@@ -1,139 +1,123 @@
 /*
  * Mortvana's Master build file
- * Based TConstruct's master build file by Sunstrike and ProgWML6, with help from AbrarSyed
+ * Based on Tinker's Construct's and Applied Energergistics' build files
  */
+
 // This sets us up for building a forge project - you need all of these
 buildscript {
     repositories {
         mavenCentral()
-		mavenLocal()
         maven {
-            name = 'ForgeFS'
-            url = 'http://files.minecraftforge.net/maven'
+            name = "forge"
+            url = "http://files.minecraftforge.net/maven"
         }
-		maven {
+        maven {
             name = "sonatype"
             url = "https://oss.sonatype.org/content/repositories/snapshots/"
         }
 
-	}
+    }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
     }
 }
 
-
-repositories {
-    maven {
-        name 'CB Maven FS'
-        url "http://chickenbones.net/maven/"
-    }
-	maven {
-         name "ProfMobius Maven FS"
-         url "http://mobiusstrip.eu/maven"
-     }
-    maven {
-        name 'DVS1 Maven FS'
-        url 'http://dvs1.progwml6.com/files/maven'
-    }
-    maven {
-        name 'ForgeFS'
-        url 'http://files.minecraftforge.net/maven'
-     }
-    maven {
-        name "IC2"
-        url "http://maven.ic2.player.to/"
-    }
-}
-
 // Load ForgeGradle
-// Apply the forge plugin - this adds all the magic for automagically obfuscating, deobfuscating, etc.
+// Apply the forge plugin - this adds all the magic for automatically obfuscating, deobfuscating, etc.
 apply plugin: 'forge'
 
-// Define the .properties file
-ext.configFile = file "build.properties"
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
-configFile.withReader {
-    // Load and read config. 
-	// It shall from now on be referenced as simply config or project.config
-    def prop = new Properties()
-    prop.load(it)
-    project.ext.config = new ConfigSlurper().parse prop
-}
-
-// This is our group.
-group = config.group
-
-// This is our actual project within the group.
-archivesBaseName = config.archiveBaseName
-
-/*configurations {
-    deployerJars
-}*/
-
-dependencies {
-    compile "mantle:Mantle:${config.minecraft_version}-${config.mantle_version}:deobf"
-	//compile "tconstruct:TConstruct:${config.minecraft_version}-${config.tconstruct_version}:deobf"
-	//compile "codechicken:CodeChickenLib:${config.minecraft_version}-${config.CCLIB_version}:dev"
-	//compile "codechicken:CodeChickenCore:${config.minecraft_version}-${config.ccc_version}:dev"
-    //compile "codechicken:NotEnoughItems:${config.minecraft_version}-${config.NEI_version}:dev"
-	//compile "codechicken:ForgeMultipart:${config.minecraft_version}-${config.FMP_version}:dev"
-	//compile "mcp.mobius.waila:Waila:${config.waila_version}:dev"
-    //compile "net.industrial-craft:industrialcraft-2:${config.ic2_version}:dev"
-    compile fileTree(dir: 'lib', include: '*.jar')
-	//deployerJars 'org.apache.maven.wagon:wagon-ssh:2.2'
-}
+version = "v0.2.0.0"
+group = "thaumrev" // This is our group.
+archivesBaseName = "ThaumicRevelations" // This is our actual project within the group.
 
 // Setup the forge minecraft plugin data.
 minecraft {
-    version = config.minecraft_version + "-" + config.forge_version
-    /*if  (file('../run').exists) {
-		runDir = "../run/assests"
-	} else {*/
-        runDir = "run/assets"
-	//}
-    // Replace stuff
-	replace '${version}', project.version
-    replace "@VERSION@", /*"${*/project.version//}.${project.build}"
-    //replace "@MC_VERSION@", project.minecraft_version
-    /*if (project.hasProperty("Mod_signature")) {
-        replace "@FINGERPRINT@", project.Mod_signature
-    }*/
+    version = "1.7.10-10.13.4.1614-1.7.10"
+    //mappings = 'stable_12' //This seems to break stuff
+    runDir = "run"
 }
 
-sourceSets {
+repositories {
+    maven {
+        name = "ChickenBones's Maven Fileserver"
+        url = "http://chickenbones.net/maven/"
+    }
+    maven {
+        name = "Professor Mobius's Maven Fileserver"
+        url = "http://mobiusstrip.eu/maven"
+    }
+    maven {
+        name = "ProgWML6's Maven Fileserver"
+        url = "http://dvs1.progwml6.com/files/maven"
+    }
+    maven {
+        name = "Forge Maven Fileserver"
+        url = "http://files.minecraftforge.net/maven"
+    }
+    maven {
+        name = "sfPlayer1's Maven Fileserver"
+        url = "http://maven.ic2.player.to"
+    }
+    maven {
+        name = "Enderio Maven Fileserver"
+        url = "http://maven.tterrag.com"
+    }
+    maven {
+        name = "RX14 Maven Fileserver"
+        url = "http://mvn.rx14.co.uk/repo"
+    }
+    maven {
+        name = "OpenComputers Maven Fileserver"
+        url = "http://maven.cil.li"
+    }
+    maven {
+        name = "MM repo"
+        url = "http://maven.k-4u.nl/"
+    }
+    maven {
+        name = "Ephys"
+        url "https://tehnut.info/maven/"
+    }
+	
+	ivy {
+        name "BuildCraft"
+        artifactPattern "http://www.mod-buildcraft.com/releases/BuildCraft/[revision]/[module]-[revision]-[classifier].[ext]"
+    }
+}
+
+configurations.all {
+    resolutionStrategy.cacheDynamicVersionsFor 7200, 'hours'
+}
+
+// Add Coremod Manifest and Classifier (if I wanted one)
+jar {
+    manifest {
+		//attributes 'FMLCorePlugin': 'tconstruct.preloader.TConstructLoaderContainer'
+        //attributes 'FMLCorePluginContainsFMLMod': 'true'
+    }
+    //classifier = 'universal'
+    // Specify which files are really included, can control which APIs should be included.
+    /*include "thaumrev/**"
+    include "assets/**"
+    include "mcmod.info"
+    include "pack.mcmeta"*/
+}
+
+/*sourceSets {WTF Gradle, why aren't you working?
     main {
+        java {
+            srcDirs += "src/api/main"
+            srcDirs += "src/main/java"
+        }
         resources {
-            srcDir 'resources'
+            srcDir "src/main/resources", "mcmod.info"
+            //"pack.mcmeta"
         }
     }
-}
-
-/*task buildInfo() {
-    def cmd = "git rev-parse --short HEAD"
-    def proc = cmd.execute()
-    proc.waitFor()
-    if (proc.exitValue() == 0) {
-        ext.revision = "DEV." + proc.text.trim()
-    } else {
-        ext.revision = "GITBORK"
-    }
-    if (System.getenv().BUILD_NUMBER != null) {
-        ext.buildNum = "${System.getenv().BUILD_NUMBER}"
-    } else {
-        ext.buildNum = "${project.buildInfo.revision}"
-    }
-}
-
-ext.artifact_version = 'NFG'
-if (System.getenv().ARTIFACT_VERSION == null) {
-    artifact_version = "${config.mod_version}-${project.buildInfo.buildNum}"
-}
-if(System.getenv().ARTIFACT_VERSION != null) {
-    artifact_version = "${system.getenv().ARTIFACT_VERSION}"
 }*/
-
-version = "${config.minecraft_version}-${config.artifact_version}"
 
 processResources {
     // this will ensure that this task is redone when the versions change.
@@ -148,12 +132,12 @@ processResources {
         include '**/*.lang'
         include '**/*.info'
         include '**/*.properties'
-                
+
         // replace version and mcversion
         expand 'version':project.version, 'mcversion':project.minecraft.version
     }
-        
-    // copy everything else, thats not the files above
+
+    // copy everything else, that's not the files above
     from(sourceSets.main.resources.srcDirs) {
         exclude '**/*.lang'
         exclude '**/*.info'
@@ -161,45 +145,52 @@ processResources {
     }
 }
 
-// Add Coremod Manifest and Classifier (if I wanted one)
-jar {
-    /*manifest {
-        attributes 'FMLCorePlugin': 'mortvana.trevelations.preloader.CoreModClass'
-        attributes 'FMLCorePluginContainsFMLMod': 'true'
-    }*/
-    //classifier = 'universal'
+// Create de-obfuscated development jars, because the normal output has been made to be obfuscated
+task deobfJar(type: Jar) {
+    from(sourceSets.main.output) {
+        include "thaumrev/**"
+        include "assets/**"
+        include "mcmod.info"
+    }
+    classifier = 'deobf'
+
+    // Coremod Stuff
+    manifest {
+        //attributes 'FMLCorePlugin': 'tconstruct.preloader.TConstructLoaderContainer'
+        //attributes 'FMLCorePluginContainsFMLMod': 'true'
+    }
 }
 
 // Add in a source jar for people, should they desire to download such a thing
-task sourceJar(type: Jar) {
+task sourceJar(type: Jar, dependsOn:classes) {
     from sourceSets.main.allSource
     classifier = 'src'
-    version = "${project.minecraft.version}-${project.version}"
 }
-
-// Create de-obfuscated development jars, because the normal output has been made to be obfuscated
-task deobfJar(type: Jar) {
-    from sourceSets.main.output
-    classifier = 'deobf'
-	/*manifest {
-        attributes 'FMLCorePlugin': 'mortvana.trevelations.preloader.CoreModClass'
-        attributes 'FMLCorePluginContainsFMLMod': 'true'
-    }*/
-}
-
-// Add a javadoc jar
-/*task javadocJar(type: Jar, dependsOn: javadoc) {
-    from 'build/docs/javadoc'
-    classifier = 'javadoc'
-}*/
 
 // No APIs... Yet...
 // Create API library jar
-/*task libJar(type: Jar) {
-    from(sourceSets.main.java) {
-        include "mortvana/trevelations/library/*"
+/*task apiJar(type: Jar) {
+    from(sourceSets.api.java) {
+        include "thaumrev/api/*"
     }
-    classifier = 'lib'
+    from(sourceSets.main.output) {
+        include "thaumrev/api/*"
+    }
+
+    classifier = 'api'
+}*/
+
+// Add a javadoc jar
+/*task javadocs(type: Javadoc) {
+    source = sourceSets.main.java
+    include "thaumrev/api**"
+
+    classpath = configurations.compile
+}*/
+
+/*task javadocJar(type: Jar, dependsOn: javadocs) {
+    from 'build/docs/javadoc'
+    classifier = 'javadoc'
 }*/
 
 artifacts {
@@ -207,32 +198,82 @@ artifacts {
     archives sourceJar
     //archives javadocJar
     //archives apiJar
-    //archives libJar
 }
 
-// I don't always upload, but when I Dos Equis...
-/*task("uploadJars", dependsOn:"reobf""signJar") {
-    
-    description = "uploads JARs"
 
-    if (project.hasProperty("local_maven") || project.hasProperty("sftp_maven")) {
-	    apply plugin: 'maven'
-        uploadArchives {
-            repositories {
-		    	if(project.hasProperty("local_maven"))
-			    {
-                    mavenDeployer {
-                        repository(url: "file://${local_maven}")
-				    }
-                }
-				if(project.hasProperty("sftp_maven")) {
-                    repositories.mavenDeployer {
-					    configuration = configurations.deployerJars
-                        repository(url: "sftp://${sftp_maven}"){
-						authentication(userName: "${sftp_username}",privateKey: "${sftp_key}")}
-				    }
-                }
-            }
-        }    
+
+configurations {
+    mods
+    shade
+    compile.extendsFrom shade
+    compile.extendsFrom exportedCompile
+}
+
+dependencies {
+    compile "mantle:Mantle:1.7.10-0.3.2.jenkins191:deobf" //Anything above this and mappings change
+    compile "tconstruct:TConstruct:1.7.10-1.8.8.build990:deobf"
+    compile "codechicken:CodeChickenLib:1.7.10-1.1.3.140:dev"
+    compile "codechicken:CodeChickenCore:1.7.10-1.0.7.47:dev"
+    compile "codechicken:NotEnoughItems:1.7.10-1.0.5.120:dev"
+    compile "codechicken:ForgeMultipart:1.7.10-1.2.0.345:dev"
+    //compile "codechicken:EnderStorage:1.7.10-1.4.7.37:dev"
+    //compile "codechicken:Translocator:1.7.10-1.1.2.15:dev"
+    compile "mcp.mobius.waila:Waila:1.5.10_1.7.10:dev" //exclude group: 'mcp.mobius.waila'
+    //compile "mcp.mobius.jabba:Jabba:1.2.1a_1.7.10:dev"
+    compile "net.industrial-craft:industrialcraft-2:2.2.828-experimental:dev"
+    compile "com.enderio.core:EnderCore:1.7.10-0.2.0.31_beta:dev"
+    compile "com.enderio:EnderIO:1.7.10-2.3.0.423_beta:dev"
+    compile "net.sengir.forestry:forestry_1.7.10:4.2.16.64:dev"
+    //complie "binnie:binnie_mods_1.7.10"
+    //compile "net.mcft.copy.betterstorage:BetterStorage:1.7.10-0.11.3.123.20:deobf"
+    //compile "inventorytweaks:InventoryTweaks:1.58:deobf"
+    //compile "li.cil.oc:OpenComputers:MC1.7.10-1.5.12.26:dev"
+    //compile "com.mod-buildcraft:buildcraft:7.1.14:dev"
+    //compile "pneumaticCraft:PneumaticCraft-1.7.10:1.10.0-109:userdev"
+    //compile "team.chisel:Chisel:dev-3.0-19-9828898:deobf"
+    //compile "nf.fr.ephys.tsteelworks:TSteelworks:1.7.10-1.1.2-20:deobf"
+    //compile "nf.fr.ephys.cookiecore:CookieCore:1.7.10-1.4.0-11:deobf"
+    //compile "exnihilo:Ex-Nihilo:1.38-53:deobf"
+
+    // So Chisel keeps it's Drulloy Pants on
+    /*compile "org.projectlombok:lombok:1.16.4"
+    shade ("team.chisel.ctmlib:CTMLib:9177141-4") {
+        transitive = false
+    }*/
+
+    compile fileTree(dir: 'lib', include: '*.jar')
+    //deployerJars 'org.apache.maven.wagon:wagon-ssh:2.2'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = "2.4"
+}
+
+/* *=-=-=-=* CodeChickenCopy *=-=-=-=* */
+
+// Searches for NEI and CodeChicken stuff from our compile set and adds them
+// to the mods folder in our run directory.
+task copyChicken(type: Copy, dependsOn: "extractUserDev") {
+    from configurations.compile
+    include "**/*CodeChicken*.jar", "**/*NotEnoughItems*.jar"
+    // Because CodeChickenCore downloads it automatically anyways...
+    exclude "**/*CodeChickenLib*.jar"
+    into file(minecraft.runDir + "/mods")
+    mustRunAfter "deobfBinJar"
+    mustRunAfter "repackMinecraft"
+}
+
+tasks.setupDevWorkspace.dependsOn copyChicken
+tasks.setupDecompWorkspace.dependsOn copyChicken
+
+/* *=-=-=-=* IntelliJ IDEA *=-=-=-=* */
+
+apply plugin: 'idea'
+
+idea {
+    module {
+        inheritOutputDirs = true
+        //sourceDirs += file('dummy')
+        //sourceDirs += file('api')
     }
-}*/
+}
