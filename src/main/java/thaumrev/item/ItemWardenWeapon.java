@@ -7,7 +7,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumRarity;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemSword;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
@@ -19,10 +19,10 @@ import thaumrev.common.ThaumRevLibrary;
 import thaumrev.util.DamageSourceWarden;
 import thaumrev.util.wardenic.WardenicChargeHelper;
 
-public class ItemWardenWeapon extends Item { //TODO: Should maybe count as a sword?
+public class ItemWardenWeapon extends ItemSword {
 
 	public ItemWardenWeapon() {
-		super();
+		super(ThaumRevLibrary.toolMaterialWarden);
 		setUnlocalizedName("itemWardenWeapon");
 		setCreativeTab(ThaumRevLibrary.tabThaumRev);
 		setMaxStackSize(1);

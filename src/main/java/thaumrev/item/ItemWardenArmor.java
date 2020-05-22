@@ -21,7 +21,7 @@ import thaumcraft.api.aspects.Aspect;
 public class ItemWardenArmor extends ItemArmor implements ISpecialArmor, IVisDiscountGear {
 
 	public ItemWardenArmor(int type) {
-		super(ThaumRevLibrary.materialWarden, 3, type);
+		super(ThaumRevLibrary.armorMaterialWarden, 2, type);
 		setCreativeTab(ThaumRevLibrary.tabThaumRev);
 		setMaxStackSize(1);
 
