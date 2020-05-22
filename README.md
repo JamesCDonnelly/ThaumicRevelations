@@ -19,5 +19,16 @@ Please include the following:
 	* Steps to reproduce
 	* ForgeModLoader-client-0.log (the FML log) from the root folder of the client
 
+##Next update's to-do list
+* Remove Ring of Love
+* The Sword should work as a sword, not an item
+* Overall rework of The Armor and The Sword
+
+##Planned for future
+* Re-add Wand Focus: Purification which will be able to cleanse Taint
+* Add The Tools
+* Add some Eldritch stuff
+* Write new lore
+
 ##Licensing
 Coming Soon (tm)
