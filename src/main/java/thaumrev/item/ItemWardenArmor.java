@@ -34,7 +34,7 @@ public class ItemWardenArmor extends ItemArmor implements ISpecialArmor, IVisDis
 
 	@Override
 	public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
-		return false;
+		return true;
 	}
 
 	@Override

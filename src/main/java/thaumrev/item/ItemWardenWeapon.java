@@ -37,7 +37,7 @@ public class ItemWardenWeapon extends Item { //TODO: Should maybe count as a swo
 
 	@Override
 	public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
-		return false;
+		return true;
 	}
 
 	@Override
