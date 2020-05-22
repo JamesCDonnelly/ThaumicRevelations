@@ -25,6 +25,7 @@ public class ThaumRevLibrary {
 	public static Item itemResource;
 	public static Item itemWardenAmulet;
 	public static Item itemWardenWeapon;
+	public static Item itemWardenBow;
 	//public static Item itemFocusPurity; //Broken
 	public static Item itemWardenHelm;
 	public static Item itemWardenChest;

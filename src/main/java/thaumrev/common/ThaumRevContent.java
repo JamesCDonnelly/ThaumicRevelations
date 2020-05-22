@@ -51,6 +51,7 @@ public class ThaumRevContent {
 		itemResource = new ItemResource();
 		itemWardenAmulet = new ItemWardenAmulet();
 		itemWardenWeapon = new ItemWardenWeapon();
+		itemWardenBow = new ItemWardenBow();
 		//itemFocusPurity = new ItemFocusPurity(); //Broken
 		itemWardenHelm = new ItemWardenHelm();
 		itemWardenChest = new ItemWardenChest();
@@ -63,6 +64,7 @@ public class ThaumRevContent {
 		GameRegistry.registerItem(itemResource, "itemResource");
 		//GameRegistry.registerItem(itemFocusPurity, "itemFocusPurity"); //Broken
 		GameRegistry.registerItem(itemWardenWeapon, "itemWardenWeapon");
+		GameRegistry.registerItem(itemWardenBow, "itemWardenBow");
 		GameRegistry.registerItem(itemWardenAmulet, "itemWardenAmulet");
 		GameRegistry.registerItem(itemWardenHelm, "itemWardenHelm");
 		GameRegistry.registerItem(itemWardenChest, "itemWardenChest");

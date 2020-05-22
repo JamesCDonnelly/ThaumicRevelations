@@ -9,6 +9,7 @@ item.itemResource.1.name=Wardenic Crystal
 item.itemResource.2.name=Wardenic Quartz
 item.itemWardenAmulet.name=Warden's Amulet
 item.itemWardenWeapon.name=Warden's Sword
+item.itemWardenBow.name=Warden's Bow
 item.itemWardenHelm.name=Warden's Helmet
 item.itemWardenChest.name=Warden's Chestplate
 item.itemWardenLegs.name=Warden's Leggings
@@ -20,7 +21,7 @@ item.itemFocusIllumination.name=Wand Focus: Illumination
 
 #Quotes
 upgrade.Excubitor.quote=Forever a warden
-upgrade..quote=I will survive
+upgrade.Sano.quote=I will survive
 upgrade.Entropy.quote=I will destroy you
 upgrade.Ignis.quote=Burn to a crisp
 upgrade.Tutamen.quote=Why are you hurting yourself?

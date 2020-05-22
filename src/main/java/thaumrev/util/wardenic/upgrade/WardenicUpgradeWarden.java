@@ -63,7 +63,12 @@ public class WardenicUpgradeWarden extends WardenicUpgrade {
 	}
 
 	public static boolean isEldritchOrTainted(Entity entity) {
-		return entity instanceof EntityEldritchGuardian || entity instanceof EntityEldritchCrab || entity instanceof EntityEldritchWarden || entity instanceof EntityEldritchGolem || entity instanceof EntityInhabitedZombie || entity instanceof ITaintedMob;
+		return entity instanceof EntityEldritchGuardian ||
+				entity instanceof EntityEldritchCrab ||
+				entity instanceof EntityEldritchWarden ||
+				entity instanceof EntityEldritchGolem ||
+				entity instanceof EntityInhabitedZombie ||
+				entity instanceof ITaintedMob;
 	}
 
 }
