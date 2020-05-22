@@ -38,6 +38,11 @@ public class ItemWaslieHammer extends Item {
 	}
 
 	@Override
+	public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
+		return false;
+	}
+
+	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
 		player.openGui(ThaumicRevelations.instance, 0, world, 0, 0, 0);
 		return stack;
