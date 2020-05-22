@@ -33,7 +33,7 @@ public class ThaumRevLibrary {
 	public static Item itemWaslieHammer;
 	public static Item itemFocusIllumination;
 
-	public static Block blockExubitura;
+	public static Block blockExcubitura;
 	public static Block blockInfusedQuartzNormal;
 	public static Block blockInfusedQuartzChiseled;
 	public static Block blockInfusedQuartzPillar;
@@ -52,7 +52,7 @@ public class ThaumRevLibrary {
 	public static ShapedArcaneRecipe recipeFocusIllumination;
 
 	public static ResearchItem researchTWarden;
-	public static ResearchItem researchExubitura;
+	public static ResearchItem researchExcubitura;
 	public static ResearchItem researchQuartz;
 	public static ResearchItem researchCrystal;
 	public static ResearchItem researchWardenArmor;

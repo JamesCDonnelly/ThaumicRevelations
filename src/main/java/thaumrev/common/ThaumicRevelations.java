@@ -13,9 +13,9 @@ import thaumrev.client.gui.GuiHandler;
 import thaumrev.util.TabTRevelations;
 import thaumrev.util.wardenic.WardenicChargeEvents;
 import thaumrev.util.wardenic.WardenicUpgrades;
-import thaumrev.world.WorldGenExubitura;
+import thaumrev.world.WorldGenExcubitura;
 
-@Mod(modid = ThaumRevLibrary.MOD_ID, name = "Thaumic Revelations", version = "v0.1.0.0b", dependencies = "required-after:Thaumcraft")
+@Mod(modid = ThaumRevLibrary.MOD_ID, name = "Thaumic Revelations", version = "v0.2.0.0", dependencies = "required-after:Thaumcraft")
 public class ThaumicRevelations {
 
 	@Instance(ThaumRevLibrary.MOD_ID)
@@ -36,7 +36,7 @@ public class ThaumicRevelations {
 		ThaumRevContent.loadBlocks();
 		ThaumRevContent.loadItems();
 
-		GameRegistry.registerWorldGenerator(new WorldGenExubitura(), 1);
+		GameRegistry.registerWorldGenerator(new WorldGenExcubitura(), 1);
 	}
 
 	@EventHandler

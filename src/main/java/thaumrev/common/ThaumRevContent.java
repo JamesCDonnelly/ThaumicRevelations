@@ -23,7 +23,7 @@ import static thaumrev.common.ThaumRevLibrary.*;
 public class ThaumRevContent {
 
 	public static void loadBlocks() {
-		blockExubitura = new BlockExcubitura();
+		blockExcubitura = new BlockExcubitura();
 		blockInfusedQuartzNormal = new BlockQuartzNormal();
 		blockInfusedQuartzChiseled = new BlockQuartzChiseled();
 		blockInfusedQuartzPillar = new BlockQuartzPillar();
@@ -31,7 +31,7 @@ public class ThaumRevContent {
 		blockInfusedQuartzStair = new BlockQuartzStair();
 		blockWitor = new BlockWitor();
 
-		GameRegistry.registerBlock(blockExubitura, "blockExubitura"); //Kept typo for backwards compatability, but there really should be that c to mean what it is supposed to
+		GameRegistry.registerBlock(blockExcubitura, "blockExcubitura");
 		GameRegistry.registerBlock(blockInfusedQuartzNormal, "blockInfusedQuartzNormal");
 		GameRegistry.registerBlock(blockInfusedQuartzChiseled, "blockInfusedQuartzChiseled");
 		GameRegistry.registerBlock(blockInfusedQuartzPillar, "blockInfusedQuartzPillar");
@@ -96,8 +96,8 @@ public class ThaumRevContent {
 
 		researchTWarden = new ThaumRevResearchItem("TREVELATIONS", "trevelations", new AspectList(), 0, 0, 0, new ItemStack(itemWardenAmulet)).setRound().setSpecial().setAutoUnlock().registerResearchItem();
 		researchTWarden.setPages(new ResearchPage("0"));
-		researchExubitura = new ThaumRevResearchItem("EXUBITURA", "trevelations", new AspectList(), 0, -2, 0, new ItemStack(blockExubitura)).setParents("TREVELATIONS").setAutoUnlock().registerResearchItem();
-		researchExubitura.setPages(new ResearchPage("0"));
+		researchExcubitura = new ThaumRevResearchItem("EXCUBITURA", "trevelations", new AspectList(), 0, -2, 0, new ItemStack(blockExcubitura)).setParents("TREVELATIONS").setAutoUnlock().registerResearchItem();
+		researchExcubitura.setPages(new ResearchPage("0"));
 		researchQuartz = new ThaumRevResearchItem("QUARTZ", "trevelations", new AspectList().add(EXCUBITOR, 4).add(Aspect.CRYSTAL, 4), 2, 0, 2, new ItemStack(itemResource, 0, 2)).setParents("TREVELATIONS").setRound().registerResearchItem();
 		researchQuartz.setPages(new ResearchPage("0"), new ResearchPage(recipeQuartz));
 		researchCrystal = new ThaumRevResearchItem("CRYSTAL", "trevelations", new AspectList().add(EXCUBITOR, 4).add(Aspect.CRYSTAL, 4), -2, 0, 2, new ItemStack(itemResource, 0, 1)).setParents("TREVELATIONS").setSecondary().registerResearchItem();

@@ -23,11 +23,6 @@ public class ItemWaslieHammer extends Item {
 	}
 
 	@Override
-	public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
-		return false;
-	}
-
-	@Override
 	public EnumRarity getRarity(ItemStack stack) {
 		return EnumRarity.rare;
 	}
