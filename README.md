@@ -20,7 +20,7 @@ Please include the following:
 	* ForgeModLoader-client-0.log (the FML log) from the root folder of the client
 
 ##Next update's to-do list
- - [ ] Remove Ring of Love
+ - [x] Remove Ring of Love
  - [x] The Sword should work as a sword, not an item
  - [ ] Overall rework of The Armor and The Sword
 
