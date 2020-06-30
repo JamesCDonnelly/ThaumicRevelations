@@ -1,4 +1,4 @@
-package thaumrev.item;
+package thaumrev.item.armour;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
@@ -16,7 +16,7 @@ public class ItemWardenBoots extends ItemWardenArmor {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister register) {
-		itemIcon = register.registerIcon("thaumrev:wardenboots");
+		itemIcon = register.registerIcon("thaumrev:armour/wardenboots");
 	}
 
 	@Override

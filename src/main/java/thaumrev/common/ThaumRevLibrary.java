@@ -17,9 +17,19 @@ public class ThaumRevLibrary {
 
 	public static CreativeTabs tabThaumRev;
 
-	public static final Aspect EXCUBITOR = new Aspect("excubitor", 0x3CD4FC, new Aspect[] {Aspect.ELDRITCH, Aspect.DEATH}, new ResourceLocation("thaumrev", "textures/aspects/excubitor.png"), 771);
+	public static final Aspect EXCUBITOR = new Aspect(
+			"excubitor",
+			0x3CD4FC,
+			new Aspect[] {
+					Aspect.ELDRITCH,
+					Aspect.DEATH},
+			new ResourceLocation(
+					"thaumrev",
+					"textures/aspects/excubitor.png"),
+			771);
 
 	public static ItemArmor.ArmorMaterial armorMaterialWarden;
+	public static ItemArmor.ArmorMaterial armorMaterialWardencloth;
 	public static ItemSword.ToolMaterial toolMaterialWarden;
 
 	public static Item itemResource;

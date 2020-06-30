@@ -1,4 +1,4 @@
-package thaumrev.item;
+package thaumrev.item.baubles;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;

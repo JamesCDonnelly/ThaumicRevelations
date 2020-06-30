@@ -8,7 +8,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
-import thaumrev.item.ItemWardenArmor;
+import thaumrev.item.armour.ItemWardenArmor;
 import thaumrev.item.ItemWardenWeapon;
 
 public class WardenicChargeEvents {

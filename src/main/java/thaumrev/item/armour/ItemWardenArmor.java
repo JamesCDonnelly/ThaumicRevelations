@@ -1,4 +1,4 @@
-package thaumrev.item;
+package thaumrev.item.armour;
 
 import java.util.List;
 

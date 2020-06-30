@@ -14,7 +14,12 @@ import thaumrev.common.ThaumRevLibrary;
 
 public class ItemResource extends Item {
 
-	public static final String[] RESOURCE_ICON = {"wardenpetal", "wardenstone", "wardenquartz"};
+	public static final String[] RESOURCE_ICON = {
+			"wardenpetal",
+			"wardenstone",
+			"wardenquartz",
+			"wardenfabric",
+			"crimsonfabric"};
 	private IIcon[] icons;
 
 	public ItemResource() {
@@ -48,7 +53,7 @@ public class ItemResource extends Item {
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister register) {
 		for (int i = 0; i < RESOURCE_ICON.length; i++) {
-			icons[i] = register.registerIcon("thaumrev:" + RESOURCE_ICON[i]);
+			icons[i] = register.registerIcon("thaumrev:resources/" + RESOURCE_ICON[i]);
 		}
 	}
 }

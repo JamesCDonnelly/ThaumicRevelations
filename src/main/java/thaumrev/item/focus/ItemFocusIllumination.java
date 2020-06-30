@@ -1,4 +1,4 @@
-package thaumrev.item;
+package thaumrev.item.focus;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -26,9 +26,9 @@ public class ItemFocusIllumination extends ItemFocusBasic {
 
 	@Override
 	public void registerIcons(IIconRegister register) {
-		icon = register.registerIcon("thaumrev:purityfocus");
-		depth = register.registerIcon("thaumrev:puritydepth");
-		orn = register.registerIcon("thaumrev:purityorn");
+		icon = register.registerIcon("thaumrev:focus/purityfocus");
+		depth = register.registerIcon("thaumrev:focus/puritydepth");
+		orn = register.registerIcon("thaumrev:focus/purityorn");
 	}
 
 	@Override

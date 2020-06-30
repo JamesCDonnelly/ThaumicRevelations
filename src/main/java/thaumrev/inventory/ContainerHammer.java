@@ -5,7 +5,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.*;
 import net.minecraft.item.ItemStack;
 
-import thaumrev.item.ItemWardenArmor;
+import thaumrev.item.armour.ItemWardenArmor;
 import thaumrev.item.ItemWardenWeapon;
 import thaumrev.util.wardenic.WardenicChargeHelper;
 import thaumcraft.api.aspects.IEssentiaContainerItem;
