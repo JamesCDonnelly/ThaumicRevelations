@@ -19,7 +19,8 @@ public class ItemResource extends Item {
 			"wardenstone",
 			"wardenquartz",
 			"wardenfabric",
-			"crimsonfabric"};
+			"crimsonfabric",
+			"voidfabric"};
 	private IIcon[] icons;
 
 	public ItemResource() {

@@ -29,8 +29,11 @@ public class ThaumRevLibrary {
 			771);
 
 	public static ItemArmor.ArmorMaterial armorMaterialWarden;
-	public static ItemArmor.ArmorMaterial armorMaterialWardencloth;
 	public static ItemSword.ToolMaterial toolMaterialWarden;
+
+	public static ItemArmor.ArmorMaterial armorMaterialWardencloth;
+
+	public static ItemArmor.ArmorMaterial armorMaterialCrimsoncloth;
 
 	public static Item itemResource;
 	public static Item itemWardenAmulet;
@@ -41,7 +44,7 @@ public class ThaumRevLibrary {
 	public static Item itemWardenChest;
 	public static Item itemWardenLegs;
 	public static Item itemWardenBoots;
-	//public static Item itemLoveRing; //Broken
+	public static Item itemLoveRing;
 	public static Item itemWaslieHammer;
 	public static Item itemFocusIllumination;
 
@@ -55,6 +58,14 @@ public class ThaumRevLibrary {
 
 	public static CrucibleRecipe recipeQuartz;
 	public static CrucibleRecipe recipeCrystal;
+	public static CrucibleRecipe recipeWardencloth;
+	public static CrucibleRecipe recipeCrimsoncloth;
+	public static CrucibleRecipe recipeVoidcloth;
+
+	public static ShapedArcaneRecipe recipeHelmetCultistRobe;
+	public static ShapedArcaneRecipe recipeChestCultistRobe;
+	public static ShapedArcaneRecipe recipeLegsCultistRobe;
+	public static ShapedArcaneRecipe recipeBootsCultist;
 	public static ShapedArcaneRecipe recipeWardenHelm;
 	public static ShapedArcaneRecipe recipeWardenChest;
 	public static ShapedArcaneRecipe recipeWardenLegs;
@@ -65,6 +76,9 @@ public class ThaumRevLibrary {
 
 	public static ResearchItem researchTWarden;
 	public static ResearchItem researchExcubitura;
+	public static ResearchItem researchWardencloth;
+	public static ResearchItem researchCrimsoncloth;
+	public static ResearchItem researchVoidcloth;
 	public static ResearchItem researchQuartz;
 	public static ResearchItem researchCrystal;
 	public static ResearchItem researchWardenArmor;

@@ -58,7 +58,7 @@ public class ItemLoveRing extends Item implements IBauble {
 
 	@Override
 	public boolean canUnequip(ItemStack itemStack, EntityLivingBase entityLivingBase) {
-		return true;
+		return false;
 	}
 
 }

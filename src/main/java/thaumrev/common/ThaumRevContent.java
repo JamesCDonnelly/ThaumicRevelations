@@ -17,6 +17,7 @@ import thaumrev.item.armour.ItemWardenBoots;
 import thaumrev.item.armour.ItemWardenChest;
 import thaumrev.item.armour.ItemWardenHelm;
 import thaumrev.item.armour.ItemWardenLegs;
+import thaumrev.item.baubles.ItemLoveRing;
 import thaumrev.item.baubles.ItemWardenAmulet;
 import thaumrev.block.tile.TileWitor;
 import thaumrev.block.*;
@@ -57,6 +58,9 @@ public class ThaumRevContent {
 		armorMaterialWardencloth = EnumHelper.addArmorMaterial("WARDENCLOTH", 50,
 				new int[] {1, 3, 2, 1}, 15);
 
+		armorMaterialCrimsoncloth = EnumHelper.addArmorMaterial("CRIMSONCLOTH", 50,
+				new int[] {1, 3, 2, 1}, 15);
+
 		itemResource = new ItemResource();
 		itemWardenAmulet = new ItemWardenAmulet();
 		itemWardenWeapon = new ItemWardenWeapon();
@@ -66,7 +70,7 @@ public class ThaumRevContent {
 		itemWardenChest = new ItemWardenChest();
 		itemWardenLegs = new ItemWardenLegs();
 		itemWardenBoots = new ItemWardenBoots();
-		//itemLoveRing = new ItemLoveRing(); //Broken
+		itemLoveRing = new ItemLoveRing();
 		itemWaslieHammer = new ItemWaslieHammer();
 		itemFocusIllumination = new ItemFocusIllumination();
 
@@ -79,7 +83,7 @@ public class ThaumRevContent {
 		GameRegistry.registerItem(itemWardenChest, "itemWardenChest");
 		GameRegistry.registerItem(itemWardenLegs, "itemWardenLegs");
 		GameRegistry.registerItem(itemWardenBoots, "itemWardenBoots");
-		//GameRegistry.registerItem(itemLoveRing, "itemLoveRing"); //Broken
+		GameRegistry.registerItem(itemLoveRing, "itemLoveRing");
 		GameRegistry.registerItem(itemWaslieHammer, "itemWaslieHammer");
 		GameRegistry.registerItem(itemFocusIllumination, "itemFocusIllumination");
 	}
@@ -87,24 +91,24 @@ public class ThaumRevContent {
 	public static void loadRecipes() {
 		GameRegistry.addShapedRecipe(
 				new ItemStack(blockInfusedQuartzNormal),
-				"XX", "XX", 'X',
-				new ItemStack(itemResource, 1, 2));
+				"XX", "XX",
+				'X', new ItemStack(itemResource, 1, 2));
 		GameRegistry.addShapedRecipe(
 				new ItemStack(blockInfusedQuartzChiseled),
-				"X", "X", 'X',
-				new ItemStack(blockInfusedQuartzSlab));
+				"X", "X",
+				'X', new ItemStack(blockInfusedQuartzSlab));
 		GameRegistry.addShapedRecipe(
 				new ItemStack(blockInfusedQuartzPillar, 2),
-				"X", "X", 'X',
-				new ItemStack(blockInfusedQuartzNormal));
+				"X", "X",
+				'X', new ItemStack(blockInfusedQuartzNormal));
 		GameRegistry.addShapedRecipe(
 				new ItemStack(blockInfusedQuartzSlab, 6),
-				"XXX", 'X',
-				new ItemStack(blockInfusedQuartzNormal));
+				"XXX",
+				'X', new ItemStack(blockInfusedQuartzNormal));
 		GameRegistry.addShapedRecipe(
 				new ItemStack(blockInfusedQuartzStair, 4),
-				"X  ", "XX ", "XXX", 'X',
-				new ItemStack(blockInfusedQuartzNormal));
+				"X  ", "XX ", "XXX",
+				'X', new ItemStack(blockInfusedQuartzNormal));
 
 		recipeQuartz = ThaumcraftApi.addCrucibleRecipe(
 				"QUARTZ",
@@ -117,57 +121,101 @@ public class ThaumRevContent {
 				new ItemStack(itemResource, 1, 0),
 				new AspectList().add(Aspect.MAGIC, 32).add(Aspect.CRYSTAL, 32));
 
+		recipeWardencloth = ThaumcraftApi.addCrucibleRecipe(
+				"WARDENCLOTH",
+				new ItemStack(itemResource, 1, 3),
+				new ItemStack(ConfigItems.itemResource, 1, 7),
+				new AspectList().add(Aspect.MAGIC, 8).add(Aspect.CLOTH, 8));
+
+		recipeCrimsoncloth = ThaumcraftApi.addCrucibleRecipe(
+				"CRIMSONCLOTH",
+				new ItemStack(itemResource, 1, 4),
+				new ItemStack(ConfigItems.itemResource, 1, 7),
+				new AspectList().add(Aspect.WEAPON, 8).add(Aspect.CLOTH, 8));
+
+		recipeHelmetCultistRobe = ThaumcraftApi.addArcaneCraftingRecipe(
+				"CRIMSONCLOTH",
+				new ItemStack(ConfigItems.itemHelmetCultistRobe, 1),
+				new AspectList().add(Aspect.ORDER, 5).add(Aspect.ENTROPY, 5).add(Aspect.AIR, 5).add(Aspect.EARTH, 5).add(Aspect.FIRE, 5).add(Aspect.WATER, 5),
+				"XXX", "X X",
+				'X', new ItemStack(itemResource, 1, 4));
+		recipeChestCultistRobe = ThaumcraftApi.addArcaneCraftingRecipe(
+				"CRIMSONCLOTH",
+				new ItemStack(ConfigItems.itemChestCultistRobe, 1),
+				new AspectList().add(Aspect.ORDER, 5).add(Aspect.ENTROPY, 5).add(Aspect.AIR, 5).add(Aspect.EARTH, 5).add(Aspect.FIRE, 5).add(Aspect.WATER, 5),
+				"X X", "XXX", "XXX",
+				'X', new ItemStack(itemResource, 1, 4));
+		recipeLegsCultistRobe = ThaumcraftApi.addArcaneCraftingRecipe(
+				"CRIMSONCLOTH",
+				new ItemStack(ConfigItems.itemLegsCultistRobe, 1),
+				new AspectList().add(Aspect.ORDER, 5).add(Aspect.ENTROPY, 5).add(Aspect.AIR, 5).add(Aspect.EARTH, 5).add(Aspect.FIRE, 5).add(Aspect.WATER, 5),
+				"XXX", "X X", "X X",
+				'X', new ItemStack(itemResource, 1, 4));
+		recipeBootsCultist = ThaumcraftApi.addArcaneCraftingRecipe(
+				"CRIMSONCLOTH",
+				new ItemStack(ConfigItems.itemBootsCultist),
+				new AspectList().add(Aspect.ORDER, 5).add(Aspect.ENTROPY, 5).add(Aspect.AIR, 5).add(Aspect.EARTH, 5).add(Aspect.FIRE, 5).add(Aspect.WATER, 5),
+				"X X", "X X",
+				'X', new ItemStack(itemResource, 1, 4));
+
+		recipeVoidcloth = ThaumcraftApi.addCrucibleRecipe(
+				"VOIDCLOTH",
+				new ItemStack(itemResource, 1, 5),
+				new ItemStack(ConfigItems.itemResource, 1, 7),
+				new AspectList().add(Aspect.ELDRITCH, 8).add(Aspect.CLOTH, 8));
+
 		recipeWardenHelm = ThaumcraftApi.addArcaneCraftingRecipe(
 				"WARDENARMOR",
 				new ItemStack(itemWardenHelm, 1),
 				new AspectList().add(Aspect.ORDER, 125).add(Aspect.ENTROPY, 125).add(Aspect.AIR, 125).add(Aspect.EARTH, 125).add(Aspect.FIRE, 125).add(Aspect.WATER, 125),
-				"XXX", "XOX", 'X',
-				new ItemStack(itemResource, 1, 2), 'O',
-				new ItemStack(itemResource, 1, 1));
+				"XXX", "XOX",
+				'X', new ItemStack(itemResource, 1, 2),
+				'O', new ItemStack(itemResource, 1, 1));
 		recipeWardenChest = ThaumcraftApi.addArcaneCraftingRecipe(
 				"WARDENARMOR",
 				new ItemStack(itemWardenChest, 1),
 				new AspectList().add(Aspect.ORDER, 125).add(Aspect.ENTROPY, 125).add(Aspect.AIR, 125).add(Aspect.EARTH, 125).add(Aspect.FIRE, 125).add(Aspect.WATER, 125),
-				"X X", "XOX", "XXX", 'X',
-				new ItemStack(itemResource, 1, 2), 'O',
-				new ItemStack(itemResource, 1, 1));
+				"X X", "XOX", "XXX",
+				'X', new ItemStack(itemResource, 1, 2),
+				'O', new ItemStack(itemResource, 1, 1));
 		recipeWardenLegs = ThaumcraftApi.addArcaneCraftingRecipe(
 				"WARDENARMOR",
 				new ItemStack(itemWardenLegs, 1),
 				new AspectList().add(Aspect.ORDER, 125).add(Aspect.ENTROPY, 125).add(Aspect.AIR, 125).add(Aspect.EARTH, 125).add(Aspect.FIRE, 125).add(Aspect.WATER, 125),
-				"XXX", "XOX", "X X", 'X',
-				new ItemStack(itemResource, 1, 2), 'O',
-				new ItemStack(itemResource, 1, 1));
+				"XXX", "XOX", "X X",
+				'X', new ItemStack(itemResource, 1, 2),
+				'O', new ItemStack(itemResource, 1, 1));
 		recipeWardenBoots = ThaumcraftApi.addArcaneCraftingRecipe(
 				"WARDENARMOR",
 				new ItemStack(itemWardenBoots, 1),
 				new AspectList().add(Aspect.ORDER, 125).add(Aspect.ENTROPY, 125).add(Aspect.AIR, 125).add(Aspect.EARTH, 125).add(Aspect.FIRE, 125).add(Aspect.WATER, 125),
-				"XOX", "X X", 'X',
-				new ItemStack(itemResource, 1, 2), 'O',
-				new ItemStack(itemResource, 1, 1));
+				"XOX", "X X",
+				'X', new ItemStack(itemResource, 1, 2),
+				'O', new ItemStack(itemResource, 1, 1));
+
 		recipeWardenWeapon = ThaumcraftApi.addArcaneCraftingRecipe(
 				"WARDENWEAPON",
 				new ItemStack(itemWardenWeapon, 1),
 				new AspectList().add(Aspect.ORDER, 125).add(Aspect.ENTROPY, 125).add(Aspect.AIR, 125).add(Aspect.EARTH, 125).add(Aspect.FIRE, 125).add(Aspect.WATER, 125),
-				"X", "X", "O", 'X',
-				new ItemStack(itemResource, 1, 2), 'O',
-				new ItemStack(itemResource, 1, 1));
+				"X", "X", "O",
+				'X', new ItemStack(itemResource, 1, 2),
+				'O', new ItemStack(itemResource, 1, 1));
 
 		recipeWaslieHammer = ThaumcraftApi.addArcaneCraftingRecipe(
 				"WASLIEHAMMER",
 				new ItemStack(itemWaslieHammer, 1),
 				new AspectList().add(Aspect.ORDER, 125).add(Aspect.ENTROPY, 125).add(Aspect.AIR, 125).add(Aspect.EARTH, 125).add(Aspect.FIRE, 125).add(Aspect.WATER, 125),
-				"XXX", "XOX", " I ", 'X',
-				new ItemStack(itemResource, 1, 1), 'O',
-				new ItemStack(itemResource, 1, 2), 'I',
-				new ItemStack(ConfigBlocks.blockMagicalLog));
+				"XXX", "XOX", " I ",
+				'X', new ItemStack(itemResource, 1, 1),
+				'O', new ItemStack(itemResource, 1, 2),
+				'I', new ItemStack(ConfigBlocks.blockMagicalLog));
 
 		recipeFocusIllumination = ThaumcraftApi.addArcaneCraftingRecipe(
 				"ILLUMINATION",
 				new ItemStack(itemFocusIllumination, 1),
-				new AspectList().add(Aspect.AIR, 50).add(Aspect.FIRE, 50), " X ", "XOX", " X ", 'X',
-				new ItemStack(ConfigItems.itemResource, 1, 1), 'O',
-				new ItemStack(ConfigItems.itemFocusFire));
+				new AspectList().add(Aspect.AIR, 50).add(Aspect.FIRE, 50), " X ", "XOX", " X ",
+				'X', new ItemStack(ConfigItems.itemResource, 1, 1),
+				'O', new ItemStack(ConfigItems.itemFocusFire));
 	}
 
 	public static void loadResearch() {
@@ -183,6 +231,7 @@ public class ThaumRevContent {
 				new ItemStack(itemWardenAmulet)).setRound().setSpecial().setAutoUnlock().registerResearchItem();
 		researchTWarden.setPages(
 				new ResearchPage("0"));
+
 		researchExcubitura = new ThaumRevResearchItem(
 				"EXCUBITURA",
 				"trevelations",
@@ -191,6 +240,41 @@ public class ThaumRevContent {
 				new ItemStack(blockExcubitura)).setParents("TREVELATIONS").setAutoUnlock().registerResearchItem();
 		researchExcubitura.setPages(
 				new ResearchPage("0"));
+
+		researchWardencloth = new ThaumRevResearchItem(
+				"WARDENCLOTH",
+				"trevelations",
+				new AspectList(),
+				-1, -4, 0,
+				new ItemStack(itemResource, 1, 3)).setParents("TREVELATIONS", "ENCHFABRIC").registerResearchItem();
+		researchWardencloth.setPages(
+				new ResearchPage("0"),
+				new ResearchPage(recipeWardencloth));
+
+		researchCrimsoncloth = new ThaumRevResearchItem(
+				"CRIMSONCLOTH",
+				"trevelations",
+				new AspectList(),
+				0, -4, 0,
+				new ItemStack(itemResource, 1, 4)).setParents("TREVELATIONS", "ENCHFABRIC").registerResearchItem();
+		researchCrimsoncloth.setPages(
+				new ResearchPage("0"),
+				new ResearchPage(recipeCrimsoncloth),
+				new ResearchPage(recipeHelmetCultistRobe),
+				new ResearchPage(recipeChestCultistRobe),
+				new ResearchPage(recipeLegsCultistRobe),
+				new ResearchPage(recipeBootsCultist));
+
+		researchVoidcloth = new ThaumRevResearchItem(
+				"VOIDCLOTH",
+				"trevelations",
+				new AspectList(),
+				1, -4, 0,
+				new ItemStack(itemResource, 1, 5)).setParents("TREVELATIONS", "ENCHFABRIC").registerResearchItem();
+		researchVoidcloth.setPages(
+				new ResearchPage("0"),
+				new ResearchPage(recipeVoidcloth));
+
 		researchQuartz = new ThaumRevResearchItem(
 				"QUARTZ",
 				"trevelations",
@@ -200,6 +284,7 @@ public class ThaumRevContent {
 		researchQuartz.setPages(
 				new ResearchPage("0"),
 				new ResearchPage(recipeQuartz));
+
 		researchCrystal = new ThaumRevResearchItem(
 				"CRYSTAL",
 				"trevelations",
@@ -209,8 +294,10 @@ public class ThaumRevContent {
 		researchCrystal.setPages(
 				new ResearchPage("0"),
 				new ResearchPage(recipeCrystal));
+
 		researchWardenArmor = new ThaumRevResearchItem(
-				"WARDENARMOR", "trevelations",
+				"WARDENARMOR",
+				"trevelations",
 				new AspectList().add(EXCUBITOR, 4).add(Aspect.CRYSTAL, 4).add(Aspect.ARMOR, 4),
 				6, 2, 3,
 				new ItemStack(itemWardenChest)).setParents("WASLIEHAMMER").setRound().setSpecial().registerResearchItem();
@@ -220,6 +307,7 @@ public class ThaumRevContent {
 				new ResearchPage(recipeWardenChest),
 				new ResearchPage(recipeWardenLegs),
 				new ResearchPage(recipeWardenBoots));
+
 		researchWardenWeapon = new ThaumRevResearchItem(
 				"WARDENWEAPON",
 				"trevelations",
@@ -229,6 +317,7 @@ public class ThaumRevContent {
 		researchWardenWeapon.setPages(
 				new ResearchPage("0"),
 				new ResearchPage(recipeWardenWeapon));
+
 		researchWaslieHammer = new ThaumRevResearchItem(
 				"WASLIEHAMMER",
 				"trevelations",

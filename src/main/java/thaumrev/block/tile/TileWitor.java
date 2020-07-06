@@ -16,11 +16,33 @@ public class TileWitor extends TileEntity {
 		if (this.worldObj.isRemote) {
 
 			if (worldObj.rand.nextInt(9 - Thaumcraft.proxy.particleCount(2)) == 0) {
-				Thaumcraft.proxy.wispFX3(worldObj, xCoord + 0.5F, yCoord + 0.5F, zCoord + 0.5F, xCoord + 0.3F + worldObj.rand.nextFloat() * 0.4F, yCoord + 0.5F, zCoord + 0.3F + worldObj.rand.nextFloat() * 0.4F, 0.5F, 0, true, -0.025F);
+				Thaumcraft.proxy.wispFX3(
+						worldObj,
+						xCoord + 0.5F,
+						yCoord + 0.5F,
+						zCoord + 0.5F,
+						xCoord + 0.3F + worldObj.rand.nextFloat() * 0.4F,
+						yCoord + 0.5F,
+						zCoord + 0.3F + worldObj.rand.nextFloat() * 0.4F,
+						0.5F,
+						0,
+						true,
+						-0.025F);
 			}
 
 			if (worldObj.rand.nextInt(15 - Thaumcraft.proxy.particleCount(4)) == 0) {
-				Thaumcraft.proxy.wispFX3(worldObj, xCoord + 0.5F, yCoord + 0.5F, zCoord + 0.5F, xCoord + 0.4F + worldObj.rand.nextFloat() * 0.2F, yCoord + 0.5F, zCoord + 0.4F + worldObj.rand.nextFloat() * 0.2F, 0.25F, 2, true, -0.02F);
+				Thaumcraft.proxy.wispFX3(
+						worldObj,
+						xCoord + 0.5F,
+						yCoord + 0.5F,
+						zCoord + 0.5F,
+						xCoord + 0.4F + worldObj.rand.nextFloat() * 0.2F,
+						yCoord + 0.5F,
+						zCoord + 0.4F + worldObj.rand.nextFloat() * 0.2F,
+						0.25F,
+						2,
+						true,
+						-0.02F);
 			}
 		}
 	}
