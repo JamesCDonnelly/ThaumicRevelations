@@ -19,7 +19,6 @@ import thaumrev.item.armour.ItemWardenHelm;
 import thaumrev.item.armour.ItemWardenLegs;
 import thaumrev.item.baubles.ItemLoveRing;
 import thaumrev.item.baubles.ItemWardenAmulet;
-import thaumrev.block.tile.TileWitor;
 import thaumrev.block.*;
 import thaumrev.item.focus.ItemFocusIllumination;
 import thaumrev.item.*;
@@ -45,8 +44,6 @@ public class ThaumRevContent {
 		GameRegistry.registerBlock(blockInfusedQuartzSlab, "blockInfusedQuartzSlab");
 		GameRegistry.registerBlock(blockInfusedQuartzStair, "blockInfusedQuartzStair");
 		GameRegistry.registerBlock(blockWitor, "blockWitor");
-
-		GameRegistry.registerTileEntity(TileWitor.class, "tileWitor"); //TODO: Make non TileEntity through advanced shecanery
 	}
 
 	public static void loadItems() {
