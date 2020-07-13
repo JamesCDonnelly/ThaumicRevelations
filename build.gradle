@@ -1,6 +1,6 @@
 /*
  * Mortvana's Master build file
- * Based on Tinker's Construct's and Applied Energergistics' build files
+ * Based on Tinker's Construct's and Applied Energistics' build files
  */
 
 // This sets us up for building a forge project - you need all of these
@@ -29,7 +29,7 @@ apply plugin: 'forge'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-version = "v0.2.2.9"
+version = "v0.2.2.24"
 group = "thaumrev" // This is our group.
 archivesBaseName = "ThaumicRevelations" // This is our actual project within the group.
 
@@ -211,7 +211,7 @@ configurations {
 
 dependencies {
     compile "mantle:Mantle:1.7.10-0.3.2.jenkins191:deobf" //Anything above this and mappings change
-    compile "tconstruct:TConstruct:1.7.10-1.8.8.build990:deobf"
+    //compile "tconstruct:TConstruct:1.7.10-1.8.8.build990:deobf"
     compile "codechicken:CodeChickenLib:1.7.10-1.1.3.140:dev"
     compile "codechicken:CodeChickenCore:1.7.10-1.0.7.47:dev"
     compile "codechicken:NotEnoughItems:1.7.10-1.0.5.120:dev"
@@ -220,10 +220,10 @@ dependencies {
     //compile "codechicken:Translocator:1.7.10-1.1.2.15:dev"
     compile "mcp.mobius.waila:Waila:1.5.10_1.7.10:dev" //exclude group: 'mcp.mobius.waila'
     //compile "mcp.mobius.jabba:Jabba:1.2.1a_1.7.10:dev"
-    compile "net.industrial-craft:industrialcraft-2:2.2.828-experimental:dev"
-    compile "com.enderio.core:EnderCore:1.7.10-0.2.0.31_beta:dev"
-    compile "com.enderio:EnderIO:1.7.10-2.3.0.423_beta:dev"
-    compile "net.sengir.forestry:forestry_1.7.10:4.2.16.64:dev"
+    //compile "net.industrial-craft:industrialcraft-2:2.2.828-experimental:dev"
+    //compile "com.enderio.core:EnderCore:1.7.10-0.2.0.31_beta:dev"
+    //compile "com.enderio:EnderIO:1.7.10-2.3.0.423_beta:dev"
+    //compile "net.sengir.forestry:forestry_1.7.10:4.2.16.64:dev"
     //complie "binnie:binnie_mods_1.7.10"
     //compile "net.mcft.copy.betterstorage:BetterStorage:1.7.10-0.11.3.123.20:deobf"
     //compile "inventorytweaks:InventoryTweaks:1.58:deobf"

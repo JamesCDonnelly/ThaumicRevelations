@@ -28,6 +28,17 @@ public class ThaumRevLibrary {
 					"textures/aspects/excubitor.png"),
 			771);
 
+	public static final Aspect RED = new Aspect(
+			"rubus",
+			0x3CD4FC,
+			new Aspect[] {
+					Aspect.ELDRITCH,
+					Aspect.DEATH},
+			new ResourceLocation(
+					"thaumrev",
+					"textures/aspects/rubus.png"),
+			771);
+
 	public static ItemArmor.ArmorMaterial armorMaterialWarden;
 	public static ItemSword.ToolMaterial toolMaterialWarden;
 
@@ -36,10 +47,11 @@ public class ThaumRevLibrary {
 	public static ItemArmor.ArmorMaterial armorMaterialCrimsoncloth;
 
 	public static Item itemResource;
+	public static Item itemCrimsonHat;
 	public static Item itemWardenAmulet;
 	public static Item itemWardenWeapon;
 	public static Item itemWardenBow;
-	//public static Item itemFocusPurity; //Broken
+	public static Item itemFocusPurity; //TODO: make it working
 	public static Item itemWardenHelm;
 	public static Item itemWardenChest;
 	public static Item itemWardenLegs;
@@ -66,6 +78,8 @@ public class ThaumRevLibrary {
 	public static ShapedArcaneRecipe recipeChestCultistRobe;
 	public static ShapedArcaneRecipe recipeLegsCultistRobe;
 	public static ShapedArcaneRecipe recipeBootsCultist;
+	public static ShapedArcaneRecipe recipeCrimsonHat;
+
 	public static ShapedArcaneRecipe recipeWardenHelm;
 	public static ShapedArcaneRecipe recipeWardenChest;
 	public static ShapedArcaneRecipe recipeWardenLegs;
@@ -74,19 +88,34 @@ public class ThaumRevLibrary {
 	public static ShapedArcaneRecipe recipeWaslieHammer;
 	public static ShapedArcaneRecipe recipeFocusIllumination;
 
-	public static ResearchItem researchTWarden;
-	public static ResearchItem researchExcubitura;
+	public static ResearchItem researchThaumRev;
+
+	public static ResearchItem researchWardens;
+
+	public static ResearchItem researchIllumination;
+
 	public static ResearchItem researchWardencloth;
-	public static ResearchItem researchCrimsoncloth;
-	public static ResearchItem researchVoidcloth;
-	public static ResearchItem researchQuartz;
+	public static ResearchItem researchWardenclothWand;
+	public static ResearchItem researchWardenclothStaff;
+
+	public static ResearchItem researchExcubitura;
 	public static ResearchItem researchCrystal;
-	public static ResearchItem researchWardenArmor;
-	public static ResearchItem researchWardenWeapon;
-	public static ResearchItem researchWaslieHammer;
+
 	public static ResearchItem researchLore1;
 	public static ResearchItem researchLore2;
 	public static ResearchItem researchLore3;
 	public static ResearchItem researchLore4;
-	public static ResearchItem researchIllumination;
+	public static ResearchItem researchQuartz;
+
+	public static ResearchItem researchWaslieHammer;
+	public static ResearchItem researchWardenArmor;
+	public static ResearchItem researchWardenWeapon;
+
+	public static ResearchItem researchCrimsonCult;
+	public static ResearchItem researchCrimsoncloth;
+	public static ResearchItem researchCrimsonHat;
+
+	public static ResearchItem researchEldritch;
+	public static ResearchItem researchVoidcloth;
+
 }

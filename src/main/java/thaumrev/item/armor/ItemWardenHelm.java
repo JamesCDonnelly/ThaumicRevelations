@@ -1,4 +1,4 @@
-package thaumrev.item.armour;
+package thaumrev.item.armor;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
@@ -20,7 +20,7 @@ public class ItemWardenHelm extends ItemWardenArmor implements IRevealer, IGoggl
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister register) {
-		itemIcon = register.registerIcon("thaumrev:armour/wardenhelm");
+		itemIcon = register.registerIcon("thaumrev:armor/wardenhelm");
 	}
 
 	@Override

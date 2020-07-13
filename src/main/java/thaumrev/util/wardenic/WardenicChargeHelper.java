@@ -30,7 +30,6 @@ public class WardenicChargeHelper {
 		} else {
 			return upgrades.get(ThaumRevLibrary.EXCUBITOR.getName());
 		}
-
 	}
 
 	public static void setUpgradeOnStack(ItemStack stack, String key) {

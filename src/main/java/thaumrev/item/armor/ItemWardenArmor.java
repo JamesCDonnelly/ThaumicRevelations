@@ -1,4 +1,4 @@
-package thaumrev.item.armour;
+package thaumrev.item.armor;
 
 import java.util.List;
 
@@ -24,7 +24,6 @@ public class ItemWardenArmor extends ItemArmor implements ISpecialArmor, IVisDis
 		super(ThaumRevLibrary.armorMaterialWarden, 2, type);
 		setCreativeTab(ThaumRevLibrary.tabThaumRev);
 		setMaxStackSize(1);
-
 	}
 
 	@Override
@@ -34,7 +33,7 @@ public class ItemWardenArmor extends ItemArmor implements ISpecialArmor, IVisDis
 
 	@Override
 	public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
-		return true;
+		return false;
 	}
 
 	@Override

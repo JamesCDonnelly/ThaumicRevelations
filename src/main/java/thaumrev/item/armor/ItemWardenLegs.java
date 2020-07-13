@@ -1,4 +1,4 @@
-package thaumrev.item.armour;
+package thaumrev.item.armor;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
@@ -6,22 +6,22 @@ import net.minecraft.item.ItemStack;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemWardenChest extends ItemWardenArmor {
+public class ItemWardenLegs extends ItemWardenArmor {
 
-	public ItemWardenChest() {
-		super(1);
-		setUnlocalizedName("itemWardenChest");
+	public ItemWardenLegs() {
+		super(2);
+		setUnlocalizedName("itemWardenLegs");
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister register) {
-		itemIcon = register.registerIcon("thaumrev:armour/wardenchest");
+		itemIcon = register.registerIcon("thaumrev:armor/wardenlegs");
 	}
 
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
-		return "thaumrev:textures/models/warden_1.png";
+		return "thaumrev:textures/models/warden_2.png";
 	}
 
 }

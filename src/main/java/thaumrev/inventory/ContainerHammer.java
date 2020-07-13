@@ -5,8 +5,9 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.*;
 import net.minecraft.item.ItemStack;
 
-import thaumrev.item.armour.ItemWardenArmor;
+import thaumrev.item.armor.ItemWardenArmor;
 import thaumrev.item.ItemWardenWeapon;
+import thaumrev.item.ItemWardenBow;
 import thaumrev.util.wardenic.WardenicChargeHelper;
 import thaumcraft.api.aspects.IEssentiaContainerItem;
 
@@ -44,7 +45,7 @@ public class ContainerHammer extends Container {
 		ItemStack item = craftingMatrix.getStackInSlot(1);
 
 		if (item != null) {
-			if (!(item.getItem() instanceof ItemWardenArmor || item.getItem() instanceof ItemWardenWeapon)) {
+			if (!(item.getItem() instanceof ItemWardenArmor || item.getItem() instanceof ItemWardenWeapon || item.getItem() instanceof ItemWardenBow)) {
 				ItemStack repairedItem = new ItemStack(item.getItem());
 				if (item.getItemDamage() != 0 && item.getItem().isRepairable()) {
 					repairedItem.setItemDamage(0);

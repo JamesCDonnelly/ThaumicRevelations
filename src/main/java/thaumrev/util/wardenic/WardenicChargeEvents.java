@@ -8,7 +8,8 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
-import thaumrev.item.armour.ItemWardenArmor;
+import thaumrev.item.ItemWardenBow;
+import thaumrev.item.armor.ItemWardenArmor;
 import thaumrev.item.ItemWardenWeapon;
 
 public class WardenicChargeEvents {
@@ -26,7 +27,7 @@ public class WardenicChargeEvents {
 
 			for (int i = 0; i < 5; i++) {
 				if (player.getEquipmentInSlot(i) != null) {
-					if (player.getEquipmentInSlot(i).getItem() instanceof ItemWardenArmor || player.getEquipmentInSlot(i).getItem() instanceof ItemWardenWeapon) {
+					if (player.getEquipmentInSlot(i).getItem() instanceof ItemWardenArmor || player.getEquipmentInSlot(i).getItem() instanceof ItemWardenWeapon || player.getEquipmentInSlot(i).getItem() instanceof ItemWardenBow) {
 						if (player.getEquipmentInSlot(i).getItemDamage() != player.getEquipmentInSlot(i).getMaxDamage()) {
 							if (random.nextInt(50) == 0) {
 								player.getEquipmentInSlot(i).setItemDamage(player.getEquipmentInSlot(i).getItemDamage() - 1);

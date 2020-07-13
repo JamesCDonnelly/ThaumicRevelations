@@ -13,6 +13,7 @@ item.itemResource.5.name=Voidcloth
 item.itemWardenAmulet.name=守卫项链
 item.itemWardenWeapon.name=守护之剑
 item.itemWardenBow.name=Warden's Bow
+item.itemCrimsonHat.name=Crimsoncloth Top Hat
 item.itemWardenHelm.name=守卫头盔
 item.itemWardenChest.name=守卫胸甲
 item.itemWardenLegs.name=守卫护腿
@@ -43,13 +44,14 @@ tile.blockWitor.name=守护之光
 
 #Aspects
 tc.aspect.excubitor=守护,警戒,胜利,牺牲
+tc.aspect.rubus=Red, Crimson, The Crimson Cult
 
 #Research
 tc.research_category.trevelations=神秘启示录
 
-trvresearch.name.TREVELATIONS=神秘守卫者
-trvresearch.text.TREVELATIONS=被我们遗忘已久..
-trvresearch.page.TREVELATIONS.0=你在书中读到了这么一群人,他们曾是古老的前魔法师,长久以来与邪灵做斗争守护着这片土地.<BR>他们曾是深渊行者的支部,因玫瑰堡的总部遭到围攻而分开.<BR>感谢莉兹白大师所记,而那些人中所留下来的就是我们现在所称的神秘守卫者.
+trvresearch.name.WARDENS=神秘守卫者
+trvresearch.text.WARDENS=被我们遗忘已久..
+trvresearch.page.WARDENS.0=你在书中读到了这么一群人,他们曾是古老的前魔法师,长久以来与邪灵做斗争守护着这片土地.<BR>他们曾是深渊行者的支部,因玫瑰堡的总部遭到围攻而分开.<BR>感谢莉兹白大师所记,而那些人中所留下来的就是我们现在所称的神秘守卫者.
 
 trvresearch.name.EXCUBITURA=Exubitura
 trvresearch.text.EXCUBITURA=即使不叫玫瑰...
@@ -123,4 +125,3 @@ trvresearch.page.LORE4.0=几天之后莉兹白和瓦纳到达了玫瑰堡,在那
 trvresearch.page.LORE4.1="它们要杀死我和我的朋友们,那可不是我能轻易接受的事" 莉兹白说<BR>"卫斯理你能不能做出些什么来击败它们的?我和它们战斗时甚至不能穿透它们的符文" 莉兹白说<BR>"是的,和它们战斗的确很棘手.我需要你的帮助.做出那种魔法金属,然后到圣物室内来见我" 卫斯理说道<BR>
 trvresearch.page.LORE4.2=*这边的文字变为了奇怪的符文,好像你不该知道他们所说的话*
 trvresearch.page.LORE4.3="现在我们准备好了.做好准备,我们黎明就出发" 卫斯理说<BR>第二天早晨,瓦纳和卫斯理出发前去查看莉兹白.他们没有找到她.她在所有人醒来之前就已经离开了.她是怎样骗过守卫的?或许是用了隐形的法杖核心或是其他的什么.<BR>"我们得在她贸然行事之前找到她" 瓦纳说<BR>"我只希望我们能赶得上" 卫斯理达到
-
