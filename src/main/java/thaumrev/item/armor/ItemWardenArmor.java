@@ -1,7 +1,5 @@
 package thaumrev.item.armor;
 
-import java.util.List;
-
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
@@ -12,11 +10,12 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ISpecialArmor;
-
-import thaumrev.common.ThaumRevLibrary;
-import thaumrev.util.wardenic.WardenicChargeHelper;
 import thaumcraft.api.IVisDiscountGear;
 import thaumcraft.api.aspects.Aspect;
+import thaumrev.common.ThaumRevLibrary;
+import thaumrev.util.wardenic.WardenicChargeHelper;
+
+import java.util.List;
 
 public class ItemWardenArmor extends ItemArmor implements ISpecialArmor, IVisDiscountGear {
 
@@ -55,6 +54,7 @@ public class ItemWardenArmor extends ItemArmor implements ISpecialArmor, IVisDis
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
 		list.add(EnumChatFormatting.AQUA + StatCollector.translateToLocal("tooltip.wardenic.charge") + ": " + (stack.getMaxDamage() - stack.getItemDamage()) + "/" + stack.getMaxDamage());
 		list.add(EnumChatFormatting.GOLD + StatCollector.translateToLocal("tooltip.wardenic.upgrade") + ": " + WardenicChargeHelper.getUpgrade(stack).getQuote());
+		list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + ": " + this.getVisDiscount(stack, player, (Aspect)null) + "%");
 
 		super.addInformation(stack, player, list, par4);
 	}

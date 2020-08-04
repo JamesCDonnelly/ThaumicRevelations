@@ -1,17 +1,17 @@
 package thaumrev.item.baubles;
 
+import baubles.api.BaubleType;
+import baubles.api.IBauble;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
-import baubles.api.BaubleType;
-import baubles.api.IBauble;
 import thaumrev.common.ThaumRevLibrary;
 
 public class ItemLoveRing extends Item implements IBauble {
@@ -38,26 +38,29 @@ public class ItemLoveRing extends Item implements IBauble {
 	}
 
 	@Override
-	public BaubleType getBaubleType(ItemStack itemStack) {
+	public BaubleType getBaubleType(ItemStack stack) {
 		return BaubleType.RING;
 	}
 
 	@Override
-	public void onWornTick(ItemStack itemStack, EntityLivingBase entityLivingBase) {}
+	public void onWornTick(ItemStack stack, EntityLivingBase entityLivingBase) {}
 
 	@Override
-	public void onEquipped(ItemStack itemStack, EntityLivingBase entityLivingBase) {}
+	public void onEquipped(ItemStack stack, EntityLivingBase entityLivingBase) {
+		double modifier = entityLivingBase.getEntityAttribute(SharedMonsterAttributes.maxHealth).getAttributeValue() * 1.5D;
+		entityLivingBase.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(modifier);
+	}
 
 	@Override
-	public void onUnequipped(ItemStack itemStack, EntityLivingBase entityLivingBase) {}
+	public void onUnequipped(ItemStack stack, EntityLivingBase entityLivingBase) {}
 
 	@Override
-	public boolean canEquip(ItemStack itemStack, EntityLivingBase entityLivingBase) {
+	public boolean canEquip(ItemStack stack, EntityLivingBase entityLivingBase) {
 		return true;
 	}
 
 	@Override
-	public boolean canUnequip(ItemStack itemStack, EntityLivingBase entityLivingBase) {
+	public boolean canUnequip(ItemStack stack, EntityLivingBase entityLivingBase) {
 		return false;
 	}
 

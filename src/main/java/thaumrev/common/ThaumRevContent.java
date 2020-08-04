@@ -64,11 +64,19 @@ public class ThaumRevContent {
 		itemWardenWeapon = new ItemWardenWeapon();
 		itemWardenBow = new ItemWardenBow();
 		itemFocusPurity = new ItemFocusPurity(); //Broken
+
 		itemCrimsonHat = new ItemCrimsonHat();
+
 		itemWardenHelm = new ItemWardenHelm();
 		itemWardenChest = new ItemWardenChest();
 		itemWardenLegs = new ItemWardenLegs();
 		itemWardenBoots = new ItemWardenBoots();
+
+		itemWardenclothHelm = new ItemWardenclothArmor(0, "itemWardenclothHelm");
+		itemWardenclothChest = new ItemWardenclothArmor(1, "itemWardenclothChest");
+		itemWardenclothLegs = new ItemWardenclothArmor(2, "itemWardenclothLegs");
+		itemWardenclothBoots = new ItemWardenclothArmor(3, "itemWardenclothBoots");
+
 		itemLoveRing = new ItemLoveRing();
 		itemWaslieHammer = new ItemWaslieHammer();
 		itemFocusIllumination = new ItemFocusIllumination();
@@ -78,11 +86,19 @@ public class ThaumRevContent {
 		GameRegistry.registerItem(itemWardenWeapon, "itemWardenWeapon");
 		GameRegistry.registerItem(itemWardenBow, "itemWardenBow");
 		GameRegistry.registerItem(itemWardenAmulet, "itemWardenAmulet");
+
+		GameRegistry.registerItem(itemCrimsonHat, "itemCrimsonHat");
+
 		GameRegistry.registerItem(itemWardenHelm, "itemWardenHelm");
 		GameRegistry.registerItem(itemWardenChest, "itemWardenChest");
 		GameRegistry.registerItem(itemWardenLegs, "itemWardenLegs");
 		GameRegistry.registerItem(itemWardenBoots, "itemWardenBoots");
-		GameRegistry.registerItem(itemCrimsonHat, "itemCrimsonHat");
+
+		GameRegistry.registerItem(itemWardenclothHelm, "itemWardenclothHelm");
+		GameRegistry.registerItem(itemWardenclothChest, "itemWardenclothChest");
+		GameRegistry.registerItem(itemWardenclothLegs, "itemWardenclothLegs");
+		GameRegistry.registerItem(itemWardenclothBoots, "itemWardenclothBoots");
+
 		GameRegistry.registerItem(itemLoveRing, "itemLoveRing");
 		GameRegistry.registerItem(itemWaslieHammer, "itemWaslieHammer");
 		GameRegistry.registerItem(itemFocusIllumination, "itemFocusIllumination");

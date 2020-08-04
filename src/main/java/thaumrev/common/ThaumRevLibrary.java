@@ -6,7 +6,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.ResourceLocation;
-
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.crafting.CrucibleRecipe;
 import thaumcraft.api.crafting.ShapedArcaneRecipe;
@@ -52,10 +51,17 @@ public class ThaumRevLibrary {
 	public static Item itemWardenWeapon;
 	public static Item itemWardenBow;
 	public static Item itemFocusPurity; //TODO: make it working
+
+	public static Item itemWardenclothHelm;
+	public static Item itemWardenclothChest;
+	public static Item itemWardenclothLegs;
+	public static Item itemWardenclothBoots;
+
 	public static Item itemWardenHelm;
 	public static Item itemWardenChest;
 	public static Item itemWardenLegs;
 	public static Item itemWardenBoots;
+
 	public static Item itemLoveRing;
 	public static Item itemWaslieHammer;
 	public static Item itemFocusIllumination;

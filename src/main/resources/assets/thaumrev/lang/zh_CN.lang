@@ -22,6 +22,10 @@ item.itemFocusPurity.name=法杖核心:净化
 item.itemLoveRing.name=爱之指环
 item.itemWaslieHammer.name=莉兹白之锤
 item.itemFocusIllumination.name=法杖核心:照明
+item.itemWardenclothHelm.name = Wardencloth Helmet
+item.itemWardenclothChest.name = Wardencloth Chestplate
+item.itemWardenclothLegs.name = Wardencloth Leggings
+item.itemWardenclothBoots.name = Wardencloth Boots
 
 #Quotes
 upgrade.Excubitor.quote=永恒之守望者

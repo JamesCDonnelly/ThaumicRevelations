@@ -29,6 +29,11 @@ item.itemWardenChest.name=Warden's Chestplate
 item.itemWardenLegs.name=Warden's Leggings
 item.itemWardenBoots.name=Warden's Boots
 
+item.itemWardenclothHelm.name = Wardencloth Helmet
+item.itemWardenclothChest.name = Wardencloth Chestplate
+item.itemWardenclothLegs.name = Wardencloth Leggings
+item.itemWardenclothBoots.name = Wardencloth Boots
+
 item.itemCrimsonHat.name=Crimsoncloth Top Hat
 
 #Misc

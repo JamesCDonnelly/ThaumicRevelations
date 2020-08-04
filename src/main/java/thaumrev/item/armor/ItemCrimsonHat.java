@@ -12,12 +12,16 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.ISpecialArmor;
 import thaumcraft.api.*;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.nodes.IRevealer;
 import thaumrev.client.ClientProxy;
 import thaumrev.common.ThaumRevLibrary;
+
+import java.util.List;
 
 public class ItemCrimsonHat extends ItemArmor implements ISpecialArmor, IRepairable, IRevealer, IGoggles, IRunicArmor, IVisDiscountGear, IWarpingGear {
 
@@ -80,7 +84,7 @@ public class ItemCrimsonHat extends ItemArmor implements ISpecialArmor, IRepaira
 
         ModelBiped armorModel = ClientProxy.armorModels.get(this);
 
-        if(armorModel != null){
+        if (armorModel != null){
             armorModel.bipedHead.showModel = armorSlot == 0;
             armorModel.bipedHeadwear.showModel = false;
 
@@ -126,11 +130,15 @@ public class ItemCrimsonHat extends ItemArmor implements ISpecialArmor, IRepaira
 
     @Override
     public void damageArmor(EntityLivingBase entityLivingBase, ItemStack itemStack, DamageSource damageSource, int i, int i1) {
-
     }
 
     @Override
     public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
         return "thaumrev:textures/models/crimsonhat.png";
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
+        list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + ": " + this.getVisDiscount(stack, player, (Aspect)null) + "%");
     }
 }
