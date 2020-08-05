@@ -54,7 +54,7 @@ public class ThaumRevContent {
 				50, 12.0F, 3.0F, 0);
 
 		armorMaterialWardencloth = EnumHelper.addArmorMaterial("WARDENCLOTH", 50,
-				new int[] {1, 3, 2, 1}, 15);
+				new int[] {0, 2, 1, 0}, 15);
 
 		armorMaterialCrimsoncloth = EnumHelper.addArmorMaterial("CRIMSONCLOTH", 50,
 				new int[] {2, 3, 2, 1}, 15);
