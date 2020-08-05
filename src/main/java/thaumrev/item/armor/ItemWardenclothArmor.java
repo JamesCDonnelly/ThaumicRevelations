@@ -46,7 +46,7 @@ public class ItemWardenclothArmor extends ItemArmor implements IVisDiscountGear,
                 name = "wardenclothboots";
         }
 
-        itemIcon = register.registerIcon("thaumrev:armor/" + name + ".png");
+        itemIcon = register.registerIcon("thaumrev:armor/" + name);
     }
 
     @Override
