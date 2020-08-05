@@ -1,8 +1,11 @@
 # Thaumic Revelations
 
+### Planned features
+  Look in the [TO-DO.md](TO-DO.md) file
+
 ### Compiling from Sources
- Note: Git MUST be installed and in the system path to use our scripts.
- * Setup: Run [gradle]in the repository root: `gradlew[.bat] [setupDevWorkspace|setupDecompWorkspace] [eclipse|idea]`
+  Note: Git MUST be installed and in the system path to use our scripts.
+* Setup: Run [gradle]in the repository root: `gradlew[.bat] [setupDevWorkspace|setupDecompWorkspace] [eclipse|idea]`
 * Build: Run [gradle]in the repository root: `gradlew[.bat] build`
 * If obscure Gradle issues are found try running `gradlew clean` and `gradlew cleanCache`
 
