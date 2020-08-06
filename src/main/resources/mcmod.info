@@ -2,21 +2,18 @@
 	{
 		"modid": "trevelations",
 		"name": "Thaumic Revelations",
-		"description": "",
-		"version": "1.7.10-0.2.3.10",
+		"description": "Adding a touch of coolness to Thaumcraft",
+		"version": "0.2.3.0",
 		"mcversion": "1.7.10",
-		"url": "",
-		"updateUrl": ""
-		"authors": [
-			"Ciemny_Cygan",
-			"Mortvana",
-			"MasterAbdoTGM50"
-		],
-		"credits": "Azanor",
+		"url": "https://www.curseforge.com/minecraft/mc-mods/thaumic-revelations",
+		"updateUrl": "",
+		"authors": "Ciemny_Cygan, Mortvana, MasterAbdoTGM50",
+		"credits": "Azanor - for creating Thaumcraft",
 		"logoFile": "",
 		"screenshots": [],
 		"dependencies": [
-		    "Thaumcraft",
-		    "Baubles"]
+		    "Forge",
+		    "Baubles",
+		    "Thaumcraft"]
 	}
 ]
