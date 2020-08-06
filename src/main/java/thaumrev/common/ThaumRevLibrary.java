@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemSeeds;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.ResourceLocation;
 import thaumcraft.api.aspects.Aspect;
@@ -67,6 +68,8 @@ public class ThaumRevLibrary {
 	public static Item itemFocusIllumination;
 
 	public static Block blockExcubitura;
+	public static ItemSeeds itemExcubituraSeeds;
+
 	public static Block blockInfusedQuartzNormal;
 	public static Block blockInfusedQuartzChiseled;
 	public static Block blockInfusedQuartzPillar;

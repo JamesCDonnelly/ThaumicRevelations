@@ -39,8 +39,11 @@ item.itemCrimsonHat.name=Crimsoncloth Top Hat
 #Misc
 item.itemWaslieHammer.name=Wesly's Hammer
 
+#Plants
+tile.blockExcubitura.name=<i>Rosa Excubitura</i>
+item.itemExcubituraSeeds.name=Rosa Excubitura Seeds
+
 #Blocks
-tile.blockExcubitura.name=Rosa Excubitura
 tile.blockInfusedQuartzNormal.name=Infused Quartz Block
 tile.blockInfusedQuartzSlab.name=Infused Quartz Slab
 tile.blockInfusedQuartzStair.name=Infused Quartz Stair

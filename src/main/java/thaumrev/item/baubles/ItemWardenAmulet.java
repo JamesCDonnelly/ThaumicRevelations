@@ -63,20 +63,22 @@ public class ItemWardenAmulet extends Item implements IBauble {
 
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
-		if (amuletCharge > 100) amuletCharge = 0;
+		if (amuletCharge > 60) amuletCharge = 0;
 
-		if (amuletCharge < 20) {
+		if (amuletCharge < 10) {
 			chargeInformation = EnumChatFormatting.DARK_RED.toString();
-		} else if (amuletCharge < 40) {
+		} else if (amuletCharge < 20) {
 			chargeInformation = EnumChatFormatting.RED.toString();
-		} else if (amuletCharge < 60) {
+		} else if (amuletCharge < 30) {
 			chargeInformation = EnumChatFormatting.GOLD.toString();
-		} else if (amuletCharge < 80) {
+		} else if (amuletCharge < 40) {
 			chargeInformation = EnumChatFormatting.YELLOW.toString();
-		} else {
+		} else if (amuletCharge < 50) {
 			chargeInformation = EnumChatFormatting.GREEN.toString();
+		} else {
+			chargeInformation = EnumChatFormatting.DARK_GREEN.toString();
 		}
-		chargeInformation += amuletCharge + "/100";
+		chargeInformation += amuletCharge + "/60";
 		list.add(chargeInformation);
 	}
 }

@@ -14,7 +14,7 @@ import thaumrev.util.wardenic.WardenicChargeEvents;
 import thaumrev.util.wardenic.WardenicUpgrades;
 import thaumrev.world.WorldGenExcubitura;
 
-@Mod(modid = ThaumRevLibrary.MOD_ID, name = "Thaumic Revelations", version = "1.7.10-0.2.3.9", dependencies = "required-after:Thaumcraft")
+@Mod(modid = ThaumRevLibrary.MOD_ID, name = "Thaumic Revelations", version = "1.7.10-0.2.3.10", dependencies = "required-after:Thaumcraft")
 public class ThaumicRevelations {
 
 	@Instance(ThaumRevLibrary.MOD_ID)

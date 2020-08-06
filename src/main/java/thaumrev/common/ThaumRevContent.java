@@ -13,10 +13,7 @@ import thaumcraft.api.research.ResearchPage;
 import thaumcraft.common.config.ConfigBlocks;
 import thaumcraft.common.config.ConfigItems;
 import thaumrev.block.*;
-import thaumrev.item.ItemResource;
-import thaumrev.item.ItemWardenBow;
-import thaumrev.item.ItemWardenWeapon;
-import thaumrev.item.ItemWaslieHammer;
+import thaumrev.item.*;
 import thaumrev.item.armor.*;
 import thaumrev.item.baubles.ItemLoveRing;
 import thaumrev.item.baubles.ItemWardenAmulet;
@@ -81,6 +78,8 @@ public class ThaumRevContent {
 		itemWaslieHammer = new ItemWaslieHammer();
 		itemFocusIllumination = new ItemFocusIllumination();
 
+		itemExcubituraSeeds = new ItemExcubituraSeeds();
+
 		GameRegistry.registerItem(itemResource, "itemResource");
 		GameRegistry.registerItem(itemFocusPurity, "itemFocusPurity"); //Broken
 		GameRegistry.registerItem(itemWardenWeapon, "itemWardenWeapon");
@@ -102,6 +101,8 @@ public class ThaumRevContent {
 		GameRegistry.registerItem(itemLoveRing, "itemLoveRing");
 		GameRegistry.registerItem(itemWaslieHammer, "itemWaslieHammer");
 		GameRegistry.registerItem(itemFocusIllumination, "itemFocusIllumination");
+
+		GameRegistry.registerItem(itemExcubituraSeeds, "itemExcubituraSeeds");
 	}
 
 	public static void loadRecipes() {
