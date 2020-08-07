@@ -16,7 +16,7 @@ public class WorldGenExcubitura implements IWorldGenerator {
 		int y = world.getHeightValue(x, z);
 
 		if (world.isAirBlock(x, y, z) && ThaumRevLibrary.blockExcubitura.canBlockStay(world, x, y, z) && random.nextInt(10) == 0) {
-			System.out.println(x + " " + y + " " + z);
+			//DEBUG System.out.println(x + " " + y + " " + z);
 			world.setBlock(x, y, z, ThaumRevLibrary.blockExcubitura, 0, 2);
 			world.setBlockMetadataWithNotify(x, y, z, 15, 0);
 		}

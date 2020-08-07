@@ -24,6 +24,7 @@ public class WardenicChargeEvents {
 	public void onTick(LivingUpdateEvent event) {
 		if (event.entity instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) event.entity;
+			int count = 0;
 
 			for (int i = 0; i <= 4; i++) {
 				if (player.getEquipmentInSlot(i) != null) {
@@ -35,6 +36,18 @@ public class WardenicChargeEvents {
 								player.getEquipmentInSlot(i).setItemDamage(player.getEquipmentInSlot(i).getItemDamage() - 1);
 							}
 						}
+					}
+				}
+			}
+			for (int i = 0; i <= 3; i++) {
+				if (player.getCurrentArmor(i) == null ||
+						!(player.getCurrentArmor(i).getItem() instanceof ItemWardenArmor) ||
+						(player.getCurrentArmor(i).getItem() instanceof ItemWardenArmor &&
+								!WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getQuote().equals("Free like wind"))) {
+					count++;
+					if (count == 4) {
+						player.capabilities.setPlayerWalkSpeed(0.1F);
+						player.stepHeight = 0.5F;
 					}
 				}
 			}

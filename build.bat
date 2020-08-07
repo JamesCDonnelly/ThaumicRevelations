@@ -1,1 +1,1 @@
-@gradlew clean & gradlew build
+@gradlew clean & gradlew build & pause
