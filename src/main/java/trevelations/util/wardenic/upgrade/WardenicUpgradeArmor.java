@@ -2,13 +2,14 @@ package trevelations.util.wardenic.upgrade;
 
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
-
-import trevelations.util.DamageSourceWarden;
 import thaumcraft.api.aspects.Aspect;
+import trevelations.util.DamageSourceWarden;
 
 public class WardenicUpgradeArmor extends WardenicUpgrade {
 
-	public WardenicUpgradeArmor(Aspect aspect) {super(aspect);}
+	public WardenicUpgradeArmor(Aspect aspect) {
+		super(aspect);
+	}
 
 	@Override
 	public void onAttacked(LivingHurtEvent event) {

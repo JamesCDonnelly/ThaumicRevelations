@@ -1,23 +1,22 @@
 package trevelations.item;
 
-import java.util.List;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumRarity;
-import net.minecraft.item.ItemSword;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import trevelations.common.ThaumRevLibrary;
 import trevelations.util.DamageSourceWarden;
 import trevelations.util.wardenic.WardenicChargeHelper;
+
+import java.util.List;
 
 public class ItemWardenWeapon extends ItemSword {
 
@@ -78,11 +77,16 @@ public class ItemWardenWeapon extends ItemSword {
 		if (stack.getItemDamage() != stack.getMaxDamage()) {
 			DamageSource damageSource = new DamageSourceWarden("warden", player);
 			entity.attackEntityFrom(damageSource, 5);
+
 			WardenicChargeHelper.getUpgrade(stack).onAttack(stack, player, entity);
+
 			stack.setItemDamage(stack.getItemDamage() + 1);
 		}
 		return super.onLeftClickEntity(stack, player, entity);
 	}
+
+	// @Override
+	// public boolean
 
 	@Override
 	@SideOnly(Side.CLIENT)

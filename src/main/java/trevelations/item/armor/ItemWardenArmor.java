@@ -31,12 +31,12 @@ public class ItemWardenArmor extends ItemArmor implements ISpecialArmor, IVisDis
 	}
 
 	@Override
-	public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
+	public boolean isBookEnchantable(ItemStack armor, ItemStack book) {
 		return false;
 	}
 
 	@Override
-	public int getMaxDamage(ItemStack stack) {
+	public int getMaxDamage(ItemStack armor) {
 		return 50;
 	}
 
@@ -51,19 +51,19 @@ public class ItemWardenArmor extends ItemArmor implements ISpecialArmor, IVisDis
 	}
 
 	@Override
-	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
-		list.add(EnumChatFormatting.AQUA + StatCollector.translateToLocal("tooltip.wardenic.charge") + ": " + (stack.getMaxDamage() - stack.getItemDamage()) + "/" + stack.getMaxDamage());
-		list.add(EnumChatFormatting.GOLD + StatCollector.translateToLocal("tooltip.wardenic.upgrade") + ": " + WardenicChargeHelper.getUpgrade(stack).getQuote());
-		list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + ": " + this.getVisDiscount(stack, player, (Aspect)null) + "%");
+	public void addInformation(ItemStack armor, EntityPlayer player, List list, boolean par4) {
+		list.add(EnumChatFormatting.AQUA + StatCollector.translateToLocal("tooltip.wardenic.charge") + ": " + (armor.getMaxDamage() - armor.getItemDamage()) + "/" + armor.getMaxDamage());
+		list.add(EnumChatFormatting.GOLD + StatCollector.translateToLocal("tooltip.wardenic.upgrade") + ": " + WardenicChargeHelper.getUpgrade(armor).getQuote());
+		list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + ": " + this.getVisDiscount(armor, player, null) + "%");
 
-		super.addInformation(stack, player, list, par4);
+		super.addInformation(armor, player, list, par4);
 	}
 
 	@Override
-	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
-		WardenicChargeHelper.getUpgrade(itemStack).onTick(world, player, itemStack);
+	public void onArmorTick(World world, EntityPlayer player, ItemStack armor) {
+		super.onArmorTick(world, player, armor);
 
-		super.onArmorTick(world, player, itemStack);
+		WardenicChargeHelper.getUpgrade(armor).onTick(world, player, armor);
 	}
 
 	@Override
@@ -81,10 +81,11 @@ public class ItemWardenArmor extends ItemArmor implements ISpecialArmor, IVisDis
 	}
 
 	@Override
-	public void damageArmor(EntityLivingBase entity, ItemStack stack, DamageSource source, int damage, int slot) {}
+	public void damageArmor(EntityLivingBase entity, ItemStack armor, DamageSource source, int damage, int slot) {
+	}
 
 	@Override
-	public int getVisDiscount(ItemStack stack, EntityPlayer player, Aspect aspect) {
+	public int getVisDiscount(ItemStack armor, EntityPlayer player, Aspect aspect) {
 		return 5;
 	}
 }
