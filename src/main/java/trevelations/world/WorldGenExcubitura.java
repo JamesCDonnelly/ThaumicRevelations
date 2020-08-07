@@ -1,12 +1,11 @@
 package trevelations.world;
 
-import java.util.Random;
-
+import cpw.mods.fml.common.IWorldGenerator;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
-import cpw.mods.fml.common.IWorldGenerator;
-
 import trevelations.common.ThaumRevLibrary;
+
+import java.util.Random;
 
 public class WorldGenExcubitura implements IWorldGenerator {
 
@@ -16,10 +15,10 @@ public class WorldGenExcubitura implements IWorldGenerator {
 		int z = chunkZ * 16 + random.nextInt(16);
 		int y = world.getHeightValue(x, z);
 
-		if (world.isAirBlock(x, y, z) && ThaumRevLibrary.blockExcubitura.canBlockStay(world, x, y, z) && random.nextInt(100) == 0) {
+		if (world.isAirBlock(x, y, z) && ThaumRevLibrary.blockExcubitura.canBlockStay(world, x, y, z) && random.nextInt(10) == 0) {
 			System.out.println(x + " " + y + " " + z);
 			world.setBlock(x, y, z, ThaumRevLibrary.blockExcubitura, 0, 2);
-			world.setBlockMetadataWithNotify(x, y, z, 7, 0);
+			world.setBlockMetadataWithNotify(x, y, z, 15, 0);
 		}
 	}
 

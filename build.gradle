@@ -29,15 +29,15 @@ apply plugin: 'forge'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-version = "1.7.10-0.2.3.0"
+version = "1.7.10-0.2.3.1"
 group = "trevelations" // This is our group.
-archivesBaseName = "ThaumicRevelations" // This is our actual project within the group.
+// archivesBaseName = "ThaumicRevelations" // This is our actual project within the group.
 
 // Setup the forge minecraft plugin data.
 minecraft {
     version = "1.7.10-10.13.4.1614-1.7.10"
-    //mappings = 'stable_12' //This seems to break stuff
     runDir = "run"
+    // mappings = 'stable_12' // This seems to break stuff
 }
 
 repositories {
@@ -87,12 +87,14 @@ repositories {
         name "BuildCraft"
         artifactPattern "http://www.mod-buildcraft.com/releases/BuildCraft/[revision]/[module]-[revision]-[classifier].[ext]"
     }
-    */
+     */
 }
 
+/*
 configurations.all {
     resolutionStrategy.cacheDynamicVersionsFor 7200, 'hours'
 }
+ */
 
 // Add Coremod Manifest and Classifier (if I wanted one)
 jar {
@@ -108,6 +110,7 @@ jar {
     include "pack.mcmeta"
 }
 
+/*
 sourceSets {
     main {
         java {
@@ -121,6 +124,7 @@ sourceSets {
         }
     }
 }
+ */
 
 processResources {
     // this will ensure that this task is redone when the versions change.
@@ -128,6 +132,7 @@ processResources {
     inputs.property "mcversion", project.minecraft.version
 
     // we're omitting the .xcf files - they're development only
+    // (those are GIMP Project files)
     exclude '**/*.xcf'
 
     // replace stuff in files
@@ -137,7 +142,7 @@ processResources {
         include '**/*.properties'
 
         // replace version and mcversion
-        expand 'version':project.version, 'mcversion':project.minecraft.version
+        // expand 'version':project.version, 'mcversion':project.minecraft.version
     }
 
     // copy everything else, that's not the files above

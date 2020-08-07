@@ -18,12 +18,12 @@ import java.util.Random;
 
 public class BlockExcubitura extends BlockBush implements IGrowable {
 	@SideOnly(Side.CLIENT)
-	protected IIcon[] iIcon;
+	protected IIcon[] iIcon = new IIcon[16];
 
 	public BlockExcubitura() {
 		super(Material.plants);
 		setBlockName("blockExcubitura");
-		setBlockTextureName("trevelations:excubitura_stage_3");
+		setBlockTextureName("trevelations:excubitura_stage_7");
 		setTickRandomly(true);
 		setBlockBounds(0F, 0.0F, 0F, 1F, 0.25F, 1F);
 		setHardness(0.0F);
@@ -32,7 +32,7 @@ public class BlockExcubitura extends BlockBush implements IGrowable {
 
 	@Override
 	public int quantityDropped(int metadata, int fortune, Random random) {
-		return metadata / 7 * 2;
+		return metadata / 7;
 	}
 
 	@Override
@@ -43,9 +43,7 @@ public class BlockExcubitura extends BlockBush implements IGrowable {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister register)
-	{
-		iIcon = new IIcon[8];
+	public void registerBlockIcons(IIconRegister register) {
 		iIcon[0] = register.registerIcon("trevelations:excubitura/excubitura_stage_0");
 		iIcon[1] = register.registerIcon("trevelations:excubitura/excubitura_stage_0");
 		iIcon[2] = register.registerIcon("trevelations:excubitura/excubitura_stage_1");
@@ -54,6 +52,14 @@ public class BlockExcubitura extends BlockBush implements IGrowable {
 		iIcon[5] = register.registerIcon("trevelations:excubitura/excubitura_stage_2");
 		iIcon[6] = register.registerIcon("trevelations:excubitura/excubitura_stage_3");
 		iIcon[7] = register.registerIcon("trevelations:excubitura/excubitura_stage_3");
+		iIcon[8] = register.registerIcon("trevelations:excubitura/excubitura_stage_4");
+		iIcon[9] = register.registerIcon("trevelations:excubitura/excubitura_stage_4");
+		iIcon[10] = register.registerIcon("trevelations:excubitura/excubitura_stage_5");
+		iIcon[11] = register.registerIcon("trevelations:excubitura/excubitura_stage_5");
+		iIcon[12] = register.registerIcon("trevelations:excubitura/excubitura_stage_6");
+		iIcon[13] = register.registerIcon("trevelations:excubitura/excubitura_stage_6");
+		iIcon[14] = register.registerIcon("trevelations:excubitura/excubitura_stage_7");
+		iIcon[15] = register.registerIcon("trevelations:excubitura/excubitura_stage_7");
 	}
 
 	@Override
@@ -77,8 +83,8 @@ public class BlockExcubitura extends BlockBush implements IGrowable {
 		int growStage = world.getBlockMetadata(x, y, z) +
 				MathHelper.getRandomIntegerInRange(random, 2, 5);
 
-		if (growStage > 7) {
-			growStage = 7;
+		if (growStage > 15) {
+			growStage = 15;
 		}
 		world.setBlockMetadataWithNotify(x, y, z, growStage, 2);
 	}
@@ -96,7 +102,7 @@ public class BlockExcubitura extends BlockBush implements IGrowable {
 
 	@Override
 	public boolean func_149851_a(World world, int x, int y, int z, boolean p_149851_5_) {
-		return world.getBlockMetadata(x, y, z) != 7;
+		return world.getBlockMetadata(x, y, z) != 15;
 	}
 
 	@Override
@@ -114,8 +120,8 @@ public class BlockExcubitura extends BlockBush implements IGrowable {
 		super.updateTick(world, x, y, z, random);
 		int growStage = world.getBlockMetadata(x, y, z) + 1;
 
-		if (growStage > 7) {
-			growStage = 7;
+		if (growStage > 15) {
+			growStage = 15;
 		}
 		world.setBlockMetadataWithNotify(x, y, z, growStage, 2);
 	}
