@@ -85,12 +85,10 @@ public class ItemWardenWeapon extends ItemSword {
 		return super.onLeftClickEntity(stack, player, entity);
 	}
 
-	// @Override
-	// public boolean
-
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister register) {
 		itemIcon = register.registerIcon("trevelations:wardensword");
 	}
+
 }

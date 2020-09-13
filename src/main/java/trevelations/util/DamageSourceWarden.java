@@ -5,8 +5,8 @@ import net.minecraft.util.EntityDamageSource;
 
 public class DamageSourceWarden extends EntityDamageSource {
 
-	public DamageSourceWarden(String par1Str, Entity entity) {
-		super(par1Str, entity);
+	public DamageSourceWarden(String name, Entity entity) {
+		super(name, entity);
 		setDamageBypassesArmor();
 		setDamageIsAbsolute();
 	}

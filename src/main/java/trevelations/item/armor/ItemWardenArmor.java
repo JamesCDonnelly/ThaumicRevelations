@@ -52,11 +52,26 @@ public class ItemWardenArmor extends ItemArmor implements ISpecialArmor, IVisDis
 
 	@Override
 	public void addInformation(ItemStack armor, EntityPlayer player, List list, boolean par4) {
+		super.addInformation(armor, player, list, par4);
+
 		list.add(EnumChatFormatting.AQUA + StatCollector.translateToLocal("tooltip.wardenic.charge") + ": " + (armor.getMaxDamage() - armor.getItemDamage()) + "/" + armor.getMaxDamage());
 		list.add(EnumChatFormatting.GOLD + StatCollector.translateToLocal("tooltip.wardenic.upgrade") + ": " + WardenicChargeHelper.getUpgrade(armor).getQuote());
-		list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + ": " + this.getVisDiscount(armor, player, null) + "%");
 
-		super.addInformation(armor, player, list, par4);
+		if (this.getVisDiscount(armor, player, Aspect.AIR) == 10) {
+			list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + " (Aer): " + this.getVisDiscount(armor, player, Aspect.AIR) + "%");
+		} else if (this.getVisDiscount(armor, player, Aspect.WATER) == 10) {
+			list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + " (Aqua): " + this.getVisDiscount(armor, player, Aspect.WATER) + "%");
+		} else if (this.getVisDiscount(armor, player, Aspect.FIRE) == 10) {
+			list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + " (Ignis): " + this.getVisDiscount(armor, player, Aspect.FIRE) + "%");
+		} else if (this.getVisDiscount(armor, player, Aspect.ORDER) == 10) {
+			list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + " (Ordo): " + this.getVisDiscount(armor, player, Aspect.ORDER) + "%");
+		} else if (this.getVisDiscount(armor, player, Aspect.ENTROPY) == 10) {
+			list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + " (Perditio): " + this.getVisDiscount(armor, player, Aspect.ENTROPY) + "%");
+		} else if (this.getVisDiscount(armor, player, Aspect.EARTH) == 10) {
+			list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + " (Terra): " + this.getVisDiscount(armor, player, Aspect.EARTH) + "%");
+		} else {
+			list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + ": " + this.getVisDiscount(armor, player, null) + "%");
+		}
 	}
 
 	@Override
@@ -86,6 +101,20 @@ public class ItemWardenArmor extends ItemArmor implements ISpecialArmor, IVisDis
 
 	@Override
 	public int getVisDiscount(ItemStack armor, EntityPlayer player, Aspect aspect) {
-		return 5;
+		if (WardenicChargeHelper.getUpgrade(armor).getUpgradeAspect().equals(Aspect.AIR.getName())) {
+			return aspect == Aspect.AIR ? 10 : 0;
+		} else if (WardenicChargeHelper.getUpgrade(armor).getUpgradeAspect().equals(Aspect.EARTH.getName())) {
+			return aspect == Aspect.EARTH ? 10 : 0;
+		} else if (WardenicChargeHelper.getUpgrade(armor).getUpgradeAspect().equals(Aspect.ENTROPY.getName()))  {
+			return aspect == Aspect.ENTROPY ? 10 : 0;
+		} else if (WardenicChargeHelper.getUpgrade(armor).getUpgradeAspect().equals(Aspect.FIRE.getName()))  {
+			return aspect == Aspect.FIRE ? 10 : 0;
+		} else if (WardenicChargeHelper.getUpgrade(armor).getUpgradeAspect().equals(Aspect.ORDER.getName()))  {
+			return aspect == Aspect.ORDER ? 10 : 0;
+		} else if (WardenicChargeHelper.getUpgrade(armor).getUpgradeAspect().equals(Aspect.WATER.getName()))  {
+			return aspect == Aspect.WATER ? 10 : 0;
+		} else {
+			return 5;
+		}
 	}
 }

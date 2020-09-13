@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import thaumcraft.api.aspects.Aspect;
 import trevelations.util.wardenic.WardenicChargeHelper;
 
@@ -40,52 +41,81 @@ public class WardenicUpgradeAir extends WardenicUpgrade {
 	}
 
 	@Override
+	public void onAttacked(LivingHurtEvent event) {
+		super.onAttacked(event);
+
+		int count = 0;
+		EntityPlayer player = (EntityPlayer) event.entity;
+
+		for (int i = 0; i <= 3; i++) {
+			if ((player.getCurrentArmor(i) != null) &&
+					WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
+							.equals(Aspect.AIR.getName())) {
+				count++;
+			}
+		}
+
+		if (event.source.damageType.equals("arrow") ||
+				event.source.damageType.equals("thrown")) {
+			event.ammount *= 1 - (0.15F * count);
+		}
+	}
+
+	@Override
 	public void onTick(World world, EntityPlayer player, ItemStack stack) {
 		float helmetBoost;
 		float chestBoost;
 		float legsBoost;
 		float bootsBoost;
 
-		if (player.getCurrentArmor(3) != null) {
-			ItemStack helm = player.getCurrentArmor(3);
-			if (WardenicChargeHelper.getUpgrade(helm).getUpgradeAspect().equals(Aspect.AIR.getName())) {
-				helmetBoost = 0.025F;
+		if (!(player.isInWater())) {
+			if (player.getCurrentArmor(3) != null) {
+				ItemStack helm = player.getCurrentArmor(3);
+				if (WardenicChargeHelper.getUpgrade(helm).getUpgradeAspect().equals(Aspect.AIR.getName())) {
+					helmetBoost = 0.025F;
+				} else {
+					helmetBoost = 0;
+				}
 			} else {
 				helmetBoost = 0;
 			}
-		} else {
-			helmetBoost = 0;
-		}
-		if (player.getCurrentArmor(2) != null) {
-			ItemStack chest = player.getCurrentArmor(2);
-			if (WardenicChargeHelper.getUpgrade(chest).getUpgradeAspect().equals(Aspect.AIR.getName())) {
-				chestBoost = 0.025F;
+			if (player.getCurrentArmor(2) != null) {
+				ItemStack chest = player.getCurrentArmor(2);
+				if (WardenicChargeHelper.getUpgrade(chest).getUpgradeAspect().equals(Aspect.AIR.getName())) {
+					chestBoost = 0.025F;
+				} else {
+					chestBoost = 0;
+				}
 			} else {
 				chestBoost = 0;
 			}
-		} else {
-			chestBoost = 0;
-		}
-		if (player.getCurrentArmor(1) != null) {
-			ItemStack legs = player.getCurrentArmor(1);
-			if (WardenicChargeHelper.getUpgrade(legs).getUpgradeAspect().equals(Aspect.AIR.getName())) {
-				legsBoost = 0.025F;
+			if (player.getCurrentArmor(1) != null) {
+				ItemStack legs = player.getCurrentArmor(1);
+				if (WardenicChargeHelper.getUpgrade(legs).getUpgradeAspect().equals(Aspect.AIR.getName())) {
+					legsBoost = 0.025F;
+				} else {
+					legsBoost = 0;
+				}
 			} else {
 				legsBoost = 0;
 			}
-		} else {
-			legsBoost = 0;
-		}
-		if (player.getCurrentArmor(0) != null) {
-			ItemStack boots = player.getCurrentArmor(0);
-			if (WardenicChargeHelper.getUpgrade(boots).getUpgradeAspect().equals(Aspect.AIR.getName())) {
-				bootsBoost = 0.025F;
-				player.stepHeight = 1F;
+			if (player.getCurrentArmor(0) != null) {
+				ItemStack boots = player.getCurrentArmor(0);
+				if (WardenicChargeHelper.getUpgrade(boots).getUpgradeAspect().equals(Aspect.AIR.getName())) {
+					bootsBoost = 0.025F;
+					player.stepHeight = 1F;
+				} else {
+					bootsBoost = 0;
+					player.stepHeight = 0.5F;
+				}
 			} else {
 				bootsBoost = 0;
 				player.stepHeight = 0.5F;
 			}
 		} else {
+			helmetBoost = 0;
+			chestBoost = 0;
+			legsBoost = 0;
 			bootsBoost = 0;
 			player.stepHeight = 0.5F;
 		}

@@ -57,25 +57,41 @@ public class WardenicUpgradeEarth extends WardenicUpgrade {
 	public void onAttacked(LivingHurtEvent event) {
 		super.onAttacked(event);
 
-		if (event.source.damageType == "fall") {
-			List entities = new ArrayList<Entity>();
-			DamageSource damageSource = new DamageSourceWarden("warden", event.entity);
+		int count = 0;
 
-			entities = event.entity.worldObj.getEntitiesWithinAABBExcludingEntity(
-					event.entity,
-					AxisAlignedBB.getBoundingBox(
-							event.entity.posX - 6,
-							event.entity.posY - 6,
-							event.entity.posZ - 6,
-							event.entity.posX + 6,
-							event.entity.posY + 6,
-							event.entity.posZ + 6));
+		if (event.entity instanceof EntityPlayer) {
+			EntityPlayer player = (EntityPlayer) event.entity;
 
-			for (Object entity : entities) {
-				if (entity instanceof Entity) {
-					((Entity) entity).attackEntityFrom(damageSource, 4);
+			if (event.source.damageType.equals("fall")) {
+				List entities = new ArrayList<Entity>();
+				DamageSource damageSource = new DamageSourceWarden("warden", event.entity);
+
+				entities = event.entity.worldObj.getEntitiesWithinAABBExcludingEntity(
+						event.entity,
+						AxisAlignedBB.getBoundingBox(
+								event.entity.posX - 6,
+								event.entity.posY - 6,
+								event.entity.posZ - 6,
+								event.entity.posX + 6,
+								event.entity.posY + 6,
+								event.entity.posZ + 6));
+
+				for (Object entity : entities) {
+					if (entity instanceof Entity) {
+						((Entity) entity).attackEntityFrom(damageSource, 4);
+					}
 				}
 			}
+
+			for (int i = 0; i <= 3; i++) {
+				if ((player.getCurrentArmor(i) != null) &&
+						WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
+								.equals(Aspect.EARTH.getName())) {
+					count++;
+				}
+			}
+
+			event.ammount *= 1 - (0.10F * count);
 		}
 	}
 }

@@ -43,27 +43,29 @@ public class WardenicUpgradeWater extends WardenicUpgrade {
 	public void onTick(World world, EntityPlayer player, ItemStack stack) {
 		super.onTick(world, player, stack);
 
-		if (player.isInWater()) {
-			int count = 0;
+		int count = 0;
 
-			for (int i = 0; i <= 3; i++) {
-				if ((player.getCurrentArmor(i) != null) &&
-						WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
-								.equals(Aspect.WATER.getName())) {
-					count++;
-				}
+		for (int i = 0; i <= 3; i++) {
+			if ((player.getCurrentArmor(i) != null) &&
+					WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
+							.equals(Aspect.WATER.getName())) {
+				count++;
 			}
+		}
 
-			if (count == 4) {
-				// p.addPotionEffect(new PotionEffect(<potion id>, <time>, <amplitude>)
-				// amplitude is equal to level - 1
-				// time is provided in ticks (1 second = 20 ticks), so: time (in seconds) = time (in ticks) / 20
+		if (player.isInWater()) {
+			player.capabilities.setPlayerWalkSpeed(0.5F + 0.025F * count);
+		}
 
-				player.addPotionEffect(new PotionEffect(Potion.waterBreathing.getId(), 0, 0));
+		if (count == 4) {
+			// player.addPotionEffect(new PotionEffect(<potion id>, <time>, <amplitude>)
+			// amplitude is equal to potion_level - 1
+			// time is provided in ticks (1 second = 20 ticks), so: time (in seconds) = time (in ticks) / 20
 
-				if (player.isPotionActive(Potion.poison.getId())) {
-					player.removePotionEffect(Potion.poison.getId());
-				}
+			player.addPotionEffect(new PotionEffect(Potion.waterBreathing.getId(), 0, 0));
+
+			if (player.isPotionActive(Potion.poison.getId())) {
+				player.removePotionEffect(Potion.poison.getId());
 			}
 		}
 	}

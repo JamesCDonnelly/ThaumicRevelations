@@ -147,8 +147,8 @@ public class ItemWardenBow extends ItemBow {
 
         ArrowLooseEvent event = new ArrowLooseEvent(par3EntityPlayer, par1ItemStack, j);
         MinecraftForge.EVENT_BUS.post(event);
-        if (event.isCanceled())
-        {
+
+        if (event.isCanceled()) {
             return;
         }
         j = event.charge;
@@ -156,40 +156,28 @@ public class ItemWardenBow extends ItemBow {
         float f = (float)j / 20.0F;
         f = (f * f + f * 2.0F) / 3.0F;
 
-        if ((double)f < 0.1D)
-        {
+        if ((double)f < 0.1D) {
             return;
         }
 
-        if (f > 1.0F)
-        {
+        if (f > 1.0F) {
             f = 1.0F;
         }
 
         EntityArrow entityarrow = new EntityArrow(par2World, par3EntityPlayer, f * 2.0F);
 
-        if (f == 1.0F)
-        {
+        if (f == 1.0F) {
             entityarrow.setIsCritical(true);
         }
 
         int k = EnchantmentHelper.getEnchantmentLevel(Enchantment.power.effectId, par1ItemStack);
 
-        if (k > 0)
-        {
+        double x = entityarrow.getDamage();
+        System.out.println(x);
+
+        if (k > 0) {
             entityarrow.setDamage(entityarrow.getDamage() + (double)k * 0.5D + 0.5D);
-        }
-
-        int l = EnchantmentHelper.getEnchantmentLevel(Enchantment.punch.effectId, par1ItemStack);
-
-        if (l > 0)
-        {
-            entityarrow.setKnockbackStrength(l);
-        }
-
-        if (EnchantmentHelper.getEnchantmentLevel(Enchantment.flame.effectId, par1ItemStack) > 0)
-        {
-            entityarrow.setFire(100);
+            System.out.println(x);
         }
 
         par1ItemStack.damageItem(1, par3EntityPlayer);
@@ -197,8 +185,7 @@ public class ItemWardenBow extends ItemBow {
 
         entityarrow.canBePickedUp = 2;
 
-        if (!par2World.isRemote)
-        {
+        if (!par2World.isRemote) {
             par2World.spawnEntityInWorld(entityarrow);
         }
     }

@@ -19,14 +19,13 @@ public class WardenicUpgrade {
 		this.aspect = aspect;
 	}
 
-	public void onAttack(ItemStack stack, EntityPlayer player, Entity entity) {
-	}
+	public void onAttack(ItemStack stack, EntityPlayer player, Entity entity) {}
 
-	public void onTick(World world, EntityPlayer player, ItemStack stack) {
-	}
+	public void onIndirectAttack(ItemStack stack, EntityPlayer player, Entity entity, Entity transmitter) {}
 
-	public void onAttacked(LivingHurtEvent event) {
-	}
+	public void onTick(World world, EntityPlayer player, ItemStack stack) {}
+
+	public void onAttacked(LivingHurtEvent event) {}
 
 	public String getQuote() {
 		return StatCollector.translateToLocal("upgrade." + aspect.getName() + ".quote");

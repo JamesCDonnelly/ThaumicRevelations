@@ -5,6 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import thaumcraft.api.aspects.Aspect;
 import trevelations.item.ItemWardenBow;
 import trevelations.item.ItemWardenWeapon;
 import trevelations.item.armor.ItemWardenArmor;
@@ -42,8 +43,10 @@ public class WardenicChargeEvents {
 			for (int i = 0; i <= 3; i++) {
 				if (player.getCurrentArmor(i) == null ||
 						!(player.getCurrentArmor(i).getItem() instanceof ItemWardenArmor) ||
-						(player.getCurrentArmor(i).getItem() instanceof ItemWardenArmor &&
-								!WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getQuote().equals("Free like wind"))) {
+						!(WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
+								.equals(Aspect.AIR.getName()))||
+						!(WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
+								.equals(Aspect.WATER.getName()))) {
 					count++;
 					if (count == 4) {
 						player.capabilities.setPlayerWalkSpeed(0.1F);

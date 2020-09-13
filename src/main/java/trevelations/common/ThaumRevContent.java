@@ -18,7 +18,6 @@ import trevelations.item.armor.*;
 import trevelations.item.baubles.ItemLoveRing;
 import trevelations.item.baubles.ItemWardenAmulet;
 import trevelations.item.focus.ItemFocusIllumination;
-import trevelations.item.focus.ItemFocusPurity;
 import trevelations.util.ThaumRevResearchItem;
 
 import static thaumcraft.api.ThaumcraftApi.addWarpToResearch;
@@ -48,7 +47,7 @@ public class ThaumRevContent {
 		armorMaterialWarden = EnumHelper.addArmorMaterial("WARDEN", 50,
 				new int[] {3, 8, 6, 3}, 0);
 		toolMaterialWarden = EnumHelper.addToolMaterial("WARDEN", 9,
-				50, 12.0F, 3.0F, 0);
+				50, 12.0F, 4, 0);
 
 		armorMaterialWardencloth = EnumHelper.addArmorMaterial("WARDENCLOTH", 50,
 				new int[] {0, 2, 1, 0}, 15);
@@ -60,7 +59,7 @@ public class ThaumRevContent {
 		itemWardenAmulet = new ItemWardenAmulet();
 		itemWardenWeapon = new ItemWardenWeapon();
 		itemWardenBow = new ItemWardenBow();
-		itemFocusPurity = new ItemFocusPurity(); //Broken
+		// itemFocusPurity = new ItemFocusPurity(); //Broken
 
 		itemCrimsonHat = new ItemCrimsonHat();
 
@@ -81,7 +80,7 @@ public class ThaumRevContent {
 		itemExcubituraSeeds = new ItemExcubituraSeeds();
 
 		GameRegistry.registerItem(itemResource, "itemResource");
-		GameRegistry.registerItem(itemFocusPurity, "itemFocusPurity"); //Broken
+		// GameRegistry.registerItem(itemFocusPurity, "itemFocusPurity"); //Broken
 		GameRegistry.registerItem(itemWardenWeapon, "itemWardenWeapon");
 		GameRegistry.registerItem(itemWardenBow, "itemWardenBow");
 		GameRegistry.registerItem(itemWardenAmulet, "itemWardenAmulet");

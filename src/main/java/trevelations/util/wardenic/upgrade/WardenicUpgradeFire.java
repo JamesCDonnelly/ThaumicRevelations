@@ -16,7 +16,22 @@ public class WardenicUpgradeFire extends WardenicUpgrade {
 	@Override
 	public void onAttack(ItemStack stack, EntityPlayer player, Entity entity) {
 		super.onAttack(stack, player, entity);
-		entity.setFire(5);
+
+		int count = 0;
+
+		for (int i = 0; i <= 3; i++) {
+			if ((player.getCurrentArmor(i) != null) &&
+					WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
+							.equals(Aspect.FIRE.getName())) {
+				count++;
+			}
+		}
+
+		if (count == 4) {
+			entity.setFire(16);
+		} else {
+			entity.setFire(4);
+		}
 	}
 
 	@Override
@@ -47,8 +62,26 @@ public class WardenicUpgradeFire extends WardenicUpgrade {
 	@Override
 	public void onAttacked(LivingHurtEvent event) {
 		super.onAttacked(event);
+
+		int count = 0;
+		EntityPlayer player = (EntityPlayer) event.entity;
+
+		for (int i = 0; i <= 3; i++) {
+			if ((player.getCurrentArmor(i) != null) &&
+					WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
+							.equals(Aspect.FIRE.getName())) {
+				count++;
+			}
+		}
+
 		if (event.source.getEntity() != null) {
 			event.source.getEntity().setFire(2);
+		}
+
+		if (event.source.isFireDamage()) {
+			event.ammount *= 1 - (0.25F * count);
+		} else if (event.source.isExplosion()) {
+			event.ammount *= 1 - (0.15F * count);
 		}
 	}
 }

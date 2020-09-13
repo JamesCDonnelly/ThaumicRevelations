@@ -18,12 +18,12 @@ import java.util.Random;
 
 public class BlockExcubitura extends BlockBush implements IGrowable {
 	@SideOnly(Side.CLIENT)
-	protected IIcon[] iIcon = new IIcon[16];
+	protected IIcon[] iIcon;
 
 	public BlockExcubitura() {
 		super(Material.plants);
 		setBlockName("blockExcubitura");
-		setBlockTextureName("trevelations:excubitura_stage_7");
+		setBlockTextureName("trevelations:excubitura/excubitura_stage_7");
 		setTickRandomly(true);
 		setBlockBounds(0F, 0.0F, 0F, 1F, 0.25F, 1F);
 		setHardness(0.0F);
@@ -37,13 +37,13 @@ public class BlockExcubitura extends BlockBush implements IGrowable {
 
 	@Override
 	public Item getItemDropped(int metadata, Random random, int fortune) {
-		if (random.nextInt(4) < 2) return ThaumRevLibrary.itemExcubituraSeeds;
-		else return ThaumRevLibrary.itemResource;
+		return random.nextInt(4) < 2 ? ThaumRevLibrary.itemExcubituraSeeds : ThaumRevLibrary.itemResource;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister register) {
+		iIcon = new IIcon[16];
 		iIcon[0] = register.registerIcon("trevelations:excubitura/excubitura_stage_0");
 		iIcon[1] = register.registerIcon("trevelations:excubitura/excubitura_stage_0");
 		iIcon[2] = register.registerIcon("trevelations:excubitura/excubitura_stage_1");

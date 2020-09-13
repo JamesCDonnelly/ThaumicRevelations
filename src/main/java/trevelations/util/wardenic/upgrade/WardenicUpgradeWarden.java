@@ -28,21 +28,26 @@ public class WardenicUpgradeWarden extends WardenicUpgrade {
 	@Override
 	public void onAttack(ItemStack stack, EntityPlayer player, Entity entity) {
 		super.onAttack(stack, player, entity);
+
+		int count = 0;
+
+		for (int i = 0; i <= 3; i++) {
+			if ((player.getCurrentArmor(i) != null) &&
+					WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
+							.equals(ThaumRevLibrary.EXCUBITOR.getName())) {
+				count++;
+			}
+		}
+
 		if (isEldritchOrTainted(entity)) {
 			DamageSource damageSource = new DamageSourceWarden("warden", player);
-			entity.attackEntityFrom(damageSource, 20);
-		}
-	}
 
-	public static boolean isEldritchOrTainted(Entity entity) {
-		return entity instanceof EntityEldritchGuardian ||
-				entity instanceof EntityEldritchCrab ||
-				entity instanceof EntityEldritchWarden ||
-				entity instanceof EntityEldritchGolem ||
-				entity instanceof EntityInhabitedZombie ||
-				entity instanceof EntityEnderman ||
-				entity instanceof EntityDragon ||
-				entity instanceof ITaintedMob;
+			if (count == 4) {
+				entity.attackEntityFrom(damageSource, 16);
+			} else {
+				entity.attackEntityFrom(damageSource, 8);
+			}
+		}
 	}
 
 	@Override
@@ -99,7 +104,25 @@ public class WardenicUpgradeWarden extends WardenicUpgrade {
 					event.setCanceled(true);
 				}
 			}
+
+			Entity sourceEntity = event.source.getEntity();
+
+			DamageSource damageSource = new DamageSourceWarden("warden", player);
+
+			if (isEldritchOrTainted(sourceEntity)) {
+				sourceEntity.attackEntityFrom(damageSource, (event.ammount * count));
+			}
 		}
 	}
 
+	public static boolean isEldritchOrTainted(Entity entity) {
+		return entity instanceof EntityEldritchGuardian ||
+				entity instanceof EntityEldritchCrab ||
+				entity instanceof EntityEldritchWarden ||
+				entity instanceof EntityEldritchGolem ||
+				entity instanceof EntityInhabitedZombie ||
+				entity instanceof EntityEnderman ||
+				entity instanceof EntityDragon ||
+				entity instanceof ITaintedMob;
+	}
 }

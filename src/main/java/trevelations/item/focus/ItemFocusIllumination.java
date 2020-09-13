@@ -2,21 +2,21 @@ package trevelations.item.focus;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-
-import trevelations.common.ThaumRevLibrary;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.wands.FocusUpgradeType;
 import thaumcraft.api.wands.ItemFocusBasic;
 import thaumcraft.common.items.wands.ItemWandCasting;
+import trevelations.common.ThaumRevLibrary;
 
 public class ItemFocusIllumination extends ItemFocusBasic {
 
-	private IIcon depth, orn;
+	private IIcon depth;
 
 	public ItemFocusIllumination() {
 		super();
@@ -28,7 +28,6 @@ public class ItemFocusIllumination extends ItemFocusBasic {
 	public void registerIcons(IIconRegister register) {
 		icon = register.registerIcon("trevelations:focus/purityfocus");
 		depth = register.registerIcon("trevelations:focus/puritydepth");
-		orn = register.registerIcon("trevelations:focus/purityorn");
 	}
 
 	@Override
@@ -37,30 +36,31 @@ public class ItemFocusIllumination extends ItemFocusBasic {
 	}
 
 	@Override
-	public IIcon getOrnament(ItemStack itemstack) {
-		return orn;
-	}
-
-	@Override
 	public int getFocusColor(ItemStack itemstack) {
 		return 0x6698FF;
 	}
 
-	public ItemStack onFocusRightClick(ItemStack itemstack, World world, EntityPlayer player, MovingObjectPosition mop) {
-		ItemWandCasting wand = (ItemWandCasting) itemstack.getItem();
+	@Override
+	public int getActivationCooldown(ItemStack stack) {
+		return 500;
+	}
+
+	@Override
+	public ItemStack onFocusRightClick(ItemStack stack, World world, EntityPlayer player, MovingObjectPosition mop) {
+		ItemWandCasting wand = (ItemWandCasting) stack.getItem();
 		if (mop != null) {
 			if (mop.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
 				if (!world.isRemote) {
-					if (wand.consumeAllVis(itemstack, player, getVisCost(itemstack), true, false)) {
+					if (wand.consumeAllVis(stack, player, getVisCost(stack), true, false)) {
 						int x = mop.blockX;
 						int y = mop.blockY;
 						int z = mop.blockZ;
 
 						if (mop.sideHit == 0) {
-							y--;
+							if (!(world.getBlock(x, y, z).equals(Blocks.water))) y--;
 						}
 						if (mop.sideHit == 1) {
-							y++;
+							if (!(world.getBlock(x, y, z).equals(Blocks.water))) y++;
 						}
 						if (mop.sideHit == 2) {
 							z--;
@@ -74,13 +74,16 @@ public class ItemFocusIllumination extends ItemFocusBasic {
 						if (mop.sideHit == 5) {
 							x++;
 						}
-						world.setBlock(x, y, z, ThaumRevLibrary.blockWitor, 0, 2);
+						if (world.getBlock(x, y, z).equals(Blocks.air) ||
+								world.getBlock(x, y, z).equals(Blocks.water)) {
+							world.setBlock(x, y, z, ThaumRevLibrary.blockWitor, 0, 2);
+						}
 					}
 				}
 			}
 		}
 		player.swingItem();
-		return itemstack;
+		return stack;
 	}
 
 	@Override
@@ -94,7 +97,20 @@ public class ItemFocusIllumination extends ItemFocusBasic {
 	}
 
 	@Override
-	public FocusUpgradeType[] getPossibleUpgradesByRank(ItemStack itemStack, int i) {
-		return new FocusUpgradeType[0];
+	public FocusUpgradeType[] getPossibleUpgradesByRank(ItemStack itemStack, int rank) {
+		switch(rank) {
+			case 1:
+				return new FocusUpgradeType[] { FocusUpgradeType.frugal };
+			case 2:
+				return new FocusUpgradeType[] { FocusUpgradeType.frugal };
+			case 3:
+				return new FocusUpgradeType[] { FocusUpgradeType.frugal };
+			case 4:
+				return new FocusUpgradeType[] { FocusUpgradeType.frugal };
+			case 5:
+				return new FocusUpgradeType[] { FocusUpgradeType.frugal };
+			default:
+				return null;
+		}
 	}
 }
