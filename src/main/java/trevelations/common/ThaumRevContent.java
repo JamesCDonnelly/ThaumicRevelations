@@ -269,7 +269,10 @@ public class ThaumRevContent {
 				"trevelations",
 				new AspectList(),
 				-6, 0, 0,
-				new ItemStack(blockExcubitura)).setParents("WARDENS").setRound().setAutoUnlock().registerResearchItem();
+				new ItemStack(
+						itemResource,
+						0,
+						0)).setParents("WARDENS").setRound().setAutoUnlock().registerResearchItem();
 		researchExcubitura.setPages(
 				new ResearchPage("0"));
 

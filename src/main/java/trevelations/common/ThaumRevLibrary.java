@@ -30,10 +30,10 @@ public class ThaumRevLibrary {
 
 	public static final Aspect RED = new Aspect(
 			"rubus",
-			0x3CD4FC,
+			0x990000,
 			new Aspect[] {
-					Aspect.ELDRITCH,
-					Aspect.DEATH},
+					Aspect.SENSES,
+					Aspect.MAGIC},
 			new ResourceLocation(
                     "trevelations",
 					"textures/aspects/rubus.png"),
@@ -51,7 +51,7 @@ public class ThaumRevLibrary {
 	public static Item itemWardenAmulet;
 	public static Item itemWardenWeapon;
 	public static Item itemWardenBow;
-	public static Item itemFocusPurity; //TODO: make it working
+	// public static Item itemFocusPurity; //TODO: make it working
 
 	public static Item itemWardenclothHelm;
 	public static Item itemWardenclothChest;
