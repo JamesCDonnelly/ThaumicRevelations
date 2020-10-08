@@ -71,20 +71,12 @@ public class ItemWardenclothArmor extends ItemArmor implements IVisDiscountGear,
 
     @Override
     public boolean showIngamePopups(ItemStack itemStack, EntityLivingBase entityLivingBase) {
-        if (itemStack.getItem().equals(itemWardenclothHelm)) {
-            return true;
-        } else {
-            return false;
-        }
+        return itemStack.getItem().equals(itemWardenclothHelm);
     }
 
     @Override
     public boolean showNodes(ItemStack itemStack, EntityLivingBase entityLivingBase) {
-        if (itemStack.getItem().equals(itemWardenclothHelm)) {
-            return true;
-        } else {
-            return false;
-        }
+        return itemStack.getItem().equals(itemWardenclothHelm);
     }
 
     @Override

@@ -3,16 +3,13 @@ package trevelations.item;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.DamageSource;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
@@ -21,7 +18,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.event.entity.player.ArrowNockEvent;
 import trevelations.common.ThaumRevLibrary;
-import trevelations.util.DamageSourceIndirectWarden;
 import trevelations.util.wardenic.WardenicChargeHelper;
 
 import java.util.List;
@@ -44,7 +40,7 @@ public class ItemWardenBow extends ItemBow {
 
     @Override
     public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
-        return true;
+        return false;
     }
 
     @Override
@@ -81,15 +77,72 @@ public class ItemWardenBow extends ItemBow {
     }
 
     @Override
-    public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
+    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+        ArrowNockEvent event = new ArrowNockEvent(player, stack);
+        MinecraftForge.EVENT_BUS.post(event);
+        if (event.isCanceled()) {
+            return event.result;
+        }
+
+        player.setItemInUse(stack, this.getMaxItemUseDuration(stack));
+
+        return stack;
+    }
+
+    @Override
+    public void onPlayerStoppedUsing(ItemStack stack, World world, EntityPlayer player, int useTime) {
+        int chargeTime = this.getMaxItemUseDuration(stack) - useTime;
+
+        ArrowLooseEvent looseEvent = new ArrowLooseEvent(player, stack, chargeTime);
+        MinecraftForge.EVENT_BUS.post(looseEvent);
+
+        if (looseEvent.isCanceled()) {
+            return;
+        }
+
+        chargeTime = looseEvent.charge;
+
+        float f = (float) chargeTime / 20.0F;
+        f = (f * f + f * 2.0F) / 3.0F;
+
+        if (f < 0.1F) {
+            return;
+        }
+
+        if (f > 1.0F) {
+            f = 1.0F;
+        }
+
+        EntityArrow entityArrow = new EntityArrow(world, player, f * 2.0F);
+
+        if (f == 1.0F) {
+            entityArrow.setIsCritical(true);
+        }
+
         if (stack.getItemDamage() != stack.getMaxDamage()) {
-            DamageSource damageSource = new DamageSourceIndirectWarden("warden.indirect", entity, player);
-            entity.attackEntityFrom(damageSource, 5);
-            WardenicChargeHelper.getUpgrade(stack).onAttack(stack, player, entity);
+
+            stack.damageItem(1, player);
+            world.playSoundAtEntity(player, "random.bow", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+
+            entityArrow.canBePickedUp = 2;
+
+            NBTTagCompound tag = entityArrow.getEntityData();
+            tag.setBoolean("WardenArrow", true);
+
+            if (!world.isRemote) {
+                world.spawnEntityInWorld(entityArrow);
+            }
+
             stack.setItemDamage(stack.getItemDamage() + 1);
         }
-        return super.onLeftClickEntity(stack, player, entity);
     }
+
+    /* Client-side */
+
+    @SideOnly(Side.CLIENT)
+    private IIcon[] iconArray;
+
+    public static final String[] wardenBowPullArray = new String[] {"pulling_0", "pulling_1", "pulling_2"};
 
     @Override
     @SideOnly(Side.CLIENT)
@@ -108,10 +161,6 @@ public class ItemWardenBow extends ItemBow {
         }
     }
 
-    public static final String[] wardenBowPullArray = new String[] {"pulling_0", "pulling_1", "pulling_2"};
-    @SideOnly(Side.CLIENT)
-    private IIcon[] iconArray;
-
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister register) {
@@ -119,74 +168,8 @@ public class ItemWardenBow extends ItemBow {
 
         iconArray = new IIcon[wardenBowPullArray.length];
 
-        for (int i = 0; i < iconArray.length; ++i)
-        {
+        for (int i = 0; i < iconArray.length; i++) {
             iconArray[i] = register.registerIcon("trevelations:bow/wardenbow" +  "_" + wardenBowPullArray[i]);
-        }
-    }
-
-    @Override
-    public ItemStack onItemRightClick(ItemStack p_77659_1_, World p_77659_2_, EntityPlayer p_77659_3_)
-    {
-        ArrowNockEvent event = new ArrowNockEvent(p_77659_3_, p_77659_1_);
-        MinecraftForge.EVENT_BUS.post(event);
-        if (event.isCanceled())
-        {
-            return event.result;
-        }
-
-        p_77659_3_.setItemInUse(p_77659_1_, this.getMaxItemUseDuration(p_77659_1_));
-
-        return p_77659_1_;
-    }
-
-    @Override
-    public void onPlayerStoppedUsing(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer, int par4)
-    {
-        int j = this.getMaxItemUseDuration(par1ItemStack) - par4;
-
-        ArrowLooseEvent event = new ArrowLooseEvent(par3EntityPlayer, par1ItemStack, j);
-        MinecraftForge.EVENT_BUS.post(event);
-
-        if (event.isCanceled()) {
-            return;
-        }
-        j = event.charge;
-
-        float f = (float)j / 20.0F;
-        f = (f * f + f * 2.0F) / 3.0F;
-
-        if ((double)f < 0.1D) {
-            return;
-        }
-
-        if (f > 1.0F) {
-            f = 1.0F;
-        }
-
-        EntityArrow entityarrow = new EntityArrow(par2World, par3EntityPlayer, f * 2.0F);
-
-        if (f == 1.0F) {
-            entityarrow.setIsCritical(true);
-        }
-
-        int k = EnchantmentHelper.getEnchantmentLevel(Enchantment.power.effectId, par1ItemStack);
-
-        double x = entityarrow.getDamage();
-        System.out.println(x);
-
-        if (k > 0) {
-            entityarrow.setDamage(entityarrow.getDamage() + (double)k * 0.5D + 0.5D);
-            System.out.println(x);
-        }
-
-        par1ItemStack.damageItem(1, par3EntityPlayer);
-        par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
-
-        entityarrow.canBePickedUp = 2;
-
-        if (!par2World.isRemote) {
-            par2World.spawnEntityInWorld(entityarrow);
         }
     }
 }

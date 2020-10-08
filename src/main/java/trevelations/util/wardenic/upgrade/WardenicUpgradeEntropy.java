@@ -3,11 +3,12 @@ package trevelations.util.wardenic.upgrade;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import thaumcraft.api.aspects.Aspect;
+import thaumcraft.common.Thaumcraft;
 import trevelations.util.DamageSourceWarden;
 import trevelations.util.wardenic.WardenicChargeHelper;
 
@@ -22,12 +23,41 @@ public class WardenicUpgradeEntropy extends WardenicUpgrade {
 	}
 
 	@Override
+	public void onIndirectAttack(LivingHurtEvent event) {
+		super.onIndirectAttack(event);
+
+		EntityLivingBase entityLivingBase = (EntityLivingBase)event.entity;
+		EntityPlayer player = (EntityPlayer)event.source.getEntity();
+		EntityArrow entityArrow = (EntityArrow)event.source.getSourceOfDamage();
+
+		DamageSource damageSource = new DamageSourceWarden("warden", player);
+
+		int count = 0;
+
+		for (int i = 0; i < 4; i++) {
+			if ((player.getCurrentArmor(i) != null) &&
+					WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
+							.equals(Aspect.ENTROPY.getName())) {
+				count++;
+			}
+		}
+
+		if (entityArrow.getIsCritical()) {
+			entityArrow.setDamage(0);
+			entityLivingBase.attackEntityFrom(damageSource,
+					random.nextInt(20) <= 2 * (count + 1) ?
+							entityLivingBase.getMaxHealth() :
+							(random.nextInt(4) + 1) * (count + 1));
+		}
+	}
+
+	@Override
 	public void onAttack(ItemStack stack, EntityPlayer player, Entity entity) {
 		super.onAttack(stack, player, entity);
 
 		int count = 0;
 
-		for (int i = 0; i <= 3; i++) {
+		for (int i = 0; i < 4; i++) {
 			if ((player.getCurrentArmor(i) != null) &&
 					WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
 							.equals(Aspect.ENTROPY.getName())) {
@@ -45,7 +75,7 @@ public class WardenicUpgradeEntropy extends WardenicUpgrade {
 						entityLivingBase.getMaxHealth());
 			} else {
 				entity.attackEntityFrom(damageSource,
-						MathHelper.getRandomIntegerInRange(random, 1, 4) * count);
+						(random.nextInt(4) + 1) * (count + 1));
 			}
 		} else {
 			if (random.nextInt(10) == 0) {
@@ -53,7 +83,7 @@ public class WardenicUpgradeEntropy extends WardenicUpgrade {
 						entityLivingBase.getMaxHealth());
 			} else {
 				entity.attackEntityFrom(damageSource,
-						MathHelper.getRandomIntegerInRange(random, 1, 4) * count);
+						(random.nextInt(4) + 1) * (count + 1));
 			}
 		}
 	}
@@ -62,11 +92,12 @@ public class WardenicUpgradeEntropy extends WardenicUpgrade {
 	public void onAttacked(LivingHurtEvent event) {
 		super.onAttacked(event);
 
+		int count = 0;
+
 		if (event.entity instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) event.entity;
-			int count = 0;
 
-			for (int i = 0; i <= 3; i++) {
+			for (int i = 0; i < 4; i++) {
 				if ((player.getCurrentArmor(i) != null) &&
 						WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
 								.equals(Aspect.ENTROPY.getName())) {
@@ -74,14 +105,17 @@ public class WardenicUpgradeEntropy extends WardenicUpgrade {
 				}
 			}
 
-			Entity sourceEntity = event.source.getEntity();
+			if (random.nextInt(20) <= count) {
+				Thaumcraft.addWarpToPlayer(player, 1, true);
+			}
 
-			DamageSource damageSource = new DamageSourceWarden("warden", player);
+			if (event.source.getSourceOfDamage() != null) {
+				Entity sourceEntity = event.source.getEntity();
+				DamageSource damageSource = new DamageSourceWarden("warden", player);
+				sourceEntity.attackEntityFrom(damageSource, event.ammount * (random.nextInt(4) * (count + 1)) / 4F);
+			}
 
-			sourceEntity.attackEntityFrom(damageSource,
-				MathHelper.getRandomIntegerInRange(random, 1, 4) * count);
-
-			event.ammount *= 1 + (float)(MathHelper.getRandomDoubleInRange(random, 0, 0.5D) * count);
+			event.ammount *= 1 + random.nextFloat() * (count + 1) / 12F;
 		}
 	}
 }

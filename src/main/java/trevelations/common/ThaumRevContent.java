@@ -45,7 +45,7 @@ public class ThaumRevContent {
 
 	public static void loadItems() {
 		armorMaterialWarden = EnumHelper.addArmorMaterial("WARDEN", 50,
-				new int[] {3, 8, 6, 3}, 0);
+				new int[] {3, 6, 8, 3}, 0);
 		toolMaterialWarden = EnumHelper.addToolMaterial("WARDEN", 9,
 				50, 12.0F, 4, 0);
 

@@ -1,7 +1,10 @@
 package trevelations.util.wardenic;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -22,12 +25,12 @@ public class WardenicChargeEvents {
 	}
 
 	@SubscribeEvent
-	public void onTick(LivingUpdateEvent event) {
+	public void onPlayerTick(LivingUpdateEvent event) {
 		if (event.entity instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) event.entity;
 			int count = 0;
 
-			for (int i = 0; i <= 4; i++) {
+			for (int i = 0; i < 5; i++) {
 				if (player.getEquipmentInSlot(i) != null) {
 					if (player.getEquipmentInSlot(i).getItem() instanceof ItemWardenArmor ||
 							player.getEquipmentInSlot(i).getItem() instanceof ItemWardenWeapon ||
@@ -40,13 +43,16 @@ public class WardenicChargeEvents {
 					}
 				}
 			}
-			for (int i = 0; i <= 3; i++) {
+
+			for (int i = 0; i < 4; i++) {
 				if (player.getCurrentArmor(i) == null ||
 						!(player.getCurrentArmor(i).getItem() instanceof ItemWardenArmor) ||
 						!(WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
-								.equals(Aspect.AIR.getName()))||
+								.equals(Aspect.AIR.getName())) ||
 						!(WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
-								.equals(Aspect.WATER.getName()))) {
+								.equals(Aspect.WATER.getName())) ||
+						!(WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
+								.equals(Aspect.EARTH.getName()))) {
 					count++;
 					if (count == 4) {
 						player.capabilities.setPlayerWalkSpeed(0.1F);
@@ -61,16 +67,27 @@ public class WardenicChargeEvents {
 	public void onHurt(LivingHurtEvent event) {
 		if (event.entity instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) event.entity;
-			for (int i = 1; i <= 4; i++) {
+			for (int i = 1; i < 5; i++) {
 				if (player.getEquipmentInSlot(i) != null &&
-						(player.getEquipmentInSlot(i).getItem() instanceof ItemWardenArmor)) {
-					if (player.getEquipmentInSlot(i).getItemDamage() != player.getEquipmentInSlot(i).getMaxDamage()) {
-						player.getEquipmentInSlot(i).setItemDamage(player.getEquipmentInSlot(i).getItemDamage() + 1);
-						WardenicChargeHelper.getUpgrade(player.getEquipmentInSlot(i)).onAttacked(event);
-					}
+					(player.getEquipmentInSlot(i).getItem() instanceof ItemWardenArmor)) {
+						if (player.getEquipmentInSlot(i).getItemDamage() != player.getEquipmentInSlot(i).getMaxDamage()) {
+							player.getEquipmentInSlot(i).setItemDamage(player.getEquipmentInSlot(i).getItemDamage() + 1);
+							WardenicChargeHelper.getUpgrade(player.getEquipmentInSlot(i)).onAttacked(event);
+						}
 				}
 			}
 			++ItemWardenAmulet.amuletCharge;
+
+		} else if ((event.source.getSourceOfDamage() instanceof EntityArrow) &&
+				(event.source.getEntity() instanceof EntityPlayer)) {
+
+			EntityPlayer player = (EntityPlayer)event.source.getEntity();
+			Entity entityArrow = event.source.getSourceOfDamage();
+			NBTTagCompound tag = entityArrow.getEntityData();
+
+			if (tag.getBoolean("WardenArrow")) {
+				WardenicChargeHelper.getUpgrade(player.getEquipmentInSlot(0)).onIndirectAttack(event);
+			}
 		}
 	}
 }

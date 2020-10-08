@@ -21,7 +21,7 @@ public class WardenicUpgrade {
 
 	public void onAttack(ItemStack stack, EntityPlayer player, Entity entity) {}
 
-	public void onIndirectAttack(ItemStack stack, EntityPlayer player, Entity entity, Entity transmitter) {}
+	public void onIndirectAttack(LivingHurtEvent event) {}
 
 	public void onTick(World world, EntityPlayer player, ItemStack stack) {}
 

@@ -3,6 +3,7 @@ package trevelations.util.wardenic.upgrade;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -18,10 +19,12 @@ public class WardenicUpgradeAir extends WardenicUpgrade {
 	}
 
 	@Override
-	public void onAttack(ItemStack stack, EntityPlayer player, Entity entity) {
-		super.onAttack(stack, player, entity);
+	public void onIndirectAttack(LivingHurtEvent event) {
+		super.onIndirectAttack(event);
 
-		EntityLivingBase entityLivingBase = (EntityLivingBase) entity;
+		EntityLivingBase entityLivingBase = (EntityLivingBase)event.entity;
+		EntityPlayer player = (EntityPlayer)event.source.getEntity();
+		EntityArrow entityArrow = (EntityArrow)event.source.getSourceOfDamage();
 
 		int count = 0;
 
@@ -33,11 +36,32 @@ public class WardenicUpgradeAir extends WardenicUpgrade {
 			}
 		}
 
-		entityLivingBase.addPotionEffect(new PotionEffect(Potion.confusion.getId(), 40, 0));
+		if (entityArrow.getIsCritical()) {
+			entityArrow.setDamage(2 * (count + 2));
 
-		if (count == 4) {
-			entityLivingBase.addPotionEffect(new PotionEffect(Potion.blindness.getId(), 40, 0));
+			entityLivingBase.addPotionEffect(new PotionEffect(Potion.confusion.id, 20 * (count + 1), 1));
+			entityLivingBase.addPotionEffect(new PotionEffect(Potion.hunger.id, 40 * (count + 1), 1));
 		}
+	}
+
+	@Override
+	public void onAttack(ItemStack stack, EntityPlayer player, Entity entity) {
+		super.onAttack(stack, player, entity);
+
+		EntityLivingBase entityLivingBase = (EntityLivingBase)entity;
+
+		int count = 0;
+
+		for (int i = 0; i <= 3; i++) {
+			if ((player.getCurrentArmor(i) != null) &&
+					WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
+							.equals(Aspect.AIR.getName())) {
+				count++;
+			}
+		}
+
+		entityLivingBase.addPotionEffect(new PotionEffect(Potion.confusion.id, 20 * (count + 1), 0));
+		entityLivingBase.addPotionEffect(new PotionEffect(Potion.hunger.id, 40 * (count + 1), 0));
 	}
 
 	@Override
@@ -45,7 +69,7 @@ public class WardenicUpgradeAir extends WardenicUpgrade {
 		super.onAttacked(event);
 
 		int count = 0;
-		EntityPlayer player = (EntityPlayer) event.entity;
+		EntityPlayer player = (EntityPlayer)event.entity;
 
 		for (int i = 0; i <= 3; i++) {
 			if ((player.getCurrentArmor(i) != null) &&
