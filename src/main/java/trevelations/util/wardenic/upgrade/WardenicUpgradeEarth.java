@@ -125,6 +125,6 @@ public class WardenicUpgradeEarth extends WardenicUpgrade {
 			}
 		}
 
-		player.capabilities.setPlayerWalkSpeed(0.1F - 0.005F * count);
+		if (player.worldObj.isRemote) player.capabilities.setPlayerWalkSpeed(0.1F - 0.005F * count);
 	}
 }

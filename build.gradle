@@ -107,6 +107,7 @@ jar {
     include "trevelations/**"
     include "assets/**"
     include "mcmod.info"
+    include "TRvLOGO.png"
     include "pack.mcmeta"
 }
 

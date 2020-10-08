@@ -154,6 +154,6 @@ public class WardenicUpgradeAir extends WardenicUpgrade {
 		}
 
 		player.fallDistance = player.fallDistance * (1 - 10 * (helmetBoost + chestBoost + legsBoost + bootsBoost));
-		player.capabilities.setPlayerWalkSpeed(0.1F + helmetBoost + chestBoost + legsBoost + bootsBoost);
+		if (player.worldObj.isRemote) player.capabilities.setPlayerWalkSpeed(0.1F + helmetBoost + chestBoost + legsBoost + bootsBoost);
 	}
 }

@@ -74,7 +74,7 @@ public class WardenicUpgradeWater extends WardenicUpgrade {
 			}
 		}
 
-		if (player.isInWater()) {
+		if (player.isInWater() && player.worldObj.isRemote) {
 			player.capabilities.setPlayerWalkSpeed(0.5F + 0.025F * count);
 		}
 

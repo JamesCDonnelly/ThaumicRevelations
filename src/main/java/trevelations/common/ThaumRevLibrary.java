@@ -28,11 +28,11 @@ public class ThaumRevLibrary {
 					"textures/aspects/excubitor.png"),
 			771);
 
-	public static final Aspect RED = new Aspect(
+	public static final Aspect CRIMSON = new Aspect(
 			"rubus",
 			0x990000,
 			new Aspect[] {
-					Aspect.SENSES,
+					Aspect.DARKNESS,
 					Aspect.MAGIC},
 			new ResourceLocation(
                     "trevelations",

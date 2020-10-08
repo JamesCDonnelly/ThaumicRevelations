@@ -23,7 +23,6 @@ public class BlockExcubitura extends BlockBush implements IGrowable {
 	public BlockExcubitura() {
 		super(Material.plants);
 		setBlockName("blockExcubitura");
-		setBlockTextureName("trevelations:excubitura/excubitura_stage_7");
 		setTickRandomly(true);
 		setBlockBounds(0F, 0.0F, 0F, 1F, 0.25F, 1F);
 		setHardness(0.0F);
@@ -96,8 +95,8 @@ public class BlockExcubitura extends BlockBush implements IGrowable {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int parGrowthStage) {
-		return iIcon[parGrowthStage];
+	public IIcon getIcon(int side, int meta) {
+		return iIcon[meta];
 	}
 
 	@Override

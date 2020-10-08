@@ -54,7 +54,8 @@ public class WardenicChargeEvents {
 						!(WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
 								.equals(Aspect.EARTH.getName()))) {
 					count++;
-					if (count == 4) {
+
+					if (count == 4 && player.worldObj.isRemote) {
 						player.capabilities.setPlayerWalkSpeed(0.1F);
 						player.stepHeight = 0.5F;
 					}
