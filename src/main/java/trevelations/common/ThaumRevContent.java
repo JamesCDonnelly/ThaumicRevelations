@@ -251,40 +251,58 @@ public class ThaumRevContent {
 		researchThaumRev = new ThaumRevResearchItem(
 				"TREVELATIONS",
 				"trevelations",
-				new AspectList(), 0, -5, 0,
-				new ItemStack(itemWardenAmulet)).setRound().setSpecial().setAutoUnlock().registerResearchItem();
+				new AspectList(),
+				0, -5, 0,
+				new ItemStack(itemWardenAmulet))
+					.setRound()
+					.setSpecial()
+					.setAutoUnlock()
+					.registerResearchItem();
 		researchThaumRev.setPages(
 				new ResearchPage("0"));
 
 		researchWardens = new ThaumRevResearchItem(
 				"WARDENS",
 				"trevelations",
-				new AspectList(), -8, -3, 0,
-				new ItemStack(itemWardenAmulet)).setParents("TREVELATIONS").registerResearchItem();
+				new AspectList()
+					.add(EXCUBITOR, 8)
+					.add(Aspect.WEAPON, 6)
+					.add(Aspect.ELDRITCH, 6),
+				-8, -3, 3,
+				new ItemStack(itemWardenAmulet))
+					.setSpecial()
+					.setParents("TREVELATIONS")
+					.registerResearchItem();
 		researchWardens.setPages(
 				new ResearchPage("0"));
 
 		researchExcubitura = new ThaumRevResearchItem(
 				"EXCUBITURA",
 				"trevelations",
-				new AspectList(),
+				new AspectList()
+					.add(EXCUBITOR, 4)
+					.add(Aspect.PLANT, 4),
 				-6, 0, 0,
-				new ItemStack(
-						itemResource,
-						0,
-						0)).setParents("WARDENS").setRound().registerResearchItem();
+				new ItemStack(itemResource, 0, 0))
+					.setConcealed()
+					.setItemTriggers(new ItemStack(itemResource, 0, 0))
+					.setParents("WARDENS")
+					.setRound()
+					.registerResearchItem();
 		researchExcubitura.setPages(
 				new ResearchPage("0"));
 
 		researchCrystal = new ThaumRevResearchItem(
 				"CRYSTAL",
 				"trevelations",
-				new AspectList().add(EXCUBITOR, 4).add(Aspect.CRYSTAL, 4),
+				new AspectList()
+						.add(EXCUBITOR, 8)
+						.add(Aspect.CRYSTAL, 8),
 				-6, 2, 2,
-				new ItemStack(
-						itemResource,
-						0,
-						1)).setParents("EXCUBITURA").setSecondary().registerResearchItem();
+				new ItemStack(itemResource, 0, 1))
+					.setParents("EXCUBITURA")
+					.setSecondary()
+					.registerResearchItem();
 		researchCrystal.setPages(
 				new ResearchPage("0"),
 				new ResearchPage(recipeCrystal));
@@ -292,12 +310,14 @@ public class ThaumRevContent {
 		researchQuartz = new ThaumRevResearchItem(
 				"QUARTZ",
 				"trevelations",
-				new AspectList().add(EXCUBITOR, 4).add(Aspect.CRYSTAL, 4),
-				-6, 4, 2,
-				new ItemStack(
-						itemResource,
-						0,
-						2)).setParents("LORE4").registerResearchItem();
+				new AspectList()
+						.add(EXCUBITOR, 6)
+						.add(Aspect.CRYSTAL, 3)
+						.add(Aspect.ENERGY, 3),
+				-6, 4, 1,
+				new ItemStack(itemResource, 0, 2))
+					.setParents("LORE4")
+					.registerResearchItem();
 		researchQuartz.setPages(
 				new ResearchPage("0"),
 				new ResearchPage(recipeQuartz));
@@ -305,12 +325,15 @@ public class ThaumRevContent {
 		researchWardencloth = new ThaumRevResearchItem(
 				"WARDENCLOTH",
 				"trevelations",
-				new AspectList(),
+				new AspectList()
+						.add(EXCUBITOR, 4)
+						.add(Aspect.MAGIC, 2)
+						.add(Aspect.CLOTH, 2),
 				-10, 0, 0,
-				new ItemStack(
-						itemResource,
-						0,
-						3)).setParents("WARDENS").setParentsHidden("ENCHFABRIC").registerResearchItem();
+				new ItemStack(itemResource, 0, 3))
+					.setParents("WARDENS")
+					.setParentsHidden("ENCHFABRIC")
+					.registerResearchItem();
 		researchWardencloth.setPages(
 				new ResearchPage("0"),
 				new ResearchPage(recipeWardencloth));
@@ -318,12 +341,20 @@ public class ThaumRevContent {
 		researchWardenclothWand = new ThaumRevResearchItem(
 				"ROD_wardencloth",
 				"trevelations",
-				new AspectList(),
-				-10, 2, 1,
-				new ItemStack(
-						itemResource,
-						0,
-						3)).setParents("WARDENCLOTH").setParentsHidden("ROD_silverwood").registerResearchItem();
+				new AspectList()
+					.add(EXCUBITOR, 6)
+					.add(Aspect.MAGIC, 4)
+					.add(Aspect.AIR, 1)
+					.add(Aspect.EARTH, 1)
+					.add(Aspect.ENTROPY, 1)
+					.add(Aspect.FIRE, 1)
+					.add(Aspect.ORDER, 1)
+					.add(Aspect.WATER, 1),
+				-10, 2, 2,
+				new ItemStack(itemResource, 0, 3))
+					.setParents("WARDENCLOTH")
+					.setParentsHidden("ROD_silverwood")
+					.registerResearchItem();
 		researchWardenclothWand.setPages(
 				new ResearchPage("0"),
 				new ResearchPage(recipeWardencloth));
@@ -331,12 +362,22 @@ public class ThaumRevContent {
 		researchWardenclothStaff = new ThaumRevResearchItem(
 				"ROD_wardencloth_staff",
 				"trevelations",
-				new AspectList(),
-				-10, 4, 1,
-				new ItemStack(
-						itemResource,
-						0,
-						3)).setParents("ROD_wardencloth").setParentsHidden("ROD_silverwood_staff").registerResearchItem();
+				new AspectList()
+					.add(EXCUBITOR, 4)
+					.add(Aspect.MAGIC, 4)
+					.add(Aspect.AIR, 2)
+					.add(Aspect.EARTH, 2)
+					.add(Aspect.ENTROPY, 2)
+					.add(Aspect.FIRE, 2)
+					.add(Aspect.ORDER, 2)
+					.add(Aspect.WATER, 2),
+				-10, 4, 3,
+				new ItemStack(itemResource, 0, 3))
+					.setConcealed()
+					.setSecondary()
+					.setParents("ROD_wardencloth")
+					.setParentsHidden("ROD_silverwood_staff")
+					.registerResearchItem();
 		researchWardenclothStaff.setPages(
 				new ResearchPage("0"),
 				new ResearchPage(recipeWardencloth));
@@ -344,9 +385,22 @@ public class ThaumRevContent {
 		researchWardenArmor = new ThaumRevResearchItem(
 				"WARDENARMOR",
 				"trevelations",
-				new AspectList(),
+				new AspectList()
+					.add(EXCUBITOR, 6)
+					.add(Aspect.ARMOR, 6)
+					.add(Aspect.AIR, 2)
+					.add(Aspect.EARTH, 2)
+					.add(Aspect.ENTROPY, 2)
+					.add(Aspect.FIRE, 2)
+					.add(Aspect.ORDER, 2)
+					.add(Aspect.WATER, 2),
 				-4, 1, 3,
-				new ItemStack(itemWardenChest)).setParents("WASLIEHAMMER").setRound().setSpecial().registerResearchItem();
+				new ItemStack(itemWardenChest))
+					.setConcealed()
+					.setParents("WASLIEHAMMER")
+					.setRound()
+					.setSpecial()
+					.registerResearchItem();
 		researchWardenArmor.setPages(
 				new ResearchPage("0"),
 				new ResearchPage(recipeWardenHelm),
@@ -357,9 +411,22 @@ public class ThaumRevContent {
 		researchWardenWeapon = new ThaumRevResearchItem(
 				"WARDENWEAPON",
 				"trevelations",
-				new AspectList(),
+				new AspectList()
+					.add(EXCUBITOR, 6)
+					.add(Aspect.WEAPON, 6)
+					.add(Aspect.AIR, 2)
+					.add(Aspect.EARTH, 2)
+					.add(Aspect.ENTROPY, 2)
+					.add(Aspect.FIRE, 2)
+					.add(Aspect.ORDER, 2)
+					.add(Aspect.WATER, 2),
 				-4, 5, 3,
-				new ItemStack(itemWardenWeapon)).setParents("WASLIEHAMMER").setRound().setSpecial().registerResearchItem();
+				new ItemStack(itemWardenWeapon))
+					.setConcealed()
+					.setParents("WASLIEHAMMER")
+					.setRound()
+					.setSpecial()
+					.registerResearchItem();
 		researchWardenWeapon.setPages(
 				new ResearchPage("0"),
 				new ResearchPage(recipeWardenWeapon));
@@ -369,7 +436,12 @@ public class ThaumRevContent {
 				"trevelations",
 				new AspectList(),
 				-4, 3, 3,
-				new ItemStack(itemWaslieHammer)).setParents("CRYSTAL", "QUARTZ").setParentsHidden("ROD_wardencloth").setRound().setSpecial().registerResearchItem();
+				new ItemStack(itemWaslieHammer))
+					.setParents("CRYSTAL", "QUARTZ")
+					.setParentsHidden("ROD_wardencloth")
+					.setRound()
+					.setSpecial()
+					.registerResearchItem();
 		researchWaslieHammer.setPages(
 				new ResearchPage("0"),
 				new ResearchPage(recipeWaslieHammer));
@@ -377,9 +449,16 @@ public class ThaumRevContent {
 		researchIllumination = new ThaumRevResearchItem(
 				"ILLUMINATION",
 				"trevelations",
-				new AspectList().add(Aspect.AIR, 2).add(Aspect.FIRE, 2),
-				8, 4, 1,
-				new ItemStack(itemFocusIllumination)).setRound().setParentsHidden("FOCUSFIRE").registerResearchItem();
+				new AspectList()
+					.add(Aspect.AIR, 8)
+					.add(Aspect.FIRE, 8),
+				-12, 2, 2,
+				new ItemStack(itemFocusIllumination))
+					.setRound()
+					.setConcealed()
+					.setParents("ROD_wardencloth")
+					.setParentsHidden("FOCUSFIRE")
+					.registerResearchItem();
 		researchIllumination.setPages(
 				new ResearchPage("0"),
 				new ResearchPage(recipeFocusIllumination));
@@ -387,28 +466,48 @@ public class ThaumRevContent {
 		researchLore1 = new ThaumRevResearchItem(
 				"LORE1",
 				"trevelations",
-				new AspectList().add(EXCUBITOR, 4).add(Aspect.MIND, 4),
-				-8, -1, 3,
-				new ItemStack(itemWardenAmulet)).setParents("WARDENS").setSecondary().setSpecial().registerResearchItem();
+				new AspectList()
+					.add(EXCUBITOR, 6)
+					.add(Aspect.MIND, 6),
+				-8, -1, 1,
+				new ItemStack(itemWardenAmulet))
+					.setParents("WARDENS")
+					.setSecondary()
+					.setSpecial()
+					.registerResearchItem();
 		researchLore1.setPages(
 				new ResearchPage("0"),
 				new ResearchPage("1"),
 				new ResearchPage("2"));
+
 		researchLore2 = new ThaumRevResearchItem("LORE2", "trevelations",
-				new AspectList().add(EXCUBITOR, 4).add(Aspect.MIND, 4),
-				-8, 1, 3,
-				new ItemStack(itemWardenAmulet)).setParents("LORE1").setSecondary().setSpecial().registerResearchItem();
+				new AspectList()
+					.add(EXCUBITOR, 6)
+					.add(Aspect.MIND, 6),
+				-8, 1, 1,
+				new ItemStack(itemWardenAmulet))
+					.setParents("LORE1")
+					.setSecondary()
+					.setSpecial()
+					.registerResearchItem();
 		researchLore2.setPages(
 				new ResearchPage("0"),
 				new ResearchPage("1"),
 				new ResearchPage("2"),
 				new ResearchPage("3"));
+
 		researchLore3 = new ThaumRevResearchItem(
 				"LORE3",
 				"trevelations",
-				new AspectList().add(EXCUBITOR, 4).add(Aspect.MIND, 4),
-				-8, 3, 3,
-				new ItemStack(itemWardenAmulet)).setParents("LORE2").setSecondary().setSpecial().registerResearchItem();
+				new AspectList()
+					.add(EXCUBITOR, 6)
+					.add(Aspect.MIND, 6),
+				-8, 3, 1,
+				new ItemStack(itemWardenAmulet))
+					.setParents("LORE2")
+					.setSecondary()
+					.setSpecial()
+					.registerResearchItem();
 		researchLore3.setPages(
 				new ResearchPage("0"),
 				new ResearchPage("1"),
@@ -416,11 +515,18 @@ public class ThaumRevContent {
 				new ResearchPage("3"),
 				new ResearchPage("4"),
 				new ResearchPage("5"));
+
 		researchLore4 = new ThaumRevResearchItem(
 				"LORE4", "trevelations",
-				new AspectList().add(EXCUBITOR, 4).add(Aspect.MIND, 4),
-				-8, 5, 3,
-				new ItemStack(itemWardenAmulet)).setParents("LORE3").setSecondary().setSpecial().registerResearchItem();
+				new AspectList()
+						.add(EXCUBITOR, 6)
+						.add(Aspect.MIND, 6),
+				-8, 5, 1,
+				new ItemStack(itemWardenAmulet))
+					.setParents("LORE3")
+					.setSecondary()
+					.setSpecial()
+					.registerResearchItem();
 		researchLore4.setPages(
 				new ResearchPage("0"),
 				new ResearchPage("1"),
@@ -430,9 +536,15 @@ public class ThaumRevContent {
 		researchCrimsonCult = new ThaumRevResearchItem(
 				"CRIMSONCULT",
 				"trevelations",
-				new AspectList(),
-				0, -3, 0,
-				new ItemStack(ConfigItems.itemEldritchObject, 0, 1)).setParents("TREVELATIONS").registerResearchItem();
+				new AspectList()
+					.add(CRIMSON, 8)
+					.add(Aspect.DARKNESS, 6)
+					.add(Aspect.MAGIC, 6),
+				0, -3, 3,
+				new ItemStack(ConfigItems.itemEldritchObject, 0, 1))
+					.setSpecial()
+					.setParents("TREVELATIONS")
+					.registerResearchItem();
 		researchCrimsonCult.setPages(
 				new ResearchPage("0"));
 		addWarpToResearch("CRIMSONCULT", 4);
@@ -440,12 +552,15 @@ public class ThaumRevContent {
 		researchCrimsoncloth = new ThaumRevResearchItem(
 				"CRIMSONCLOTH",
 				"trevelations",
-				new AspectList(),
+				new AspectList()
+						.add(CRIMSON, 4)
+						.add(Aspect.MAGIC, 2)
+						.add(Aspect.CLOTH, 2),
 				0, -1, 0,
-				new ItemStack(
-						itemResource,
-						0,
-						4)).setParents("CRIMSONCULT").setParentsHidden("ENCHFABRIC").registerResearchItem();
+				new ItemStack(itemResource, 0, 4))
+					.setParents("CRIMSONCULT")
+					.setParentsHidden("ENCHFABRIC")
+					.registerResearchItem();
 		researchCrimsoncloth.setPages(
 				new ResearchPage("0"),
 				new ResearchPage(recipeCrimsoncloth),
@@ -457,9 +572,15 @@ public class ThaumRevContent {
 		researchEldritch = new ThaumRevResearchItem(
 				"ELDRITCH",
 				"trevelations",
-				new AspectList(),
-				8, -3, 0,
-				new ItemStack(ConfigItems.itemEldritchObject)).setParents("TREVELATIONS").registerResearchItem();
+				new AspectList()
+					.add(Aspect.ELDRITCH, 8)
+					.add(Aspect.VOID, 6)
+					.add(Aspect.DARKNESS, 6),
+				8, -3, 3,
+				new ItemStack(ConfigItems.itemEldritchObject))
+					.setSpecial()
+					.setParents("TREVELATIONS")
+					.registerResearchItem();
 		researchEldritch.setPages(
 				new ResearchPage("0"));
 		addWarpToResearch("ELDRITCH", 4);
@@ -467,12 +588,12 @@ public class ThaumRevContent {
 		researchVoidcloth = new ThaumRevResearchItem(
 				"VOIDCLOTH",
 				"trevelations",
-				new AspectList(),
+				new AspectList().add(Aspect.ELDRITCH, 4).add(Aspect.MAGIC, 2).add(Aspect.CLOTH, 2),
 				8, -1, 0,
-				new ItemStack(
-						itemResource,
-						0,
-						5)).setParents("ELDRITCH").setParentsHidden("ENCHFABRIC").registerResearchItem();
+				new ItemStack(itemResource, 0, 5))
+					.setParents("ELDRITCH")
+					.setParentsHidden("ENCHFABRIC")
+					.registerResearchItem();
 		researchVoidcloth.setPages(
 				new ResearchPage("0"),
 				new ResearchPage(recipeVoidcloth));

@@ -67,10 +67,11 @@ upgrade.Terra.quote=Strong like rock
 #Research
 tc.research_category.trevelations=Thaumic Revelations
 
-trvresearch.name.WARDENS=Thaumic Wardens
-trvresearch.text.WARDENS=Long forgotten to our ears
-trvresearch.page.WARDENS.0=You have read of an ancient order of former thaumaturge who dedicated themselves to fighting the Eldritch and protecting the land.<BR>They were once a branch of the Abysswalkers who became divided after the siege on their headquarters Fort Rose.<BR>Thanks to Master Lizbeth some of the remnants are now what we call the Thaumic Wardens.
+trvresearch.name.TREVELATIONS=Thaumic Revelations
+trvresearch.text.TREVELATIONS=Revelations in this magical world!
+trvresearch.page.TREVELATIONS.0=There were once three factions in this world:<BR> - Thaumaturgists, from which Thaumic Wardens came to life;<BR> - Crimson Cultists, Thaumaturgists who went insane;<BR> - Eldritch Creatures, which hunted down anyone who dared to gain forbidden knowledge.<BR>Or so they say...
 
+#Wardens
 trvresearch.name.EXCUBITURA=Excubitura
 trvresearch.text.EXCUBITURA=A rose by any other name...
 trvresearch.page.EXCUBITURA.0=Mutated by Thaumic energies, this odd little rose has formed a beautiful crystal where its stigma should be.<BR>Despite it's small size, the petals are vibrant and have an unusual energy about them.
@@ -86,14 +87,6 @@ trvresearch.page.CRYSTAL.0=You knew these petals were unique somehow. By crystal
 trvresearch.name.WARDENCLOTH=Wardencloth
 trvresearch.text.WARDENCLOTH=Fabric of the Protectors
 trvresearch.page.WARDENCLOTH.0=You discovered a way to create legendary Wardens' fabric, which has incredible magical capabilities
-
-trvresearch.name.CRIMSONCLOTH=Crimsoncloth
-trvresearch.text.CRIMSONCLOTH=Fabric of the Crimson Cult
-trvresearch.page.CRIMSONCLOTH.0=You finally discovered a way to create Crimson Cult Robes
-
-trvresearch.name.VOIDCLOTH=Voidcloth
-trvresearch.text.VOIDCLOTH=Fabric of the Eldritch
-trvresearch.page.VOIDCLOTH.0=You discovered a way to create Voidcloth, from which the Eldritch Guardians are 'created'
 
 trvresearch.name.WARDENARMOR=The Armor
 trvresearch.text.WARDENARMOR=Feels like I'm wearing nothin' at all!
@@ -114,6 +107,11 @@ trvresearch.page.WASLIEHAMMER.0=This hammer was created by the Master Wanderer W
 trvresearch.name.ILLUMINATION=Wand Focus: Illumination
 trvresearch.text.ILLUMINATION=They know...
 trvresearch.page.ILLUMINATION.0=We know all about your plans<BR>You know you should join us<BR>Our thaumic focus that creates illumination on right click will illuminate you to the right path
+
+#Warden's Lore
+trvresearch.name.WARDENS=Thaumic Wardens
+trvresearch.text.WARDENS=Long forgotten to our ears
+trvresearch.page.WARDENS.0=You have read of an ancient order of former thaumaturge who dedicated themselves to fighting the Eldritch and protecting the land.<BR>They were once a branch of the Abyssalwalkers who became divided after the siege on their headquarters Fort Rose.<BR>Thanks to Master Lizbeth some of the remnants are now what we call the Thaumic Wardens.
 
 trvresearch.name.LORE1=The Prologue
 trvresearch.text.LORE1=Everything has a beginning
@@ -139,9 +137,27 @@ trvresearch.page.LORE3.5="Where were you when I was being attacked" Lizbeth said
 
 trvresearch.name.LORE4=The Journey Begins
 trvresearch.text.LORE4=Memories Lost?
-trvresearch.page.LORE4.0=After a couple of days Lizbeth and Vana reached Fort Rose and sought Wesly for help.<BR>"Vana is with you..... that doesn't mean well" Wesly said "He's crazy but he's good" Lizbeth said sarcastically<BR>"I opened that box you gave me and the old spirit told me about the Eldritch and that I must seek you to stop them" Lizbeth said<BR>"That easy!!! you're not gonna ask for details" Vana interrupted<BR>
+trvresearch.page.LORE4.0=After a couple of days Lizbeth and Vana reached Fort Rose and sought Wesly for help.<BR>"Vana is with you... that doesn't mean well" Wesly said "He's crazy but he's good" Lizbeth said sarcastically<BR>"I opened that box you gave me and the old spirit told me about the Eldritch and that I must seek you to stop them" Lizbeth said<BR>"That easy!!! you're not gonna ask for details" Vana interrupted<BR>
 trvresearch.page.LORE4.1="They tried killing me and my friends and that's not something I take lightly" Lizbeth said<BR>"Wesly can you create something to help defeat them. When I fought them I wasn't even able to pass through their runes" Lizbeth said<BR>"Yes they will prove difficult to fight. I will need your help. Create that magical metal of yours and come see me in the reliquary room" Wesly replied<BR>
 trvresearch.page.LORE4.2=*The text changes into weird runes as if you are not supposed to learn what they say*
 trvresearch.page.LORE4.3="Now we're ready. Prepare yourself dear we leave at dawn" Wesly said<BR>The morning came and Vana and Wesly went to check on Lizbeth before leaving. They didn't find her. She had already left alone before everyone woke up. How did she pass through the guards though? probably used an invisibility Focus or something<BR>"We have to reach her before she does something rash" Vana said<BR>"I only hope we make it in time" Wesly replied to him
 
+#Crimson Cult
+trvresearch.name.CRIMSONCLOTH=Crimsoncloth
+trvresearch.text.CRIMSONCLOTH=Fabric of the Crimson Cult
+trvresearch.page.CRIMSONCLOTH.0=You finally discovered a way to create Crimson Cult Robes and Crimson Cult Armour.
 
+#Crimson Cult's Lore
+trvresearch.name.CRIMSONCULT=The Crimson Cult
+trvresearch.text.CRIMSONCULT=Trough Knowledge, Power, They Say...
+trvresearch.page.CRIMSONCULT.0=WiP
+
+#The Eldritch
+trvresearch.name.VOIDCLOTH=Voidcloth
+trvresearch.text.VOIDCLOTH=Fabric of the Eldritch
+trvresearch.page.VOIDCLOTH.0=You discovered a way to create Voidcloth.<BR>Who knows, what miracles you'll be able to create with this fabric?
+
+#The Eldritch Lore
+trvresearch.name.ELDRITCH=The Eldritch
+trvresearch.text.ELDRITCH=What wonders are awaiting you in the Abyss?
+trvresearch.page.ELDRITCH.0=WiP
