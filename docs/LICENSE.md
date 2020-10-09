@@ -1,8 +1,9 @@
 # What Is The Team Magnequazar Even Saying License  
-  Version 1, 05 August 2020
+  Version 2, 08 October 2020
 
 ### Preamble
-  "Thaumic Revelations" mod is copyleft under **This License**.
+ * You are permitted to change **This License** name to reflect name of your development team, you name or nickname, but the words "_What is_ \<insert your name here\> _Even Saying License_" and the wording of **This License** cannot be changed.
+ * "Thaumic Revelations" mod is copyleft under **This License**.
 
 ### 0. Definitions
 * "**This License**" refers to "_What Is The Team Magnequazar Even Saying License_".
