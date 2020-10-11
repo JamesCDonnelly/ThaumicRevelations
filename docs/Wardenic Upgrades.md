@@ -49,7 +49,7 @@
 * Terra:
     * reduce Terra vis cost by 10% per Armor piece
     * reduce incoming damage by 10%
-    * reduce speed per Armor piece - **WiP**
+    * reduce speed per Armor piece
     * nullify Knockback (only when full set is being worn) - **WiP**
 
 ### The Sword
@@ -83,8 +83,7 @@
 * Ordo:
     * deal additional damage to Zombies, Skeletons, Withers and Nether mobs as Warden Damage, which is based on Armor pieces number
 * Perditio:
-    * there's 12.5% chance the attack will kill target immediately, chance is based on Armor pieces number
+    * there's a chance the attack will kill target immediately, chance is based on Armor pieces number
         * don't work on bosses (because bosses have damage limit)
-        * chance is increased to 10% when full Perditio armor set is being worn
 * Terra:
     * apply Slowness, and Mining Fatigue effects on attack, duration of these effects is based on Armor pieces number
