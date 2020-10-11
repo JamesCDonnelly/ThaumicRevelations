@@ -12,6 +12,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ISpecialArmor;
 import thaumcraft.api.IVisDiscountGear;
 import thaumcraft.api.aspects.Aspect;
+import thaumcraft.common.Thaumcraft;
+import thaumcraft.common.items.armor.Hover;
 import trevelations.common.ThaumRevLibrary;
 import trevelations.util.wardenic.WardenicChargeHelper;
 
@@ -77,8 +79,69 @@ public class ItemWardenArmor extends ItemArmor implements ISpecialArmor, IVisDis
 	@Override
 	public void onArmorTick(World world, EntityPlayer player, ItemStack armor) {
 		super.onArmorTick(world, player, armor);
-
 		WardenicChargeHelper.getUpgrade(armor).onTick(world, player, armor);
+
+		int air = 0;
+		int earth = 0;
+		int water = 0;
+
+		for (int i = 0; i < 4; i++) {
+			if ((player.getCurrentArmor(i) != null) &&
+					WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
+							.equals(Aspect.AIR.getName())) {
+				air++;
+			}
+		}
+
+		for (int i = 0; i < 4; i++) {
+			if ((player.getCurrentArmor(i) != null) &&
+					WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
+							.equals(Aspect.EARTH.getName())) {
+				earth++;
+			}
+		}
+
+		for (int i = 0; i < 4; i++) {
+			if ((player.getCurrentArmor(i) != null) &&
+					WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
+							.equals(Aspect.WATER.getName())) {
+				water++;
+			}
+		}
+
+		if (!player.capabilities.isFlying && player.moveForward > 0.0F) {
+			if (player.worldObj.isRemote &&
+				!player.isSneaking() &&
+				(WardenicChargeHelper
+					.getUpgrade(player.getCurrentArmor(0))
+					.getUpgradeAspect()
+					.equals(Aspect.AIR.getName()) ||
+				WardenicChargeHelper
+					.getUpgrade(player.getCurrentArmor(0))
+					.getUpgradeAspect()
+					.equals(Aspect.WATER.getName()))) {
+						if (!Thaumcraft.instance.entityEventHandler.prevStep.containsKey(player.getEntityId())) {
+							Thaumcraft.instance.entityEventHandler.prevStep.put(player.getEntityId(), player.stepHeight);
+						}
+
+						player.stepHeight = 1.0F;
+			}
+
+			if (player.onGround) {
+				if (player.isInWater()) {
+					player.moveFlying(0.0F, 1.0F, water * 0.025F);
+				} else {
+					player.moveFlying(0.0F, 1.0F, air * 0.015F - earth * 0.005F);
+				}
+			} else if (Hover.getHover(player.getEntityId())) {
+				player.jumpMovementFactor += 0.0025F * air;
+			}
+			else {
+				player.jumpMovementFactor += 0.01F * air;
+			}
+		}
+
+		player.fallDistance *= 1.0F - (float)air / 4;
 	}
 
 	@Override

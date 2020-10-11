@@ -61,7 +61,7 @@ public class ThaumRevContent {
 		itemWardenBow = new ItemWardenBow();
 		// itemFocusPurity = new ItemFocusPurity(); //Broken
 
-		itemCrimsonHat = new ItemCrimsonHat();
+		// itemCrimsonHat = new ItemCrimsonHat();
 
 		itemWardenHelm = new ItemWardenHelm();
 		itemWardenChest = new ItemWardenChest();
@@ -85,7 +85,7 @@ public class ThaumRevContent {
 		GameRegistry.registerItem(itemWardenBow, "itemWardenBow");
 		GameRegistry.registerItem(itemWardenAmulet, "itemWardenAmulet");
 
-		GameRegistry.registerItem(itemCrimsonHat, "itemCrimsonHat");
+		// GameRegistry.registerItem(itemCrimsonHat, "itemCrimsonHat");
 
 		GameRegistry.registerItem(itemWardenHelm, "itemWardenHelm");
 		GameRegistry.registerItem(itemWardenChest, "itemWardenChest");
@@ -174,13 +174,13 @@ public class ThaumRevContent {
 				"X X", "X X",
 				'X', new ItemStack(itemResource, 1, 4));
 
-		recipeCrimsonHat = ThaumcraftApi.addArcaneCraftingRecipe(
+		/* recipeCrimsonHat = ThaumcraftApi.addArcaneCraftingRecipe(
 				"CRIMSONHAT",
 				new ItemStack(itemCrimsonHat),
 				new AspectList().add(Aspect.ORDER, 40).add(Aspect.ENTROPY, 40).add(Aspect.AIR, 40).add(Aspect.EARTH, 40).add(Aspect.FIRE, 40).add(Aspect.WATER, 40),
 				" X ", "XOX", " X ",
 				'X', new ItemStack(itemResource, 1, 4),
-				'O', new ItemStack(ConfigItems.itemGolemDecoration, 1));
+				'O', new ItemStack(ConfigItems.itemGolemDecoration, 1)); */
 
 		recipeVoidcloth = ThaumcraftApi.addCrucibleRecipe(
 				"VOIDCLOTH",

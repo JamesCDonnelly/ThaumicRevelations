@@ -37,7 +37,7 @@ public class WardenicUpgradeAir extends WardenicUpgrade {
 		}
 
 		if (entityArrow.getIsCritical()) {
-			entityArrow.setDamage(2 * (count + 2));
+			entityArrow.setDamage(4 * (count + 2)); //TODO: Why it won't work?!!!
 
 			entityLivingBase.addPotionEffect(new PotionEffect(Potion.confusion.id, 20 * (count + 1), 1));
 			entityLivingBase.addPotionEffect(new PotionEffect(Potion.hunger.id, 40 * (count + 1), 1));
@@ -87,64 +87,19 @@ public class WardenicUpgradeAir extends WardenicUpgrade {
 
 	@Override
 	public void onTick(World world, EntityPlayer player, ItemStack stack) {
-		float helmetBoost;
-		float chestBoost;
-		float legsBoost;
-		float bootsBoost;
+		super.onTick(world, player, stack);
 
-		if (!(player.isInWater())) {
-			if (player.getCurrentArmor(3) != null) {
-				ItemStack helm = player.getCurrentArmor(3);
-				if (WardenicChargeHelper.getUpgrade(helm).getUpgradeAspect().equals(Aspect.AIR.getName())) {
-					helmetBoost = 0.025F;
-				} else {
-					helmetBoost = 0;
-				}
-			} else {
-				helmetBoost = 0;
+		int count = 0;
+
+		for (int i = 0; i < 4; i++) {
+			if ((player.getCurrentArmor(i) != null) &&
+					WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
+							.equals(Aspect.AIR.getName())) {
+				count++;
 			}
-			if (player.getCurrentArmor(2) != null) {
-				ItemStack chest = player.getCurrentArmor(2);
-				if (WardenicChargeHelper.getUpgrade(chest).getUpgradeAspect().equals(Aspect.AIR.getName())) {
-					chestBoost = 0.025F;
-				} else {
-					chestBoost = 0;
-				}
-			} else {
-				chestBoost = 0;
-			}
-			if (player.getCurrentArmor(1) != null) {
-				ItemStack legs = player.getCurrentArmor(1);
-				if (WardenicChargeHelper.getUpgrade(legs).getUpgradeAspect().equals(Aspect.AIR.getName())) {
-					legsBoost = 0.025F;
-				} else {
-					legsBoost = 0;
-				}
-			} else {
-				legsBoost = 0;
-			}
-			if (player.getCurrentArmor(0) != null) {
-				ItemStack boots = player.getCurrentArmor(0);
-				if (WardenicChargeHelper.getUpgrade(boots).getUpgradeAspect().equals(Aspect.AIR.getName())) {
-					bootsBoost = 0.025F;
-					player.stepHeight = 1F;
-				} else {
-					bootsBoost = 0;
-					player.stepHeight = 0.5F;
-				}
-			} else {
-				bootsBoost = 0;
-				player.stepHeight = 0.5F;
-			}
-		} else {
-			helmetBoost = 0;
-			chestBoost = 0;
-			legsBoost = 0;
-			bootsBoost = 0;
-			player.stepHeight = 0.5F;
 		}
 
-		if ((helmetBoost + chestBoost + legsBoost + bootsBoost) == 0.1F) {
+		if (count == 4) {
 			if (player.isPotionActive(Potion.moveSlowdown.getId())) {
 				player.removePotionEffect(Potion.moveSlowdown.getId());
 			}
@@ -152,8 +107,5 @@ public class WardenicUpgradeAir extends WardenicUpgrade {
 				player.removePotionEffect(Potion.confusion.getId());
 			}
 		}
-
-		player.fallDistance = player.fallDistance * (1 - 10 * (helmetBoost + chestBoost + legsBoost + bootsBoost));
-		if (player.worldObj.isRemote) player.capabilities.setPlayerWalkSpeed(0.1F + helmetBoost + chestBoost + legsBoost + bootsBoost);
 	}
 }

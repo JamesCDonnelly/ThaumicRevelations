@@ -9,7 +9,6 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
-import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import thaumcraft.api.aspects.Aspect;
 import trevelations.util.DamageSourceWarden;
@@ -109,22 +108,5 @@ public class WardenicUpgradeEarth extends WardenicUpgrade {
 
 			event.ammount *= 1 - (0.10F * count);
 		}
-	}
-
-	@Override
-	public void onTick(World world, EntityPlayer player, ItemStack stack) {
-		super.onTick(world, player, stack);
-
-		int count = 0;
-
-		for (int i = 0; i < 4; i++) {
-			if ((player.getCurrentArmor(i) != null) &&
-					WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
-							.equals(Aspect.EARTH.getName())) {
-				count++;
-			}
-		}
-
-		if (player.worldObj.isRemote) player.capabilities.setPlayerWalkSpeed(0.1F - 0.005F * count);
 	}
 }

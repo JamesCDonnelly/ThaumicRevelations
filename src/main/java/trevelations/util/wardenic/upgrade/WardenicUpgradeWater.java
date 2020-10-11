@@ -37,7 +37,7 @@ public class WardenicUpgradeWater extends WardenicUpgrade {
 		}
 
 		if (entityArrow.getIsCritical()) {
-			entityLivingBase.addPotionEffect(new PotionEffect(Potion.poison.getId(), 40, count - 1));
+			entityLivingBase.addPotionEffect(new PotionEffect(Potion.poison.getId(), 40, count / 2));
 		}
 	}
 
@@ -72,10 +72,6 @@ public class WardenicUpgradeWater extends WardenicUpgrade {
 							.equals(Aspect.WATER.getName())) {
 				count++;
 			}
-		}
-
-		if (player.isInWater() && player.worldObj.isRemote) {
-			player.capabilities.setPlayerWalkSpeed(0.5F + 0.025F * count);
 		}
 
 		if (count == 4) {

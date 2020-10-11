@@ -8,7 +8,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import thaumcraft.api.aspects.Aspect;
 import trevelations.item.ItemWardenBow;
 import trevelations.item.ItemWardenWeapon;
 import trevelations.item.armor.ItemWardenArmor;
@@ -25,10 +24,9 @@ public class WardenicChargeEvents {
 	}
 
 	@SubscribeEvent
-	public void onPlayerTick(LivingUpdateEvent event) {
+	public void onServerTick(LivingUpdateEvent event) {
 		if (event.entity instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) event.entity;
-			int count = 0;
 
 			for (int i = 0; i < 5; i++) {
 				if (player.getEquipmentInSlot(i) != null) {
@@ -40,24 +38,6 @@ public class WardenicChargeEvents {
 								player.getEquipmentInSlot(i).setItemDamage(player.getEquipmentInSlot(i).getItemDamage() - 1);
 							}
 						}
-					}
-				}
-			}
-
-			for (int i = 0; i < 4; i++) {
-				if (player.getCurrentArmor(i) == null ||
-						!(player.getCurrentArmor(i).getItem() instanceof ItemWardenArmor) ||
-						!(WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
-								.equals(Aspect.AIR.getName())) ||
-						!(WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
-								.equals(Aspect.WATER.getName())) ||
-						!(WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
-								.equals(Aspect.EARTH.getName()))) {
-					count++;
-
-					if (count == 4 && player.worldObj.isRemote) {
-						player.capabilities.setPlayerWalkSpeed(0.1F);
-						player.stepHeight = 0.5F;
 					}
 				}
 			}
