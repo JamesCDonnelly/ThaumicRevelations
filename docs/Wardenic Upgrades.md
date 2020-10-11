@@ -13,23 +13,23 @@
         * Taint Poison
 * Aer:
     * reduce Aer vis cost by 10% per Armor piece
-    * increase movement speed by 20% per Armor piece
+    * increase movement speed per Armor piece
     * remove effects (only when full set is being worn):
         * Slowness
         * Nausea
-    * reduce fall damage by 25% per Armor piece
-    * reduce projectile damage by 15% per Armor piece
+    * reduce fall damage, based on Armor pieces number
+    * reduce projectile damage, based on Armor pieces number
 * Aqua:
     * reduce Aqua vis cost by 10% per Armor piece
     * give effect (only when full set is being worn): Water Breathing
     * remove effect (only when full set is being worn): Poison
-    * increase movement speed in water per Armor piece
+    * increase movement speed in water, based on Armor pieces number
 * Ignis:
     * reduce Ignis vis cost by 10% per Armor piece
     * remove effect (only when full set is being worn): Sun Scorned
     * extinguish fire (only when full set is being worn)
-    * reduce fire damage by 25% per Armor piece
-    * reduce explosion damage by 15% per Armor piece
+    * reduce fire damage, based on Armor pieces number
+    * reduce explosion damage, based on Armor pieces number
 * Ordo:
     * reduce Ordo vis cost by 10% per Armor piece
     * ignore damage dealt by Zombies, Skeletons, Withers and Nether mobs (only when full set is being worn)
@@ -45,10 +45,10 @@
     * reduce Perditio vis cost by 10% per Armor piece
     * damage attacker by random value, which is based on Armor pieces number
     * increase incoming damage by random value, which is based on Armor pieces number
-    * 5% chance per Armor piece that the incoming damage will apply sticky Warp
+    * chance based on Armor pieces number that the incoming damage will apply sticky Warp
 * Terra:
     * reduce Terra vis cost by 10% per Armor piece
-    * reduce incoming damage by 10%
+    * reduce incoming damage, based on Armor pieces number
     * reduce speed per Armor piece
     * nullify Knockback (only when full set is being worn) - **WiP**
 
