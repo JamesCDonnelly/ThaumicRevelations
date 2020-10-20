@@ -3,9 +3,8 @@ package trevelations.client.gui;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
-
-import trevelations.inventory.ContainerHammer;
 import org.lwjgl.opengl.GL11;
+import trevelations.inventory.ContainerHammer;
 
 public class GuiWaslieHammer extends GuiContainer {
 

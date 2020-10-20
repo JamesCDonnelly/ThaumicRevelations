@@ -39,6 +39,8 @@ public class ThaumicRevelations {
 		ThaumRevContent.loadBlocks();
 		ThaumRevContent.loadItems();
 
+		// GameRegistry.addSubstitutionAlias();
+
 		GameRegistry.registerWorldGenerator(new WorldGenExcubitura(), 1);
 	}
 

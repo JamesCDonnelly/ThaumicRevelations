@@ -1,5 +1,9 @@
 package trevelations.item.armor;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
@@ -7,11 +11,15 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ISpecialArmor;
+import thaumcraft.api.IGoggles;
+import thaumcraft.api.IRepairable;
 import thaumcraft.api.IVisDiscountGear;
 import thaumcraft.api.aspects.Aspect;
+import thaumcraft.api.nodes.IRevealer;
 import thaumcraft.common.Thaumcraft;
 import thaumcraft.common.items.armor.Hover;
 import trevelations.common.ThaumRevLibrary;
@@ -19,10 +27,15 @@ import trevelations.util.wardenic.WardenicChargeHelper;
 
 import java.util.List;
 
-public class ItemWardenArmor extends ItemArmor implements ISpecialArmor, IVisDiscountGear {
+public class ItemWardenArmor extends ItemArmor implements IRepairable, ISpecialArmor, IVisDiscountGear, IGoggles, IRevealer {
+	public IIcon iconHelm;
+	public IIcon iconChest;
+	public IIcon iconLegs;
+	public IIcon iconBoots;
 
-	public ItemWardenArmor(int type) {
+	public ItemWardenArmor(int type, String name) {
 		super(ThaumRevLibrary.armorMaterialWarden, 2, type);
+		setUnlocalizedName(name);
 		setCreativeTab(ThaumRevLibrary.tabThaumRev);
 		setMaxStackSize(1);
 	}
@@ -112,6 +125,7 @@ public class ItemWardenArmor extends ItemArmor implements ISpecialArmor, IVisDis
 		if (!player.capabilities.isFlying && player.moveForward > 0.0F) {
 			if (player.worldObj.isRemote &&
 				!player.isSneaking() &&
+				player.getCurrentArmor(0) != null &&
 				(WardenicChargeHelper
 					.getUpgrade(player.getCurrentArmor(0))
 					.getUpgradeAspect()
@@ -131,13 +145,13 @@ public class ItemWardenArmor extends ItemArmor implements ISpecialArmor, IVisDis
 				if (player.isInWater()) {
 					player.moveFlying(0.0F, 1.0F, water * 0.025F);
 				} else {
-					player.moveFlying(0.0F, 1.0F, air * 0.015F - earth * 0.005F);
+					player.moveFlying(0.0F, 1.0F, air * 0.010F - earth * 0.005F);
 				}
 			} else if (Hover.getHover(player.getEntityId())) {
-				player.jumpMovementFactor += 0.0025F * air;
+				player.jumpMovementFactor = 0.02F + 0.0025F * air;
 			}
 			else {
-				player.jumpMovementFactor += 0.01F * air;
+				player.jumpMovementFactor = 0.02F + 0.005F * air;
 			}
 		}
 
@@ -179,5 +193,36 @@ public class ItemWardenArmor extends ItemArmor implements ISpecialArmor, IVisDis
 		} else {
 			return 5;
 		}
+	}
+
+	@Override
+	public boolean showIngamePopups(ItemStack itemStack, EntityLivingBase entityLivingBase) {
+		return this.armorType == 2;
+	}
+
+	@Override
+	public boolean showNodes(ItemStack itemStack, EntityLivingBase entityLivingBase) {
+		return this.armorType == 2;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IIconRegister register) {
+		this.iconHelm = register.registerIcon("trevelations:armor/wardenhelm");
+		this.iconChest = register.registerIcon("trevelations:armor/wardenchest");
+		this.iconLegs = register.registerIcon("trevelations:armor/wardenlegs");
+		this.iconBoots = register.registerIcon("trevelations:armor/wardenboots");
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIconFromDamage(int par1) {
+		return this.armorType == 0 ? this.iconHelm : (this.armorType == 1 ? this.iconChest : (this.armorType == 2 ? this.iconLegs : this.iconBoots));
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
+		return "trevelations:textures/models/warden_" + (this.armorType == 2 ? "2" : "1") + ".png";
 	}
 }

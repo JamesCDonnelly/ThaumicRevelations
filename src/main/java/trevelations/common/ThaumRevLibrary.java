@@ -9,8 +9,11 @@ import net.minecraft.item.ItemSword;
 import net.minecraft.util.ResourceLocation;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.crafting.CrucibleRecipe;
+import thaumcraft.api.crafting.InfusionRecipe;
 import thaumcraft.api.crafting.ShapedArcaneRecipe;
 import thaumcraft.api.research.ResearchItem;
+import thaumcraft.api.wands.StaffRod;
+import thaumcraft.api.wands.WandRod;
 
 public class ThaumRevLibrary {
 	public static final String MOD_ID = "trevelations";
@@ -40,11 +43,19 @@ public class ThaumRevLibrary {
 			771);
 
 	public static ItemArmor.ArmorMaterial armorMaterialWarden;
+	public static ItemArmor.ArmorMaterial armorMaterialWardencloth;
+	public static ItemArmor.ArmorMaterial armorMaterialCrimsoncloth;
+
 	public static ItemSword.ToolMaterial toolMaterialWarden;
 
-	public static ItemArmor.ArmorMaterial armorMaterialWardencloth;
+	public static WandRod WAND_ROD_WARDENCLOTH;
+	public static WandRod WAND_ROD_VOIDWOOD;
+	public static WandRod WAND_ROD_CRIMSONCRYSTAL;
+	public static StaffRod STAFF_ROD_WARDENCLOTH;
+	public static StaffRod STAFF_ROD_VOIDWOOD;
+	public static StaffRod STAFF_ROD_CRIMSONCULT;
 
-	public static ItemArmor.ArmorMaterial armorMaterialCrimsoncloth;
+	public static Item itemWandCore;
 
 	public static Item itemResource;
 	// public static Item itemCrimsonHat; //TODO: make model working
@@ -53,7 +64,6 @@ public class ThaumRevLibrary {
 	public static Item itemWardenBow;
 	// public static Item itemFocusPurity; //TODO: make it working
 
-	public static Item itemWardenclothHelm;
 	public static Item itemWardenclothChest;
 	public static Item itemWardenclothLegs;
 	public static Item itemWardenclothBoots;
@@ -83,16 +93,31 @@ public class ThaumRevLibrary {
 	public static CrucibleRecipe recipeCrimsoncloth;
 	public static CrucibleRecipe recipeVoidcloth;
 
+	// ArcaneWandRecipe
+
+	public static InfusionRecipe recipeWardenclothWand;
+	// public static ShapedArcaneRecipe recipeVoidwoodWand;
+	// public static ShapedArcaneRecipe recipeRedCrystalWand;
+
+	public static ShapedArcaneRecipe recipeWardenclothStaff;
+	// public static ShapedArcaneRecipe recipeVoidwoodStaff;
+	// public static ShapedArcaneRecipe recipeCrimsonCultStaff;
+
 	public static ShapedArcaneRecipe recipeHelmetCultistRobe;
 	public static ShapedArcaneRecipe recipeChestCultistRobe;
 	public static ShapedArcaneRecipe recipeLegsCultistRobe;
 	public static ShapedArcaneRecipe recipeBootsCultist;
 	// public static ShapedArcaneRecipe recipeCrimsonHat;
 
+	public static ShapedArcaneRecipe recipeWardenclothChest;
+	public static ShapedArcaneRecipe recipeWardenclothLegs;
+	public static ShapedArcaneRecipe recipeWardenclothBoots;
+
 	public static ShapedArcaneRecipe recipeWardenHelm;
 	public static ShapedArcaneRecipe recipeWardenChest;
 	public static ShapedArcaneRecipe recipeWardenLegs;
 	public static ShapedArcaneRecipe recipeWardenBoots;
+
 	public static ShapedArcaneRecipe recipeWardenWeapon;
 	public static ShapedArcaneRecipe recipeWaslieHammer;
 	public static ShapedArcaneRecipe recipeFocusIllumination;
@@ -126,5 +151,6 @@ public class ThaumRevLibrary {
 
 	public static ResearchItem researchEldritch;
 	public static ResearchItem researchVoidcloth;
-
+	// public static ResearchItem researchVoidwoodWand;
+	// public static ResearchItem researchVoidwoodStaff;
 }

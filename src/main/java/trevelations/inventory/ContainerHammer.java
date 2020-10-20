@@ -4,12 +4,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.*;
 import net.minecraft.item.ItemStack;
-
-import trevelations.item.armor.ItemWardenArmor;
-import trevelations.item.ItemWardenWeapon;
-import trevelations.item.ItemWardenBow;
-import trevelations.util.wardenic.WardenicChargeHelper;
 import thaumcraft.api.aspects.IEssentiaContainerItem;
+import trevelations.item.ItemWardenBow;
+import trevelations.item.ItemWardenWeapon;
+import trevelations.item.armor.ItemWardenArmor;
+import trevelations.util.wardenic.WardenicChargeHelper;
 
 public class ContainerHammer extends Container {
 

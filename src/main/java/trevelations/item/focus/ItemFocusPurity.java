@@ -6,14 +6,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-
-import trevelations.common.ThaumRevLibrary;
-import trevelations.entity.EntityPurity;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.wands.FocusUpgradeType;
 import thaumcraft.api.wands.ItemFocusBasic;
 import thaumcraft.common.items.wands.ItemWandCasting;
+import trevelations.common.ThaumRevLibrary;
+import trevelations.entity.EntityPurity;
 
 public class ItemFocusPurity extends ItemFocusBasic {
 

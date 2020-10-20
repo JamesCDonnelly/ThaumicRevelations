@@ -4,7 +4,7 @@ tooltip.wardenic.charge=Charge
 tooltip.wardenic.upgrade=Upgrade
 
 #Resources
-item.itemResource.0.name=Warden Rose Petal
+item.itemResource.0.name=Wardenic Rose Petal
 item.itemResource.1.name=Wardenic Crystal
 item.itemResource.2.name=Wardenic Quartz
 item.itemResource.3.name=Wardencloth
@@ -36,12 +36,28 @@ item.itemWardenclothBoots.name=Wardencloth Boots
 
 item.itemCrimsonHat.name=Crimsoncloth Top Hat
 
+#Wand Cores
+item.itemWandCore.0.name=Wardencloth Rod
+item.itemWandCore.1.name=Voidwood Rod
+item.itemWandCore.2.name=Crimson Crystal Rod
+item.itemWandCore.10.name=Wardencloth Staff Core
+item.itemWandCore.11.name=Voidwood Staff Core
+item.itemWandCore.12.name=Staff of The Crimson Core
+
+#Wands
+item.Wand.wardencloth.rod=Wardencloth Strapped Silverwood
+item.Wand.voidwood.rod=Wardencloth Strapped Silverwood
+item.Wand.redcrystal.rod=Wardencloth Strapped Silverwood
+item.Staff.wardencloth.rod=Wardencloth Strapped Silverwood
+item.Staff.voidwood.rod=Wardencloth Strapped Silverwood
+item.Staff.crimsoncult.rod=Wardencloth Strapped Silverwood
+
 #Misc
 item.itemWaslieHammer.name=Wesly's Hammer
 
 #Plants
-tile.blockExcubitura.name=Warden Rose
-item.itemExcubituraSeeds.name=Warden Rose Seeds
+tile.blockExcubitura.name=Wardenic Rose
+item.itemExcubituraSeeds.name=Wardenic Rose Seeds
 
 #Blocks
 tile.blockInfusedQuartzNormal.name=Infused Quartz Block

@@ -100,15 +100,13 @@ public class ItemFocusIllumination extends ItemFocusBasic {
 	public FocusUpgradeType[] getPossibleUpgradesByRank(ItemStack itemStack, int rank) {
 		switch(rank) {
 			case 1:
-				return new FocusUpgradeType[] { FocusUpgradeType.frugal };
 			case 2:
-				return new FocusUpgradeType[] { FocusUpgradeType.frugal };
 			case 3:
-				return new FocusUpgradeType[] { FocusUpgradeType.frugal };
 			case 4:
-				return new FocusUpgradeType[] { FocusUpgradeType.frugal };
 			case 5:
-				return new FocusUpgradeType[] { FocusUpgradeType.frugal };
+				return new FocusUpgradeType[] {
+						FocusUpgradeType.frugal
+				};
 			default:
 				return null;
 		}

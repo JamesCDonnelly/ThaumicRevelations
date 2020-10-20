@@ -1,10 +1,9 @@
 package trevelations.client.gui;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
-
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.World;
 import trevelations.common.ThaumicRevelations;
 import trevelations.inventory.ContainerHammer;
 

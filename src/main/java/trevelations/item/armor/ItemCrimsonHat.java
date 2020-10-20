@@ -23,8 +23,7 @@ import trevelations.common.ThaumRevLibrary;
 
 import java.util.List;
 
-public class ItemCrimsonHat extends ItemArmor implements ISpecialArmor, IRepairable,
-        IRevealer, IGoggles, IRunicArmor, IVisDiscountGear, IWarpingGear {
+public class ItemCrimsonHat extends ItemArmor implements ISpecialArmor, IRepairable, IRevealer, IGoggles, IRunicArmor, IVisDiscountGear, IWarpingGear {
 
     public ItemCrimsonHat() {
         super(ThaumRevLibrary.armorMaterialCrimsoncloth, 1, 0);

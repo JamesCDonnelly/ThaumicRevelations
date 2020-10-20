@@ -17,6 +17,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.event.entity.player.ArrowNockEvent;
+import thaumcraft.api.aspects.Aspect;
 import trevelations.common.ThaumRevLibrary;
 import trevelations.util.wardenic.WardenicChargeHelper;
 
@@ -91,6 +92,16 @@ public class ItemWardenBow extends ItemBow {
 
     @Override
     public void onPlayerStoppedUsing(ItemStack stack, World world, EntityPlayer player, int useTime) {
+        int air = 0;
+
+        for (int i = 0; i < 4; i++) {
+            if ((player.getCurrentArmor(i) != null) &&
+                    WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
+                            .equals(Aspect.AIR.getName())) {
+                air++;
+            }
+        }
+
         int chargeTime = this.getMaxItemUseDuration(stack) - useTime;
 
         ArrowLooseEvent looseEvent = new ArrowLooseEvent(player, stack, chargeTime);
@@ -128,6 +139,16 @@ public class ItemWardenBow extends ItemBow {
 
             NBTTagCompound tag = entityArrow.getEntityData();
             tag.setBoolean("WardenArrow", true);
+
+            if (entityArrow.getIsCritical()) {
+                if (WardenicChargeHelper.getUpgrade(player.getEquipmentInSlot(0)).getUpgradeAspect()
+                        .equals(Aspect.AIR.getName())) {
+                            entityArrow.setDamage(3 * (air + 2));
+                } else if (WardenicChargeHelper.getUpgrade(player.getEquipmentInSlot(0)).getUpgradeAspect()
+                        .equals(Aspect.ENTROPY.getName())) {
+                            entityArrow.setDamage(0);
+                }
+            }
 
             if (!world.isRemote) {
                 world.spawnEntityInWorld(entityArrow);

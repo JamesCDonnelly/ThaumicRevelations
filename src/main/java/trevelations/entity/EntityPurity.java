@@ -4,9 +4,8 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-
-import trevelations.util.PurityHelper;
 import thaumcraft.common.Thaumcraft;
+import trevelations.util.PurityHelper;
 
 public class EntityPurity extends EntityThrowable {
 

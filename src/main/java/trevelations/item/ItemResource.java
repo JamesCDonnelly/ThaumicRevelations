@@ -1,27 +1,26 @@
 package trevelations.item;
 
-import java.util.List;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import trevelations.common.ThaumRevLibrary;
+
+import java.util.List;
 
 public class ItemResource extends Item {
 
 	public static final String[] RESOURCE_ICON = {
 			"wardenpetal",
-			"wardenstone",
+			"wardencrystal",
 			"wardenquartz",
 			"wardenfabric",
 			"crimsonfabric",
 			"voidfabric"};
-	private IIcon[] icons;
+	public IIcon[] icons;
 
 	public ItemResource() {
 		super();

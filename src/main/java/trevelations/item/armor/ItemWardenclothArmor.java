@@ -4,24 +4,27 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
-import thaumcraft.api.IGoggles;
+import thaumcraft.api.IRepairable;
+import thaumcraft.api.IRunicArmor;
 import thaumcraft.api.IVisDiscountGear;
 import thaumcraft.api.aspects.Aspect;
-import thaumcraft.api.nodes.IRevealer;
 import trevelations.common.ThaumRevLibrary;
 
 import java.util.List;
 
-import static trevelations.common.ThaumRevLibrary.itemWardenclothHelm;
+public class ItemWardenclothArmor extends ItemArmor implements IRepairable, IVisDiscountGear, IRunicArmor {
 
-public class ItemWardenclothArmor extends ItemArmor implements IVisDiscountGear, IRevealer, IGoggles {
+    public IIcon iconHelm;
+    public IIcon iconChest;
+    public IIcon iconLegs;
+    public IIcon iconBoots;
 
     public ItemWardenclothArmor(int type, String name) {
         super(ThaumRevLibrary.armorMaterialWardencloth, 2, type);
@@ -31,22 +34,8 @@ public class ItemWardenclothArmor extends ItemArmor implements IVisDiscountGear,
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister register) {
-        String name = "";
-
-        switch(this.armorType) {
-            case 0:
-                name = "wardenclothhelm";
-            case 1:
-                name = "wardenclothchest";
-            case 2:
-                name = "wardenclothlegs";
-            case 3:
-                name = "wardenclothboots";
-        }
-
-        itemIcon = register.registerIcon("trevelations:armor/" + name);
+    public int getRunicCharge(ItemStack itemStack) {
+        return 0;
     }
 
     @Override
@@ -55,13 +44,8 @@ public class ItemWardenclothArmor extends ItemArmor implements IVisDiscountGear,
     }
 
     @Override
-    public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
-        return "trevelations:textures/models/" + (this.armorType == 2 ? "2" : "1") + ".png";
-    }
-
-    @Override
     public int getVisDiscount(ItemStack itemStack, EntityPlayer entityPlayer, Aspect aspect) {
-        return 6;
+        return 5;
     }
 
     @Override
@@ -70,17 +54,30 @@ public class ItemWardenclothArmor extends ItemArmor implements IVisDiscountGear,
     }
 
     @Override
-    public boolean showIngamePopups(ItemStack itemStack, EntityLivingBase entityLivingBase) {
-        return itemStack.getItem().equals(itemWardenclothHelm);
-    }
-
-    @Override
-    public boolean showNodes(ItemStack itemStack, EntityLivingBase entityLivingBase) {
-        return itemStack.getItem().equals(itemWardenclothHelm);
-    }
-
-    @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
-        list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + ": " + this.getVisDiscount(stack, player, (Aspect)null) + "%");
+        list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + ": "
+                + this.getVisDiscount(stack, player, (Aspect)null) + "%");
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void registerIcons(IIconRegister register) {
+        iconHelm = register.registerIcon("trevelations:armor/wardenclothhelm");
+        iconChest = register.registerIcon("trevelations:armor/wardenclothchest");
+        iconLegs = register.registerIcon("trevelations:armor/wardenclothlegs");
+        iconBoots = register.registerIcon("trevelations:armor/wardenclothboots");
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public IIcon getIconFromDamage(int par1) {
+        return this.armorType == 0 ? this.iconHelm : (this.armorType == 1 ? this.iconChest : (this.armorType == 2 ? this.iconLegs : this.iconBoots));
+    }
+
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
+        return "trevelations:textures/models/wardencloth_" + (this.armorType == 2 ? "2" : "1") + ".png";
     }
 }
