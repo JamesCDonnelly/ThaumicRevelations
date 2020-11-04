@@ -1,5 +1,7 @@
 # Thaumic Revelations
 
+![Java CI with Gradle](https://github.com/iwo-strzebonski/ThaumicRevelations/workflows/Java%20CI%20with%20Gradle/badge.svg)
+
 ## Features
 * For Wardenic Upgrades look at the [Wardenic Upgrades](Wardenic Upgrades.md) file
 
