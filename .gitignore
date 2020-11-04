@@ -32,7 +32,6 @@ out/
 \.gradle
 \.idea
 \build
-\lib
 *.iml
 *.ipr
 *.iws
