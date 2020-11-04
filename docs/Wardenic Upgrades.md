@@ -1,6 +1,6 @@
 # Rework of The Armor and The Sword
 
-### The Armor
+## The Armor
 * Excubitor:
     * ignore damage dealt by Taint, Eldritch and End mobs (only when full set is being worn)
     * return 15% of damage per Armor piece if it was dealt by Taint, Eldritch or End mobs
@@ -52,7 +52,7 @@
     * reduce speed per Armor piece
     * nullify Knockback (only when full set is being worn) - **WiP**
 
-### The Sword
+## The Sword
 * Excubitor:
     * deal additional damage to Taint, Eldritch and End mobs as Warden Damage, which is based on Armor pieces number
 * Aer:
@@ -70,7 +70,7 @@
 * Terra:
     * apply Slowness, Blindness and Mining Fatigue effects on attack, duration of these effects is based on Armor pieces number
         
-### The Bow
+## The Bow
 * Excubitor:
     * deal additional damage to Taint, Eldritch and End mobs as Warden Damage, which is based on Armor pieces number
 * Aer:
