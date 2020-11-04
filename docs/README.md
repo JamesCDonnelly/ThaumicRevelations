@@ -1,7 +1,7 @@
 # Thaumic Revelations
 
 ### Planned features
-  Look in the [Wardenic Upgrades.md](Wardenic Upgrades.md) file
+  Look in the [Wardenic Upgrades](Wardenic Upgrades.md) file
 
 ### Compiling from Sources
   Note: Git MUST be installed and in the system path to use our scripts.
@@ -21,4 +21,4 @@ Please include the following:
   * ForgeModLoader-client-0.log (the FML log) from the root folder of the client
 
 ### Licensing
-  Look In The [LICENSE.md](LICENSE.md) File;
+  Look In The [LICENSE](LICENSE.md) File;
