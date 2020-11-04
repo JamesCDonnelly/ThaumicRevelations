@@ -1,5 +1,5 @@
 /*
- * Mortvana's Master build file
+ * Team Magnequazar's Master build file
  * Based on Tinker's Construct's and Applied Energistics' build files
  */
 
@@ -29,8 +29,8 @@ apply plugin: 'forge'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-version = "0.2.4.3"
-group = "trevelations" // This is our group.
+version = "0.2.4.4"
+group = "thaumrev" // This is our group.
 // archivesBaseName = "ThaumicRevelations" // This is our actual project within the group.
 
 // Setup the forge minecraft plugin data.
@@ -104,7 +104,7 @@ jar {
     }
     // classifier = 'universal'
     // Specify which files are really included, can control which APIs should be included.
-    include "trevelations/**"
+    include "thaumrev/**"
     include "assets/**"
     include "mcmod.info"
     include "TRvLOGO.png"
@@ -157,7 +157,7 @@ processResources {
 // Create de-obfuscated development jars, because the normal output has been made to be obfuscated
 task deobfJar(type: Jar) {
     from(sourceSets.main.output) {
-        include "trevelations/**"
+        include "thaumrev/**"
         include "assets/**"
         include "mcmod.info"
     }
@@ -180,10 +180,10 @@ task sourceJar(type: Jar, dependsOn:classes) {
 // Create API library jar
 /* task apiJar(type: Jar) {
     from(sourceSets.api.java) {
-        include "trevelations/api/*"
+        include "thaumrev/api/*"
     }
     from(sourceSets.main.output) {
-        include "trevelations/api/*"
+        include "thaumrev/api/*"
     }
 
     classifier = 'api'
@@ -192,7 +192,7 @@ task sourceJar(type: Jar, dependsOn:classes) {
 // Add a javadoc jar
 /* task javadocs(type: Javadoc) {
     source = sourceSets.main.java
-    include "trevelations/api**"
+    include "thaumrev/api**"
 
     classpath = configurations.compile
 }*/
