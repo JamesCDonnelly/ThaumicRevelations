@@ -1,7 +1,7 @@
 # Thaumic Revelations
 
 ### Planned features
-  Look in the [Wardenic Upgrades](Wardenic Upgrades.md) file
+  Look in the [Wardenic Upgrades.md](Wardenic Upgrades.md) file
 
 ### Compiling from Sources
   Note: Git MUST be installed and in the system path to use our scripts.
