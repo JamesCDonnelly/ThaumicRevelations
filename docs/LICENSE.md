@@ -2,8 +2,8 @@
   Version 1, 04 November 2020
 
 ## Preamble
- * You are permitted to change **0. Definitions** Section to reflect _Your_ or _Your_ development team's name(s).
- * "Thaumic Revelations" mod is copyleft under **This License**.
+ * You are permitted to change **0. Definitions** Section to reflect _Your_ or _Your_ development team's name(s) and/or the _Mod's_ name.
+ * "_Thaumic Revelations_" mod is copyleft under **This License**.
 
 ## 0. Definitions
 * "**This License**" refers to "_What Are The Mod's Developers Even Saying License_".
