@@ -1,5 +1,5 @@
 # What Are The Mod's Developers Even Saying License
-  Version 1, 04 November 2020
+  Version 1.1, 04 November 2020
 
 ## Preamble
  * You are permitted to change **0. Definitions** Section to reflect _Your_ or _Your_ development team's name(s) and/or the _Mod's_ name.
@@ -12,7 +12,7 @@
 * The "**Repository**" refers to _Mod's_ repository on GitHub.
 * "**You**", "**Your**" refers to the End User.
 * The "**Team**", "**We**", "**Us**", "**Our**" refers to the **_Team Magnequazar_**:
-  * **Ciemny_Cygan** (current _Owner_ and _Developer_ of the _Mod_),
+  * **Your_Prosecutor**, formerly known as **Ciemny_Cygan** (current _Owner_ and _Developer_ of the _Mod_),
   * **Mortvana** (author of the _Mod_),
   * **MasterAbdoTGM50** (author of the "_Thaumic Warden_"),
   * **Drullkus** (author of the _Mod's_ old textures).
