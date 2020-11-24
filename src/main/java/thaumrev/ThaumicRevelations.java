@@ -10,6 +10,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import thaumrev.client.gui.GuiHandler;
 import thaumrev.common.CommonProxy;
+import thaumrev.util.KeyEventHandler;
 import thaumrev.util.MobDropsHandler;
 import thaumrev.util.TabThaumRev;
 import thaumrev.util.wardenic.WardenicChargeEvents;
@@ -33,6 +34,7 @@ public class ThaumicRevelations {
 		GuiHandler.init();
 
 		MobDropsHandler.init();
+		KeyEventHandler.init();
 
 		ThaumRevLibrary.tabThaumRev = new TabThaumRev(ThaumRevLibrary.MOD_ID);
 		ThaumRevBlocks.registerBlocks();
