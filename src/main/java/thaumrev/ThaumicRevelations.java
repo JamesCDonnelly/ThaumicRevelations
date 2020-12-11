@@ -8,6 +8,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+import thaumrev.client.ClientProxy;
 import thaumrev.client.gui.GuiHandler;
 import thaumrev.common.CommonProxy;
 import thaumrev.util.MobDropsHandler;
@@ -25,11 +26,14 @@ public class ThaumicRevelations {
 	@SidedProxy(
 			serverSide = "thaumrev.common.CommonProxy",
 			clientSide = "thaumrev.client.ClientProxy")
-	public static CommonProxy proxy;
+
+	public static CommonProxy commonProxy;
+	public static ClientProxy clientProxy;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		proxy.initRenderers();
+		commonProxy.initRenderers();
+		clientProxy.initRenderers();
 		GuiHandler.init();
 
 		MobDropsHandler.init();

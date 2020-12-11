@@ -1,4 +1,4 @@
-package thaumrev.client.render;
+package thaumrev.client.render.models;
 
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.entity.Render;

@@ -35,7 +35,8 @@ public class ItemCrimsonHat extends ItemArmor implements ISpecialArmor, IRepaira
     /** Overrides - void **/
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
-        list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + ": " + this.getVisDiscount(stack, player, (Aspect)null) + "%");
+        list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + ": " +
+                this.getVisDiscount(stack, player, (Aspect)null) + "%");
     }
 
     @Override
@@ -112,40 +113,40 @@ public class ItemCrimsonHat extends ItemArmor implements ISpecialArmor, IRepaira
     @SideOnly(Side.CLIENT)
     public ModelBiped getArmorModel (EntityLivingBase entityLiving, ItemStack itemstack, int armorSlot) {
 
-        ModelBiped armorModel = ClientProxy.armorModels.get(this);
+        ModelBiped model = ClientProxy.armorModels.get(this);
 
-        if (armorModel != null){
-            armorModel.bipedHead.showModel = armorSlot == 0;
-            armorModel.bipedHeadwear.showModel = false;
+        if (model != null) {
+            model.bipedHead.showModel = armorSlot == 0;
+            model.bipedHeadwear.showModel = false;
 
-            armorModel.isSneak = entityLiving.isSneaking();
-            armorModel.isRiding = entityLiving.isRiding();
-            armorModel.isChild = entityLiving.isChild();
+            model.isSneak = entityLiving.isSneaking();
+            model.isRiding = entityLiving.isRiding();
+            model.isChild = entityLiving.isChild();
 
-            armorModel.heldItemRight = 0;
-            armorModel.aimedBow = false;
+            model.heldItemRight = 0;
+            model.aimedBow = false;
 
             EntityPlayer player = (EntityPlayer)entityLiving;
 
             ItemStack held_item = player.getEquipmentInSlot(0);
 
-            if (held_item != null){
-                armorModel.heldItemRight = 1;
+            if (held_item != null) {
+                model.heldItemRight = 1;
 
                 if (player.getItemInUseCount() > 0){
 
                     EnumAction enumaction = held_item.getItemUseAction();
 
                     if (enumaction == EnumAction.bow){
-                        armorModel.aimedBow = true;
+                        model.aimedBow = true;
                     } else if (enumaction == EnumAction.block){
-                        armorModel.heldItemRight = 3;
+                        model.heldItemRight = 3;
                     }
                 }
             }
         }
 
-        return armorModel;
+        return model;
     }
 
     @Override

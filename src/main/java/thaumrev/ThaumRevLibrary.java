@@ -39,7 +39,7 @@ public class ThaumRevLibrary {
 	public static Item itemWandCore;
 
 	public static Item itemResource;
-	// public static Item itemCrimsonHat; //TODO: make model working
+	public static Item itemCrimsonHat; //TODO: make model working
 	public static Item itemWardenAmulet;
 	public static Item itemWardenWeapon;
 	public static Item itemWardenBow;
@@ -88,7 +88,7 @@ public class ThaumRevLibrary {
 	public static ShapedArcaneRecipe recipeChestCultistRobe;
 	public static ShapedArcaneRecipe recipeLegsCultistRobe;
 	public static ShapedArcaneRecipe recipeBootsCultist;
-	// public static ShapedArcaneRecipe recipeCrimsonHat;
+	public static ShapedArcaneRecipe recipeCrimsonHat;
 
 	public static ShapedArcaneRecipe recipeWardenclothChest;
 	public static ShapedArcaneRecipe recipeWardenclothLegs;
@@ -128,7 +128,7 @@ public class ThaumRevLibrary {
 
 	public static ResearchItem researchCrimsonCult;
 	public static ResearchItem researchCrimsoncloth;
-	// public static ResearchItem researchCrimsonHat;
+	public static ResearchItem researchCrimsonHat;
 
 	public static ResearchItem researchEldritch;
 	public static ResearchItem researchVoidcloth;

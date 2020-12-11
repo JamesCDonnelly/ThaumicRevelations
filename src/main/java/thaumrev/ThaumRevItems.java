@@ -7,6 +7,7 @@ import net.minecraftforge.common.util.EnumHelper;
 import thaumcraft.api.wands.StaffRod;
 import thaumcraft.api.wands.WandRod;
 import thaumrev.item.*;
+import thaumrev.item.armor.ItemCrimsonHat;
 import thaumrev.item.armor.ItemWardenArmor;
 import thaumrev.item.armor.ItemWardenclothArmor;
 import thaumrev.item.baubles.ItemLoveRing;
@@ -27,7 +28,7 @@ public class ThaumRevItems {
         GameRegistry.registerItem(itemWardenBow, "itemWardenBow");
         GameRegistry.registerItem(itemWardenAmulet, "itemWardenAmulet");
 
-        // GameRegistry.registerItem(itemCrimsonHat, "itemCrimsonHat");
+        GameRegistry.registerItem(itemCrimsonHat, "itemCrimsonHat");
 
         GameRegistry.registerItem(itemWardenHelm, "itemWardenHelm");
         GameRegistry.registerItem(itemWardenChest, "itemWardenChest");
@@ -55,7 +56,7 @@ public class ThaumRevItems {
         itemWardenBow = new ItemWardenBow();
         // itemFocusPurity = new ItemFocusPurity(); // Broken
 
-        // itemCrimsonHat = new ItemCrimsonHat();
+        itemCrimsonHat = new ItemCrimsonHat();
 
         itemWardenHelm = new ItemWardenArmor(0, "itemWardenHelm");
         itemWardenChest = new ItemWardenArmor(1, "itemWardenChest");
@@ -167,6 +168,6 @@ public class ThaumRevItems {
                 32,
                 new ResourceLocation("thaumrev", "textures/models/rod_crimsoncult_staff.png"));
         STAFF_ROD_CRIMSONCULT.setRunes(true);
-        STAFF_ROD_CRIMSONCULT.setRunes(true);
+        STAFF_ROD_CRIMSONCULT.setGlowing(true);
     }
 }

@@ -41,31 +41,31 @@ public class ThaumRevAspects {
 
 		ThaumcraftApi.registerObjectTag(
 				new ItemStack(itemResource, 0, 1),
-				new AspectList().add(Aspect.CRYSTAL, 4).add(Aspect.ELDRITCH, 4).add(EXCUBITOR, 1));
+				new AspectList().add(Aspect.CRYSTAL, 4).add(Aspect.CRYSTAL, 2).add(EXCUBITOR, 2));
 
 		ThaumcraftApi.registerObjectTag(
 				new ItemStack(itemResource, 0, 2),
-				new AspectList().add(Aspect.CRYSTAL, 4).add(Aspect.ELDRITCH, 4).add(EXCUBITOR, 1));
+				new AspectList().add(Aspect.CRYSTAL, 4).add(EXCUBITOR, 4));
 
 		ThaumcraftApi.registerObjectTag(
 				new ItemStack(itemWardenHelm),
-				new AspectList().add(Aspect.ARMOR, 4).add(Aspect.ELDRITCH, 4).add(EXCUBITOR, 1));
+				new AspectList().add(Aspect.ARMOR, 4).add(Aspect.ARMOR, 5).add(EXCUBITOR, 10));
 
 		ThaumcraftApi.registerObjectTag(
 				new ItemStack(itemWardenChest),
-				new AspectList().add(Aspect.ARMOR, 4).add(Aspect.ELDRITCH, 4).add(EXCUBITOR, 3));
+				new AspectList().add(Aspect.ARMOR, 4).add(Aspect.ELDRITCH, 15).add(EXCUBITOR, 30));
 
 		ThaumcraftApi.registerObjectTag(
 				new ItemStack(itemWardenLegs),
-				new AspectList().add(Aspect.ARMOR, 4).add(Aspect.ELDRITCH, 4).add(EXCUBITOR, 2));
+				new AspectList().add(Aspect.ARMOR, 4).add(Aspect.ELDRITCH, 10).add(EXCUBITOR, 20));
 
 		ThaumcraftApi.registerObjectTag(
 				new ItemStack(itemWardenBoots),
-				new AspectList().add(Aspect.ARMOR, 4).add(Aspect.ELDRITCH, 4).add(EXCUBITOR, 1));
+				new AspectList().add(Aspect.ARMOR, 4).add(Aspect.ELDRITCH, 5).add(EXCUBITOR, 10));
 
 		ThaumcraftApi.registerObjectTag(
 				new ItemStack(itemWardenWeapon),
-				new AspectList().add(Aspect.WEAPON, 4).add(Aspect.ELDRITCH, 4).add(EXCUBITOR, 1));
+				new AspectList().add(Aspect.WEAPON, 4).add(Aspect.WEAPON, 10).add(EXCUBITOR, 20));
 
 		ThaumcraftApi.registerObjectTag(
 				ItemApi.getItem("itemHelmetCultistRobe", 0),
