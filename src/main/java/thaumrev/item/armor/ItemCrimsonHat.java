@@ -2,12 +2,10 @@ package thaumrev.item.armor;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
@@ -19,7 +17,6 @@ import thaumcraft.api.*;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.nodes.IRevealer;
 import thaumrev.ThaumRevLibrary;
-import thaumrev.client.ClientProxy;
 
 import java.util.List;
 
@@ -109,9 +106,11 @@ public class ItemCrimsonHat extends ItemArmor implements ISpecialArmor, IRepaira
         itemIcon = register.registerIcon("thaumrev:armor/crimsonhat");
     }
 
+    /*
     @Override
     @SideOnly(Side.CLIENT)
-    public ModelBiped getArmorModel (EntityLivingBase entityLiving, ItemStack itemstack, int armorSlot) {
+    public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemstack, int armorSlot) {
+
 
         ModelBiped model = ClientProxy.armorModels.get(this);
 
@@ -148,6 +147,7 @@ public class ItemCrimsonHat extends ItemArmor implements ISpecialArmor, IRepaira
 
         return model;
     }
+    */
 
     @Override
     @SideOnly(Side.CLIENT)

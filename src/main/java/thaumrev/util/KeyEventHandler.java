@@ -31,9 +31,7 @@ public class KeyEventHandler {
     @SubscribeEvent
     public void onKeyInput(InputEvent.KeyInputEvent event) {
         if (!FMLClientHandler.instance().isGUIOpen(GuiChat.class)) {
-            if (keys[AMULET_KEY].isPressed()) {
-
-            }
+            if (keys[AMULET_KEY].isPressed()) {}
         }
     }
 }

@@ -39,7 +39,7 @@ public class ThaumRevLibrary {
 	public static Item itemWandCore;
 
 	public static Item itemResource;
-	public static Item itemCrimsonHat; //TODO: make model working
+	// public static Item itemCrimsonHat; //TODO: make model working
 	public static Item itemWardenAmulet;
 	public static Item itemWardenWeapon;
 	public static Item itemWardenBow;
@@ -74,21 +74,19 @@ public class ThaumRevLibrary {
 	public static CrucibleRecipe recipeCrimsoncloth;
 	public static CrucibleRecipe recipeVoidcloth;
 
-	// ArcaneWandRecipe
-
 	public static InfusionRecipe recipeWardenclothWand;
-	// public static ShapedArcaneRecipe recipeVoidwoodWand;
-	// public static ShapedArcaneRecipe recipeRedCrystalWand;
+	public static ShapedArcaneRecipe recipeVoidwoodWand;
+	public static ShapedArcaneRecipe recipeRedCrystalWand;
 
 	public static ShapedArcaneRecipe recipeWardenclothStaff;
-	// public static ShapedArcaneRecipe recipeVoidwoodStaff;
-	// public static ShapedArcaneRecipe recipeCrimsonCultStaff;
+	public static ShapedArcaneRecipe recipeVoidwoodStaff;
+	public static ShapedArcaneRecipe recipeCrimsonCultStaff;
 
 	public static ShapedArcaneRecipe recipeHelmetCultistRobe;
 	public static ShapedArcaneRecipe recipeChestCultistRobe;
 	public static ShapedArcaneRecipe recipeLegsCultistRobe;
 	public static ShapedArcaneRecipe recipeBootsCultist;
-	public static ShapedArcaneRecipe recipeCrimsonHat;
+	// public static ShapedArcaneRecipe recipeCrimsonHat;
 
 	public static ShapedArcaneRecipe recipeWardenclothChest;
 	public static ShapedArcaneRecipe recipeWardenclothLegs;
@@ -132,6 +130,6 @@ public class ThaumRevLibrary {
 
 	public static ResearchItem researchEldritch;
 	public static ResearchItem researchVoidcloth;
-	// public static ResearchItem researchVoidwoodWand;
-	// public static ResearchItem researchVoidwoodStaff;
+	public static ResearchItem researchVoidwoodWand;
+	public static ResearchItem researchVoidwoodStaff;
 }

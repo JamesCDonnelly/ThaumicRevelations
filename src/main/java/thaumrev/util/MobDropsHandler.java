@@ -15,13 +15,15 @@ public class MobDropsHandler {
     }
 
     @SubscribeEvent
-    public void onMobDrops(LivingDropsEvent event)
-    {
+    public void onMobDrops(LivingDropsEvent event) {
         if (event.entity instanceof EntityWolf) {
             ItemStack stack = new ItemStack(ThaumRevLibrary.itemLoveRing);
-            EntityItem drop = new EntityItem(event.entity.worldObj, event.entity.posX, event.entity.posY, event.entity.posZ, stack);
+            EntityWolf wolf = (EntityWolf) event.entity;
 
-            event.drops.add(drop);
+            if (wolf.isTamed()) {
+                EntityItem drop = new EntityItem(event.entity.worldObj, event.entity.posX, event.entity.posY, event.entity.posZ, stack);
+                event.drops.add(drop);
+            }
         }
     }
 }

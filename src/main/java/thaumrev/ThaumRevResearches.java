@@ -181,7 +181,11 @@ public class ThaumRevResearches {
         researchWaslieHammer = new ThaumRevResearchItem(
                 "WASLIEHAMMER",
                 "thaumrev",
-                new AspectList(),
+                new AspectList()
+                        .add(EXCUBITOR, 12)
+                        .add(Aspect.TOOL, 6)
+                        .add(Aspect.WEAPON, 3)
+                        .add(Aspect.ARMOR, 3),
                 -4, 3, 3,
                 new ItemStack(itemWaslieHammer))
                 .setParents("CRYSTAL", "QUARTZ")
@@ -369,6 +373,7 @@ public class ThaumRevResearches {
                 ItemApi.getItem("itemEldritchObject", 1))
                 .setSpecial()
                 .setParents("THAUMREV")
+                .setItemTriggers(ItemApi.getItem("itemEldritchObject", 1))
                 .registerResearchItem();
         researchCrimsonCult.setPages(
                 new ResearchPage("0"));
@@ -385,6 +390,7 @@ public class ThaumRevResearches {
                 ItemApi.getItem("itemEldritchObject", 0))
                 .setSpecial()
                 .setParents("THAUMREV")
+                .setItemTriggers(ItemApi.getItem("itemEldritchObject", 0))
                 .registerResearchItem();
         researchEldritch.setPages(
                 new ResearchPage("0"));

@@ -13,21 +13,22 @@ public class ModelCrimsonHat extends ModelBiped {
         this.textureWidth = 64;
         this.textureHeight = 64;
 
-        this.top = new ModelRenderer(this, 0, 44);
-        this.top.setRotationPoint(0.0F, 0.0F, 0.0F);
-        this.setRotation(top, 0.0F, 0.0F, 0.0F);
-        this.top.setTextureSize(64, 32);
-        this.top.addBox(-4.0F, -15.5F, -4.0F, 8, 7, 8, 0.0F);
-
         this.brim = new ModelRenderer(this, 0, 32);
         this.brim.setRotationPoint(0.0F, 0.0F, 0.0F);
         this.setRotation(brim, 0.0F, 0.0F, 0.0F);
         this.brim.setTextureSize(64, 32);
         this.brim.addBox(-5.0F, -8.5F, -5.0F, 10, 2, 10, 0.0F);
 
+        this.top = new ModelRenderer(this, 0, 44);
+        this.top.setRotationPoint(0.0F, 0.0F, 0.0F);
+        this.setRotation(top, 0.0F, 0.0F, 0.0F);
+        this.top.setTextureSize(64, 32);
+        this.top.addBox(-4.0F, -15.5F, -4.0F, 8, 7, 8, 0.0F);
+
         // brim.addChild(top);
-        this.bipedHead.addChild(top);
         this.bipedHead.addChild(brim);
+        this.brim.addChild(top);
+
     }
 
     @Override

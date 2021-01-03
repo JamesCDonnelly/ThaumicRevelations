@@ -45,7 +45,6 @@ public class ItemWardenArmor extends ItemArmor implements IRepairable, ISpecialA
 	public void addInformation(ItemStack armor, EntityPlayer player, List list, boolean par4) {
 		super.addInformation(armor, player, list, par4);
 
-		list.add(EnumChatFormatting.AQUA + StatCollector.translateToLocal("tooltip.wardenic.charge") + ": " + (armor.getMaxDamage() - armor.getItemDamage()) + "/" + armor.getMaxDamage());
 		list.add(EnumChatFormatting.GOLD + StatCollector.translateToLocal("tooltip.wardenic.upgrade") + ": " + WardenicChargeHelper.getUpgrade(armor).getQuote());
 
 		if (this.getVisDiscount(armor, player, Aspect.AIR) == 10) {
@@ -168,11 +167,6 @@ public class ItemWardenArmor extends ItemArmor implements IRepairable, ISpecialA
 
 	/** Overrides - int **/
 	@Override
-	public int getMaxDamage(ItemStack armor) {
-		return 50;
-	}
-
-	@Override
 	public int getArmorDisplay(EntityPlayer player, ItemStack armor, int slot) {
 		return getArmorMaterial().getDamageReductionAmount(slot);
 	}
@@ -207,11 +201,7 @@ public class ItemWardenArmor extends ItemArmor implements IRepairable, ISpecialA
 	/** Overrides - ArmorProperties **/
 	@Override
 	public ArmorProperties getProperties(EntityLivingBase player, ItemStack armor, DamageSource source, double damage, int slot) {
-		if (armor.getItemDamage() != armor.getMaxDamage()) {
-			return new ArmorProperties(0, getArmorMaterial().getDamageReductionAmount(slot) / 25D, 20);
-		} else {
-			return new ArmorProperties(0, 0, 0);
-		}
+		return new ArmorProperties(0, getArmorMaterial().getDamageReductionAmount(slot) / 25D, 20);
 	}
 
 

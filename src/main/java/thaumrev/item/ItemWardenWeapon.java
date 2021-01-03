@@ -32,7 +32,6 @@ public class ItemWardenWeapon extends ItemSword {
 	/** Overrides - void **/
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
-		list.add(EnumChatFormatting.AQUA + StatCollector.translateToLocal("tooltip.wardenic.charge") + ": " + (stack.getMaxDamage() - stack.getItemDamage()) + "/" + stack.getMaxDamage());
 		list.add(EnumChatFormatting.GOLD + StatCollector.translateToLocal("tooltip.wardenic.upgrade") + ": " + WardenicChargeHelper.getUpgrade(stack).getQuote());
 
 		super.addInformation(stack, player, list, par4);
@@ -62,19 +61,12 @@ public class ItemWardenWeapon extends ItemSword {
 			entity.attackEntityFrom(damageSource, 5);
 
 			WardenicChargeHelper.getUpgrade(stack).onAttack(stack, player, entity);
-
-			stack.setItemDamage(stack.getItemDamage() + 1);
 		}
 		return super.onLeftClickEntity(stack, player, entity);
 	}
 
 
 	/** Overrides - int **/
-	@Override
-	public int getMaxDamage(ItemStack stack) {
-		return 50;
-	}
-
 	@Override
 	public int getMaxItemUseDuration(ItemStack par1ItemStack) {
 		return 72000;

@@ -100,14 +100,11 @@ public class ItemWardenBow extends ItemBow {
             if (!world.isRemote) {
                 world.spawnEntityInWorld(entityArrow);
             }
-
-            stack.setItemDamage(stack.getItemDamage() + 1);
         }
     }
 
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
-        list.add(EnumChatFormatting.AQUA + StatCollector.translateToLocal("tooltip.wardenic.charge") + ": " + (stack.getMaxDamage() - stack.getItemDamage()) + "/" + stack.getMaxDamage());
         list.add(EnumChatFormatting.GOLD + StatCollector.translateToLocal("tooltip.wardenic.upgrade") + ": " + WardenicChargeHelper.getUpgrade(stack).getQuote());
 
         super.addInformation(stack, player, list, par4);
@@ -132,11 +129,6 @@ public class ItemWardenBow extends ItemBow {
 
 
     /** Overrides - int **/
-    @Override
-    public int getMaxDamage(ItemStack stack) {
-        return 50;
-    }
-
     @Override
     public int getMaxItemUseDuration(ItemStack par1ItemStack) {
         return 72000;
