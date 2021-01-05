@@ -204,12 +204,12 @@ task sourceJar(type: Jar, dependsOn:classes) {
     classifier = 'javadoc'
 }*/
 
-artifacts {
+/*artifacts {
     archives deobfJar
     archives sourceJar
     // archives javadocJar
     // archives apiJar
-}
+}*/
 
 configurations {
     mods
