@@ -24,8 +24,9 @@ public class ThaumicRevelations {
 	public static ThaumicRevelations instance;
 
 	@SidedProxy(
-			serverSide = "thaumrev.common.CommonProxy",
-			clientSide = "thaumrev.client.ClientProxy")
+		serverSide = "thaumrev.common.CommonProxy",
+		clientSide = "thaumrev.client.ClientProxy"
+	)
 
 	public static CommonProxy commonProxy;
 	// public static ClientProxy clientProxy;
@@ -37,7 +38,7 @@ public class ThaumicRevelations {
 		GuiHandler.init();
 
 		MobDropsHandler.init();
-		KeyEventHandler.init();
+		// KeyEventHandler.init();
 
 		ThaumRevLibrary.tabThaumRev = new TabThaumRev(ThaumRevLibrary.MOD_ID);
 		ThaumRevBlocks.registerBlocks();
