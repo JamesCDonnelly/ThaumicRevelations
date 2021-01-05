@@ -155,6 +155,7 @@ processResources {
 }
 
 // Create de-obfuscated development jars, because the normal output has been made to be obfuscated
+/*
 task deobfJar(type: Jar) {
     from(sourceSets.main.output) {
         include "thaumrev/**"
@@ -175,6 +176,7 @@ task sourceJar(type: Jar, dependsOn:classes) {
     from sourceSets.main.allSource
     classifier = 'src'
 }
+*/
 
 // No APIs... Yet...
 // Create API library jar
