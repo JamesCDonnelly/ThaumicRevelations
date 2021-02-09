@@ -178,6 +178,29 @@ public class ThaumRevResearches {
                 new ResearchPage("0"),
                 new ResearchPage(recipeWardenWeapon));
 
+        researchWardenBow = new ThaumRevResearchItem(
+                "WARDENBOW",
+                "thaumrev",
+                new AspectList()
+                        .add(EXCUBITOR, 6)
+                        .add(Aspect.WEAPON, 6)
+                        .add(Aspect.AIR, 2)
+                        .add(Aspect.EARTH, 2)
+                        .add(Aspect.ENTROPY, 2)
+                        .add(Aspect.FIRE, 2)
+                        .add(Aspect.ORDER, 2)
+                        .add(Aspect.WATER, 2),
+                -2, 3, 3,
+                new ItemStack(itemWardenBow))
+                .setConcealed()
+                .setParents("WASLIEHAMMER")
+                .setRound()
+                .setSpecial()
+                .registerResearchItem();
+        researchWardenBow.setPages(
+                new ResearchPage("0"),
+                new ResearchPage(recipeWardenBow));
+
         researchWaslieHammer = new ThaumRevResearchItem(
                 "WASLIEHAMMER",
                 "thaumrev",

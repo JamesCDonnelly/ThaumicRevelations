@@ -16,6 +16,8 @@ import thaumrev.ThaumRevLibrary;
 
 import java.util.Random;
 
+import static thaumrev.Config.roseGrowthDivider;
+
 public class BlockExcubitura extends BlockBush implements IGrowable {
 
 	public BlockExcubitura() {
@@ -34,6 +36,7 @@ public class BlockExcubitura extends BlockBush implements IGrowable {
 		if (growStage > 15) {
 			growStage = 15;
 		}
+
 		world.setBlockMetadataWithNotify(x, y, z, growStage, 2);
 	}
 
@@ -47,11 +50,16 @@ public class BlockExcubitura extends BlockBush implements IGrowable {
 	@Override
 	public void updateTick(World world, int x, int y, int z, Random random) {
 		super.updateTick(world, x, y, z, random);
-		int growStage = world.getBlockMetadata(x, y, z) + 1;
+		int growStage = world.getBlockMetadata(x, y, z);
+
+		if (MathHelper.getRandomIntegerInRange(random, 1, roseGrowthDivider) == 1) {
+			growStage += 1;
+		}
 
 		if (growStage > 15) {
 			growStage = 15;
 		}
+
 		world.setBlockMetadataWithNotify(x, y, z, growStage, 2);
 	}
 

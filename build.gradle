@@ -15,7 +15,6 @@ buildscript {
             name = "sonatype"
             url = "https://oss.sonatype.org/content/repositories/snapshots/"
         }
-
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
@@ -29,7 +28,7 @@ apply plugin: 'forge'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-version = "0.2.4.5"
+version = "0.2.5.0"
 group = "thaumrev" // This is our group.
 // archivesBaseName = "ThaumicRevelations" // This is our actual project within the group.
 
@@ -42,18 +41,18 @@ minecraft {
 
 repositories {
     maven {
-        name = "ChickenBones's Maven Fileserver"
-        url = "http://chickenbones.net/maven/"
-    }
-    maven {
         name = "Forge Maven Fileserver"
         url = "http://files.minecraftforge.net/maven"
+    }
+    /*
+    maven {
+        name = "ChickenBones's Maven Fileserver"
+        url = "http://chickenbones.net/maven/"
     }
     maven {
         name = "Professor Mobius's Maven Fileserver"
         url = "http://mobiusstrip.eu/maven"
     }
-    /*
     maven {
         name = "ProgWML6's Maven Fileserver"
         url = "http://dvs1.progwml6.com/files/maven"
@@ -219,11 +218,11 @@ configurations {
 }
 
 dependencies {
-    compile "mcp.mobius.waila:Waila:1.5.10_1.7.10:dev" // exclude group: 'mcp.mobius.waila'
-    compile "codechicken:CodeChickenLib:1.7.10-1.1.3.140:dev"
-    compile "codechicken:CodeChickenCore:1.7.10-1.0.7.47:dev"
-    compile "codechicken:NotEnoughItems:1.7.10-1.0.5.120:dev"
-    compile "codechicken:ForgeMultipart:1.7.10-1.2.0.345:dev"
+    // compile "mcp.mobius.waila:Waila:1.5.10_1.7.10:dev" // exclude group: 'mcp.mobius.waila'
+    // compile "codechicken:CodeChickenLib:1.7.10-1.1.3.140:dev"
+    // compile "codechicken:CodeChickenCore:1.7.10-1.0.7.47:dev"
+    // compile "codechicken:NotEnoughItems:1.7.10-1.0.5.120:dev"
+    // compile "codechicken:ForgeMultipart:1.7.10-1.2.0.345:dev"
 
     // compile "mantle:Mantle:1.7.10-0.3.2.jenkins191:deobf" // Anything above this and mappings change
     // compile "tconstruct:TConstruct:1.7.10-1.8.8.build990:deobf"

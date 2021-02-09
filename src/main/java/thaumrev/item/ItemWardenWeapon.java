@@ -56,12 +56,11 @@ public class ItemWardenWeapon extends ItemSword {
 
 	@Override
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
-		if (stack.getItemDamage() != stack.getMaxDamage()) {
-			DamageSource damageSource = new DamageSourceWarden("warden", player);
-			entity.attackEntityFrom(damageSource, 5);
+		DamageSource damageSource = new DamageSourceWarden("warden", player);
+		entity.attackEntityFrom(damageSource, 5);
+		WardenicChargeHelper.getUpgrade(stack).onAttack(stack, player, entity);
+		stack.setItemDamage(0);
 
-			WardenicChargeHelper.getUpgrade(stack).onAttack(stack, player, entity);
-		}
 		return super.onLeftClickEntity(stack, player, entity);
 	}
 

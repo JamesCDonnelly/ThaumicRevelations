@@ -29,10 +29,11 @@ public class ItemExcubituraSeeds extends ItemSeeds implements IPlantable {
     public boolean onItemUse(ItemStack stack, EntityPlayer player,
                              World world, int x, int y, int z, int par7, float hitX,
                              float hitY, float hitZ) {
-        // not sure what this parameter does, copied it from potato
+
         if (par7 != 1) {
             return false;
         }
+
         else if (player.canPlayerEdit(x, y + 1, z, par7, stack)) {
             if (world.getBlock(x, y, z).canSustainPlant(world,
                     x, y, z, ForgeDirection.UP, this) && world

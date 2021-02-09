@@ -77,30 +77,28 @@ public class ItemWardenBow extends ItemBow {
             entityArrow.setIsCritical(true);
         }
 
-        if (stack.getItemDamage() != stack.getMaxDamage()) {
+        world.playSoundAtEntity(player, "random.bow", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
 
-            stack.damageItem(1, player);
-            world.playSoundAtEntity(player, "random.bow", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+        entityArrow.canBePickedUp = 2;
 
-            entityArrow.canBePickedUp = 2;
+        NBTTagCompound tag = entityArrow.getEntityData();
+        tag.setBoolean("WardenArrow", true);
 
-            NBTTagCompound tag = entityArrow.getEntityData();
-            tag.setBoolean("WardenArrow", true);
-
-            if (entityArrow.getIsCritical()) {
-                if (WardenicChargeHelper.getUpgrade(player.getEquipmentInSlot(0)).getUpgradeAspect()
-                        .equals(Aspect.AIR.getName())) {
-                    entityArrow.setDamage(3 * (air + 2));
-                } else if (WardenicChargeHelper.getUpgrade(player.getEquipmentInSlot(0)).getUpgradeAspect()
-                        .equals(Aspect.ENTROPY.getName())) {
-                    entityArrow.setDamage(0);
-                }
-            }
-
-            if (!world.isRemote) {
-                world.spawnEntityInWorld(entityArrow);
+        if (entityArrow.getIsCritical()) {
+            if (WardenicChargeHelper.getUpgrade(player.getEquipmentInSlot(0)).getUpgradeAspect()
+                    .equals(Aspect.AIR.getName())) {
+                entityArrow.setDamage(3 * (air + 2));
+            } else if (WardenicChargeHelper.getUpgrade(player.getEquipmentInSlot(0)).getUpgradeAspect()
+                    .equals(Aspect.ENTROPY.getName())) {
+                entityArrow.setDamage(0);
             }
         }
+
+        if (!world.isRemote) {
+            world.spawnEntityInWorld(entityArrow);
+        }
+
+        stack.setItemDamage(0);
     }
 
     @Override
@@ -140,6 +138,7 @@ public class ItemWardenBow extends ItemBow {
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
         ArrowNockEvent event = new ArrowNockEvent(player, stack);
         MinecraftForge.EVENT_BUS.post(event);
+
         if (event.isCanceled()) {
             return event.result;
         }

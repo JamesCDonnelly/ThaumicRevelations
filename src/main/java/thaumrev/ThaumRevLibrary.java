@@ -98,6 +98,7 @@ public class ThaumRevLibrary {
 	public static ShapedArcaneRecipe recipeWardenBoots;
 
 	public static ShapedArcaneRecipe recipeWardenWeapon;
+	public static ShapedArcaneRecipe recipeWardenBow;
 	public static ShapedArcaneRecipe recipeWaslieHammer;
 	public static ShapedArcaneRecipe recipeFocusIllumination;
 
@@ -123,6 +124,7 @@ public class ThaumRevLibrary {
 	public static ResearchItem researchWaslieHammer;
 	public static ResearchItem researchWardenArmor;
 	public static ResearchItem researchWardenWeapon;
+	public static ResearchItem researchWardenBow;
 
 	public static ResearchItem researchCrimsonCult;
 	public static ResearchItem researchCrimsoncloth;

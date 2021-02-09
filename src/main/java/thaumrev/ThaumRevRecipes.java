@@ -248,6 +248,21 @@ public class ThaumRevRecipes {
                 'X', new ItemStack(itemResource, 1, 2),
                 'O', new ItemStack(itemResource, 1, 1));
 
+        recipeWardenBow = ThaumcraftApi.addArcaneCraftingRecipe(
+                "WARDENWEAPON",
+                new ItemStack(itemWardenBow, 1),
+                new AspectList()
+                        .add(Aspect.ORDER, 125)
+                        .add(Aspect.ENTROPY, 125)
+                        .add(Aspect.AIR, 125)
+                        .add(Aspect.EARTH, 125)
+                        .add(Aspect.FIRE, 125)
+                        .add(Aspect.WATER, 125),
+                " XO", "Y O", " XO",
+                'X', new ItemStack(itemResource, 1, 2),
+                'O', new ItemStack(Items.string, 1),
+                'Y', new ItemStack(itemResource, 1, 1));
+
         recipeWaslieHammer = ThaumcraftApi.addArcaneCraftingRecipe(
                 "WASLIEHAMMER",
                 new ItemStack(itemWaslieHammer, 1),
