@@ -115,7 +115,7 @@ public class WardenicUpgradeEntropy extends WardenicUpgrade {
 				Thaumcraft.addWarpToPlayer(player, 1, true);
 			}
 
-			float damage = event.ammount * (random.nextInt((count + 1)));
+			float damage = event.ammount * (random.nextInt((count + 1))) / 4;
 
 			if (event.source.getSourceOfDamage() != null) {
 				Entity sourceEntity = event.source.getEntity();
