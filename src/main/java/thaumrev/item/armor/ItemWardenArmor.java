@@ -21,7 +21,6 @@ import thaumcraft.api.IVisDiscountGear;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.nodes.IRevealer;
 import thaumcraft.common.Thaumcraft;
-import thaumcraft.common.items.armor.Hover;
 import thaumrev.ThaumRevLibrary;
 import thaumrev.util.wardenic.WardenicChargeHelper;
 
@@ -45,22 +44,30 @@ public class ItemWardenArmor extends ItemArmor implements IRepairable, ISpecialA
 	public void addInformation(ItemStack armor, EntityPlayer player, List list, boolean par4) {
 		super.addInformation(armor, player, list, par4);
 
-		list.add(EnumChatFormatting.GOLD + StatCollector.translateToLocal("tooltip.wardenic.upgrade") + ": " + WardenicChargeHelper.getUpgrade(armor).getQuote());
+		list.add(EnumChatFormatting.GOLD + StatCollector.translateToLocal("tooltip.wardenic.upgrade") +
+				": " + WardenicChargeHelper.getUpgrade(armor).getQuote());
 
 		if (this.getVisDiscount(armor, player, Aspect.AIR) == 10) {
-			list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + " (Aer): " + this.getVisDiscount(armor, player, Aspect.AIR) + "%");
+			list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") +
+					" (Aer): " + this.getVisDiscount(armor, player, Aspect.AIR) + "%");
 		} else if (this.getVisDiscount(armor, player, Aspect.WATER) == 10) {
-			list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + " (Aqua): " + this.getVisDiscount(armor, player, Aspect.WATER) + "%");
+			list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") +
+					" (Aqua): " + this.getVisDiscount(armor, player, Aspect.WATER) + "%");
 		} else if (this.getVisDiscount(armor, player, Aspect.FIRE) == 10) {
-			list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + " (Ignis): " + this.getVisDiscount(armor, player, Aspect.FIRE) + "%");
+			list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") +
+					" (Ignis): " + this.getVisDiscount(armor, player, Aspect.FIRE) + "%");
 		} else if (this.getVisDiscount(armor, player, Aspect.ORDER) == 10) {
-			list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + " (Ordo): " + this.getVisDiscount(armor, player, Aspect.ORDER) + "%");
+			list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") +
+					" (Ordo): " + this.getVisDiscount(armor, player, Aspect.ORDER) + "%");
 		} else if (this.getVisDiscount(armor, player, Aspect.ENTROPY) == 10) {
-			list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + " (Perditio): " + this.getVisDiscount(armor, player, Aspect.ENTROPY) + "%");
+			list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") +
+					" (Perditio): " + this.getVisDiscount(armor, player, Aspect.ENTROPY) + "%");
 		} else if (this.getVisDiscount(armor, player, Aspect.EARTH) == 10) {
-			list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + " (Terra): " + this.getVisDiscount(armor, player, Aspect.EARTH) + "%");
+			list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") +
+					" (Terra): " + this.getVisDiscount(armor, player, Aspect.EARTH) + "%");
 		} else {
-			list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + ": " + this.getVisDiscount(armor, player, null) + "%");
+			list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") +
+					": " + this.getVisDiscount(armor, player, null) + "%");
 		}
 	}
 
@@ -116,18 +123,21 @@ public class ItemWardenArmor extends ItemArmor implements IRepairable, ISpecialA
 				player.stepHeight = 1.0F;
 			}
 
-			if (player.onGround) {
-				if (player.isInWater()) {
-					player.moveFlying(0.0F, 1.0F, water * 0.025F);
-				} else {
-					player.moveFlying(0.0F, 1.0F, air * 0.010F - earth * 0.005F);
-				}
-			} else if (Hover.getHover(player.getEntityId())) {
+			if (player.isInWater()) {
+				player.moveFlying(0.0F, 1.0F, water * 0.0025F);
+			} else {
+				player.moveFlying(0.0F, 1.0F, air * 0.001F - earth * 0.0005F);
+			}
+			player.jumpMovementFactor = 0.02F + 0.005F * air;
+
+			/*
+			if (Hover.getHover(player.getEntityId())) {
 				player.jumpMovementFactor = 0.02F + 0.0025F * air;
 			}
 			else {
 				player.jumpMovementFactor = 0.02F + 0.005F * air;
 			}
+			*/
 		}
 
 		player.fallDistance *= 1.0F - (float)air / 4;

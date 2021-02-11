@@ -32,7 +32,8 @@ public class ItemWardenWeapon extends ItemSword {
 	/** Overrides - void **/
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
-		list.add(EnumChatFormatting.GOLD + StatCollector.translateToLocal("tooltip.wardenic.upgrade") + ": " + WardenicChargeHelper.getUpgrade(stack).getQuote());
+		list.add(EnumChatFormatting.GOLD + StatCollector.translateToLocal("tooltip.wardenic.upgrade") +
+				": " + WardenicChargeHelper.getUpgrade(stack).getQuote());
 
 		super.addInformation(stack, player, list, par4);
 	}
@@ -56,9 +57,11 @@ public class ItemWardenWeapon extends ItemSword {
 
 	@Override
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
-		DamageSource damageSource = new DamageSourceWarden("warden", player);
-		entity.attackEntityFrom(damageSource, 5);
-		WardenicChargeHelper.getUpgrade(stack).onAttack(stack, player, entity);
+		try {
+			DamageSource damageSource = new DamageSourceWarden("warden", player);
+			entity.attackEntityFrom(damageSource, 5);
+			WardenicChargeHelper.getUpgrade(stack).onAttack(stack, player, entity);
+		} catch(Exception ignored) {}
 		stack.setItemDamage(0);
 
 		return super.onLeftClickEntity(stack, player, entity);

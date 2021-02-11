@@ -5,6 +5,8 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import thaumcraft.api.aspects.Aspect;
@@ -42,12 +44,11 @@ public class WardenicUpgradeEntropy extends WardenicUpgrade {
 			}
 		}
 
+		float damage = random.nextInt(20) <= (count + 1) ? entityLivingBase.getMaxHealth() : 0;
+
 		if (entityArrow.getIsCritical()) {
 			entityArrow.setDamage(0);
-			entityLivingBase.attackEntityFrom(damageSource,
-					random.nextInt(20) <= 2 * (count + 1) ?
-							entityLivingBase.getMaxHealth() :
-							(random.nextInt(4) + 1) * (count + 1));
+			entityLivingBase.attackEntityFrom(damageSource, damage);
 		}
 	}
 
@@ -66,7 +67,6 @@ public class WardenicUpgradeEntropy extends WardenicUpgrade {
 		}
 
 		EntityLivingBase entityLivingBase = (EntityLivingBase)entity;
-
 		DamageSource damageSource = new DamageSourceWarden("warden", player);
 
 		if (count < 4) {
@@ -76,6 +76,9 @@ public class WardenicUpgradeEntropy extends WardenicUpgrade {
 			} else {
 				entity.attackEntityFrom(damageSource,
 						(random.nextInt(4) + 1) * (count + 1));
+				entityLivingBase.addPotionEffect(new PotionEffect(Potion.wither.getId(), 20 * count, count));
+
+				if (entity instanceof EntityPlayer) Thaumcraft.addWarpToPlayer((EntityPlayer)entity, count, true);
 			}
 		} else {
 			if (random.nextInt(10) == 0) {
@@ -83,7 +86,10 @@ public class WardenicUpgradeEntropy extends WardenicUpgrade {
 						entityLivingBase.getMaxHealth());
 			} else {
 				entity.attackEntityFrom(damageSource,
-						(random.nextInt(4) + 1) * (count + 1));
+						(random.nextInt(4) + 1) * 5);
+				entityLivingBase.addPotionEffect(new PotionEffect(Potion.wither.getId(), 80, 4));
+
+				if (entity instanceof EntityPlayer) Thaumcraft.addWarpToPlayer((EntityPlayer)entity, 4, false);
 			}
 		}
 	}
@@ -109,13 +115,15 @@ public class WardenicUpgradeEntropy extends WardenicUpgrade {
 				Thaumcraft.addWarpToPlayer(player, 1, true);
 			}
 
+			float damage = event.ammount * (random.nextInt((count + 1)));
+
 			if (event.source.getSourceOfDamage() != null) {
 				Entity sourceEntity = event.source.getEntity();
 				DamageSource damageSource = new DamageSourceWarden("warden", player);
-				sourceEntity.attackEntityFrom(damageSource, event.ammount * (random.nextInt(4) * (count + 1)) / 4F);
+				sourceEntity.attackEntityFrom(damageSource, damage);
 			}
 
-			event.ammount *= 1 + random.nextFloat() * (count + 1) / 12F;
+			event.ammount = damage;
 		}
 	}
 }

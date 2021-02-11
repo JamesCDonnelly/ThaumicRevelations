@@ -77,22 +77,25 @@ public class ItemWardenBow extends ItemBow {
             entityArrow.setIsCritical(true);
         }
 
-        world.playSoundAtEntity(player, "random.bow", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+        world.playSoundAtEntity(player, "random.bow", 1.0F, 1.0F /
+                (itemRand.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
 
         entityArrow.canBePickedUp = 2;
 
         NBTTagCompound tag = entityArrow.getEntityData();
         tag.setBoolean("WardenArrow", true);
 
-        if (entityArrow.getIsCritical()) {
-            if (WardenicChargeHelper.getUpgrade(player.getEquipmentInSlot(0)).getUpgradeAspect()
-                    .equals(Aspect.AIR.getName())) {
-                entityArrow.setDamage(3 * (air + 2));
-            } else if (WardenicChargeHelper.getUpgrade(player.getEquipmentInSlot(0)).getUpgradeAspect()
-                    .equals(Aspect.ENTROPY.getName())) {
-                entityArrow.setDamage(0);
+        try {
+            if (entityArrow.getIsCritical()) {
+                if (WardenicChargeHelper.getUpgrade(player.getEquipmentInSlot(0)).getUpgradeAspect()
+                        .equals(Aspect.AIR.getName())) {
+                    entityArrow.setDamage(3 * (air + 2));
+                } else if (WardenicChargeHelper.getUpgrade(player.getEquipmentInSlot(0)).getUpgradeAspect()
+                        .equals(Aspect.ENTROPY.getName())) {
+                    entityArrow.setDamage(0);
+                }
             }
-        }
+        } catch (Exception ignored) {}
 
         if (!world.isRemote) {
             world.spawnEntityInWorld(entityArrow);
@@ -103,7 +106,8 @@ public class ItemWardenBow extends ItemBow {
 
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
-        list.add(EnumChatFormatting.GOLD + StatCollector.translateToLocal("tooltip.wardenic.upgrade") + ": " + WardenicChargeHelper.getUpgrade(stack).getQuote());
+        list.add(EnumChatFormatting.GOLD + StatCollector.translateToLocal("tooltip.wardenic.upgrade") +
+                ": " + WardenicChargeHelper.getUpgrade(stack).getQuote());
 
         super.addInformation(stack, player, list, par4);
     }

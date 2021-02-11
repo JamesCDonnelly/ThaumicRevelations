@@ -28,7 +28,7 @@ apply plugin: 'forge'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-version = "0.2.5.0"
+version = "0.2.5.1"
 group = "thaumrev" // This is our group.
 // archivesBaseName = "ThaumicRevelations" // This is our actual project within the group.
 
