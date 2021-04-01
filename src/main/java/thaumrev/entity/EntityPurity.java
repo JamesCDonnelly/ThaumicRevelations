@@ -15,6 +15,7 @@ public class EntityPurity extends EntityThrowable {
 
 	public EntityPurity(World world, EntityLivingBase entity) {
 		super(world, entity);
+		this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, this.func_70182_d(), 1.0F);
 	}
 
 	public EntityPurity(World world, double x, double y, double z) {

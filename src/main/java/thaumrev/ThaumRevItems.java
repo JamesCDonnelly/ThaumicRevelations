@@ -12,6 +12,7 @@ import thaumrev.item.armor.ItemWardenclothArmor;
 import thaumrev.item.baubles.ItemLoveRing;
 import thaumrev.item.baubles.ItemWardenAmulet;
 import thaumrev.item.focus.ItemFocusIllumination;
+import thaumrev.item.focus.ItemFocusPurity;
 import thaumrev.item.wands.ItemWandCore;
 
 import static thaumrev.ThaumRevLibrary.*;
@@ -41,7 +42,7 @@ public class ThaumRevItems {
         GameRegistry.registerItem(itemLoveRing, "itemLoveRing");
         GameRegistry.registerItem(itemWaslieHammer, "itemWaslieHammer");
         GameRegistry.registerItem(itemFocusIllumination, "itemFocusIllumination");
-        // GameRegistry.registerItem(itemFocusPurity, "itemFocusPurity"); // Broken
+        GameRegistry.registerItem(itemFocusPurity, "itemFocusPurity"); // Broken
 
         GameRegistry.registerItem(itemExcubituraSeeds, "itemExcubituraSeeds");
 
@@ -53,7 +54,7 @@ public class ThaumRevItems {
         itemWardenAmulet = new ItemWardenAmulet();
         itemWardenWeapon = new ItemWardenWeapon();
         itemWardenBow = new ItemWardenBow();
-        // itemFocusPurity = new ItemFocusPurity(); // Broken
+        itemFocusPurity = new ItemFocusPurity(); // Broken
 
         // itemCrimsonHat = new ItemCrimsonHat();
 

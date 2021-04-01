@@ -43,7 +43,7 @@ public class ThaumRevLibrary {
 	public static Item itemWardenAmulet;
 	public static Item itemWardenWeapon;
 	public static Item itemWardenBow;
-	// public static Item itemFocusPurity; //TODO: make it working
+	public static Item itemFocusPurity; //TODO: make it working
 
 	public static Item itemWardenclothChest;
 	public static Item itemWardenclothLegs;
