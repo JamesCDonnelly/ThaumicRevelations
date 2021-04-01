@@ -2,6 +2,7 @@ package thaumrev.item.armor;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -17,10 +18,13 @@ import thaumcraft.api.*;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.nodes.IRevealer;
 import thaumrev.ThaumRevLibrary;
+import thaumrev.client.render.models.ModelCrimsonHat;
 
 import java.util.List;
 
 public class ItemCrimsonHat extends ItemArmor implements ISpecialArmor, IRepairable, IRevealer, IGoggles, IRunicArmor, IVisDiscountGear, IWarpingGear {
+
+    ModelBiped model = null;
 
     public ItemCrimsonHat() {
         super(ThaumRevLibrary.armorMaterialCrimsoncloth, 1, 0);
@@ -106,13 +110,18 @@ public class ItemCrimsonHat extends ItemArmor implements ISpecialArmor, IRepaira
         itemIcon = register.registerIcon("thaumrev:armor/crimsonhat");
     }
 
-    /*
+
     @Override
     @SideOnly(Side.CLIENT)
     public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemstack, int armorSlot) {
 
+        if(this.model == null) {
+            this.model = new ModelCrimsonHat();
+        }
 
-        ModelBiped model = ClientProxy.armorModels.get(this);
+        return this.model;
+
+        /*ModelBiped model = ClientProxy.armorModels.get(this);
 
         if (model != null) {
             model.bipedHead.showModel = armorSlot == 0;
@@ -145,9 +154,9 @@ public class ItemCrimsonHat extends ItemArmor implements ISpecialArmor, IRepaira
             }
         }
 
-        return model;
+        return model;*/
     }
-    */
+
 
     @Override
     @SideOnly(Side.CLIENT)

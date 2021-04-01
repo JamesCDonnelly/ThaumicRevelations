@@ -7,6 +7,7 @@ import net.minecraftforge.common.util.EnumHelper;
 import thaumcraft.api.wands.StaffRod;
 import thaumcraft.api.wands.WandRod;
 import thaumrev.item.*;
+import thaumrev.item.armor.ItemCrimsonHat;
 import thaumrev.item.armor.ItemWardenArmor;
 import thaumrev.item.armor.ItemWardenclothArmor;
 import thaumrev.item.baubles.ItemLoveRing;
@@ -28,7 +29,7 @@ public class ThaumRevItems {
         GameRegistry.registerItem(itemWardenBow, "itemWardenBow");
         GameRegistry.registerItem(itemWardenAmulet, "itemWardenAmulet");
 
-        // GameRegistry.registerItem(itemCrimsonHat, "itemCrimsonHat");
+        GameRegistry.registerItem(itemCrimsonHat, "itemCrimsonHat");
 
         GameRegistry.registerItem(itemWardenHelm, "itemWardenHelm");
         GameRegistry.registerItem(itemWardenChest, "itemWardenChest");
@@ -42,7 +43,7 @@ public class ThaumRevItems {
         GameRegistry.registerItem(itemLoveRing, "itemLoveRing");
         GameRegistry.registerItem(itemWaslieHammer, "itemWaslieHammer");
         GameRegistry.registerItem(itemFocusIllumination, "itemFocusIllumination");
-        GameRegistry.registerItem(itemFocusPurity, "itemFocusPurity"); // Broken
+        GameRegistry.registerItem(itemFocusPurity, "itemFocusPurity");
 
         GameRegistry.registerItem(itemExcubituraSeeds, "itemExcubituraSeeds");
 
@@ -54,9 +55,9 @@ public class ThaumRevItems {
         itemWardenAmulet = new ItemWardenAmulet();
         itemWardenWeapon = new ItemWardenWeapon();
         itemWardenBow = new ItemWardenBow();
-        itemFocusPurity = new ItemFocusPurity(); // Broken
+        itemFocusPurity = new ItemFocusPurity();
 
-        // itemCrimsonHat = new ItemCrimsonHat();
+        itemCrimsonHat = new ItemCrimsonHat();
 
         itemWardenHelm = new ItemWardenArmor(0, "itemWardenHelm");
         itemWardenChest = new ItemWardenArmor(1, "itemWardenChest");
