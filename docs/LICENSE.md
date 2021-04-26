@@ -12,8 +12,8 @@
 * The "**Repository**" refers to _Mod's_ repository on GitHub.
 * "**You**", "**Your**" refers to the End User.
 * The "**Team**", "**We**", "**Us**", "**Our**" refers to the **_Team Magnequazar_**:
-  * **Your_Prosecutor**, formerly known as **Ciemny_Cygan** (current _Owner_ and _Developer_ of the _Mod_),
-  * **Mortvana** (author of the _Mod_),
+  * **Octoturge** (current _Owner_ and _Developer_ of the _Mod_),
+  * **SisterJacq** (author of the _Mod_),
   * **MasterAbdoTGM50** (author of the "_Thaumic Warden_"),
   * **Drullkus** (author of the _Mod's_ old textures).
 * The "**Modpack**" refers to any modpack which contains the _Mod_.
