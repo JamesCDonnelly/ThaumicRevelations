@@ -18,7 +18,7 @@ import thaumcraft.api.*;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.nodes.IRevealer;
 import thaumrev.ThaumRevLibrary;
-import thaumrev.client.render.models.ModelCrimsonHat;
+import thaumrev.client.renderers.ModelCrimsonHat;
 
 import java.util.List;
 
@@ -37,7 +37,7 @@ public class ItemCrimsonHat extends ItemArmor implements ISpecialArmor, IRepaira
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
         list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + ": " +
-                this.getVisDiscount(stack, player, (Aspect)null) + "%");
+                this.getVisDiscount(stack, player, null) + "%");
     }
 
     @Override
@@ -120,41 +120,6 @@ public class ItemCrimsonHat extends ItemArmor implements ISpecialArmor, IRepaira
         }
 
         return this.model;
-
-        /*ModelBiped model = ClientProxy.armorModels.get(this);
-
-        if (model != null) {
-            model.bipedHead.showModel = armorSlot == 0;
-            model.bipedHeadwear.showModel = false;
-
-            model.isSneak = entityLiving.isSneaking();
-            model.isRiding = entityLiving.isRiding();
-            model.isChild = entityLiving.isChild();
-
-            model.heldItemRight = 0;
-            model.aimedBow = false;
-
-            EntityPlayer player = (EntityPlayer)entityLiving;
-
-            ItemStack held_item = player.getEquipmentInSlot(0);
-
-            if (held_item != null) {
-                model.heldItemRight = 1;
-
-                if (player.getItemInUseCount() > 0){
-
-                    EnumAction enumaction = held_item.getItemUseAction();
-
-                    if (enumaction == EnumAction.bow){
-                        model.aimedBow = true;
-                    } else if (enumaction == EnumAction.block){
-                        model.heldItemRight = 3;
-                    }
-                }
-            }
-        }
-
-        return model;*/
     }
 
 

@@ -1,8 +1,6 @@
 package thaumrev.util.wardenic.upgrade;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.boss.EntityDragon;
-import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.ItemStack;
@@ -11,32 +9,17 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import thaumcraft.api.aspects.Aspect;
-import thaumcraft.api.entities.ITaintedMob;
 import thaumcraft.common.config.Config;
-import thaumcraft.common.entities.monster.EntityEldritchCrab;
-import thaumcraft.common.entities.monster.EntityEldritchGuardian;
-import thaumcraft.common.entities.monster.EntityInhabitedZombie;
-import thaumcraft.common.entities.monster.boss.EntityEldritchGolem;
-import thaumcraft.common.entities.monster.boss.EntityEldritchWarden;
 import thaumrev.ThaumRevLibrary;
 import thaumrev.util.DamageSourceWarden;
 import thaumrev.util.wardenic.WardenicChargeHelper;
+
+import static thaumrev.util.PurityHelper.isEldritchOrTainted;
 
 public class WardenicUpgradeWarden extends WardenicUpgrade {
 
 	public WardenicUpgradeWarden(Aspect aspect) {
 		super(aspect);
-	}
-
-	private boolean isEldritchOrTainted(Entity entity) {
-		return entity instanceof EntityEldritchGuardian ||
-				entity instanceof EntityEldritchCrab ||
-				entity instanceof EntityEldritchWarden ||
-				entity instanceof EntityEldritchGolem ||
-				entity instanceof EntityInhabitedZombie ||
-				entity instanceof EntityEnderman ||
-				entity instanceof EntityDragon ||
-				entity instanceof ITaintedMob;
 	}
 
 	@Override

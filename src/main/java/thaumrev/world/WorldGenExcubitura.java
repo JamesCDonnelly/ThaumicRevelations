@@ -21,5 +21,4 @@ public class WorldGenExcubitura implements IWorldGenerator {
 			world.setBlockMetadataWithNotify(x, y, z, 15, 0);
 		}
 	}
-
 }

@@ -16,7 +16,7 @@ import thaumrev.ThaumRevLibrary;
 
 import java.util.Random;
 
-import static thaumrev.Config.roseGrowthDivider;
+import static thaumrev.ThaumRevConfig.roseGrowthDivider;
 
 public class BlockExcubitura extends BlockBush implements IGrowable {
 

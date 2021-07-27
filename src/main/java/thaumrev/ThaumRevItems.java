@@ -52,7 +52,7 @@ public class ThaumRevItems {
 
     private static void loadItems() {
         itemResource = new ItemResource();
-        itemWardenAmulet = new ItemWardenAmulet();
+
         itemWardenWeapon = new ItemWardenWeapon();
         itemWardenBow = new ItemWardenBow();
         itemFocusPurity = new ItemFocusPurity();
@@ -68,6 +68,7 @@ public class ThaumRevItems {
         itemWardenclothLegs = new ItemWardenclothArmor(2, "itemWardenclothLegs");
         itemWardenclothBoots = new ItemWardenclothArmor(3, "itemWardenclothBoots");
 
+        itemWardenAmulet = new ItemWardenAmulet();
         itemLoveRing = new ItemLoveRing();
         itemWaslieHammer = new ItemWaslieHammer();
         itemFocusIllumination = new ItemFocusIllumination();
@@ -79,7 +80,7 @@ public class ThaumRevItems {
         armorMaterialWarden = EnumHelper.addArmorMaterial(
                 "WARDEN",
                 50,
-                new int[] {3, 6, 8, 3},
+                new int[]{3, 8, 6, 3},
                 0);
         armorMaterialWardencloth = EnumHelper.addArmorMaterial(
                 "WARDENCLOTH",
@@ -104,7 +105,7 @@ public class ThaumRevItems {
     private static void loadWandCores() {
         itemWandCore = new ItemWandCore();
 
-        /** Wands **/
+        /* Wands */
         WAND_ROD_WARDENCLOTH = new WandRod(
                 "wardencloth",
                 150,
@@ -137,7 +138,7 @@ public class ThaumRevItems {
         WAND_ROD_CRIMSONCULT.setGlowing(true);
 
 
-        /** Staffs **/
+        /* Staffs */
         STAFF_ROD_WARDENCLOTH = new StaffRod(
                 "wardencloth",
                 375,

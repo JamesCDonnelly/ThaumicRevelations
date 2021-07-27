@@ -5,12 +5,14 @@ import net.minecraftforge.common.config.Property;
 
 import java.io.File;
 
-public class Config {
+public class ThaumRevConfig {
     public static Configuration config;
     public static final String CATEGORY_SPEED = "Feature_Speed";
     public static int roseGrowthDivider = 1;
 
-    public Config() {}
+    public ThaumRevConfig() {
+    }
+
     public static void save() {
         config.save();
     }

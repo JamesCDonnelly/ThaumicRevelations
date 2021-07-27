@@ -14,7 +14,6 @@ import thaumcraft.api.aspects.Aspect;
 import thaumrev.util.DamageSourceWarden;
 import thaumrev.util.wardenic.WardenicChargeHelper;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class WardenicUpgradeEarth extends WardenicUpgrade {
@@ -78,18 +77,17 @@ public class WardenicUpgradeEarth extends WardenicUpgrade {
 			EntityPlayer player = (EntityPlayer) event.entity;
 
 			if (event.source.damageType.equals("fall")) {
-				List entities = new ArrayList<Entity>();
-				DamageSource damageSource = new DamageSourceWarden("warden", event.entity);
+				DamageSource damageSource = new DamageSourceWarden("warden", player);
 
-				entities = event.entity.worldObj.getEntitiesWithinAABBExcludingEntity(
-						event.entity,
+				List entities = event.entity.worldObj.getEntitiesWithinAABBExcludingEntity(
+						player,
 						AxisAlignedBB.getBoundingBox(
-								event.entity.posX - 6,
-								event.entity.posY - 6,
-								event.entity.posZ - 6,
-								event.entity.posX + 6,
-								event.entity.posY + 6,
-								event.entity.posZ + 6));
+								player.posX - 6,
+								player.posY - 6,
+								player.posZ - 6,
+								player.posX + 6,
+								player.posY + 6,
+								player.posZ + 6));
 
 				for (Object entity : entities) {
 					if (entity instanceof Entity) {

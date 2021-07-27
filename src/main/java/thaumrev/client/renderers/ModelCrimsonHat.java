@@ -1,13 +1,8 @@
-package thaumrev.client.render.models;
+package thaumrev.client.renderers;
 
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.monster.EntitySkeleton;
-import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.util.MathHelper;
-
-import org.lwjgl.opengl.GL11;
 
 public class ModelCrimsonHat extends ModelBiped {
 
@@ -19,12 +14,12 @@ public class ModelCrimsonHat extends ModelBiped {
         this.textureHeight = 64;
 
         this.brim = new ModelRenderer(this, 0, 32);
-        this.brim.addBox(-5.0F, -8.5F, -5.0F, 10, 2, 10, 0.0F);
+        this.brim.addBox(-5.0F, -7.5F, -5.0F, 10, 2, 10, 0.0F);
         this.brim.setRotationPoint(0.0F, 0.0F, 0.0F);
         this.setRotation(brim, 0.0F, 0.0F, 0.0F);
 
         this.top = new ModelRenderer(this, 0, 44);
-        this.top.addBox(-4.0F, -15.5F, -4.0F, 8, 7, 8, 0.0F);
+        this.top.addBox(-4.0F, -14.5F, -4.0F, 8, 7, 8, 0.0F);
         this.top.setRotationPoint(0.0F, 0.0F, 0.0F);
         this.setRotation(top, 0.0F, 0.0F, 0.0F);
 

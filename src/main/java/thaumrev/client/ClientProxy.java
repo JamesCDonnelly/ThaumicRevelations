@@ -1,16 +1,23 @@
 package thaumrev.client;
 
+import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.FMLCommonHandler;
+import thaumrev.client.renderers.RenderPurity;
 import thaumrev.common.CommonProxy;
+import thaumrev.entity.EntityPurity;
+import thaumrev.util.KeyHandler;
 
 public class ClientProxy extends CommonProxy {
-
-	// public static final Map<Item, ModelBiped> armorModels = new HashMap<Item, ModelBiped>();
-
 	@Override
 	public void initRenderers() {
-		// RenderingRegistry.registerEntityRenderingHandler(EntityPurity.class, new RenderPurity());
+		entityRenderers();
+	}
 
-		// ModelCrimsonHat crimsonHat = new ModelCrimsonHat();
-		// armorModels.put(itemCrimsonHat, crimsonHat);
+	public void keyBindings() {
+		FMLCommonHandler.instance().bus().register(new KeyHandler());
+	}
+
+	private void entityRenderers() {
+		RenderingRegistry.registerEntityRenderingHandler(EntityPurity.class, new RenderPurity());
 	}
 }

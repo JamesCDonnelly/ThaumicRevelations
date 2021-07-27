@@ -30,32 +30,29 @@ public class ThaumicRevelations {
 	public static ThaumicRevelations instance;
 
 	@SidedProxy(
-		serverSide = "thaumrev.common.CommonProxy",
-		clientSide = "thaumrev.client.ClientProxy"
+			serverSide = "thaumrev.common.CommonProxy",
+			clientSide = "thaumrev.client.ClientProxy"
 	)
-
-	public static CommonProxy commonProxy;
-	// public static ClientProxy clientProxy;
+	public static CommonProxy proxy;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		this.modDir = event.getModConfigurationDirectory();
 
 		try {
-			Config.initialize(event.getSuggestedConfigurationFile());
+			ThaumRevConfig.initialize(event.getSuggestedConfigurationFile());
 		} catch (Exception var8) {
 			log.error("Thaumic Revelations has a problem loading it's configuration");
 		} finally {
-			if (Config.config != null) {
-				Config.save();
+			if (ThaumRevConfig.config != null) {
+				ThaumRevConfig.save();
 			}
 		}
 
-		commonProxy.initRenderers();
+		proxy.initRenderers();
 		GuiHandler.init();
 
 		MobDropsHandler.init();
-		// KeyEventHandler.init();
 
 		ThaumRevLibrary.tabThaumRev = new TabThaumRev(ThaumRevLibrary.MOD_ID);
 		ThaumRevBlocks.registerBlocks();
@@ -67,13 +64,14 @@ public class ThaumicRevelations {
 
 		GameRegistry.registerWorldGenerator(new WorldGenExcubitura(), 1);
 
-		Config.save();
+		ThaumRevConfig.save();
 	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		WardenicChargeEvents.init();
 		WardenicUpgrades.init();
+		proxy.keyBindings();
 	}
 
 	@EventHandler

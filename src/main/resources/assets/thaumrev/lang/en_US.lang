@@ -3,6 +3,10 @@ itemGroup.thaumrev=Thaumic Revelations
 tooltip.wardenic.charge=Charge
 tooltip.wardenic.upgrade=Upgrade
 
+#Keys
+key.thaumrev.category=Thaumic Revelations
+key.amulet.desc=Use Amulet
+
 #Resources
 item.itemResource.0.name=Wardenic Rose Petal
 item.itemResource.1.name=Wardenic Crystal

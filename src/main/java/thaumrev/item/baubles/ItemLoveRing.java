@@ -2,6 +2,8 @@ package thaumrev.item.baubles;
 
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
+import baubles.common.container.InventoryBaubles;
+import baubles.common.lib.PlayerHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -30,6 +32,7 @@ public class ItemLoveRing extends Item implements IBauble {
 
 	@Override
 	public void onEquipped(ItemStack stack, EntityLivingBase entityLivingBase) {
+		entityLivingBase.worldObj.playSoundAtEntity(entityLivingBase, "thaumrev:abderp", 1, 1);
 		double maxHealth = entityLivingBase.getEntityAttribute(SharedMonsterAttributes.maxHealth).getAttributeValue();
 		entityLivingBase.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(maxHealth * 1.5D);
 	}
@@ -41,6 +44,15 @@ public class ItemLoveRing extends Item implements IBauble {
 	/** Overrides - boolean **/
 	@Override
 	public boolean canEquip(ItemStack stack, EntityLivingBase entityLivingBase) {
+		InventoryBaubles baubles = PlayerHandler.getPlayerBaubles((EntityPlayer) entityLivingBase);
+
+		for (int i = 0; i < baubles.getSizeInventory(); i++) {
+			if (baubles.getStackInSlot(i) != null &&
+					baubles.getStackInSlot(i).getItem() instanceof ItemLoveRing) {
+				return false;
+			}
+		}
+
 		return true;
 	}
 

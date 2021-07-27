@@ -2,6 +2,7 @@ package thaumrev.util;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -21,66 +22,48 @@ public class ItemSorter implements Comparator<ItemStack> {
     };
 
     @Override
-    public int compare(ItemStack stack1, ItemStack stack2) {
+    public int compare(@NotNull ItemStack stack1, @NotNull ItemStack stack2) {
         Item item1 = stack1.getItem();
         Item item2 = stack2.getItem();
 
-        int pos1;
-        int pos2;
-
-        if (item1.getClass().getName().toLowerCase().contains("block")) {
-            pos1 = Arrays.asList(priority).indexOf("block");
-        } else if (item1.getClass().getName().toLowerCase().contains("seeds")) {
-            pos1 = Arrays.asList(priority).indexOf("seeds");
-        } else if (item1.getClass().getName().toLowerCase().contains("resource")) {
-            pos1 = Arrays.asList(priority).indexOf("resource");
-        } else if (item1.getClass().getName().toLowerCase().contains("ring") ||
-                item1.getClass().getName().toLowerCase().contains("amulet")) {
-            pos1 = Arrays.asList(priority).indexOf("bauble");
-        } else if (item1.getClass().getName().toLowerCase().contains("armor")) {
-            pos1 = Arrays.asList(priority).indexOf("armor");
-        } else if (item1.getClass().getName().toLowerCase().contains("weapon") ||
-                item1.getClass().getName().toLowerCase().contains("bow")) {
-            pos1 = Arrays.asList(priority).indexOf("weapon");
-        } else if (item1.getClass().getName().toLowerCase().contains("wand")) {
-            pos1 = Arrays.asList(priority).indexOf("wand");
-        } else if (item1.getClass().getName().toLowerCase().contains("focus")) {
-            pos1 = Arrays.asList(priority).indexOf("focus");
-        } else {
-            pos1 = Arrays.asList(priority).indexOf("item");
-        }
-
-        if (item2.getClass().getName().toLowerCase().contains("block")) {
-            pos2 = Arrays.asList(priority).indexOf("block");
-        } else if (item2.getClass().getName().toLowerCase().contains("seeds")) {
-            pos2 = Arrays.asList(priority).indexOf("seeds");
-        } else if (item2.getClass().getName().toLowerCase().contains("resource")) {
-            pos2 = Arrays.asList(priority).indexOf("resource");
-        } else if (item2.getClass().getName().toLowerCase().contains("ring") ||
-                item2.getClass().getName().toLowerCase().contains("amulet")) {
-            pos2 = Arrays.asList(priority).indexOf("bauble");
-        } else if (item2.getClass().getName().toLowerCase().contains("armor")) {
-            pos2 = Arrays.asList(priority).indexOf("armor");
-        } else if (item2.getClass().getName().toLowerCase().contains("weapon") ||
-                item2.getClass().getName().toLowerCase().contains("bow")) {
-            pos2 = Arrays.asList(priority).indexOf("weapon");
-        } else if (item2.getClass().getName().toLowerCase().contains("wand")) {
-            pos2 = Arrays.asList(priority).indexOf("wand");
-        } else if (item2.getClass().getName().toLowerCase().contains("focus")) {
-            pos2 = Arrays.asList(priority).indexOf("focus");
-        } else {
-            pos2 = Arrays.asList(priority).indexOf("item");
-        }
+        final int pos1 = getPos(item1);
+        final int pos2 = getPos(item2);
 
         if (pos1 != pos2) {
             return pos1 > pos2 ? 1 : -1;
-        }  else {
+        } else {
             String displayName1 = stack1.getDisplayName();
             String displayName2 = stack2.getDisplayName();
 
-            int result = displayName1.compareToIgnoreCase(displayName2);
-
-            return result;
+            return displayName1.compareToIgnoreCase(displayName2);
         }
+    }
+
+    private int getPos(@NotNull Item item) {
+        int pos;
+
+        if (item.getClass().getName().toLowerCase().contains("block")) {
+            pos = Arrays.asList(priority).indexOf("block");
+        } else if (item.getClass().getName().toLowerCase().contains("seeds")) {
+            pos = Arrays.asList(priority).indexOf("seeds");
+        } else if (item.getClass().getName().toLowerCase().contains("resource")) {
+            pos = Arrays.asList(priority).indexOf("resource");
+        } else if (item.getClass().getName().toLowerCase().contains("ring") ||
+                item.getClass().getName().toLowerCase().contains("amulet")) {
+            pos = Arrays.asList(priority).indexOf("bauble");
+        } else if (item.getClass().getName().toLowerCase().contains("armor")) {
+            pos = Arrays.asList(priority).indexOf("armor");
+        } else if (item.getClass().getName().toLowerCase().contains("weapon") ||
+                item.getClass().getName().toLowerCase().contains("bow")) {
+            pos = Arrays.asList(priority).indexOf("weapon");
+        } else if (item.getClass().getName().toLowerCase().contains("wand")) {
+            pos = Arrays.asList(priority).indexOf("wand");
+        } else if (item.getClass().getName().toLowerCase().contains("focus")) {
+            pos = Arrays.asList(priority).indexOf("focus");
+        } else {
+            pos = Arrays.asList(priority).indexOf("item");
+        }
+
+        return pos;
     }
 }

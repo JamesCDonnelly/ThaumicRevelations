@@ -81,46 +81,25 @@ public class ItemWardenArmor extends ItemArmor implements IRepairable, ISpecialA
 		int water = 0;
 
 		for (int i = 0; i < 4; i++) {
-			if ((player.getCurrentArmor(i) != null) &&
-					WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
-							.equals(Aspect.AIR.getName())) {
-				air++;
-			}
-		}
-
-		for (int i = 0; i < 4; i++) {
-			if ((player.getCurrentArmor(i) != null) &&
-					WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
-							.equals(Aspect.EARTH.getName())) {
-				earth++;
-			}
-		}
-
-		for (int i = 0; i < 4; i++) {
-			if ((player.getCurrentArmor(i) != null) &&
-					WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
-							.equals(Aspect.WATER.getName())) {
-				water++;
+			if (player.getCurrentArmor(i) != null) {
+				if (WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect().equals(Aspect.AIR.getName())) {
+					air++;
+				} else if (WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect().equals(Aspect.EARTH.getName())) {
+					earth++;
+				} else if (WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect().equals(Aspect.WATER.getName())) {
+					water++;
+				}
 			}
 		}
 
 		if (!player.capabilities.isFlying && player.moveForward > 0.0F) {
-			if (player.worldObj.isRemote &&
-					!player.isSneaking() &&
-					player.getCurrentArmor(0) != null &&
-					(WardenicChargeHelper
-							.getUpgrade(player.getCurrentArmor(0))
-							.getUpgradeAspect()
-							.equals(Aspect.AIR.getName()) ||
-							WardenicChargeHelper
-									.getUpgrade(player.getCurrentArmor(0))
-									.getUpgradeAspect()
-									.equals(Aspect.WATER.getName()))) {
+			if (player.worldObj.isRemote && !player.isSneaking() && player.getCurrentArmor(0) != null &&
+					(WardenicChargeHelper.getUpgrade(player.getCurrentArmor(0)).getUpgradeAspect().equals(Aspect.AIR.getName()) ||
+							WardenicChargeHelper.getUpgrade(player.getCurrentArmor(0)).getUpgradeAspect().equals(Aspect.WATER.getName()))) {
+				player.stepHeight = 1.0F;
 				if (!Thaumcraft.instance.entityEventHandler.prevStep.containsKey(player.getEntityId())) {
 					Thaumcraft.instance.entityEventHandler.prevStep.put(player.getEntityId(), player.stepHeight);
 				}
-
-				player.stepHeight = 1.0F;
 			}
 
 			if (player.isInWater()) {
@@ -129,15 +108,6 @@ public class ItemWardenArmor extends ItemArmor implements IRepairable, ISpecialA
 				player.moveFlying(0.0F, 1.0F, air * 0.001F - earth * 0.0005F);
 			}
 			player.jumpMovementFactor = 0.02F + 0.005F * air;
-
-			/*
-			if (Hover.getHover(player.getEntityId())) {
-				player.jumpMovementFactor = 0.02F + 0.0025F * air;
-			}
-			else {
-				player.jumpMovementFactor = 0.02F + 0.005F * air;
-			}
-			*/
 		}
 
 		player.fallDistance *= 1.0F - (float)air / 4;

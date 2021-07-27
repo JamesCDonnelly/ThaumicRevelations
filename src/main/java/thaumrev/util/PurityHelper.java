@@ -8,6 +8,8 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import thaumcraft.api.entities.ITaintedMob;
 import thaumcraft.common.entities.monster.*;
+import thaumcraft.common.entities.monster.boss.EntityEldritchGolem;
+import thaumcraft.common.entities.monster.boss.EntityEldritchWarden;
 
 public class PurityHelper {
 
@@ -23,6 +25,15 @@ public class PurityHelper {
 		}
 
 		return false;
+	}
+
+	public static boolean isEldritchOrTainted(Entity entity) {
+		return entity instanceof EntityEldritchGuardian ||
+				entity instanceof EntityEldritchCrab ||
+				entity instanceof EntityEldritchWarden ||
+				entity instanceof EntityEldritchGolem ||
+				entity instanceof EntityInhabitedZombie ||
+				entity instanceof ITaintedMob;
 	}
 
 	public static void purifyEntity(Entity toPurify) {

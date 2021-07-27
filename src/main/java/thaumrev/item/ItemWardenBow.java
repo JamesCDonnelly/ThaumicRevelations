@@ -83,14 +83,14 @@ public class ItemWardenBow extends ItemBow {
         entityArrow.canBePickedUp = 2;
 
         NBTTagCompound tag = entityArrow.getEntityData();
-        tag.setBoolean("WardenArrow", true);
+        tag.setString("WardenArrow", WardenicChargeHelper.getUpgrade(player.getHeldItem()).getUpgradeAspect());
 
         try {
             if (entityArrow.getIsCritical()) {
-                if (WardenicChargeHelper.getUpgrade(player.getEquipmentInSlot(0)).getUpgradeAspect()
+                if (WardenicChargeHelper.getUpgrade(player.getHeldItem()).getUpgradeAspect()
                         .equals(Aspect.AIR.getName())) {
                     entityArrow.setDamage(3 * (air + 2));
-                } else if (WardenicChargeHelper.getUpgrade(player.getEquipmentInSlot(0)).getUpgradeAspect()
+                } else if (WardenicChargeHelper.getUpgrade(player.getHeldItem()).getUpgradeAspect()
                         .equals(Aspect.ENTROPY.getName())) {
                     entityArrow.setDamage(0);
                 }
