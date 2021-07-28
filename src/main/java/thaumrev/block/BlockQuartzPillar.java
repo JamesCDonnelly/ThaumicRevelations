@@ -16,17 +16,18 @@ public class BlockQuartzPillar extends BlockRotatedPillar {
 
 	public BlockQuartzPillar() {
 		super(Material.rock);
-		setBlockName("blockInfusedQuartzPillar");
+		setUnlocalizedName("blockInfusedQuartzPillar");
 		setCreativeTab(ThaumRevLibrary.tabThaumRev);
 		setStepSound(Block.soundTypeStone);
 		setHardness(0.8F);
 	}
 
-	/** Client-side **/
-
+	/**
+	 * Client-side
+	 **/
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister register) {
+	public void registerIcons(IIconRegister register) {
 		topIcon = register.registerIcon("thaumrev:infusedquartzpillartop");
 		sideIcon = register.registerIcon("thaumrev:infusedquartzpillarside");
 	}

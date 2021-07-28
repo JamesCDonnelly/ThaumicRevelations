@@ -23,7 +23,9 @@ import net.minecraft.world.World;
 import thaumcraft.common.Thaumcraft;
 import thaumrev.ThaumRevLibrary;
 import thaumrev.util.DamageSourceWarden;
+import thaumrev.util.PurityHelper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ItemWardenAmulet extends Item implements IBauble {
@@ -34,38 +36,17 @@ public class ItemWardenAmulet extends Item implements IBauble {
 		setMaxStackSize(1);
 	}
 
-	public static void useAmulet(EntityPlayer player) {
-		if (getAmulet(player) == null) return;
+	public static void amuletParticles(EntityPlayer player) {
 		ItemStack amulet = getAmulet(player);
-		DamageSource damageSource = new DamageSourceWarden("warden", player);
 
-		if (amulet.getItemDamage() > 0) {
-			List entities = player.worldObj.getEntitiesWithinAABBExcludingEntity(
-					player,
-					AxisAlignedBB.getBoundingBox(
-							player.posX - 8,
-							player.posY - 8,
-							player.posZ - 8,
-							player.posX + 8,
-							player.posY + 8,
-							player.posZ + 8)
-			);
-
-			amulet.setItemDamage(amulet.getItemDamage() - 5);
+		if (amulet != null) {
+			List<Object> entities = getEntities(player);
 
 			for (Object entity : entities) {
 				if (entity instanceof IMob ||
 						entity instanceof INpc ||
 						entity instanceof EntityPlayer ||
 						entity instanceof EntityWaterMob) {
-
-					/* TODO: Network Packets
-					PurityHelper.purifyEntity((Entity) entity);
-
-					if (PurityHelper.isEldritchOrTainted((Entity) entity)) {
-						((Entity) entity).attackEntityFrom(damageSource, ((EntityLivingBase) entity).getMaxHealth());
-					}
-					*/
 
 					summonParticles(
 							player.worldObj,
@@ -74,17 +55,40 @@ public class ItemWardenAmulet extends Item implements IBauble {
 							((Entity) entity).posZ
 					);
 				}
-
-				if (entity instanceof EntityPlayer) {
-					// TODO: Network Packets
-					// getAmulet((EntityPlayer) entity).setItemDamage(getAmulet((EntityPlayer) entity).getItemDamage() - 1);
-					amulet.setItemDamage(amulet.getItemDamage() + 1);
-				}
 			}
 		}
 	}
 
-	private static ItemStack getAmulet(EntityPlayer player) {
+	public static void amuletEffect(EntityPlayer player) {
+		ItemStack amulet = getAmulet(player);
+		DamageSource damageSource = new DamageSourceWarden("warden", player);
+
+		if (amulet != null) {
+			List<Object> entities = getEntities(player);
+
+			amulet.setMetadata(50);
+
+			for (Object entity : entities) {
+				if (entity instanceof Entity &&
+						(PurityHelper.isEldritchOrTainted((Entity) entity) || entity instanceof EntityPlayer)) {
+					PurityHelper.purifyEntity((Entity) entity);
+
+					if (PurityHelper.isEldritchOrTainted((Entity) entity)) {
+						((Entity) entity).attackEntityFrom(damageSource, ((EntityLivingBase) entity).getMaxHealth());
+					}
+				}
+
+				if (entity instanceof EntityPlayer) {
+					getAmulet((EntityPlayer) entity).setMetadata(getAmulet((EntityPlayer) entity).getMetadata() - 5);
+					amulet.setMetadata(amulet.getMetadata() + 5);
+				}
+			}
+
+			Thaumcraft.addWarpToPlayer(player, -50, true);
+		}
+	}
+
+	public static ItemStack getAmulet(EntityPlayer player) {
 		InventoryBaubles baubles = PlayerHandler.getPlayerBaubles(player);
 
 		for (int i = 0; i < baubles.getSizeInventory(); i++) {
@@ -95,6 +99,19 @@ public class ItemWardenAmulet extends Item implements IBauble {
 		}
 
 		return null;
+	}
+
+	private static List<Object> getEntities(EntityPlayer player) {
+		return new ArrayList<Object>(player.worldObj.getEntitiesWithinAABBExcludingEntity(
+				player,
+				AxisAlignedBB.getBoundingBox(
+						player.posX - 8,
+						player.posY - 8,
+						player.posZ - 8,
+						player.posX + 8,
+						player.posY + 8,
+						player.posZ + 8)
+		));
 	}
 
 	private static void summonParticles(World worldObj, double posX, double posY, double posZ) {
@@ -129,24 +146,25 @@ public class ItemWardenAmulet extends Item implements IBauble {
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
 		String chargeInformation;
 
-		if (stack.getItemDamage() > 50) stack.setItemDamage(50);
-		else if (stack.getItemDamage() < 0) stack.setItemDamage(0);
+		if (stack.getMetadata() > 50) {
+			stack.setMetadata(50);
+		} else if (stack.getMetadata() < 0) stack.setMetadata(0);
 
-		if (stack.getItemDamage() < 8) {
+		if (stack.getMetadata() > 41) {
 			chargeInformation = EnumChatFormatting.DARK_RED.toString();
-		} else if (stack.getItemDamage() < 16) {
+		} else if (stack.getMetadata() > 33) {
 			chargeInformation = EnumChatFormatting.RED.toString();
-		} else if (stack.getItemDamage() < 25) {
+		} else if (stack.getMetadata() > 25) {
 			chargeInformation = EnumChatFormatting.GOLD.toString();
-		} else if (stack.getItemDamage() < 33) {
+		} else if (stack.getMetadata() > 16) {
 			chargeInformation = EnumChatFormatting.YELLOW.toString();
-		} else if (stack.getItemDamage() < 41) {
+		} else if (stack.getMetadata() > 8) {
 			chargeInformation = EnumChatFormatting.GREEN.toString();
 		} else {
 			chargeInformation = EnumChatFormatting.DARK_GREEN.toString();
 		}
 
-		chargeInformation += stack.getItemDamage() + "/50";
+		chargeInformation += (50 - stack.getMetadata()) + "/50";
 		list.add(chargeInformation);
 
 		super.addInformation(stack, player, list, par4);
@@ -174,10 +192,9 @@ public class ItemWardenAmulet extends Item implements IBauble {
 	 * Overrides - int
 	 **/
 	@Override
-	public int getMaxDamage() {
+	public int getMaxDurability() {
 		return 50;
 	}
-
 
 	/**
 	 * Overrides - BaubleType

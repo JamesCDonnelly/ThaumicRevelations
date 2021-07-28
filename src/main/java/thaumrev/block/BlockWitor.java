@@ -17,11 +17,11 @@ import java.util.Random;
 public class BlockWitor extends Block {
 
 	public BlockWitor() {
-		super(Config.airyMaterial);
-		setBlockName("blockWitor");
-		setStepSound(Block.soundTypeCloth);
-		setBlockBounds(0.3F, 0.3F, 0.3F, 0.7F, 0.7F, 0.7F);
-	}
+        super(Config.airyMaterial);
+        setUnlocalizedName("blockWitor");
+        setStepSound(Block.soundTypeCloth);
+        setBlockBounds(0.3F, 0.3F, 0.3F, 0.7F, 0.7F, 0.7F);
+    }
 
 	/** Overrides - boolean **/
 	@Override
@@ -66,12 +66,14 @@ public class BlockWitor extends Block {
 	}
 
 
-	/** Client-side **/
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister register) {
-		blockIcon = register.registerIcon("thaumcraft:blank");
-	}
+    /**
+     * Client-side
+     **/
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void registerIcons(IIconRegister register) {
+        blockIcon = register.registerIcon("thaumcraft:blank");
+    }
 
 	@Override
 	@SideOnly(Side.CLIENT)

@@ -15,21 +15,22 @@ public class BlockQuartzNormal extends Block {
 	public IIcon sideIcon;
 
 	public BlockQuartzNormal() {
-		super(Material.rock);
-		setBlockName("blockInfusedQuartzNormal");
-		setCreativeTab(ThaumRevLibrary.tabThaumRev);
-		setStepSound(Block.soundTypeStone);
-		setHardness(0.8F);
-	}
+        super(Material.rock);
+        setUnlocalizedName("blockInfusedQuartzNormal");
+        setCreativeTab(ThaumRevLibrary.tabThaumRev);
+        setStepSound(Block.soundTypeStone);
+        setHardness(0.8F);
+    }
 
-	/** Client-side **/
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister register) {
-		topIcon = register.registerIcon("thaumrev:infusedquartztop");
-		botIcon = register.registerIcon("thaumrev:infusedquartzbot");
-		sideIcon = register.registerIcon("thaumrev:infusedquartzside");
-	}
+    /**
+     * Client-side
+     **/
+    @SideOnly(Side.CLIENT)
+    public void registerIcons(IIconRegister register) {
+        topIcon = register.registerIcon("thaumrev:infusedquartztop");
+        botIcon = register.registerIcon("thaumrev:infusedquartzbot");
+        sideIcon = register.registerIcon("thaumrev:infusedquartzside");
+    }
 
 	@Override
 	@SideOnly(Side.CLIENT)

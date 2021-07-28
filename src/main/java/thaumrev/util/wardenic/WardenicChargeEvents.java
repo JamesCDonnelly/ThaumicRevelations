@@ -1,11 +1,10 @@
 package thaumrev.util.wardenic;
 
-import baubles.common.container.InventoryBaubles;
-import baubles.common.lib.PlayerHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
@@ -19,7 +18,6 @@ import thaumrev.item.baubles.ItemWardenAmulet;
 import java.util.Random;
 
 public class WardenicChargeEvents {
-
 	private final Random random = new Random();
 
 	public static void init() {
@@ -44,12 +42,12 @@ public class WardenicChargeEvents {
 
 			for (int i = 0; i < 4; i++) {
 				if (player.getCurrentArmor(i) != null && (player.getCurrentArmor(i).getItem() instanceof ItemWardenArmor)) {
-					player.getCurrentArmor(i).setItemDamage(0);
+					player.getCurrentArmor(i).setMetadata(0);
 				}
 			}
 
 			if (player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ItemWardenWeapon) {
-				player.getHeldItem().setItemDamage(0);
+				player.getHeldItem().setMetadata(0);
 			}
 		}
 	}
@@ -66,13 +64,10 @@ public class WardenicChargeEvents {
 				}
 			}
 
-			InventoryBaubles baubles = PlayerHandler.getPlayerBaubles(player);
+			ItemStack amulet = ItemWardenAmulet.getAmulet(player);
 
-			for (int i = 0; i < baubles.getSizeInventory(); i++) {
-				if (baubles.getStackInSlot(i).getItem() instanceof ItemWardenAmulet) {
-					baubles.getStackInSlot(i).setItemDamage(baubles.getStackInSlot(i).getItemDamage() + 1);
-					break;
-				}
+			if (amulet != null) {
+				amulet.setMetadata(amulet.getMetadata() - 1);
 			}
 		}
 
@@ -87,15 +82,10 @@ public class WardenicChargeEvents {
 
 			if (event.entity instanceof EntityPlayer &&
 					tag.getString("WardenArrow").equals(ThaumRevLibrary.EXCUBITOR.getName())) {
-				EntityPlayer target = (EntityPlayer) event.entity;
-				InventoryBaubles baubles = PlayerHandler.getPlayerBaubles(target);
+				ItemStack amulet = ItemWardenAmulet.getAmulet((EntityPlayer) event.entity);
 
-				for (int i = 0; i < baubles.getSizeInventory(); i++) {
-					if (baubles.getStackInSlot(i) != null &&
-							baubles.getStackInSlot(i).getItem() instanceof ItemWardenAmulet) {
-						baubles.getStackInSlot(i).setItemDamage(baubles.getStackInSlot(i).getItemDamage() - 5);
-						break;
-					}
+				if (amulet != null) {
+					amulet.setMetadata(amulet.getMetadata() + 5);
 				}
 			}
 		}

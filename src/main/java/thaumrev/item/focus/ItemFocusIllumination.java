@@ -71,14 +71,14 @@ public class ItemFocusIllumination extends ItemFocusBasic {
 						if (mop.sideHit == 5) {
 							x++;
 						}
-						if (world.getBlock(x, y, z).equals(Blocks.air) ||
-								world.getBlock(x, y, z).equals(Blocks.water)) {
+						if (world.getBlock(x, y, z).equals(Blocks.air)) {
 							world.setBlock(x, y, z, ThaumRevLibrary.blockWitor, 0, 2);
 						}
 					}
 				}
 			}
 		}
+
 		player.swingItem();
 		return stack;
 	}

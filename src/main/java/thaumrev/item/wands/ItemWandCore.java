@@ -33,7 +33,7 @@ public class ItemWandCore extends ItemWandRod {
 
     /** Overrides - String **/
     public String getUnlocalizedName(ItemStack stack) {
-        return super.getUnlocalizedName() + "." + stack.getItemDamage();
+        return super.getUnlocalizedName() + "." + stack.getMetadata();
     }
 
 

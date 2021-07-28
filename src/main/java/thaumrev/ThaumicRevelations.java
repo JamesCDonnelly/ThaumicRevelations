@@ -7,6 +7,7 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.FMLEventChannel;
 import cpw.mods.fml.common.registry.GameRegistry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,17 +24,22 @@ import java.io.File;
 @Mod(modid = "thaumrev", useMetadata = true)
 public class ThaumicRevelations {
 
-	public File modDir;
-	public static final Logger log = LogManager.getLogger("THAUMREV");
+    public File modDir;
+    public static final Logger log = LogManager.getLogger("thaumrev");
 
-	@Instance(ThaumRevLibrary.MOD_ID)
-	public static ThaumicRevelations instance;
+    public static final String networkChannelName = "thaumrev";
+    public final static int PACKET_TYPE_AMULET_USE = 1;
+    public final static int PACKET_TYPE_S2C_TEST = 1;
+    public static FMLEventChannel channel;
 
-	@SidedProxy(
-			serverSide = "thaumrev.common.CommonProxy",
-			clientSide = "thaumrev.client.ClientProxy"
-	)
-	public static CommonProxy proxy;
+    @Instance(ThaumRevLibrary.MOD_ID)
+    public static ThaumicRevelations instance;
+
+    @SidedProxy(
+            serverSide = "thaumrev.common.CommonProxy",
+            clientSide = "thaumrev.client.ClientProxy"
+    )
+    public static CommonProxy proxy;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -69,10 +75,11 @@ public class ThaumicRevelations {
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
-		WardenicChargeEvents.init();
-		WardenicUpgrades.init();
-		proxy.keyBindings();
-	}
+        WardenicChargeEvents.init();
+        WardenicUpgrades.init();
+        proxy.keyBindings();
+        proxy.initNetwork();
+    }
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {

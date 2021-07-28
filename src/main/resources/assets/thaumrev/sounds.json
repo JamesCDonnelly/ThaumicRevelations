@@ -1,3 +1,14 @@
 {
-   "abderp": {"category": "master","sounds": ["abderp"]}
+  "abderp": {
+    "category": "master",
+    "sounds": [
+      "abderp"
+    ]
+  },
+  "compramos": {
+    "category": "master",
+    "sounds": [
+      "compramos"
+    ]
+  }
 }

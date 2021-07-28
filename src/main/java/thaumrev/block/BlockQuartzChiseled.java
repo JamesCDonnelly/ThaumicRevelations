@@ -15,21 +15,23 @@ public class BlockQuartzChiseled extends Block {
 	public IIcon sideIcon;
 
 	public BlockQuartzChiseled() {
-		super(Material.rock);
-		setBlockName("blockInfusedQuartzChiseled");
-		setCreativeTab(ThaumRevLibrary.tabThaumRev);
-		setStepSound(Block.soundTypeStone);
-		setHardness(0.8F);
-	}
+        super(Material.rock);
+        setUnlocalizedName("blockInfusedQuartzChiseled");
+        setCreativeTab(ThaumRevLibrary.tabThaumRev);
+        setStepSound(Block.soundTypeStone);
+        setHardness(0.8F);
+    }
 
-	/** Client-side **/
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister register) {
-		topIcon = register.registerIcon("thaumrev:infusedquartzchiseledtop");
-		botIcon = register.registerIcon("thaumrev:infusedquartzchiseledtop");
-		sideIcon = register.registerIcon("thaumrev:infusedquartzchiseledside");
-	}
+    /**
+     * Client-side
+     **/
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void registerIcons(IIconRegister register) {
+        topIcon = register.registerIcon("thaumrev:infusedquartzchiseledtop");
+        botIcon = register.registerIcon("thaumrev:infusedquartzchiseledtop");
+        sideIcon = register.registerIcon("thaumrev:infusedquartzchiseledside");
+    }
 
 	@Override
 	@SideOnly(Side.CLIENT)

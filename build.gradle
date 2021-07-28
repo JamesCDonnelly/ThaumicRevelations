@@ -9,7 +9,8 @@ buildscript {
         mavenCentral()
         maven {
             name = "forge"
-            url = "http://files.minecraftforge.net/maven"
+            // url = "http://files.minecraftforge.net/maven"
+			url = "https://maven.minecraftforge.net"
         }
         maven {
             name = "sonatype"
@@ -18,6 +19,7 @@ buildscript {
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+        // classpath 'net.minecraftforge.gradle:ForgeGradle:4.1.+'
     }
 }
 
@@ -28,7 +30,7 @@ apply plugin: 'forge'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-version = "0.2.5.2"
+version = "0.2.5.3"
 group = "thaumrev" // This is our group.
 // archivesBaseName = "ThaumicRevelations" // This is our actual project within the group.
 
@@ -36,15 +38,15 @@ group = "thaumrev" // This is our group.
 minecraft {
     version = "1.7.10-10.13.4.1614-1.7.10"
     runDir = "run"
-    // mappings = 'stable_12' // This seems to break stuff
+    mappings = 'stable_12' // This seems to break stuff
 }
 
+    /*
 repositories {
     maven {
         name = "Forge Maven Fileserver"
-        url = "http://files.minecraftforge.net/maven"
+			url = "https://maven.minecraftforge.net"
     }
-    /*
     maven {
         name = "ChickenBones's Maven Fileserver"
         url = "http://chickenbones.net/maven/"
@@ -86,8 +88,8 @@ repositories {
         name "BuildCraft"
         artifactPattern "http://www.mod-buildcraft.com/releases/BuildCraft/[revision]/[module]-[revision]-[classifier].[ext]"
     }
-     */
 }
+     */
 
 /*
 configurations.all {

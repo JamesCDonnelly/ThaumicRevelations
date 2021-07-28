@@ -46,8 +46,8 @@ public class ItemResource extends Item {
 	/** Overrides - String **/
 	@Override
 	public String getUnlocalizedName(ItemStack stack) {
-		return super.getUnlocalizedName() + "." + stack.getItemDamage();
-	}
+        return super.getUnlocalizedName() + "." + stack.getMetadata();
+    }
 
 
 	/** Client-side **/

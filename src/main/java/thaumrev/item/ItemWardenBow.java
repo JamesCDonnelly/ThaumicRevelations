@@ -101,7 +101,7 @@ public class ItemWardenBow extends ItemBow {
             world.spawnEntityInWorld(entityArrow);
         }
 
-        stack.setItemDamage(0);
+        stack.setMetadata(0);
     }
 
     @Override

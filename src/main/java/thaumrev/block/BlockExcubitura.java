@@ -22,7 +22,7 @@ public class BlockExcubitura extends BlockBush implements IGrowable {
 
 	public BlockExcubitura() {
 		super(Material.plants);
-		setBlockName("blockExcubitura");
+		setUnlocalizedName("blockExcubitura");
 		setTickRandomly(true);
 		setBlockBounds(0F, 0.0F, 0F, 1F, 0.25F, 1F);
 		setHardness(0.0F);
@@ -40,10 +40,11 @@ public class BlockExcubitura extends BlockBush implements IGrowable {
 		world.setBlockMetadataWithNotify(x, y, z, growStage, 2);
 	}
 
-
-	/** Overrides - void **/
+	/**
+	 * Overrides - void
+	 **/
 	@Override
-	public void func_149853_b(World world, Random random, int x, int y, int z) {
+	public void fertilize(World world, Random random, int x, int y, int z) {
 		incrementGrowStage(world, random, x, y, z);
 	}
 
@@ -78,12 +79,12 @@ public class BlockExcubitura extends BlockBush implements IGrowable {
 	}
 
 	@Override
-	public boolean func_149851_a(World world, int x, int y, int z, boolean p_149851_5_) {
+	public boolean canFertilize(World world, int x, int y, int z, boolean b) {
 		return world.getBlockMetadata(x, y, z) != 15;
 	}
 
 	@Override
-	public boolean func_149852_a(World p_149852_1_, Random random, int p_149852_3_, int p_149852_4_, int p_149852_5_) {
+	public boolean shouldFertilize(World world, Random random, int i, int i1, int i2) {
 		return true;
 	}
 
@@ -118,7 +119,7 @@ public class BlockExcubitura extends BlockBush implements IGrowable {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister register) {
+	public void registerIcons(IIconRegister register) {
 		iIcon = new IIcon[16];
 		iIcon[0] = register.registerIcon("thaumrev:excubitura/excubitura_stage_0");
 		iIcon[1] = register.registerIcon("thaumrev:excubitura/excubitura_stage_0");

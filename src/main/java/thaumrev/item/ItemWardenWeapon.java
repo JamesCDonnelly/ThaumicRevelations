@@ -67,20 +67,20 @@ public class ItemWardenWeapon extends ItemSword {
 		} catch (Exception ignored) {
 		}
 
-		stack.setItemDamage(0);
+		stack.setMetadata(0);
 
 		return super.onLeftClickEntity(stack, player, entity);
 	}
 
 	@Override
 	public boolean onBlockDestroyed(ItemStack stack, World world, Block block, int i1, int i2, int i3, EntityLivingBase entityLivingBase) {
-		stack.setItemDamage(0);
+		stack.setMetadata(0);
 		return super.onBlockDestroyed(stack, world, block, i1, i2, i3, entityLivingBase);
 	}
 
 	@Override
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int i1, int i2, int i3, int i4, float f1, float f2, float f3) {
-		stack.setItemDamage(0);
+		stack.setMetadata(0);
 		return super.onItemUse(stack, player, world, i1, i2, i3, i4, f1, f2, f3);
 	}
 

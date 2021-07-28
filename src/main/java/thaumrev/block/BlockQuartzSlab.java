@@ -16,7 +16,7 @@ public class BlockQuartzSlab extends BlockSlab {
 
 	public BlockQuartzSlab() {
 		super(false, Material.rock);
-		setBlockName("blockInfusedQuartzSlab");
+		setUnlocalizedName("blockInfusedQuartzSlab");
 		setCreativeTab(ThaumRevLibrary.tabThaumRev);
 		setStepSound(Block.soundTypeStone);
 		setHardness(0.8F);
@@ -24,30 +24,40 @@ public class BlockQuartzSlab extends BlockSlab {
 	}
 
 	/** Overrides - String **/
-	@Override
-	public String func_150002_b(int var1) {
-		return "tile.blockInfusedQuartzSlab";
-	}
+//	public String func_150002_b(int var1) {
+//		return "tile.blockInfusedQuartzSlab";
+//	}
 
 
-	/** Overrides - Item **/
+	/**
+	 * Overrides - Item
+	 **/
 	@Override
 	public Item getItemDropped(int par1, Random par2, int par3) {
 		return Item.getItemFromBlock(ThaumRevLibrary.blockInfusedQuartzSlab);
 	}
 
 
-	/** Overrides  - ItemStack **/
+	/**
+	 * Overrides  - ItemStack
+	 **/
 	@Override
 	public ItemStack createStackedBlock(int par1) {
 		return new ItemStack(ThaumRevLibrary.blockInfusedQuartzSlab);
 	}
 
 
-	/** Client-side **/
+	/**
+	 * Client-side
+	 **/
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int par1, int par2) {
 		return ThaumRevLibrary.blockInfusedQuartzNormal.getBlockTextureFromSide(par1);
+	}
+
+	@Override
+	public String getFullSlabName(int i) {
+		return null;
 	}
 }

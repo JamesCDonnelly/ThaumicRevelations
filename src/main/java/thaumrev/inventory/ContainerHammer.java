@@ -46,8 +46,8 @@ public class ContainerHammer extends Container {
 		if (item != null) {
 			if (!(item.getItem() instanceof ItemWardenArmor || item.getItem() instanceof ItemWardenWeapon || item.getItem() instanceof ItemWardenBow)) {
 				ItemStack repairedItem = new ItemStack(item.getItem());
-				if (item.getItemDamage() != 0 && item.getItem().isRepairable()) {
-					repairedItem.setItemDamage(0);
+				if (item.getMetadata() != 0 && item.getItem().isRepairable()) {
+					repairedItem.setMetadata(0);
 					resultInv.setInventorySlotContents(0, repairedItem);
 				}
 			} else if (essentia != null) {
