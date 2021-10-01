@@ -20,6 +20,9 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import thaumcraft.common.Thaumcraft;
 import thaumrev.ThaumRevLibrary;
 import thaumrev.util.DamageSourceWarden;
@@ -88,7 +91,7 @@ public class ItemWardenAmulet extends Item implements IBauble {
 		}
 	}
 
-	public static ItemStack getAmulet(EntityPlayer player) {
+	public static @Nullable ItemStack getAmulet(EntityPlayer player) {
 		InventoryBaubles baubles = PlayerHandler.getPlayerBaubles(player);
 
 		for (int i = 0; i < baubles.getSizeInventory(); i++) {
@@ -101,7 +104,8 @@ public class ItemWardenAmulet extends Item implements IBauble {
 		return null;
 	}
 
-	private static List<Object> getEntities(EntityPlayer player) {
+	@Contract("_ -> new")
+	private static @NotNull List<Object> getEntities(@NotNull EntityPlayer player) {
 		return new ArrayList<Object>(player.worldObj.getEntitiesWithinAABBExcludingEntity(
 				player,
 				AxisAlignedBB.getBoundingBox(
@@ -127,15 +131,16 @@ public class ItemWardenAmulet extends Item implements IBauble {
 	}
 
 
-	/**
+	/*
 	 * Overrides - void
-	 **/
+	 */
 	@Override
 	public void onWornTick(ItemStack stack, EntityLivingBase entityLivingBase) {
 	}
 
 	@Override
-	public void onEquipped(ItemStack stack, EntityLivingBase entityLivingBase) {
+	public void onEquipped(ItemStack stack, @NotNull EntityLivingBase entityLivingBase) {
+		entityLivingBase.worldObj.playSoundAtEntity(entityLivingBase, "thaumrev:compramos", 1, 1);
 	}
 
 	@Override
@@ -143,7 +148,7 @@ public class ItemWardenAmulet extends Item implements IBauble {
 	}
 
 	@Override
-	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
+	public void addInformation(@NotNull ItemStack stack, EntityPlayer player, List list, boolean b) {
 		String chargeInformation;
 
 		if (stack.getMetadata() > 50) {
@@ -167,7 +172,7 @@ public class ItemWardenAmulet extends Item implements IBauble {
 		chargeInformation += (50 - stack.getMetadata()) + "/50";
 		list.add(chargeInformation);
 
-		super.addInformation(stack, player, list, par4);
+		super.addInformation(stack, player, list, b);
 	}
 
 
@@ -188,38 +193,49 @@ public class ItemWardenAmulet extends Item implements IBauble {
 	}
 
 
-	/**
+	/*
+	 * Overrides - ItemStack
+	 */
+	@Override
+	public ItemStack onItemRightClick(ItemStack stack, @NotNull World world, EntityPlayer player) {
+		world.playSoundAtEntity(player, "thaumrev:compramos", 1, 1);
+		return super.onItemRightClick(stack, world, player);
+	}
+
+
+	/*
 	 * Overrides - int
-	 **/
+	 */
 	@Override
 	public int getMaxDurability() {
 		return 50;
 	}
 
-	/**
+
+	/*
 	 * Overrides - BaubleType
-	 **/
+	 */
 	@Override
 	public BaubleType getBaubleType(ItemStack stack) {
 		return BaubleType.AMULET;
 	}
 
 
-	/**
+	/*
 	 * Overrides - EnumRarity
-	 **/
+	 */
 	@Override
 	public EnumRarity getRarity(ItemStack par1ItemStack) {
 		return EnumRarity.rare;
 	}
 
 
-	/**
+	/*
 	 * Client-side
-	 **/
+	 */
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister register) {
+	public void registerIcons(@NotNull IIconRegister register) {
 		itemIcon = register.registerIcon("thaumrev:wardenamulet");
 	}
 }

@@ -20,6 +20,12 @@ public class ThaumRevRecipes {
         loadFociRecipes();
     }
 
+    private static void loadArcaneRecipes() {
+        loadWardenRecipes();
+        loadCrimsonRecipes();
+        loadVoidRecipes();
+    }
+
     private static void loadShapedRecipes() {
         GameRegistry.addShapedRecipe(
                 new ItemStack(blockInfusedQuartzNormal),
@@ -85,7 +91,7 @@ public class ThaumRevRecipes {
                         .add(Aspect.CLOTH, 8));
     }
 
-    private static void loadArcaneRecipes() {
+    private static void loadWardenRecipes() {
         recipeWardenclothChest = ThaumcraftApi.addArcaneCraftingRecipe(
                 "WARDENCLOTH",
                 new ItemStack(itemWardenclothChest, 1),
@@ -122,64 +128,6 @@ public class ThaumRevRecipes {
                         .add(Aspect.WATER, 4),
                 "X X", "X X",
                 'X', new ItemStack(itemResource, 1, 3));
-
-        recipeHelmetCultistRobe = ThaumcraftApi.addArcaneCraftingRecipe(
-                "CRIMSONCLOTH",
-                ItemApi.getItem("itemHelmetCultistRobe", 0),
-                new AspectList().add(Aspect.ORDER, 5)
-                        .add(Aspect.ENTROPY, 5)
-                        .add(Aspect.AIR, 5)
-                        .add(Aspect.EARTH, 5)
-                        .add(Aspect.FIRE, 5)
-                        .add(Aspect.WATER, 5),
-                "XXX", "X X",
-                'X', new ItemStack(itemResource, 1, 4));
-        recipeChestCultistRobe = ThaumcraftApi.addArcaneCraftingRecipe(
-                "CRIMSONCLOTH",
-                ItemApi.getItem("itemChestCultistRobe", 0),
-                new AspectList()
-                        .add(Aspect.ORDER, 5)
-                        .add(Aspect.ENTROPY, 5)
-                        .add(Aspect.AIR, 5)
-                        .add(Aspect.EARTH, 5)
-                        .add(Aspect.FIRE, 5)
-                        .add(Aspect.WATER, 5),
-                "X X", "XXX", "XXX",
-                'X', new ItemStack(itemResource, 1, 4));
-        recipeLegsCultistRobe = ThaumcraftApi.addArcaneCraftingRecipe(
-                "CRIMSONCLOTH",
-                ItemApi.getItem("itemLegsCultistRobe", 0),
-                new AspectList()
-                        .add(Aspect.ORDER, 5)
-                        .add(Aspect.ENTROPY, 5)
-                        .add(Aspect.AIR, 5)
-                        .add(Aspect.EARTH, 5)
-                        .add(Aspect.FIRE, 5)
-                        .add(Aspect.WATER, 5),
-                "XXX", "X X", "X X",
-                'X', new ItemStack(itemResource, 1, 4));
-        recipeBootsCultist = ThaumcraftApi.addArcaneCraftingRecipe(
-                "CRIMSONCLOTH",
-                ItemApi.getItem("itemBootsCultist", 0),
-                new AspectList()
-                        .add(Aspect.ORDER, 5)
-                        .add(Aspect.ENTROPY, 5)
-                        .add(Aspect.AIR, 5)
-                        .add(Aspect.EARTH, 5)
-                        .add(Aspect.FIRE, 5)
-                        .add(Aspect.WATER, 5),
-                "X X", "X X",
-                'X', new ItemStack(itemResource, 1, 4));
-
-		/*
-		recipeCrimsonHat = ThaumcraftApi.addArcaneCraftingRecipe(
-				"CRIMSONHAT",
-				new ItemStack(itemCrimsonHat),
-				new AspectList().add(Aspect.ORDER, 40).add(Aspect.ENTROPY, 40).add(Aspect.AIR, 40).add(Aspect.EARTH, 40).add(Aspect.FIRE, 40).add(Aspect.WATER, 40),
-				" X ", "XOX", " X ",
-				'X', new ItemStack(itemResource, 1, 4),
-				'O', ItemApi.getItem("itemGolemDecoration", 0));
-		 */
 
         recipeWardenHelm = ThaumcraftApi.addArcaneCraftingRecipe(
                 "WARDENARMOR",
@@ -267,21 +215,104 @@ public class ThaumRevRecipes {
                 "WASLIEHAMMER",
                 new ItemStack(itemWaslieHammer, 1),
                 new AspectList()
+                        .add(Aspect.ORDER, 50)
+                        .add(Aspect.ENTROPY, 50)
+                        .add(Aspect.AIR, 50)
+                        .add(Aspect.EARTH, 50)
+                        .add(Aspect.FIRE, 50)
+                        .add(Aspect.WATER, 50),
+                "XXX", "XOX", " I ",
+                'X', new ItemStack(itemResource, 1, 1),
+                'O', new ItemStack(itemResource, 1, 2),
+                'I', new ItemStack(itemWandCore, 1, 0));
+
+        recipeWardenAmulet = ThaumcraftApi.addArcaneCraftingRecipe(
+                "WARDENAMULET",
+                new ItemStack(itemWardenAmulet, 1, 50),
+                new AspectList()
                         .add(Aspect.ORDER, 125)
                         .add(Aspect.ENTROPY, 125)
                         .add(Aspect.AIR, 125)
                         .add(Aspect.EARTH, 125)
                         .add(Aspect.FIRE, 125)
                         .add(Aspect.WATER, 125),
-                "XXX", "XOX", " I ",
-                'X', new ItemStack(itemResource, 1, 1),
-                'O', new ItemStack(itemResource, 1, 2),
-                'I', new ItemStack(itemWandCore, 1, 0));
+                "X X", " O ", " I ",
+                'X', new ItemStack(itemResource, 1, 3),
+                ')', new ItemStack(itemResource, 1, 1));
+    }
+
+    private static void loadCrimsonRecipes() {
+        recipeHelmetCultistRobe = ThaumcraftApi.addArcaneCraftingRecipe(
+                "CRIMSONCLOTH",
+                ItemApi.getItem("itemHelmetCultistRobe", 0),
+                new AspectList().add(Aspect.ORDER, 5)
+                        .add(Aspect.ENTROPY, 5)
+                        .add(Aspect.AIR, 5)
+                        .add(Aspect.EARTH, 5)
+                        .add(Aspect.FIRE, 5)
+                        .add(Aspect.WATER, 5),
+                "XXX", "X X",
+                'X', new ItemStack(itemResource, 1, 4));
+        recipeChestCultistRobe = ThaumcraftApi.addArcaneCraftingRecipe(
+                "CRIMSONCLOTH",
+                ItemApi.getItem("itemChestCultistRobe", 0),
+                new AspectList()
+                        .add(Aspect.ORDER, 5)
+                        .add(Aspect.ENTROPY, 5)
+                        .add(Aspect.AIR, 5)
+                        .add(Aspect.EARTH, 5)
+                        .add(Aspect.FIRE, 5)
+                        .add(Aspect.WATER, 5),
+                "X X", "XXX", "XXX",
+                'X', new ItemStack(itemResource, 1, 4));
+        recipeLegsCultistRobe = ThaumcraftApi.addArcaneCraftingRecipe(
+                "CRIMSONCLOTH",
+                ItemApi.getItem("itemLegsCultistRobe", 0),
+                new AspectList()
+                        .add(Aspect.ORDER, 5)
+                        .add(Aspect.ENTROPY, 5)
+                        .add(Aspect.AIR, 5)
+                        .add(Aspect.EARTH, 5)
+                        .add(Aspect.FIRE, 5)
+                        .add(Aspect.WATER, 5),
+                "XXX", "X X", "X X",
+                'X', new ItemStack(itemResource, 1, 4));
+        recipeBootsCultist = ThaumcraftApi.addArcaneCraftingRecipe(
+                "CRIMSONCLOTH",
+                ItemApi.getItem("itemBootsCultist", 0),
+                new AspectList()
+                        .add(Aspect.ORDER, 5)
+                        .add(Aspect.ENTROPY, 5)
+                        .add(Aspect.AIR, 5)
+                        .add(Aspect.EARTH, 5)
+                        .add(Aspect.FIRE, 5)
+                        .add(Aspect.WATER, 5),
+                "X X", "X X",
+                'X', new ItemStack(itemResource, 1, 4));
+
+        recipeCrimsonHat = ThaumcraftApi.addArcaneCraftingRecipe(
+                "CRIMSONHAT",
+                new ItemStack(itemCrimsonHat),
+                new AspectList()
+                        .add(Aspect.ORDER, 40)
+                        .add(Aspect.ENTROPY, 40)
+                        .add(Aspect.AIR, 40)
+                        .add(Aspect.EARTH, 40)
+                        .add(Aspect.FIRE, 40)
+                        .add(Aspect.WATER, 40),
+                " X ", "XOX", " X ",
+                'X', new ItemStack(itemResource, 1, 4),
+                'O', ItemApi.getItem("itemGolemDecoration", 0));
+
+    }
+
+    private static void loadVoidRecipes() {
+
     }
 
     private static void loadFociRecipes() {
         recipeFocusIllumination = ThaumcraftApi.addArcaneCraftingRecipe(
-                "ILLUMINATION",
+                "FOCUSILLUMINATION",
                 new ItemStack(itemFocusIllumination, 1),
                 new AspectList()
                         .add(Aspect.AIR, 20)
@@ -289,6 +320,21 @@ public class ThaumRevRecipes {
                 " X ", "XOX", " X ",
                 'X', ItemApi.getItem("itemResource", 1),
                 'O', ItemApi.getItem("itemFocusFire", 0));
+
+        recipeFocusPurity = ThaumcraftApi.addArcaneCraftingRecipe(
+                "FOCUSPURITY",
+                new ItemStack(itemFocusPurity, 1),
+                new AspectList()
+                        .add(Aspect.ORDER, 25)
+                        .add(Aspect.ENTROPY, 25)
+                        .add(Aspect.AIR, 25)
+                        .add(Aspect.EARTH, 25)
+                        .add(Aspect.FIRE, 25)
+                        .add(Aspect.WATER, 25),
+                "YXY", "XOX", "YXY",
+                'X', ItemApi.getItem("itemResource", 11),
+                'Y', ItemApi.getItem("itemResource", 12),
+                'O', ItemApi.getItem("itemFocusWarding", 0));
     }
 
     private static void loadWandRecipes() {

@@ -7,6 +7,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import org.jetbrains.annotations.NotNull;
 import thaumrev.ThaumRevLibrary;
 
 import java.util.List;
@@ -43,11 +44,13 @@ public class ItemResource extends Item {
 	}
 
 
-	/** Overrides - String **/
+	/**
+	 * Overrides - String
+	 **/
 	@Override
-	public String getUnlocalizedName(ItemStack stack) {
-        return super.getUnlocalizedName() + "." + stack.getMetadata();
-    }
+	public String getUnlocalizedName(@NotNull ItemStack stack) {
+		return super.getUnlocalizedName() + "." + stack.getMetadata();
+	}
 
 
 	/** Client-side **/

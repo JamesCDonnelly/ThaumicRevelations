@@ -124,9 +124,13 @@ trvresearch.name.WASLIEHAMMER=Wesly's Hammer
 trvresearch.text.WASLIEHAMMER=OP as flux
 trvresearch.page.WASLIEHAMMER.0=This hammer was created by the Master Wanderer Wesly to help Lizbeth and the Thaumic Wardens<LINE>Using the hammer is easy since it doesn't require a kit.<BR>The hammer can also be used to infuse various aspects into the Wardenic Armaments.
 
-trvresearch.name.ILLUMINATION=Wand Focus: Illumination
-trvresearch.text.ILLUMINATION=They know...
-trvresearch.page.ILLUMINATION.0=We know all about your plans<BR>You know you should join us<BR>Our thaumic focus that creates illumination on right click will illuminate you to the right path
+trvresearch.name.FOCUSILLUMINATION=Wand Focus: Illumination
+trvresearch.text.FOCUSILLUMINATION=They know...
+trvresearch.page.FOCUSILLUMINATION.0=We know all about your plans<BR>You know you should join us<BR>Our thaumic focus that creates illumination on right click will illuminate you to the right path
+
+trvresearch.name.FOCUSPURITY=Wand Focus: Purity
+trvresearch.text.FOCUSPURITY=Thy shall be purified!
+trvresearch.page.FOCUSPURITY.0=<I>Placeholder</I>
 
 #Warden's Lore
 trvresearch.name.WARDENS=Thaumic Wardens

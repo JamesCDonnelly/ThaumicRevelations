@@ -17,6 +17,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.event.entity.player.ArrowNockEvent;
+import org.jetbrains.annotations.NotNull;
 import thaumcraft.api.aspects.Aspect;
 import thaumrev.ThaumRevLibrary;
 import thaumrev.util.wardenic.WardenicChargeHelper;
@@ -105,11 +106,11 @@ public class ItemWardenBow extends ItemBow {
     }
 
     @Override
-    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
+    public void addInformation(ItemStack stack, EntityPlayer player, @NotNull List list, boolean b) {
         list.add(EnumChatFormatting.GOLD + StatCollector.translateToLocal("tooltip.wardenic.upgrade") +
                 ": " + WardenicChargeHelper.getUpgrade(stack).getQuote());
 
-        super.addInformation(stack, player, list, par4);
+        super.addInformation(stack, player, list, b);
     }
 
 
@@ -190,13 +191,13 @@ public class ItemWardenBow extends ItemBow {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister register) {
+    public void registerIcons(@NotNull IIconRegister register) {
         itemIcon = register.registerIcon("thaumrev:bow/wardenbow");
 
         iconArray = new IIcon[wardenBowPullArray.length];
 
         for (int i = 0; i < iconArray.length; i++) {
-            iconArray[i] = register.registerIcon("thaumrev:bow/wardenbow" +  "_" + wardenBowPullArray[i]);
+            iconArray[i] = register.registerIcon("thaumrev:bow/wardenbow" + "_" + wardenBowPullArray[i]);
         }
     }
 }

@@ -13,6 +13,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.ForgeDirection;
+import org.jetbrains.annotations.NotNull;
 import thaumrev.ThaumRevLibrary;
 
 public class ItemExcubituraSeeds extends ItemSeeds implements IPlantable {
@@ -75,10 +76,12 @@ public class ItemExcubituraSeeds extends ItemSeeds implements IPlantable {
     }
 
 
-    /** Client-side **/
+    /**
+     * Client-side
+     **/
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister register) {
+    public void registerIcons(@NotNull IIconRegister register) {
         itemIcon = register.registerIcon("thaumrev:roseseeds");
     }
 }

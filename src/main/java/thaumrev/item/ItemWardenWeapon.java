@@ -15,6 +15,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 import thaumrev.ThaumRevLibrary;
 import thaumrev.util.DamageSourceWarden;
 import thaumrev.util.wardenic.WardenicChargeHelper;
@@ -32,9 +33,11 @@ public class ItemWardenWeapon extends ItemSword {
 	}
 
 
-	/** Overrides - void **/
+	/**
+	 * Overrides - void
+	 **/
 	@Override
-	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
+	public void addInformation(ItemStack stack, EntityPlayer player, @NotNull List list, boolean par4) {
 		list.add(EnumChatFormatting.GOLD + StatCollector.translateToLocal("tooltip.wardenic.upgrade") +
 				": " + WardenicChargeHelper.getUpgrade(stack).getQuote());
 
@@ -73,13 +76,13 @@ public class ItemWardenWeapon extends ItemSword {
 	}
 
 	@Override
-	public boolean onBlockDestroyed(ItemStack stack, World world, Block block, int i1, int i2, int i3, EntityLivingBase entityLivingBase) {
+	public boolean onBlockDestroyed(@NotNull ItemStack stack, World world, Block block, int i1, int i2, int i3, EntityLivingBase entityLivingBase) {
 		stack.setMetadata(0);
 		return super.onBlockDestroyed(stack, world, block, i1, i2, i3, entityLivingBase);
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int i1, int i2, int i3, int i4, float f1, float f2, float f3) {
+	public boolean onItemUse(@NotNull ItemStack stack, EntityPlayer player, World world, int i1, int i2, int i3, int i4, float f1, float f2, float f3) {
 		stack.setMetadata(0);
 		return super.onItemUse(stack, player, world, i1, i2, i3, i4, f1, f2, f3);
 	}
@@ -117,7 +120,7 @@ public class ItemWardenWeapon extends ItemSword {
 	 **/
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister register) {
+	public void registerIcons(@NotNull IIconRegister register) {
 		itemIcon = register.registerIcon("thaumrev:wardensword");
 	}
 }

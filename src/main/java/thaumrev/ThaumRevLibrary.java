@@ -33,28 +33,29 @@ public class ThaumRevLibrary {
 	public static WandRod WAND_ROD_CRIMSONCULT;
 
 	public static StaffRod STAFF_ROD_WARDENCLOTH;
-	public static StaffRod STAFF_ROD_VOIDWOOD;
-	public static StaffRod STAFF_ROD_CRIMSONCULT;
+    public static StaffRod STAFF_ROD_VOIDWOOD;
+    public static StaffRod STAFF_ROD_CRIMSONCULT;
 
-	public static Item itemWandCore;
+    public static Item itemWandCore;
 
-	public static Item itemResource;
-	public static Item itemCrimsonHat; //TODO: make model working
-	public static Item itemWardenAmulet;
-	public static Item itemWardenWeapon;
-	public static Item itemWardenBow;
-	public static Item itemFocusPurity; //TODO: make it working
+    public static Item itemResource;
+    public static Item itemWardenWeapon;
+    public static Item itemWardenBow;
+    public static Item itemFocusPurity; //TODO: make it working
 
-	public static Item itemWardenclothChest;
-	public static Item itemWardenclothLegs;
-	public static Item itemWardenclothBoots;
+    public static Item itemCrimsonHat;
 
-	public static Item itemWardenHelm;
-	public static Item itemWardenChest;
-	public static Item itemWardenLegs;
-	public static Item itemWardenBoots;
+    public static Item itemWardenclothChest;
+    public static Item itemWardenclothLegs;
+    public static Item itemWardenclothBoots;
 
-	public static Item itemLoveRing;
+    public static Item itemWardenHelm;
+    public static Item itemWardenChest;
+    public static Item itemWardenLegs;
+    public static Item itemWardenBoots;
+
+    public static Item itemWardenAmulet;
+    public static Item itemLoveRing;
 	public static Item itemWaslieHammer;
 	public static Item itemFocusIllumination;
 
@@ -85,41 +86,45 @@ public class ThaumRevLibrary {
 	public static ShapedArcaneRecipe recipeHelmetCultistRobe;
 	public static ShapedArcaneRecipe recipeChestCultistRobe;
 	public static ShapedArcaneRecipe recipeLegsCultistRobe;
-	public static ShapedArcaneRecipe recipeBootsCultist;
-	// public static ShapedArcaneRecipe recipeCrimsonHat;
+    public static ShapedArcaneRecipe recipeBootsCultist;
+    public static ShapedArcaneRecipe recipeCrimsonHat;
 
 	public static ShapedArcaneRecipe recipeWardenclothChest;
 	public static ShapedArcaneRecipe recipeWardenclothLegs;
 	public static ShapedArcaneRecipe recipeWardenclothBoots;
 
-	public static ShapedArcaneRecipe recipeWardenHelm;
-	public static ShapedArcaneRecipe recipeWardenChest;
-	public static ShapedArcaneRecipe recipeWardenLegs;
-	public static ShapedArcaneRecipe recipeWardenBoots;
+    public static ShapedArcaneRecipe recipeWardenHelm;
+    public static ShapedArcaneRecipe recipeWardenChest;
+    public static ShapedArcaneRecipe recipeWardenLegs;
+    public static ShapedArcaneRecipe recipeWardenBoots;
 
-	public static ShapedArcaneRecipe recipeWardenWeapon;
-	public static ShapedArcaneRecipe recipeWardenBow;
-	public static ShapedArcaneRecipe recipeWaslieHammer;
-	public static ShapedArcaneRecipe recipeFocusIllumination;
+    public static ShapedArcaneRecipe recipeWardenWeapon;
+    public static ShapedArcaneRecipe recipeWardenBow;
+    public static ShapedArcaneRecipe recipeWaslieHammer;
 
-	public static ResearchItem researchThaumRev;
+    public static ShapedArcaneRecipe recipeFocusIllumination;
+    public static ShapedArcaneRecipe recipeFocusPurity;
 
-	public static ResearchItem researchWardens;
+    public static ShapedArcaneRecipe recipeWardenAmulet;
 
-	public static ResearchItem researchIllumination;
+    public static ResearchItem researchThaumRev;
+    public static ResearchItem researchWardens;
+    public static ResearchItem researchFocusIllumination;
+    public static ResearchItem researchFocusPurity;
 
-	public static ResearchItem researchWardencloth;
-	public static ResearchItem researchWardenclothWand;
-	public static ResearchItem researchWardenclothStaff;
+    public static ResearchItem researchWardencloth;
+    public static ResearchItem researchWardenclothWand;
+    public static ResearchItem researchWardenclothStaff;
 
-	public static ResearchItem researchExcubitura;
-	public static ResearchItem researchCrystal;
+    public static ResearchItem researchExcubitura;
+    public static ResearchItem researchCrystal;
 
-	public static ResearchItem researchLore1;
-	public static ResearchItem researchLore2;
+    public static ResearchItem researchLore1;
+    public static ResearchItem researchLore2;
 	public static ResearchItem researchLore3;
 	public static ResearchItem researchLore4;
-	public static ResearchItem researchQuartz;
+    public static ResearchItem researchQuartz;
+    public static ResearchItem researchWardenAmulet;
 
 	public static ResearchItem researchWaslieHammer;
 	public static ResearchItem researchWardenArmor;

@@ -219,6 +219,23 @@ public class ThaumRevResearches {
         researchWaslieHammer.setPages(
                 new ResearchPage("0"),
                 new ResearchPage(recipeWaslieHammer));
+
+        researchWardenAmulet = new ThaumRevResearchItem(
+                "WARDENAMULET",
+                "thaumrev",
+                new AspectList()
+                        .add(EXCUBITOR, 12)
+                        .add(Aspect.ARMOR, 6)
+                        .add(Aspect.MAGIC, 6),
+                -8, 7, 2,
+                new ItemStack(itemWardenAmulet))
+                .setParents("LORE4")
+                .setRound()
+                .setSpecial()
+                .registerResearchItem();
+        researchWardenAmulet.setPages(
+                new ResearchPage("0"),
+                new ResearchPage(recipeWardenAmulet));
     }
 
     private static void loadWandCoresResearches() {
@@ -268,22 +285,45 @@ public class ThaumRevResearches {
     }
 
     private static void loadWandFociResearches() {
-        researchIllumination = new ThaumRevResearchItem(
-                "ILLUMINATION",
+        researchFocusIllumination = new ThaumRevResearchItem(
+                "FOCUSILLUMINATION",
                 "thaumrev",
                 new AspectList()
+                        .add(Aspect.LIGHT, 8)
                         .add(Aspect.AIR, 8)
                         .add(Aspect.FIRE, 8),
-                -12, 2, 2,
+                -12, 1, 2,
                 new ItemStack(itemFocusIllumination))
                 .setRound()
                 .setConcealed()
                 .setParents("ROD_wardencloth")
                 .setParentsHidden("FOCUSFIRE")
                 .registerResearchItem();
-        researchIllumination.setPages(
+        researchFocusIllumination.setPages(
                 new ResearchPage("0"),
                 new ResearchPage(recipeFocusIllumination));
+
+        researchFocusPurity = new ThaumRevResearchItem(
+                "FOCUSPURITY",
+                "thaumrev",
+                new AspectList()
+                        .add(EXCUBITOR, 6)
+                        .add(Aspect.AIR, 3)
+                        .add(Aspect.EARTH, 3)
+                        .add(Aspect.ENTROPY, 3)
+                        .add(Aspect.FIRE, 3)
+                        .add(Aspect.ORDER, 3)
+                        .add(Aspect.WATER, 3),
+                -12, 3, 3,
+                new ItemStack(itemFocusPurity))
+                .setRound()
+                .setConcealed()
+                .setParents("ROD_wardencloth")
+                .setParentsHidden("FOCUSWARDING")
+                .registerResearchItem();
+        researchFocusPurity.setPages(
+                new ResearchPage("0"),
+                new ResearchPage(recipeFocusPurity));
     }
 
     private static void loadLoreResearches() {
@@ -325,7 +365,6 @@ public class ThaumRevResearches {
                 new ItemStack(itemWardenAmulet))
                 .setParents("WARDENS")
                 .setSecondary()
-                .setSpecial()
                 .registerResearchItem();
         researchLore1.setPages(
                 new ResearchPage("0"),
@@ -340,7 +379,6 @@ public class ThaumRevResearches {
                 new ItemStack(itemWardenAmulet))
                 .setParents("LORE1")
                 .setSecondary()
-                .setSpecial()
                 .registerResearchItem();
         researchLore2.setPages(
                 new ResearchPage("0"),
@@ -358,7 +396,6 @@ public class ThaumRevResearches {
                 new ItemStack(itemWardenAmulet))
                 .setParents("LORE2")
                 .setSecondary()
-                .setSpecial()
                 .registerResearchItem();
         researchLore3.setPages(
                 new ResearchPage("0"),
@@ -377,7 +414,6 @@ public class ThaumRevResearches {
                 new ItemStack(itemWardenAmulet))
                 .setParents("LORE3")
                 .setSecondary()
-                .setSpecial()
                 .registerResearchItem();
         researchLore4.setPages(
                 new ResearchPage("0"),

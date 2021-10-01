@@ -9,8 +9,7 @@ buildscript {
         mavenCentral()
         maven {
             name = "forge"
-            // url = "http://files.minecraftforge.net/maven"
-			url = "https://maven.minecraftforge.net"
+            url = "https://maven.minecraftforge.net"
         }
         maven {
             name = "sonatype"
@@ -30,7 +29,7 @@ apply plugin: 'forge'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-version = "0.2.5.3"
+version = "0.2.5.4"
 group = "thaumrev" // This is our group.
 // archivesBaseName = "ThaumicRevelations" // This is our actual project within the group.
 
@@ -38,7 +37,7 @@ group = "thaumrev" // This is our group.
 minecraft {
     version = "1.7.10-10.13.4.1614-1.7.10"
     runDir = "run"
-    mappings = 'stable_12' // This seems to break stuff
+    mappings = 'stable_12'
 }
 
     /*
@@ -100,7 +99,7 @@ configurations.all {
 // Add Coremod Manifest and Classifier (if I wanted one)
 jar {
     manifest {
-		// attributes 'FMLCorePlugin': 'tconstruct.preloader.TConstructLoaderContainer'
+        // attributes 'FMLCorePlugin': 'tconstruct.preloader.TConstructLoaderContainer'
         // attributes 'FMLCorePluginContainsFMLMod': 'true'
     }
     // classifier = 'universal'
@@ -269,8 +268,7 @@ task wrapper(type: Wrapper) {
 task copyChicken(type: Copy, dependsOn: "extractUserDev") {
     from configurations.compile
     include "**/*CodeChicken*.jar", "**/*NotEnoughItems*.jar"
-    // Because CodeChickenCore downloads it automatically anyways...
-    exclude "**/*CodeChickenLib*.jar"
+    exclude "**/*CodeChickenLib*.jar" // Because CodeChickenCore downloads it automatically anyways...
     into file(minecraft.runDir + "/mods")
     mustRunAfter "deobfBinJar"
     mustRunAfter "repackMinecraft"
