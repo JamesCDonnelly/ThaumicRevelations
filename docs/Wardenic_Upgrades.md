@@ -1,6 +1,7 @@
 # Rework of The Armor and The Sword
 
 ### The Armor
+
 * Excubitor:
     * ignore damage dealt by Taint, Eldritch and End mobs (only when full set is being worn)
     * return 15% of damage per Armor piece if it was dealt by Taint, Eldritch or End mobs
@@ -53,6 +54,7 @@
     * nullify Knockback (only when full set is being worn) - **WiP**
 
 ### The Sword
+
 * Excubitor:
     * deal additional damage to Taint, Eldritch and End mobs as Warden Damage, which is based on Armor pieces number
 * Aer:
@@ -66,11 +68,13 @@
 * Perditio:
     * there's 1% chance the attack will kill target immediately
         * don't work on bosses (because bosses have damage limit)
+            * fun fact: Twilight Forest mod doesn't have boss damage cap lmao
         * chance is increased to 10% when full Perditio armor set is being worn
 * Terra:
     * apply Slowness, Blindness and Mining Fatigue effects on attack, duration of these effects is based on Armor pieces number
-        
+
 ### The Bow
+
 * Excubitor:
     * deal additional damage to Taint, Eldritch and End mobs as Warden Damage, which is based on Armor pieces number
 * Aer:
@@ -85,5 +89,6 @@
 * Perditio:
     * there's a chance the attack will kill target immediately, chance is based on Armor pieces number
         * don't work on bosses (because bosses have damage limit)
+            * fun fact: Twilight Forest mod doesn't have boss damage cap lmao
 * Terra:
     * apply Slowness, and Mining Fatigue effects on attack, duration of these effects is based on Armor pieces number
