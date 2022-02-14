@@ -33,9 +33,7 @@ public class ItemWardenWeapon extends ItemSword {
 	}
 
 
-	/**
-	 * Overrides - void
-	 **/
+	/* Overrides - void */
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, @NotNull List list, boolean par4) {
 		list.add(EnumChatFormatting.GOLD + StatCollector.translateToLocal("tooltip.wardenic.upgrade") +
@@ -45,7 +43,7 @@ public class ItemWardenWeapon extends ItemSword {
 	}
 
 
-	/** Overrides - boolean **/
+	/* Overrides - boolean */
 	@Override
 	public boolean getShareTag() {
 		return true;
@@ -67,8 +65,7 @@ public class ItemWardenWeapon extends ItemSword {
 			DamageSource damageSource = new DamageSourceWarden("warden", player);
 			entity.attackEntityFrom(damageSource, 5);
 			WardenicChargeHelper.getUpgrade(stack).onAttack(stack, player, entity);
-		} catch (Exception ignored) {
-		}
+		} catch (Exception ignored) {}
 
 		stack.setMetadata(0);
 
@@ -88,36 +85,28 @@ public class ItemWardenWeapon extends ItemSword {
 	}
 
 
-	/**
-	 * Overrides - int
-	 **/
+	/* Overrides - int */
 	@Override
 	public int getMaxItemUseDuration(ItemStack par1ItemStack) {
 		return 72000;
 	}
 
 
-	/**
-	 * Overrides - EnumRarity
-	 **/
+	/* Overrides - EnumRarity */
 	@Override
 	public EnumRarity getRarity(ItemStack par1ItemStack) {
 		return EnumRarity.epic;
 	}
 
 
-	/**
-	 * Overrides - EnumAction
-	 **/
+	/* Overrides - EnumAction */
 	@Override
 	public EnumAction getItemUseAction(ItemStack par1ItemStack) {
 		return EnumAction.block;
 	}
 
 
-	/**
-	 * Client-side
-	 **/
+	/* Client-side */
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(@NotNull IIconRegister register) {

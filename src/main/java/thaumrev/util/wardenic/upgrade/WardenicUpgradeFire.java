@@ -12,98 +12,98 @@ import thaumrev.util.wardenic.WardenicChargeHelper;
 
 public class WardenicUpgradeFire extends WardenicUpgrade {
 
-	public WardenicUpgradeFire(Aspect aspect) {
-		super(aspect);
-	}
+  public WardenicUpgradeFire(Aspect aspect) {
+    super(aspect);
+  }
 
-	@Override
-	public void onIndirectAttack(LivingHurtEvent event) {
-		super.onIndirectAttack(event);
+  @Override
+  public void onIndirectAttack(LivingHurtEvent event) {
+    super.onIndirectAttack(event);
 
-		Entity entity = event.entity;
-		EntityPlayer player = (EntityPlayer)event.source.getEntity();
-		EntityArrow entityArrow = (EntityArrow)event.source.getSourceOfDamage();
+    Entity entity = event.entity;
+    EntityPlayer player = (EntityPlayer)event.source.getEntity();
+    EntityArrow entityArrow = (EntityArrow)event.source.getSourceOfDamage();
 
-		int count = 0;
+    int count = 0;
 
-		for (int i = 0; i < 4; i++) {
-			if ((player.getCurrentArmor(i) != null) &&
-					WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
-							.equals(Aspect.FIRE.getName())) {
-				count++;
-			}
-		}
+    for (int i = 0; i < 4; i++) {
+      if ((player.getCurrentArmor(i) != null) &&
+        WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
+          .equals(Aspect.FIRE.getName())) {
+        count++;
+      }
+    }
 
-		if (entityArrow.getIsCritical()) {
-			entity.setFire(4 * (count + 1));
-		}
-	}
+    if (entityArrow.getIsCritical()) {
+      entity.setFire(4 * (count + 1));
+    }
+  }
 
-	@Override
-	public void onAttack(ItemStack stack, EntityPlayer player, Entity entity) {
-		super.onAttack(stack, player, entity);
+  @Override
+  public void onAttack(ItemStack stack, EntityPlayer player, Entity entity) {
+    super.onAttack(stack, player, entity);
 
-		int count = 0;
+    int count = 0;
 
-		for (int i = 0; i < 4; i++) {
-			if ((player.getCurrentArmor(i) != null) &&
-					WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
-							.equals(Aspect.FIRE.getName())) {
-				count++;
-			}
-		}
+    for (int i = 0; i < 4; i++) {
+      if ((player.getCurrentArmor(i) != null) &&
+        WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
+          .equals(Aspect.FIRE.getName())) {
+        count++;
+      }
+    }
 
-		entity.setFire(4 * (count + 1));
-	}
+    entity.setFire(4 * (count + 1));
+  }
 
-	@Override
-	public void onAttacked(LivingHurtEvent event) {
-		super.onAttacked(event);
+  @Override
+  public void onHurt(LivingHurtEvent event) {
+    super.onHurt(event);
 
-		int count = 0;
-		EntityPlayer player = (EntityPlayer) event.entity;
+    int count = 0;
+    EntityPlayer player = (EntityPlayer) event.entity;
 
-		for (int i = 0; i <= 3; i++) {
-			if ((player.getCurrentArmor(i) != null) &&
-					WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
-							.equals(Aspect.FIRE.getName())) {
-				count++;
-			}
-		}
+    for (int i = 0; i <= 3; i++) {
+      if ((player.getCurrentArmor(i) != null) &&
+        WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
+          .equals(Aspect.FIRE.getName())) {
+        count++;
+      }
+    }
 
-		if (event.source.getEntity() != null) {
-			event.source.getEntity().setFire(2);
-		}
+    if (event.source.getEntity() != null) {
+      event.source.getEntity().setFire(2);
+    }
 
-		if (event.source.isFireDamage()) {
-			event.ammount *= 1 - (0.25F * count);
-		} else if (event.source.isExplosion()) {
-			event.ammount *= 1 - (0.15F * count);
-		}
-	}
+    if (event.source.isFireDamage()) {
+      event.ammount *= 1 - (0.25F * count);
+    } else if (event.source.isExplosion()) {
+      event.ammount *= 1 - (0.15F * count);
+    }
+  }
 
-	@Override
-	public void onTick(World world, EntityPlayer player, ItemStack stack) {
-		super.onTick(world, player, stack);
+  @Override
+  public void onTick(World world, EntityPlayer player, ItemStack stack) {
+    super.onTick(world, player, stack);
 
-		int count = 0;
+    int count = 0;
 
-		if (player.isBurning()) {
-			player.extinguish();
-		}
+    if (player.isBurning()) {
+      player.extinguish();
+    }
 
-		for (int i = 0; i <= 3; i++) {
-			if ((player.getCurrentArmor(i) != null) &&
-					WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
-							.equals(Aspect.FIRE.getName())) {
-				count++;
-			}
-		}
+    for (int i = 0; i <= 3; i++) {
+      if ((player.getCurrentArmor(i) != null) &&
+        WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
+          .equals(Aspect.FIRE.getName())) {
+        count++;
+      }
+    }
 
-		if (count == 4) {
-			if (player.isPotionActive(Config.potionSunScornedID)) {
-				player.removePotionEffect(Config.potionSunScornedID);
-			}
-		}
-	}
+    if (count == 4) {
+      if (player.isPotionActive(Config.potionSunScornedID)) {
+        player.removePotionEffect(Config.potionSunScornedID);
+      }
+    }
+  }
 }

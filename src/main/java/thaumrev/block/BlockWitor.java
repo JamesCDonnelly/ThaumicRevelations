@@ -15,15 +15,14 @@ import thaumcraft.common.config.Config;
 import java.util.Random;
 
 public class BlockWitor extends Block {
-
 	public BlockWitor() {
-        super(Config.airyMaterial);
-        setUnlocalizedName("blockWitor");
-        setStepSound(Block.soundTypeCloth);
-        setBlockBounds(0.3F, 0.3F, 0.3F, 0.7F, 0.7F, 0.7F);
-    }
+		super(Config.airyMaterial);
+		setUnlocalizedName("blockWitor");
+		setStepSound(Block.soundTypeCloth);
+		setBlockBounds(0.3F, 0.3F, 0.3F, 0.7F, 0.7F, 0.7F);
+	}
 
-	/** Overrides - boolean **/
+	/* Overrides - boolean */
 	@Override
 	public boolean renderAsNormalBlock() {
 		return false;
@@ -40,7 +39,7 @@ public class BlockWitor extends Block {
 	}
 
 
-	/** Overrides - int **/
+	/* Overrides - int */
 	@Override
 	public int getRenderType() {
 		return -1;
@@ -52,60 +51,58 @@ public class BlockWitor extends Block {
 	}
 
 
-	/** Overrides - Item **/
+	/* Overrides - Item */
 	@Override
 	public Item getItemDropped(int par1, Random par2Random, int par3) {
 		return null;
 	}
 
 
-	/** Overrides - AxisAlignedBB **/
+	/* Overrides - AxisAlignedBB */
 	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
 		return null;
 	}
 
 
-    /**
-     * Client-side
-     **/
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister register) {
-        blockIcon = register.registerIcon("thaumcraft:blank");
-    }
+	/* Client-side */
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IIconRegister register) {
+			blockIcon = register.registerIcon("thaumcraft:blank");
+	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
 		if (rand.nextInt(9 - Thaumcraft.proxy.particleCount(2)) <= 5) {
 			Thaumcraft.proxy.wispFX3(
-					world,
-					x + 0.5F,
-					y + 0.5F,
-					z + 0.5F,
-					x + 0.3F + rand.nextFloat() * 0.4F,
-					y + 0.5F,
-					z + 0.3F + rand.nextFloat() * 0.4F,
-					0.5F,
-					0,
-					true,
-					-0.025F);
+				world,
+				x + 0.5F,
+				y + 0.5F,
+				z + 0.5F,
+				x + 0.3F + rand.nextFloat() * 0.4F,
+				y + 0.5F,
+				z + 0.3F + rand.nextFloat() * 0.4F,
+				0.5F,
+				0,
+				true,
+				-0.025F);
 		}
+
 		if (rand.nextInt(15 - Thaumcraft.proxy.particleCount(4)) <= 8) {
 			Thaumcraft.proxy.wispFX3(
-					world,
-					x + 0.5F,
-					y + 0.5F,
-					z + 0.5F,
-					x + 0.4F + rand.nextFloat() * 0.2F,
-					y + 0.5F,
-					z + 0.4F + rand.nextFloat() * 0.2F,
-					0.25F,
-					2,
-					true,
-					-0.02F);
+				world,
+				x + 0.5F,
+				y + 0.5F,
+				z + 0.5F,
+				x + 0.4F + rand.nextFloat() * 0.2F,
+				y + 0.5F,
+				z + 0.4F + rand.nextFloat() * 0.2F,
+				0.25F,
+				2,
+				true,
+				-0.02F);
 		}
 	}
-
 }

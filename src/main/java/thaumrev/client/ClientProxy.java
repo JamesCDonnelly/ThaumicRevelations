@@ -1,21 +1,33 @@
 package thaumrev.client;
 
+import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
+
+import thaumrev.entity.EntityPurity;
+import thaumrev.tiles.TileKnowledgeReprocessor;
+import thaumrev.client.renderers.TileKnowledgeReprocessorRenderer;
 import thaumrev.client.renderers.RenderPurity;
 import thaumrev.common.CommonProxy;
-import thaumrev.entity.EntityPurity;
 import thaumrev.networking.ClientPacketHandler;
 import thaumrev.util.KeyHandler;
 
 import static thaumrev.ThaumicRevelations.channel;
 import static thaumrev.ThaumicRevelations.networkChannelName;
 
+// import thaumcraft.common.blocks.BlockLifter;
+// import thaumcraft.client.renderers.block.BlockLifterRenderer;
+// import thaumcraft.client.renderers.tile.TileAlembicRenderer;
+// import thaumcraft.common.tiles.TileLifter;
+// import thaumcraft.client.renderers.models.ModelArcaneWorkbench;
+// import thaumcraft.client.renderers.models.ModelBrain;
+
 public class ClientProxy extends CommonProxy {
 	@Override
 	public void initRenderers() {
 		entityRenderers();
+		tileRenderers();
 	}
 
 	@Override
@@ -31,5 +43,9 @@ public class ClientProxy extends CommonProxy {
 
 	private void entityRenderers() {
 		RenderingRegistry.registerEntityRenderingHandler(EntityPurity.class, new RenderPurity());
+	}
+
+	private void tileRenderers() {
+		ClientRegistry.bindTileEntitySpecialRenderer(TileKnowledgeReprocessor.class, new TileKnowledgeReprocessorRenderer());
 	}
 }

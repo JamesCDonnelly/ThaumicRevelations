@@ -70,6 +70,7 @@ tile.blockInfusedQuartzStair.name=Infused Quartz Stair
 tile.blockInfusedQuartzChiseled.name=Chiseled Infused Quartz Block
 tile.blockInfusedQuartzPillar.name=Infused Quartz Pillar Block
 tile.blockWitor.name=Wardenic Light
+tile.blockKnowledgeReprocessor.name=Knowledge Reprocessor
 
 #Aspects
 tc.aspect.excubitor=Warden, Vigilance, Victory, Sacrifice

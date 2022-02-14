@@ -23,7 +23,6 @@ import java.io.File;
 
 @Mod(modid = "thaumrev", useMetadata = true)
 public class ThaumicRevelations {
-
     public File modDir;
     public static final Logger log = LogManager.getLogger("thaumrev");
 
@@ -48,7 +47,7 @@ public class ThaumicRevelations {
 		try {
 			ThaumRevConfig.initialize(event.getSuggestedConfigurationFile());
 		} catch (Exception var8) {
-			log.error("Thaumic Revelations has a problem loading it's configuration");
+			log.error("Thaumic Revelations has a problem loading its configuration");
 		} finally {
 			if (ThaumRevConfig.config != null) {
 				ThaumRevConfig.save();

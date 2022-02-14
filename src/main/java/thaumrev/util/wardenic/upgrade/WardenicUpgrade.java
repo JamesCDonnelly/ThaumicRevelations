@@ -25,7 +25,7 @@ public class WardenicUpgrade {
 
 	public void onTick(World world, EntityPlayer player, ItemStack stack) {}
 
-	public void onAttacked(LivingHurtEvent event) {}
+	public void onHurt(LivingHurtEvent event) {}
 
 	public String getQuote() {
 		return StatCollector.translateToLocal("upgrade." + aspect.getName() + ".quote");

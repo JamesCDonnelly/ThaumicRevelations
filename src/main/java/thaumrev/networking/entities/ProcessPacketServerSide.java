@@ -13,25 +13,25 @@ import java.io.IOException;
 import static thaumrev.ThaumicRevelations.PACKET_TYPE_AMULET_USE;
 
 public class ProcessPacketServerSide {
-    public ProcessPacketServerSide() {
-    }
+  public ProcessPacketServerSide() {
+  }
 
-    public static void processPacketOnServer(ByteBuf parBB, Side side, EntityPlayerMP player) throws IOException {
-        if (side == Side.SERVER) {
-            ByteBufInputStream bbis = new ByteBufInputStream(parBB);
+  public static void processPacketOnServer(ByteBuf parBB, Side side, EntityPlayerMP player) throws IOException {
+    if (side == Side.SERVER) {
+      ByteBufInputStream bbis = new ByteBufInputStream(parBB);
 
-            World world = Minecraft.getMinecraft().theWorld;
-            int packetTypeID = bbis.readInt();
+      World world = Minecraft.getMinecraft().theWorld;
+      int packetTypeID = bbis.readInt();
 
-            switch (packetTypeID) {
-                case PACKET_TYPE_AMULET_USE: {
-                    int meta = bbis.readInt();
-                    if (meta == 0) ItemWardenAmulet.amuletEffect(player);
-                    break;
-                }
-            }
-
-            bbis.close();
+      switch (packetTypeID) {
+        case PACKET_TYPE_AMULET_USE: {
+          int meta = bbis.readInt();
+          if (meta == 0) ItemWardenAmulet.amuletEffect(player);
+          break;
         }
+      }
+
+      bbis.close();
     }
+  }
 }
