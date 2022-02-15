@@ -16,13 +16,6 @@ import thaumrev.util.KeyHandler;
 import static thaumrev.ThaumicRevelations.channel;
 import static thaumrev.ThaumicRevelations.networkChannelName;
 
-// import thaumcraft.common.blocks.BlockLifter;
-// import thaumcraft.client.renderers.block.BlockLifterRenderer;
-// import thaumcraft.client.renderers.tile.TileAlembicRenderer;
-// import thaumcraft.common.tiles.TileLifter;
-// import thaumcraft.client.renderers.models.ModelArcaneWorkbench;
-// import thaumcraft.client.renderers.models.ModelBrain;
-
 public class ClientProxy extends CommonProxy {
 	@Override
 	public void initRenderers() {

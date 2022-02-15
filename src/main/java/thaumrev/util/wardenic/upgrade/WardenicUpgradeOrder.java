@@ -1,11 +1,9 @@
 package thaumrev.util.wardenic.upgrade;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.boss.EntityWither;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.monster.EntityGhast;
-import net.minecraft.entity.monster.EntitySkeleton;
-import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.ItemStack;
@@ -27,9 +25,7 @@ public class WardenicUpgradeOrder extends WardenicUpgrade {
   }
 
   private boolean isUndeadOrHell(Entity entity) {
-    return entity instanceof EntityZombie ||
-      entity instanceof EntitySkeleton ||
-      entity instanceof EntityWither ||
+    return ((EntityLivingBase)entity).isEntityUndead() ||
       entity instanceof EntityGhast ||
       entity instanceof EntityFireBat ||
       entity instanceof EntityBlaze;

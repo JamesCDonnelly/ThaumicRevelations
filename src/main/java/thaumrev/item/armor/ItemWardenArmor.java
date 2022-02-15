@@ -24,7 +24,6 @@ import thaumcraft.api.IVisDiscountGear;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.nodes.IRevealer;
 import thaumcraft.common.Thaumcraft;
-import thaumcraft.client.renderers.tile.TileResearchTableRenderer;
 import thaumrev.ThaumRevLibrary;
 import thaumrev.util.wardenic.WardenicChargeHelper;
 
@@ -85,26 +84,48 @@ public class ItemWardenArmor extends ItemArmor implements IRepairable, ISpecialA
     String upgrade = WardenicChargeHelper.getUpgrade(stack).getUpgradeAspect();
     ItemArmor armor = (ItemArmor) stack.getItem();
 
-    if (!player.capabilities.isFlying && player.moveForward > 0.0F) {
-      if (armor.armorType == 3 && (upgrade.equals(Aspect.AIR.getName()) || upgrade.equals(Aspect.WATER.getName()))) {
-        if (!player.isSneaking()) {
-          player.stepHeight = 1.0F;
-        } else {
-          player.stepHeight = 0.5F;
-        }
+    if (player.moveForward > 0.0F) {
+      if (armor.armorType == 3) {
+        if (
+          (upgrade.equals(Aspect.AIR.getName()) && !player.isInWater()) ||
+          (upgrade.equals(Aspect.WATER.getName()) && player.isInWater())
+        ) {
+          if (!player.isSneaking()) {
+            player.stepHeight = 1.0F;
+          } else {
+            player.stepHeight = 0.5F;
+          }
 
-        if (!Thaumcraft.instance.entityEventHandler.prevStep.containsKey(player.getEntityId())) {
-          Thaumcraft.instance.entityEventHandler.prevStep.put(player.getEntityId(), player.stepHeight);
+          if (!Thaumcraft.instance.entityEventHandler.prevStep.containsKey(player.getEntityId())) {
+            Thaumcraft.instance.entityEventHandler.prevStep.put(player.getEntityId(), player.stepHeight);
+          }
         }
       }
 
       if (player.isInWater()) {
         if (upgrade.equals(Aspect.WATER.getName())) {
-          player.moveFlying(1, 0, 0.1F);
+          player.moveFlying(0.0F, 1.0F, player.isSprinting() ? 0.02F : 0.01F);
         } else if (upgrade.equals(Aspect.AIR.getName()) || upgrade.equals(Aspect.EARTH.getName())) {
-          player.moveFlying(1, 0, -0.05F);
+          player.moveFlying(0.0F, 1.0F, -0.001F);
         }
       }
+      if (upgrade.equals(Aspect.AIR.getName())) {
+        player.jumpMovementFactor += 0.0025F;
+      } else if (upgrade.equals(Aspect.EARTH.getName())) { 
+        player.jumpMovementFactor -= 0.0025F;
+      }
+
+      // if (player.onGround) {
+			// 	if (player.isInWater()) {
+			// 		player.moveFlying(0.0F, 1.0F, water * 0.025F);
+			// 	} else {
+			// 		player.moveFlying(0.0F, 1.0F, air * 0.010F - earth * 0.005F);
+			// 	}
+			// } else if (Hover.getHover(player.getEntityId())) {
+			// 	player.jumpMovementFactor = 0.02F + 0.0025F * air;
+			// } else {
+			// 	player.jumpMovementFactor = 0.02F + 0.005F * air;
+			// }
     }
   }
 
@@ -206,7 +227,7 @@ public class ItemWardenArmor extends ItemArmor implements IRepairable, ISpecialA
 
   /* Overrides - EnumRarity */
   @Override
-  public EnumRarity getRarity(ItemStack par1ItemStack) {
+  public EnumRarity getRarity(ItemStack stack) {
     return EnumRarity.epic;
   }
 

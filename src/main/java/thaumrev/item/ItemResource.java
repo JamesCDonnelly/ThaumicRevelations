@@ -15,12 +15,12 @@ import java.util.List;
 public class ItemResource extends Item {
 
 	public static final String[] RESOURCE_ICON = {
-			"wardenpetal",
-			"wardencrystal",
-			"wardenquartz",
-			"wardenfabric",
-			"crimsonfabric",
-			"voidfabric"
+		"wardenpetal",
+		"wardencrystal",
+		"wardenquartz",
+		"wardenfabric",
+		"crimsonfabric",
+		"voidfabric"
 	};
 
 	public IIcon[] icons;

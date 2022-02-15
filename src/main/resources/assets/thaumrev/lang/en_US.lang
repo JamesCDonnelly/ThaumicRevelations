@@ -65,7 +65,7 @@ item.itemExcubituraSeeds.name=Wardenic Rose Seeds
 
 #Blocks
 tile.blockInfusedQuartzNormal.name=Infused Quartz Block
-tile.blockInfusedQuartzSlab.name=Infused Quartz Slab
+tile.blockSlabInfusedQuartz.name=Infused Quartz Slab
 tile.blockInfusedQuartzStair.name=Infused Quartz Stair
 tile.blockInfusedQuartzChiseled.name=Chiseled Infused Quartz Block
 tile.blockInfusedQuartzPillar.name=Infused Quartz Pillar Block

@@ -3,9 +3,7 @@ package thaumrev.networking.entities;
 import cpw.mods.fml.relauncher.Side;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufInputStream;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.world.World;
 import thaumrev.item.baubles.ItemWardenAmulet;
 
 import java.io.IOException;
@@ -20,7 +18,7 @@ public class ProcessPacketServerSide {
     if (side == Side.SERVER) {
       ByteBufInputStream bbis = new ByteBufInputStream(parBB);
 
-      World world = Minecraft.getMinecraft().theWorld;
+      // World world = Minecraft.getMinecraft().theWorld;
       int packetTypeID = bbis.readInt();
 
       switch (packetTypeID) {

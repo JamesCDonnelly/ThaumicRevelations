@@ -8,7 +8,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class TabThaumRev extends CreativeTabs {
-
 	private final ItemSorter itemSorter = new ItemSorter();
 
 	public TabThaumRev(String label) {

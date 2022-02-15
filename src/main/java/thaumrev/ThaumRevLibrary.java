@@ -83,7 +83,8 @@ public class ThaumRevLibrary {
   public static Block blockInfusedQuartzNormal;
   public static Block blockInfusedQuartzChiseled;
   public static Block blockInfusedQuartzPillar;
-  public static Block blockInfusedQuartzSlab;
+  public static Block blockSlabInfusedQuartz;
+  public static Block blockSlabDoubleInfusedQuartz;
   public static Block blockInfusedQuartzStair;
   public static Block blockWitor;
   public static Block blockKnowledgeReprocessor;

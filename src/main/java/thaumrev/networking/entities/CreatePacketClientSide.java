@@ -9,8 +9,7 @@ import java.io.IOException;
 import static thaumrev.ThaumicRevelations.*;
 
 public class CreatePacketClientSide {
-    public CreatePacketClientSide() {
-    }
+    public CreatePacketClientSide() { }
 
     public static FMLProxyPacket createAmuletUsePacket(int i) throws IOException {
         ByteBufOutputStream bbos = new ByteBufOutputStream(Unpooled.buffer());

@@ -12,7 +12,6 @@ import thaumcraft.common.entities.monster.boss.EntityEldritchGolem;
 import thaumcraft.common.entities.monster.boss.EntityEldritchWarden;
 
 public class PurityHelper {
-
 	public static boolean isTainted(Entity entity) {
 		return entity instanceof ITaintedMob;
 	}

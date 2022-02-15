@@ -40,9 +40,7 @@ public class BlockExcubitura extends BlockBush implements IGrowable {
 		world.setBlockMetadataWithNotify(x, y, z, growStage, 2);
 	}
 
-	/**
-	 * Overrides - void
-	 **/
+	/* Overrides - void */
 	@Override
 	public void fertilize(World world, Random random, int x, int y, int z) {
 		incrementGrowStage(world, random, x, y, z);
@@ -65,7 +63,7 @@ public class BlockExcubitura extends BlockBush implements IGrowable {
 	}
 
 
-	/** Overrides - boolean **/
+	/* Overrides - boolean */
 	@Override
 	public boolean canBlockStay(World world, int x, int y, int z) {
 		return world.getBlock(x, y - 1, z).equals(Blocks.dirt) ||
@@ -89,7 +87,7 @@ public class BlockExcubitura extends BlockBush implements IGrowable {
 	}
 
 
-	/** Overrides - int **/
+	/* Overrides - int */
 	@Override
 	public int quantityDropped(int metadata, int fortune, Random random) {
 		return metadata / 7;

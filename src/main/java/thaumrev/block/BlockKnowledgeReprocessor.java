@@ -6,11 +6,14 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.item.EnumRarity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 import thaumrev.ThaumRevLibrary;
 import thaumrev.tiles.TileKnowledgeReprocessor;
 
@@ -30,39 +33,61 @@ public class BlockKnowledgeReprocessor extends BlockContainer {
 
   @Override
   @SideOnly(Side.CLIENT)
-  public int getRenderType() { return 2; }
+  public int getRenderType() { return -1; }
 
   @SideOnly(Side.CLIENT)
-  public void registerBlockIcons(IIconRegister ir) {
-    this.icons[0] = ir.registerIcon("thaumcraft:arcaneearbottom");
-    this.icons[1] = ir.registerIcon("thaumcraft:liftertop");
-    this.icons[2] = ir.registerIcon("thaumcraft:lifterside");
-  }
+  public void registerBlockIcons(IIconRegister ir) { }
 
 	@Override
   @SideOnly(Side.CLIENT)
   public IIcon getIcon(int side, int meta) {
-		if (side == 0) {
-			return this.icons[0];
-		} else if (side == 1) {
-			return this.icons[1];
-		} else {
-			return this.icons[2];
-		}
-	}
+    if (side == 0) {
+      return this.icons[0];
+    } else if (side == 1) {
+      return this.icons[1];
+    } else {
+      return this.icons[2];
+    }
+  }
+
+  public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack) {
+    byte rotation = 0;
+    int rotationYaw = MathHelper.floor_double((double)(entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+
+    switch (rotationYaw) {
+      case 0:
+        rotation = 2;
+        break;
+
+      case 1:
+        rotation = 5;
+        break;
+
+      case 2:
+        rotation = 4;
+        break;
+
+      case 3:
+        rotation = 3;
+        break;
+
+      default:
+        break;
+    }
+
+    world.setBlockMetadataWithNotify(x, y, z, rotation, 2);
+}
 
   @Override
   public TileEntity createNewTileEntity(World world, int metadata) {
     return new TileKnowledgeReprocessor();
   }
 
-  // @Override
-  // public TileEntity createTileEntity(World world, int metadata) {
-  //   return new TileKnowledgeReprocessor();
-  // }
+  @Override
+  public boolean renderAsNormalBlock() { return false; }
 
   @Override
-  public boolean renderAsNormalBlock() {
-    return false;
+  public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side) {
+    return true;
   }
 }

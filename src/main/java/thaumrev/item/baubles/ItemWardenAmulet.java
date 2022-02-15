@@ -10,13 +10,10 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.INpc;
-import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.passive.EntityWaterMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagInt;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
@@ -277,7 +274,7 @@ public class ItemWardenAmulet extends Item implements IBauble, IRunicArmor {
    */
   @Override
   public ItemStack onItemRightClick(@NotNull ItemStack stack, @NotNull World world, @NotNull EntityPlayer player) {
-    world.playSoundAtEntity(player, "thaumrev:compramos", 1, 1);
+    // world.playSoundAtEntity(player, "thaumrev:compramos", 1, 1);
     return super.onItemRightClick(stack, world, player);
   }
 

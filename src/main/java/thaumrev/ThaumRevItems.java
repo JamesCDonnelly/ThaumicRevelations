@@ -19,38 +19,14 @@ import thaumrev.item.wands.ItemWandCore;
 import static thaumrev.ThaumRevLibrary.*;
 
 public class ThaumRevItems {
-  public static void registerItems() {
-    loadMaterials();
-    loadItems();
-    loadWandCores();
-
-    GameRegistry.registerItem(itemResource, "itemResource");
-    GameRegistry.registerItem(itemWardenWeapon, "itemWardenWeapon");
-    GameRegistry.registerItem(itemWardenBow, "itemWardenBow");
-    GameRegistry.registerItem(itemWardenAmulet, "itemWardenAmulet");
-
-    GameRegistry.registerItem(itemCrimsonHat, "itemCrimsonHat");
-
-    GameRegistry.registerItem(itemWardenHelm, "itemWardenHelm");
-    GameRegistry.registerItem(itemWardenChest, "itemWardenChest");
-    GameRegistry.registerItem(itemWardenLegs, "itemWardenLegs");
-    GameRegistry.registerItem(itemWardenBoots, "itemWardenBoots");
-
-    GameRegistry.registerItem(itemWardenclothChest, "itemWardenclothChest");
-    GameRegistry.registerItem(itemWardenclothLegs, "itemWardenclothLegs");
-    GameRegistry.registerItem(itemWardenclothBoots, "itemWardenclothBoots");
-
-    GameRegistry.registerItem(itemLoveRing, "itemLoveRing");
-    GameRegistry.registerItem(itemWaslieHammer, "itemWaslieHammer");
-    GameRegistry.registerItem(itemFocusIllumination, "itemFocusIllumination");
-    GameRegistry.registerItem(itemFocusPurity, "itemFocusPurity");
-
-    GameRegistry.registerItem(itemExcubituraSeeds, "itemExcubituraSeeds");
-
-    GameRegistry.registerItem(itemWandCore, "itemWandCore");
+  public static void init() {
+    initializeMaterials();
+    initializeItems();
+    initializeWandCores();
+    registerItems();
   }
 
-  private static void loadItems() {
+  private static void initializeItems() {
     itemResource = new ItemResource();
 
     itemWardenWeapon = new ItemWardenWeapon();
@@ -76,7 +52,7 @@ public class ThaumRevItems {
     itemExcubituraSeeds = new ItemExcubituraSeeds();
   }
 
-  private static void loadMaterials() {
+  private static void initializeMaterials() {
     armorMaterialWarden = EnumHelper.addArmorMaterial(
       "WARDEN",
       50,
@@ -102,7 +78,7 @@ public class ThaumRevItems {
       0);
   }
 
-  private static void loadWandCores() {
+  private static void initializeWandCores() {
     itemWandCore = new ItemWandCore();
 
     /* Wands */
@@ -171,5 +147,32 @@ public class ThaumRevItems {
       new ResourceLocation("thaumrev", "textures/models/rod_crimsoncult_staff.png"));
     STAFF_ROD_CRIMSONCULT.setRunes(true);
     STAFF_ROD_CRIMSONCULT.setGlowing(true);
+  }
+
+  private static void registerItems() {
+    GameRegistry.registerItem(itemResource, "itemResource");
+    GameRegistry.registerItem(itemWardenWeapon, "itemWardenWeapon");
+    GameRegistry.registerItem(itemWardenBow, "itemWardenBow");
+    GameRegistry.registerItem(itemWardenAmulet, "itemWardenAmulet");
+
+    GameRegistry.registerItem(itemCrimsonHat, "itemCrimsonHat");
+
+    GameRegistry.registerItem(itemWardenHelm, "itemWardenHelm");
+    GameRegistry.registerItem(itemWardenChest, "itemWardenChest");
+    GameRegistry.registerItem(itemWardenLegs, "itemWardenLegs");
+    GameRegistry.registerItem(itemWardenBoots, "itemWardenBoots");
+
+    GameRegistry.registerItem(itemWardenclothChest, "itemWardenclothChest");
+    GameRegistry.registerItem(itemWardenclothLegs, "itemWardenclothLegs");
+    GameRegistry.registerItem(itemWardenclothBoots, "itemWardenclothBoots");
+
+    GameRegistry.registerItem(itemLoveRing, "itemLoveRing");
+    GameRegistry.registerItem(itemWaslieHammer, "itemWaslieHammer");
+    GameRegistry.registerItem(itemFocusIllumination, "itemFocusIllumination");
+    GameRegistry.registerItem(itemFocusPurity, "itemFocusPurity");
+
+    GameRegistry.registerItem(itemExcubituraSeeds, "itemExcubituraSeeds");
+
+    GameRegistry.registerItem(itemWandCore, "itemWandCore");
   }
 }

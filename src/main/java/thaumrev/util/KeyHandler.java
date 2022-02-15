@@ -39,7 +39,7 @@ public class KeyHandler {
         this.keyPressedA = true;
         this.lastPressA = System.currentTimeMillis();
         CreatePacketClientSide.sendAmuletUsePacket(amulet.getMetadata());
-        event.player.worldObj.playSoundAtEntity(event.player, "thaumrev:compramos", 1, 1);
+        // event.player.worldObj.playSoundAtEntity(event.player, "thaumrev:compramos", 1, 1);
       } else if (this.keyPressedA && this.lastPressA + 1000 >= System.currentTimeMillis()) {
         ItemWardenAmulet.amuletParticles(event.player);
       } else {

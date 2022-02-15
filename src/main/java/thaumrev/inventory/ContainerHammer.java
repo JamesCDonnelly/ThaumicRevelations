@@ -44,24 +44,26 @@ public class ContainerHammer extends Container {
 		ItemStack item = craftingMatrix.getStackInSlot(1);
 
 		if (item != null) {
-			if (!(item.getItem() instanceof ItemWardenArmor || item.getItem() instanceof ItemWardenWeapon || item.getItem() instanceof ItemWardenBow)) {
+			if (item.getItem() instanceof ItemWardenArmor || item.getItem() instanceof ItemWardenWeapon || item.getItem() instanceof ItemWardenBow) {
+				if (essentia != null) {
+					ItemStack infusedArmor = new ItemStack(item.getItem());
+					String aspectKey = ((IEssentiaContainerItem) essentia.getItem()).getAspects(essentia).getAspects()[0].getName();
+
+					if (WardenicChargeHelper.upgrades.containsKey(aspectKey)) {
+						WardenicChargeHelper.setUpgradeOnStack(infusedArmor, aspectKey);
+					}
+
+					resultInv.setInventorySlotContents(0, infusedArmor);
+
+				} else {
+					resultInv.setInventorySlotContents(0, null);
+				}
+			} else {
 				ItemStack repairedItem = new ItemStack(item.getItem());
 				if (item.getMetadata() != 0 && item.getItem().isRepairable()) {
 					repairedItem.setMetadata(0);
 					resultInv.setInventorySlotContents(0, repairedItem);
 				}
-			} else if (essentia != null) {
-				ItemStack infusedArmor = new ItemStack(item.getItem());
-				String aspectKey = ((IEssentiaContainerItem) essentia.getItem()).getAspects(essentia).getAspects()[0].getName();
-
-				if (WardenicChargeHelper.upgrades.containsKey(aspectKey)) {
-					WardenicChargeHelper.setUpgradeOnStack(infusedArmor, aspectKey);
-				}
-
-				resultInv.setInventorySlotContents(0, infusedArmor);
-
-			} else {
-				resultInv.setInventorySlotContents(0, null);
 			}
 		} else {
 			resultInv.setInventorySlotContents(0, null);
