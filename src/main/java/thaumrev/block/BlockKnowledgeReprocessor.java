@@ -28,6 +28,10 @@ public class BlockKnowledgeReprocessor extends BlockContainer {
     this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
   }
 
+  @Override
+  @SideOnly(Side.CLIENT)
+  public int getRenderType() { return 2; }
+
   @SideOnly(Side.CLIENT)
   public void registerBlockIcons(IIconRegister ir) {
     this.icons[0] = ir.registerIcon("thaumcraft:arcaneearbottom");
