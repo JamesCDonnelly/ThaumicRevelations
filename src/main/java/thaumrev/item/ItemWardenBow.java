@@ -13,9 +13,7 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
@@ -24,9 +22,6 @@ import org.jetbrains.annotations.NotNull;
 import thaumcraft.api.aspects.Aspect;
 import thaumrev.ThaumRevLibrary;
 import thaumrev.util.wardenic.WardenicChargeHelper;
-
-import java.util.List;
-import java.util.UUID;
 
 import static thaumrev.ThaumRevLibrary.WEAPON_DAMAGE_MODIFIER;
 
@@ -113,25 +108,14 @@ public class ItemWardenBow extends ItemBow {
     stack.setMetadata(0);
   }
 
-  @Override
-  public void addInformation(ItemStack stack, EntityPlayer player, @NotNull List list, boolean b) {
-    list.add(EnumChatFormatting.GOLD + StatCollector.translateToLocal("tooltip.wardenic.upgrade") +
-      ": " + WardenicChargeHelper.getUpgrade(stack).getQuote());
-
-    super.addInformation(stack, player, list, b);
-  }
-
-
   /** Overrides - boolean **/
   @Override
-  public boolean isDamageable() {
-    return false;
-  }
+  public boolean isDamageable() { return false; }
 
-  @Override
-  public boolean getShareTag() {
-    return true;
-  }
+  // @Override
+  // public boolean getShareTag() {
+  //   return true;
+  // }
 
   @Override
   public boolean isBookEnchantable(ItemStack stack, ItemStack book) {

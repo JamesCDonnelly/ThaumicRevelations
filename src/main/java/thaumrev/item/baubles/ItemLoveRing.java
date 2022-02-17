@@ -14,7 +14,6 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.NotNull;
 import thaumrev.ThaumRevLibrary;
 
 public class ItemLoveRing extends Item implements IBauble {
@@ -74,7 +73,7 @@ public class ItemLoveRing extends Item implements IBauble {
    * Overrides - ItemStack
    **/
   @Override
-  public ItemStack onItemRightClick(ItemStack stack, @NotNull World world, EntityPlayer player) {
+  public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
     world.playSoundAtEntity(player, "thaumrev:abderp", 1, 1);
     return super.onItemRightClick(stack, world, player);
   }
@@ -82,7 +81,7 @@ public class ItemLoveRing extends Item implements IBauble {
 
   /** Overrides - EnumRarity **/
   @Override
-  public EnumRarity getRarity(ItemStack par1ItemStack) {return EnumRarity.epic;}
+  public EnumRarity getRarity(ItemStack stack) { return EnumRarity.epic; }
 
 
   /** Client-side **/

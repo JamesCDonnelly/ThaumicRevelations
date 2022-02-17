@@ -6,7 +6,6 @@ import net.minecraft.item.ItemStack;
 import thaumcraft.api.aspects.IEssentiaContainerItem;
 
 public class SlotEssentia extends Slot {
-
 	public SlotEssentia(IInventory inv, int id, int x, int y) {
 		super(inv, id, x, y);
 	}

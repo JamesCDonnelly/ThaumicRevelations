@@ -31,14 +31,18 @@ public class WardenicChargeEvents {
   public void onPlayerTick(@NotNull LivingUpdateEvent event) {
     if (event.entity instanceof EntityPlayer) {
       EntityPlayer player = (EntityPlayer) event.entity;
+      ItemStack amulet = ItemWardenAmulet.getAmulet(player);
+      String upgrade = WardenicChargeHelper.getUpgrade(amulet).getUpgradeAspect();
 
-      if (player.getCurrentArmor(0) != null) {
-        if ((WardenicChargeHelper.getUpgrade(player.getCurrentArmor(0))
-          .getUpgradeAspect().equals(Aspect.AIR.getName()) && !player.isInWater()) ||
-          (WardenicChargeHelper.getUpgrade(player.getCurrentArmor(0))
-            .getUpgradeAspect().equals(Aspect.WATER.getName()) && player.isInWater())) {
-          player.stepHeight = 1.0F;
-        }
+      if (
+        player.getCurrentArmor(0) != null &&
+        player.getCurrentArmor(0).getItem() instanceof ItemWardenArmor &&
+        (
+          (upgrade.equals(Aspect.AIR.getName()) && !player.isInWater()) ||
+          (upgrade.equals(Aspect.WATER.getName()) && player.isInWater())
+        )
+      ) {
+        player.stepHeight = 1.0F;
       } else {
         player.stepHeight = 0.5F;
       }
@@ -48,16 +52,6 @@ public class WardenicChargeEvents {
 
         if (armor != null && (armor.getItem() instanceof ItemWardenArmor)) {
           armor.setMetadata(0);
-
-          if (i == 0) {
-            String upgradeAspect = WardenicChargeHelper.getUpgrade(armor).getUpgradeAspect();
-
-            if (!(upgradeAspect.equals(Aspect.AIR.getName()) || upgradeAspect.equals(Aspect.WATER.getName()))) {
-              player.stepHeight = 0.5F;
-            }
-          }
-        } else if (i == 0) {
-          player.stepHeight = 0.5F;
         }
       }
 

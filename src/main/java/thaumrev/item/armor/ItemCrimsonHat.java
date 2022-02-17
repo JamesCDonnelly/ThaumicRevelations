@@ -27,10 +27,10 @@ public class ItemCrimsonHat extends ItemArmor implements ISpecialArmor, IRepaira
   ModelBiped model = null;
 
   public ItemCrimsonHat() {
-      super(ThaumRevLibrary.armorMaterialCrimsoncloth, 1, 0);
-      setUnlocalizedName("itemCrimsonHat");
-      setCreativeTab(ThaumRevLibrary.tabThaumRev);
-      setMaxStackSize(1);
+    super(ThaumRevLibrary.armorMaterialCrimsoncloth, 1, 0);
+    setUnlocalizedName("itemCrimsonHat");
+    setCreativeTab(ThaumRevLibrary.tabThaumRev);
+    setMaxStackSize(1);
   }
 
   /** Overrides - void **/
@@ -47,41 +47,29 @@ public class ItemCrimsonHat extends ItemArmor implements ISpecialArmor, IRepaira
 
   /** Overrides - boolean **/
   @Override
-  public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack) {
-    return par2ItemStack.isItemEqual(new ItemStack(ThaumRevLibrary.itemResource, 1, 4));
+  public boolean getIsRepairable(ItemStack stack, ItemStack material) {
+    return material.isItemEqual(new ItemStack(ThaumRevLibrary.itemResource, 1, 4));
   }
 
   @Override
-  public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
-    return true;
-  }
+  public boolean isBookEnchantable(ItemStack stack, ItemStack book) { return true; }
 
   @Override
-  public boolean showNodes(ItemStack stack, EntityLivingBase entityLivingBase) {
-    return true;
-  }
+  public boolean showNodes(ItemStack stack, EntityLivingBase entity) { return true; }
 
   @Override
-  public boolean showIngamePopups(ItemStack itemStack, EntityLivingBase entityLivingBase) {
-    return true;
-  }
+  public boolean showIngamePopups(ItemStack stack, EntityLivingBase entity) { return true; }
 
 
   /** Overrides - int **/
   @Override
-  public int getRunicCharge(ItemStack itemStack) {
-    return 4;
-  }
+  public int getRunicCharge(ItemStack itemStack) { return 4; }
 
   @Override
-  public int getVisDiscount(ItemStack itemStack, EntityPlayer entityPlayer, Aspect aspect) {
-    return 2;
-  }
+  public int getVisDiscount(ItemStack itemStack, EntityPlayer entityPlayer, Aspect aspect) { return 2; }
 
   @Override
-  public int getWarp(ItemStack itemStack, EntityPlayer entityPlayer) {
-    return 4;
-  }
+  public int getWarp(ItemStack itemStack, EntityPlayer entityPlayer) { return 4; }
 
   @Override
   public int getArmorDisplay(EntityPlayer player, ItemStack armor, int slot) {
@@ -91,9 +79,7 @@ public class ItemCrimsonHat extends ItemArmor implements ISpecialArmor, IRepaira
 
   /** Overrides - EnumRarity **/
   @Override
-  public EnumRarity getRarity(ItemStack itemstack) {
-    return EnumRarity.rare;
-  }
+  public EnumRarity getRarity(ItemStack itemstack) { return EnumRarity.rare; }
 
 
   /** Overrides - ArmorProperties **/
@@ -114,7 +100,6 @@ public class ItemCrimsonHat extends ItemArmor implements ISpecialArmor, IRepaira
   @Override
   @SideOnly(Side.CLIENT)
   public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemstack, int armorSlot) {
-
     if(this.model == null) {
       this.model = new ModelCrimsonHat();
     }

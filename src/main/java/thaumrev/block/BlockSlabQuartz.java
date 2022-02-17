@@ -18,7 +18,9 @@ public class BlockSlabQuartz extends BlockSlab {
 	public BlockSlabQuartz(boolean isDouble) {
 		super(isDouble, Material.rock);
 		setUnlocalizedName("blockSlab");
-		setCreativeTab(ThaumRevLibrary.tabThaumRev);
+		if (!isDouble) {
+			setCreativeTab(ThaumRevLibrary.tabThaumRev);
+		}
 		setStepSound(Block.soundTypeStone);
 		setHardness(0.8F);
 		setLightOpacity(0);

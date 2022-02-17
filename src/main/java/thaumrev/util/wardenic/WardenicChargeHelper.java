@@ -7,7 +7,7 @@ import thaumrev.util.wardenic.upgrade.WardenicUpgrade;
 
 import java.util.HashMap;
 
-public class WardenicChargeHelper {
+public abstract class WardenicChargeHelper {
 
 	public static HashMap<String, WardenicUpgrade> upgrades = new HashMap<String, WardenicUpgrade>();
 
@@ -21,14 +21,14 @@ public class WardenicChargeHelper {
 
 	public static WardenicUpgrade getUpgrade(ItemStack stack) {
 		if (stack.stackTagCompound != null) {
-			if (stack.stackTagCompound.hasKey("upgrade")) {
-				return upgrades.get(stack.stackTagCompound.getString("upgrade"));
-			} else {
-				return upgrades.get(ThaumRevLibrary.EXCUBITOR.getName());
+			if (!stack.stackTagCompound.hasKey("upgrade")) {
+				setUpgradeOnStack(stack, ThaumRevLibrary.EXCUBITOR.getName());
 			}
 		} else {
-			return upgrades.get(ThaumRevLibrary.EXCUBITOR.getName());
+			setUpgradeOnStack(stack, ThaumRevLibrary.EXCUBITOR.getName());
 		}
+
+		return upgrades.get(stack.stackTagCompound.getString("upgrade"));
 	}
 
 	public static void setUpgradeOnStack(ItemStack stack, String key) {
@@ -38,5 +38,4 @@ public class WardenicChargeHelper {
 
 		stack.stackTagCompound.setString("upgrade", key);
 	}
-
 }

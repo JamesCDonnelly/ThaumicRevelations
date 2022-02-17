@@ -5,13 +5,10 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.*;
 import net.minecraft.item.ItemStack;
 import thaumcraft.api.aspects.IEssentiaContainerItem;
-import thaumrev.item.ItemWardenBow;
-import thaumrev.item.ItemWardenWeapon;
-import thaumrev.item.armor.ItemWardenArmor;
+import thaumrev.item.baubles.ItemWardenAmulet;
 import thaumrev.util.wardenic.WardenicChargeHelper;
 
 public class ContainerHammer extends Container {
-
 	InventoryPlayer playerInv;
 	InventoryCrafting hammerInv;
 	IInventory resultInv;
@@ -44,26 +41,21 @@ public class ContainerHammer extends Container {
 		ItemStack item = craftingMatrix.getStackInSlot(1);
 
 		if (item != null) {
-			if (item.getItem() instanceof ItemWardenArmor || item.getItem() instanceof ItemWardenWeapon || item.getItem() instanceof ItemWardenBow) {
+			if (item.getItem() instanceof ItemWardenAmulet) {
 				if (essentia != null) {
-					ItemStack infusedArmor = new ItemStack(item.getItem());
 					String aspectKey = ((IEssentiaContainerItem) essentia.getItem()).getAspects(essentia).getAspects()[0].getName();
+					ItemStack infused = item.copy();
 
 					if (WardenicChargeHelper.upgrades.containsKey(aspectKey)) {
-						WardenicChargeHelper.setUpgradeOnStack(infusedArmor, aspectKey);
+						WardenicChargeHelper.setUpgradeOnStack(infused, aspectKey);
 					}
 
-					resultInv.setInventorySlotContents(0, infusedArmor);
-
+					resultInv.setInventorySlotContents(0, infused);
 				} else {
 					resultInv.setInventorySlotContents(0, null);
 				}
 			} else {
-				ItemStack repairedItem = new ItemStack(item.getItem());
-				if (item.getMetadata() != 0 && item.getItem().isRepairable()) {
-					repairedItem.setMetadata(0);
-					resultInv.setInventorySlotContents(0, repairedItem);
-				}
+				resultInv.setInventorySlotContents(0, null);
 			}
 		} else {
 			resultInv.setInventorySlotContents(0, null);
@@ -92,6 +84,7 @@ public class ContainerHammer extends Container {
 
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int slot) {
+		System.out.println(slot);
 		return null;
 	}
 

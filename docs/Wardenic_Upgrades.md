@@ -34,7 +34,7 @@
 * Ordo:
     * reduce Ordo vis cost by 10% per Armor piece
     * ignore damage dealt by Zombies, Skeletons, Withers and Nether mobs (only when full set is being worn)
-    * return 15% of damage per Armor piece if it was dealt by Zombies, Skeletons, Withers or Nether mobs
+    * return 15% of damage per Armor piece if it was dealt by Undead or Nether mobs
     * remove effects (only when full set is being worn):
         * Wither
         * Blindness
@@ -51,7 +51,7 @@
     * reduce Terra vis cost by 10% per Armor piece
     * reduce incoming damage, based on Armor pieces number
     * reduce speed per Armor piece
-    * nullify Knockback (only when full set is being worn) - **WiP**
+    * nullify Knockback (only when full set is being worn)
 
 ### The Sword
 
