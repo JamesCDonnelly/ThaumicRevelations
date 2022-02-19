@@ -14,10 +14,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ISpecialArmor;
 import thaumcraft.api.IRepairable;
-import thaumcraft.api.aspects.Aspect;
-import thaumcraft.common.Thaumcraft;
 import thaumrev.ThaumRevLibrary;
-import thaumrev.util.wardenic.WardenicChargeHelper;
 
 public class ItemWardenArmor extends ItemArmor implements IRepairable, ISpecialArmor {
   public IIcon iconHelm;
@@ -36,6 +33,7 @@ public class ItemWardenArmor extends ItemArmor implements IRepairable, ISpecialA
   @Override
   public void onArmorTick(World world, EntityPlayer player, ItemStack stack) {
     super.onArmorTick(world, player, stack);
+    /*
     WardenicChargeHelper.getUpgrade(stack).onTick(world, player, stack);
     String upgrade = WardenicChargeHelper.getUpgrade(stack).getUpgradeAspect();
     ItemArmor armor = (ItemArmor) stack.getItem();
@@ -83,6 +81,7 @@ public class ItemWardenArmor extends ItemArmor implements IRepairable, ISpecialA
 			// 	player.jumpMovementFactor = 0.02F + 0.005F * air;
 			// }
     }
+     */
   }
 
 

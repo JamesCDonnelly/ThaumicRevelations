@@ -1,8 +1,10 @@
 package thaumrev.util.wardenic;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import thaumrev.ThaumRevLibrary;
+import thaumrev.item.armor.ItemWardenArmor;
 import thaumrev.util.wardenic.upgrade.WardenicUpgrade;
 
 import java.util.HashMap;
@@ -37,5 +39,19 @@ public abstract class WardenicChargeHelper {
 		}
 
 		stack.stackTagCompound.setString("upgrade", key);
+	}
+
+	public static short getWardenicArmorCount(EntityPlayer player) {
+		short count = 0;
+
+    for (int i = 0; i < 4; i++) {
+      ItemStack armor = player.getCurrentArmor(i);
+
+      if (armor != null && (armor.getItem() instanceof ItemWardenArmor)) {
+        count++;
+      }
+    }
+
+		return count;
 	}
 }

@@ -7,11 +7,16 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import thaumcraft.api.aspects.Aspect;
+import thaumcraft.api.aspects.AspectList;
+import thaumrev.item.baubles.ItemWardenAmulet;
+import thaumrev.util.wardenic.VisHelper;
+import thaumrev.util.wardenic.WardenicChargeHelper;
 
 import java.util.Random;
 
-public class WardenicUpgrade {
+import static thaumrev.ThaumRevLibrary.EXCUBITOR;
 
+public class WardenicUpgrade {
 	public Aspect aspect;
 	public Random random = new Random();
 
@@ -19,13 +24,71 @@ public class WardenicUpgrade {
 		this.aspect = aspect;
 	}
 
-	public void onAttack(ItemStack stack, EntityPlayer player, Entity entity) {}
+	public void onAttack(ItemStack weapon, EntityPlayer player, Entity entity) {
+		ItemStack amulet = ItemWardenAmulet.getAmulet(player);
 
-	public void onIndirectAttack(LivingHurtEvent event) {}
+		if (amulet == null) {
+			return;
+		}
 
-	public void onTick(World world, EntityPlayer player, ItemStack stack) {}
+		boolean activate = ItemWardenAmulet.shouldActivate(amulet, 1000);
 
-	public void onHurt(LivingHurtEvent event) {}
+		if (!activate) {
+			return;
+		}
+	}
+
+	public void onIndirectAttack(LivingHurtEvent event) {
+		Entity entity = event.source.getEntity();
+
+		if (entity instanceof EntityPlayer) {
+			EntityPlayer player = (EntityPlayer) entity;
+			ItemStack amulet = ItemWardenAmulet.getAmulet(player);
+
+			if (amulet == null) {
+				return;
+			}
+
+			boolean activate = ItemWardenAmulet.shouldActivate(amulet, 1000);
+	
+			if (!activate) {
+				return;
+			}
+		}
+	}
+
+	public void onWornTick(World world, EntityPlayer player, ItemStack stack) {
+		ItemStack amulet = ItemWardenAmulet.getAmulet(player);
+
+		if (amulet == null) {
+			return;
+		}
+
+		boolean activate = ItemWardenAmulet.shouldActivate(amulet, 100);
+
+		if (!activate) {
+			return;
+		}
+	}
+
+	public void onHurt(LivingHurtEvent event) {
+		Entity entity = event.entity;
+
+		if (event.entity instanceof EntityPlayer) {
+			EntityPlayer player = (EntityPlayer) entity;
+			ItemStack amulet = ItemWardenAmulet.getAmulet(player);
+
+			if (amulet == null) {
+				return;
+			}
+
+			boolean activate = ItemWardenAmulet.shouldActivate(amulet, 1000);
+	
+			if (!activate) {
+				return;
+			}
+		}
+	}
 
 	public String getQuote() {
 		return StatCollector.translateToLocal("upgrade." + aspect.getName() + ".quote");

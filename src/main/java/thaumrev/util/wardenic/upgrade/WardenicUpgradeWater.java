@@ -25,16 +25,7 @@ public class WardenicUpgradeWater extends WardenicUpgrade {
     EntityLivingBase entityLivingBase = (EntityLivingBase)event.entity;
     EntityPlayer player = (EntityPlayer)event.source.getEntity();
     EntityArrow entityArrow = (EntityArrow)event.source.getSourceOfDamage();
-
-    int count = 0;
-
-    for (int i = 0; i < 4; i++) {
-      if ((player.getCurrentArmor(i) != null) &&
-        WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
-          .equals(Aspect.WATER.getName())) {
-        count++;
-      }
-    }
+    short count = WardenicChargeHelper.getWardenicArmorCount(player);
 
     if (entityArrow.getIsCritical()) {
       entityLivingBase.addPotionEffect(new PotionEffect(Potion.poison.getId(), 40, count / 2));
@@ -46,43 +37,29 @@ public class WardenicUpgradeWater extends WardenicUpgrade {
     super.onAttack(stack, player, entity);
 
     EntityLivingBase entityLivingBase = (EntityLivingBase) entity;
-
-    int count = 0;
-
-    for (int i = 0; i < 4; i++) {
-      if ((player.getCurrentArmor(i) != null) &&
-        WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
-          .equals(Aspect.WATER.getName())) {
-        count++;
-      }
-    }
+    short count = WardenicChargeHelper.getWardenicArmorCount(player);
 
     entityLivingBase.addPotionEffect(new PotionEffect(Potion.poison.getId(), 40, count));
   }
 
   @Override
-  public void onTick(World world, EntityPlayer player, ItemStack stack) {
-    super.onTick(world, player, stack);
+  public void onWornTick(World world, EntityPlayer player, ItemStack stack) {
+    super.onWornTick(world, player, stack);
 
-    int count = 0;
-
-    for (int i = 0; i < 4; i++) {
-      if ((player.getCurrentArmor(i) != null) &&
-        WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
-          .equals(Aspect.WATER.getName())) {
-        count++;
-      }
-    }
+    short count = WardenicChargeHelper.getWardenicArmorCount(player);
 
     if (count == 4) {
       // player.addPotionEffect(new PotionEffect(<potion id>, <time>, <amplitude>)
       // amplitude is equal to potion_level - 1
       // time is provided in ticks (1 second = 20 ticks), so: time (in seconds) = time (in ticks) / 20
-
       player.addPotionEffect(new PotionEffect(Potion.waterBreathing.getId(), 0, 0));
 
       if (player.isPotionActive(Potion.poison.getId())) {
         player.removePotionEffect(Potion.poison.getId());
+      }
+
+      if (player.isInWater()) {
+        player.moveFlying(0.0F, 1.0F, player.isSprinting() ? 0.02F : 0.01F);
       }
     }
   }

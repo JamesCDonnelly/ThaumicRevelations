@@ -38,16 +38,7 @@ public class WardenicUpgradeOrder extends WardenicUpgrade {
     Entity entity = event.entity;
     EntityPlayer player = (EntityPlayer)event.source.getEntity();
     EntityArrow entityArrow = (EntityArrow)event.source.getSourceOfDamage();
-
-    int count = 0;
-
-    for (int i = 0; i < 4; i++) {
-      if ((player.getCurrentArmor(i) != null) &&
-        WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
-          .equals(Aspect.ORDER.getName())) {
-        count++;
-      }
-    }
+    short count = WardenicChargeHelper.getWardenicArmorCount(player);
 
     if (entityArrow.getIsCritical()) {
       if (isUndeadOrHell(entity)) {
@@ -62,15 +53,7 @@ public class WardenicUpgradeOrder extends WardenicUpgrade {
   public void onAttack(ItemStack stack, EntityPlayer player, Entity entity) {
     super.onAttack(stack, player, entity);
 
-    int count = 0;
-
-    for (int i = 0; i < 4; i++) {
-      if ((player.getCurrentArmor(i) != null) &&
-        WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
-          .equals(Aspect.ORDER.getName())) {
-        count++;
-      }
-    }
+    short count = WardenicChargeHelper.getWardenicArmorCount(player);
 
     if (isUndeadOrHell(entity)) {
       DamageSource damageSource = new DamageSourceWarden("warden", player);
@@ -85,15 +68,7 @@ public class WardenicUpgradeOrder extends WardenicUpgrade {
 
     if (event.entity instanceof EntityPlayer) {
       EntityPlayer player = (EntityPlayer) event.entity;
-      int count = 0;
-
-      for (int i = 0; i <= 3; i++) {
-        if ((player.getCurrentArmor(i) != null) &&
-          WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
-            .equals(Aspect.ORDER.getName())) {
-          count++;
-        }
-      }
+      short count = WardenicChargeHelper.getWardenicArmorCount(player);
 
       if (count == 4) {
         if (isUndeadOrHell(event.source.getEntity())) {
@@ -112,18 +87,10 @@ public class WardenicUpgradeOrder extends WardenicUpgrade {
   }
 
   @Override
-  public void onTick(World world, EntityPlayer player, ItemStack stack) {
-    super.onTick(world, player, stack);
+  public void onWornTick(World world, EntityPlayer player, ItemStack stack) {
+    super.onWornTick(world, player, stack);
 
-    int count = 0;
-
-    for (int i = 0; i <= 3; i++) {
-      if ((player.getCurrentArmor(i) != null) &&
-        WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
-          .equals(Aspect.ORDER.getName())) {
-        count++;
-      }
-    }
+    short count = WardenicChargeHelper.getWardenicArmorCount(player);
 
     if (count == 4) {
       if (player.isPotionActive(Config.potionUnHungerID)) {

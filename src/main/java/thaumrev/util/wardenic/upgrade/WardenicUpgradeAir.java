@@ -10,6 +10,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import thaumcraft.api.aspects.Aspect;
+import thaumrev.item.baubles.ItemWardenAmulet;
 import thaumrev.util.wardenic.WardenicChargeHelper;
 
 public class WardenicUpgradeAir extends WardenicUpgrade {
@@ -26,22 +27,14 @@ public class WardenicUpgradeAir extends WardenicUpgrade {
     EntityPlayer player = (EntityPlayer)event.source.getEntity();
     EntityArrow entityArrow = (EntityArrow)event.source.getSourceOfDamage();
 
-    int count = 0;
+    ItemStack amulet = ItemWardenAmulet.getAmulet(player);
 
-    for (int i = 0; i <= 3; i++) {
-      if ((player.getCurrentArmor(i) != null) &&
-        WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
-          .equals(Aspect.AIR.getName())) {
-        count++;
-      }
-    }
+    // if (entityArrow.getIsCritical()) {
+    //   entityArrow.setDamage(4 * (count + 2)); // TODO: Why it won't work?!!!
 
-    if (entityArrow.getIsCritical()) {
-      entityArrow.setDamage(4 * (count + 2)); //TODO: Why it won't work?!!!
-
-      entityLivingBase.addPotionEffect(new PotionEffect(Potion.confusion.id, 20 * (count + 1), 1));
-      entityLivingBase.addPotionEffect(new PotionEffect(Potion.hunger.id, 40 * (count + 1), 1));
-    }
+    //   entityLivingBase.addPotionEffect(new PotionEffect(Potion.confusion.id, 20 * (count + 1), 1));
+    //   entityLivingBase.addPotionEffect(new PotionEffect(Potion.hunger.id, 40 * (count + 1), 1));
+    // }
   }
 
   @Override
@@ -49,16 +42,7 @@ public class WardenicUpgradeAir extends WardenicUpgrade {
     super.onAttack(stack, player, entity);
 
     EntityLivingBase entityLivingBase = (EntityLivingBase)entity;
-
-    int count = 0;
-
-    for (int i = 0; i <= 3; i++) {
-      if ((player.getCurrentArmor(i) != null) &&
-        WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
-          .equals(Aspect.AIR.getName())) {
-        count++;
-      }
-    }
+    short count = WardenicChargeHelper.getWardenicArmorCount(player);
 
     entityLivingBase.addPotionEffect(new PotionEffect(Potion.confusion.id, 20 * (count + 1), 0));
     entityLivingBase.addPotionEffect(new PotionEffect(Potion.hunger.id, 40 * (count + 1), 0));
@@ -68,16 +52,8 @@ public class WardenicUpgradeAir extends WardenicUpgrade {
   public void onHurt(LivingHurtEvent event) {
     super.onHurt(event);
 
-    int count = 0;
-    EntityPlayer player = (EntityPlayer)event.entity;
-
-    for (int i = 0; i < 4; i++) {
-      if ((player.getCurrentArmor(i) != null) &&
-        WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
-          .equals(Aspect.AIR.getName())) {
-        count++;
-      }
-    }
+    EntityPlayer player = (EntityPlayer) event.entity;
+    short count = WardenicChargeHelper.getWardenicArmorCount(player);
 
     if (event.source.damageType.equals("arrow") ||
       event.source.damageType.equals("thrown")) {
@@ -94,25 +70,23 @@ public class WardenicUpgradeAir extends WardenicUpgrade {
   }
 
   @Override
-  public void onTick(World world, EntityPlayer player, ItemStack stack) {
-    super.onTick(world, player, stack);
+  public void onWornTick(World world, EntityPlayer player, ItemStack stack) {
+    super.onWornTick(world, player, stack);
+    System.out.println(stack.getDisplayName()); // TODO: Debug
 
-    int count = 0;
-
-    for (int i = 0; i < 4; i++) {
-      if ((player.getCurrentArmor(i) != null) &&
-        WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
-          .equals(Aspect.AIR.getName())) {
-        count++;
-      }
-    }
+    short count = WardenicChargeHelper.getWardenicArmorCount(player);
 
     if (count == 4) {
       if (player.isPotionActive(Potion.moveSlowdown.getId())) {
         player.removePotionEffect(Potion.moveSlowdown.getId());
       }
+
       if (player.isPotionActive(Potion.confusion.getId())) {
         player.removePotionEffect(Potion.confusion.getId());
+      }
+
+      if (player.moveForward > 0.0F && player.isInWater()) {
+        player.moveFlying(0.0F, 1.0F, -0.001F);
       }
     }
   }

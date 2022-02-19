@@ -23,16 +23,7 @@ public class WardenicUpgradeFire extends WardenicUpgrade {
     Entity entity = event.entity;
     EntityPlayer player = (EntityPlayer)event.source.getEntity();
     EntityArrow entityArrow = (EntityArrow)event.source.getSourceOfDamage();
-
-    int count = 0;
-
-    for (int i = 0; i < 4; i++) {
-      if ((player.getCurrentArmor(i) != null) &&
-        WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
-          .equals(Aspect.FIRE.getName())) {
-        count++;
-      }
-    }
+    short count = WardenicChargeHelper.getWardenicArmorCount(player);
 
     if (entityArrow.getIsCritical()) {
       entity.setFire(4 * (count + 1));
@@ -43,15 +34,7 @@ public class WardenicUpgradeFire extends WardenicUpgrade {
   public void onAttack(ItemStack stack, EntityPlayer player, Entity entity) {
     super.onAttack(stack, player, entity);
 
-    int count = 0;
-
-    for (int i = 0; i < 4; i++) {
-      if ((player.getCurrentArmor(i) != null) &&
-        WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
-          .equals(Aspect.FIRE.getName())) {
-        count++;
-      }
-    }
+    short count = WardenicChargeHelper.getWardenicArmorCount(player);
 
     entity.setFire(4 * (count + 1));
   }
@@ -60,16 +43,8 @@ public class WardenicUpgradeFire extends WardenicUpgrade {
   public void onHurt(LivingHurtEvent event) {
     super.onHurt(event);
 
-    int count = 0;
     EntityPlayer player = (EntityPlayer) event.entity;
-
-    for (int i = 0; i <= 3; i++) {
-      if ((player.getCurrentArmor(i) != null) &&
-        WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
-          .equals(Aspect.FIRE.getName())) {
-        count++;
-      }
-    }
+    short count = WardenicChargeHelper.getWardenicArmorCount(player);
 
     if (event.source.getEntity() != null) {
       event.source.getEntity().setFire(2);
@@ -83,26 +58,18 @@ public class WardenicUpgradeFire extends WardenicUpgrade {
   }
 
   @Override
-  public void onTick(World world, EntityPlayer player, ItemStack stack) {
-    super.onTick(world, player, stack);
+  public void onWornTick(World world, EntityPlayer player, ItemStack stack) {
+    super.onWornTick(world, player, stack);
 
-    int count = 0;
-
-    if (player.isBurning()) {
-      player.extinguish();
-    }
-
-    for (int i = 0; i <= 3; i++) {
-      if ((player.getCurrentArmor(i) != null) &&
-        WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
-          .equals(Aspect.FIRE.getName())) {
-        count++;
-      }
-    }
+    short count = WardenicChargeHelper.getWardenicArmorCount(player);
 
     if (count == 4) {
       if (player.isPotionActive(Config.potionSunScornedID)) {
         player.removePotionEffect(Config.potionSunScornedID);
+      }
+
+      if (player.isBurning()) {
+        player.extinguish();
       }
     }
   }

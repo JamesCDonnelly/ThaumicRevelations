@@ -30,15 +30,7 @@ public class WardenicUpgradeEarth extends WardenicUpgrade {
     EntityPlayer player = (EntityPlayer)event.source.getEntity();
     EntityArrow entityArrow = (EntityArrow)event.source.getSourceOfDamage();
 
-    int count = 0;
-
-    for (int i = 0; i < 4; i++) {
-      if ((player.getCurrentArmor(i) != null) &&
-        WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
-          .equals(Aspect.EARTH.getName())) {
-        count++;
-      }
-    }
+    short count = WardenicChargeHelper.getWardenicArmorCount(player);
 
     if (entityArrow.getIsCritical()) {
       entityLivingBase.addPotionEffect(new PotionEffect(Potion.moveSlowdown.getId(), 10 * (count + 1), 1));
@@ -52,15 +44,7 @@ public class WardenicUpgradeEarth extends WardenicUpgrade {
 
     EntityLivingBase entityLivingBase = (EntityLivingBase) entity;
 
-    int count = 0;
-
-    for (int i = 0; i < 4; i++) {
-      if ((player.getCurrentArmor(i) != null) &&
-        WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
-          .equals(Aspect.EARTH.getName())) {
-        count++;
-      }
-    }
+    short count = WardenicChargeHelper.getWardenicArmorCount(player);
 
     entityLivingBase.addPotionEffect(new PotionEffect(Potion.moveSlowdown.getId(), 10 * (count + 1), 3));
     entityLivingBase.addPotionEffect(new PotionEffect(Potion.digSlowdown.getId(), 10 * (count + 1), 3));
@@ -70,8 +54,6 @@ public class WardenicUpgradeEarth extends WardenicUpgrade {
   @Override
   public void onHurt(LivingHurtEvent event) {
     super.onHurt(event);
-
-    int count = 0;
 
     if (event.entity instanceof EntityPlayer) {
       EntityPlayer player = (EntityPlayer) event.entity;
@@ -96,13 +78,7 @@ public class WardenicUpgradeEarth extends WardenicUpgrade {
         }
       }
 
-      for (int i = 0; i < 4; i++) {
-        if ((player.getCurrentArmor(i) != null) &&
-          WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
-            .equals(Aspect.EARTH.getName())) {
-          count++;
-        }
-      }
+      short count = WardenicChargeHelper.getWardenicArmorCount(player);
 
       event.ammount *= 1 - (0.10F * count);
     }

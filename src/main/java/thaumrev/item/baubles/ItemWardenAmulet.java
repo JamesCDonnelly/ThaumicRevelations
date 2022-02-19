@@ -22,9 +22,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import thaumcraft.api.IGoggles;
 import thaumcraft.api.IRunicArmor;
@@ -51,6 +48,8 @@ import com.google.common.collect.Multimap;
 
 import static thaumrev.ThaumRevLibrary.ARMOR_KNOCKBACK_MODIFIERS;
 import static thaumrev.ThaumRevLibrary.ARMOR_SPEED_MODIFIERS;
+
+import static thaumrev.ThaumRevLibrary.EXCUBITOR;
 
 public class ItemWardenAmulet extends Item implements IBauble, IRunicArmor, IVisDiscountGear, IGoggles, IRevealer {
   DecimalFormat formatter = new DecimalFormat("#######.##");
@@ -131,6 +130,45 @@ public class ItemWardenAmulet extends Item implements IBauble, IRunicArmor, IVis
 
     return null;
   }
+
+	public static boolean shouldActivate(ItemStack amulet, int value) {
+		if (amulet != null) {
+			Aspect aspect = WardenicChargeHelper.getUpgrade(amulet).aspect;
+
+			if (aspect.getName().equals(EXCUBITOR.getName())) {
+				AspectList aspectList = VisHelper.getAllVis(amulet);
+				Aspect[] aspects = aspectList.getAspects();
+				boolean doit = true;
+
+				for (Aspect a : aspects) {
+					if (aspectList.getAmount(a) < value / 10) {
+						doit = false;
+						break;
+					}
+				}
+
+				if (doit) {
+					for (Aspect a : aspects) {
+						VisHelper.addRealVis(amulet, a, -value / 10);
+					}
+				} else {
+					return false;
+				}
+			} else {
+				int vis = VisHelper.getVis(amulet, aspect);
+
+				if (vis > value) {
+					VisHelper.addRealVis(amulet, aspect, -value);
+				} else {
+					return false;
+				}
+			}
+
+			return true;
+		} else {
+			return false;
+		}
+	}
 
   private static List<Object> getEntities(EntityPlayer player) {
     return new ArrayList<Object>(
@@ -216,6 +254,8 @@ public class ItemWardenAmulet extends Item implements IBauble, IRunicArmor, IVis
         chargeVis(amulet, player);
       }
     }
+
+    // String upgrade = WardenicChargeHelper.getUpgrade(amulet).getUpgradeAspect();
   }
 
   @Override
@@ -330,10 +370,10 @@ public class ItemWardenAmulet extends Item implements IBauble, IRunicArmor, IVis
 
   /* Overrides - MultiMap */
   @Override
-  public Multimap getAttributeModifiers(ItemStack stack) {
-    Multimap modifiers = super.getAttributeModifiers(stack);
-    String upgrade = WardenicChargeHelper.getUpgrade(stack).getUpgradeAspect();
-    ItemArmor armor = (ItemArmor) stack.getItem();
+  public Multimap getAttributeModifiers(ItemStack amulet) {
+    Multimap modifiers = super.getAttributeModifiers(amulet);
+    String upgrade = WardenicChargeHelper.getUpgrade(amulet).getUpgradeAspect();
+    ItemArmor armor = (ItemArmor) amulet.getItem();
     AttributeModifier speedModifier;
     AttributeModifier knockbackModifier = null;
     float value = 0;

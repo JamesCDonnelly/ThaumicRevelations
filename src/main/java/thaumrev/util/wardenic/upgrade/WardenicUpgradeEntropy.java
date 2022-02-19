@@ -33,17 +33,7 @@ public class WardenicUpgradeEntropy extends WardenicUpgrade {
     EntityArrow entityArrow = (EntityArrow)event.source.getSourceOfDamage();
 
     DamageSource damageSource = new DamageSourceWarden("warden", player);
-
-    int count = 0;
-
-    for (int i = 0; i < 4; i++) {
-      if ((player.getCurrentArmor(i) != null) &&
-        WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
-          .equals(Aspect.ENTROPY.getName())) {
-        count++;
-      }
-    }
-
+    short count = WardenicChargeHelper.getWardenicArmorCount(player);
     float damage = random.nextInt(20) <= (count + 1) ? entityLivingBase.getMaxHealth() : 0;
 
     if (entityArrow.getIsCritical()) {
@@ -56,16 +46,7 @@ public class WardenicUpgradeEntropy extends WardenicUpgrade {
   public void onAttack(ItemStack stack, EntityPlayer player, Entity entity) {
     super.onAttack(stack, player, entity);
 
-    int count = 0;
-
-    for (int i = 0; i < 4; i++) {
-      if ((player.getCurrentArmor(i) != null) &&
-        WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
-          .equals(Aspect.ENTROPY.getName())) {
-        count++;
-      }
-    }
-
+    short count = WardenicChargeHelper.getWardenicArmorCount(player);
     EntityLivingBase entityLivingBase = (EntityLivingBase)entity;
     DamageSource damageSource = new DamageSourceWarden("warden", player);
 
@@ -98,18 +79,9 @@ public class WardenicUpgradeEntropy extends WardenicUpgrade {
   public void onHurt(LivingHurtEvent event) {
     super.onHurt(event);
 
-    int count = 0;
-
     if (event.entity instanceof EntityPlayer) {
       EntityPlayer player = (EntityPlayer) event.entity;
-
-      for (int i = 0; i < 4; i++) {
-        if ((player.getCurrentArmor(i) != null) &&
-          WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
-            .equals(Aspect.ENTROPY.getName())) {
-          count++;
-        }
-      }
+      short count = WardenicChargeHelper.getWardenicArmorCount(player);
 
       if (random.nextInt(20) <= count) {
         Thaumcraft.addWarpToPlayer(player, 1, true);

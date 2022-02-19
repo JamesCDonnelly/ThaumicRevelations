@@ -28,24 +28,10 @@ public class WardenicChargeEvents {
   }
 
   @SubscribeEvent
-  public void onPlayerTick(@NotNull LivingUpdateEvent event) {
+  public void onPlayerTick(LivingUpdateEvent event) {
     if (event.entity instanceof EntityPlayer) {
       EntityPlayer player = (EntityPlayer) event.entity;
       ItemStack amulet = ItemWardenAmulet.getAmulet(player);
-      String upgrade = WardenicChargeHelper.getUpgrade(amulet).getUpgradeAspect();
-
-      if (
-        player.getCurrentArmor(0) != null &&
-        player.getCurrentArmor(0).getItem() instanceof ItemWardenArmor &&
-        (
-          (upgrade.equals(Aspect.AIR.getName()) && !player.isInWater()) ||
-          (upgrade.equals(Aspect.WATER.getName()) && player.isInWater())
-        )
-      ) {
-        player.stepHeight = 1.0F;
-      } else {
-        player.stepHeight = 0.5F;
-      }
 
       for (int i = 0; i < 4; i++) {
         ItemStack armor = player.getCurrentArmor(i);
@@ -58,11 +44,30 @@ public class WardenicChargeEvents {
       if (player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ItemWardenWeapon) {
         player.getHeldItem().setMetadata(0);
       }
+
+      if (amulet == null) {
+        return;
+      }
+
+      String upgrade = WardenicChargeHelper.getUpgrade(amulet).getUpgradeAspect();
+
+      ItemStack boots = player.getCurrentArmor(0);
+
+      if (boots != null && boots.getItem() instanceof ItemWardenArmor &&
+        (
+          (upgrade.equals(Aspect.AIR.getName()) && !player.isInWater()) ||
+          (upgrade.equals(Aspect.WATER.getName()) && player.isInWater())
+        )
+      ) {
+        player.stepHeight = 1.0F;
+      } else {
+        player.stepHeight = 0.5F;
+      }
     }
   }
 
   @SubscribeEvent
-  public void onHurt(@NotNull LivingHurtEvent event) {
+  public void onHurt(LivingHurtEvent event) {
     if (event.entity instanceof EntityPlayer) {
       EntityPlayer player = (EntityPlayer) event.entity;
       ItemStack amulet = ItemWardenAmulet.getAmulet(player);
@@ -71,66 +76,38 @@ public class WardenicChargeEvents {
         return;
       }
 
-      amulet.setMetadata(amulet.getMetadata() - 1);
+      amulet.setMetadata((int)(amulet.getMetadata() - event.ammount));
 
-      for (int i = 1; i < 4; i++) {
-        ItemStack armor = player.getCurrentArmor(i);
+      short count = WardenicChargeHelper.getWardenicArmorCount(player);
 
-        if (armor != null && (armor.getItem() instanceof ItemWardenArmor)) {
-          Aspect aspect = WardenicChargeHelper.getUpgrade(armor).aspect;
-          boolean activate = false;
-
-          if (aspect.getName().equals(EXCUBITOR.getName())) {
-            AspectList aspectList = VisHelper.getAllVis(amulet);
-            Aspect[] aspects = aspectList.getAspects();
-            boolean doit = true;
-
-            for (Aspect a : aspects) {
-              if (aspectList.getAmount(a) < 100) {
-                doit = false;
-                break;
-              }
-            }
-
-            if (doit) {
-              for (Aspect a : aspects) {
-                VisHelper.addRealVis(amulet, a, -100);
-              }
-
-              activate = true;
-            }
-          } else {
-            int vis = VisHelper.getVis(amulet, aspect);
-
-            if (vis > 1000) {
-              VisHelper.addRealVis(amulet, aspect, -1000);
-              activate = true;
-            }
-          }
-
-          if (activate) {
-            WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).onHurt(event);
-          }
-        }
+      if (count == 4) {
+        WardenicChargeHelper.getUpgrade(amulet).onHurt(event);
       }
     }
 
     if (event.source.getEntity() instanceof EntityPlayer && event.source.getSourceOfDamage() instanceof EntityArrow) {
       EntityPlayer player = (EntityPlayer) event.source.getEntity();
+      ItemStack amulet = ItemWardenAmulet.getAmulet(player);
       Entity entityArrow = event.source.getSourceOfDamage();
       NBTTagCompound tag = entityArrow.getEntityData();
 
+      if (amulet == null) {
+        return;
+      }
+
       if (tag.getString("WardenArrow") != null) {
-        WardenicChargeHelper.getUpgrade(player.getHeldItem()).onIndirectAttack(event);
+        WardenicChargeHelper.getUpgrade(amulet).onIndirectAttack(event);
       }
 
       if (event.entity instanceof EntityPlayer &&
         tag.getString("WardenArrow").equals(EXCUBITOR.getName())) {
-        ItemStack amulet = ItemWardenAmulet.getAmulet((EntityPlayer) event.entity);
+        ItemStack a = ItemWardenAmulet.getAmulet((EntityPlayer) event.entity);
 
-        if (amulet != null) {
-          amulet.setMetadata(amulet.getMetadata() + 5);
+        if (a == null) {
+          return;
         }
+
+        a.setMetadata((int)(a.getMetadata() + event.ammount));
       }
     }
   }
