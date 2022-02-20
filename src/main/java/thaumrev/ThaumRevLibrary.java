@@ -19,21 +19,9 @@ import java.util.UUID;
 public class ThaumRevLibrary {
   public static final String MOD_ID = "thaumrev";
 
-  public static final UUID[] ARMOR_KNOCKBACK_MODIFIERS = new UUID[]{
-    UUID.fromString("16fcf503-bb7d-493f-8af6-6fafae741110"),
-    UUID.fromString("f1d7f5ae-cc9a-49f2-ae1e-7c7f4c889cb3"),
-    UUID.fromString("93a367a3-278d-4035-b48c-06f058bfc6cb"),
-    UUID.fromString("9f2ffe0a-487c-4070-b4e7-f775ac080bbd"),
-  };
-
-  public static final UUID[] ARMOR_SPEED_MODIFIERS = new UUID[]{
-    UUID.fromString("fcbfb696-b2a4-41e9-b9e9-ea874b85d5a4"),
-    UUID.fromString("cc6d1ece-9785-4e78-9949-76643e0aba73"),
-    UUID.fromString("a82465ac-faf5-474f-bef8-fb21ef99f9f7"),
-    UUID.fromString("bcc089bb-3b51-44bc-b790-352451fd246c"),
-  };
-
-  public static final UUID WEAPON_DAMAGE_MODIFIER = UUID.fromString("7ef33ceb-143f-434f-b7fd-eb07ca09f397");
+  public static final UUID KNOCKBACK_MODIFIER = UUID.fromString("16fcf503-bb7d-493f-8af6-6fafae741110");
+  public static final UUID SPEED_MODIFIER = UUID.fromString("fcbfb696-b2a4-41e9-b9e9-ea874b85d5a4");
+  public static final UUID DAMAGE_MODIFIER = UUID.fromString("7ef33ceb-143f-434f-b7fd-eb07ca09f397");
 
   public static CreativeTabs tabThaumRev;
 

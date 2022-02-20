@@ -23,7 +23,7 @@ import thaumcraft.api.aspects.Aspect;
 import thaumrev.ThaumRevLibrary;
 import thaumrev.util.wardenic.WardenicChargeHelper;
 
-import static thaumrev.ThaumRevLibrary.WEAPON_DAMAGE_MODIFIER;
+import static thaumrev.ThaumRevLibrary.DAMAGE_MODIFIER;
 
 public class ItemWardenBow extends ItemBow {
   public static final String[] wardenBowPullArray = new String[]{"pulling_0", "pulling_1", "pulling_2"};
@@ -164,14 +164,13 @@ public class ItemWardenBow extends ItemBow {
   @Override
   public Multimap getAttributeModifiers(ItemStack stack) {
     Multimap modifiers = super.getAttributeModifiers(stack);
-    String upgrade = WardenicChargeHelper.getUpgrade(stack).getUpgradeAspect();
 
-    if (upgrade.equals(Aspect.AIR.getName())) {
-      modifiers.put(
-        SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(),
-        new AttributeModifier(WEAPON_DAMAGE_MODIFIER, "DAMAGE_MODIFIER", 4.0F, 0)
-      );
-    }
+    // if (upgrade.equals(Aspect.AIR.getName())) {
+    //   modifiers.put(
+    //     SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(),
+    //     new AttributeModifier(DAMAGE_MODIFIER, "DAMAGE_MODIFIER", 4.0F, 0)
+    //   );
+    // }
 
     return modifiers;
   }

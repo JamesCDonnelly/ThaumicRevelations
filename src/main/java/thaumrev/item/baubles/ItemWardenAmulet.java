@@ -15,7 +15,6 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
@@ -33,7 +32,6 @@ import thaumcraft.common.Thaumcraft;
 import thaumcraft.common.items.wands.ItemWandCasting;
 import thaumcraft.common.tiles.TileVisRelay;
 import thaumrev.ThaumRevLibrary;
-import thaumrev.item.armor.ItemWardenArmor;
 import thaumrev.util.DamageSourceWarden;
 import thaumrev.util.PurityHelper;
 import thaumrev.util.wardenic.VisHelper;
@@ -46,8 +44,8 @@ import java.util.List;
 
 import com.google.common.collect.Multimap;
 
-import static thaumrev.ThaumRevLibrary.ARMOR_KNOCKBACK_MODIFIERS;
-import static thaumrev.ThaumRevLibrary.ARMOR_SPEED_MODIFIERS;
+import static thaumrev.ThaumRevLibrary.KNOCKBACK_MODIFIER;
+import static thaumrev.ThaumRevLibrary.SPEED_MODIFIER;
 
 import static thaumrev.ThaumRevLibrary.EXCUBITOR;
 
@@ -259,15 +257,15 @@ public class ItemWardenAmulet extends Item implements IBauble, IRunicArmor, IVis
   }
 
   @Override
-  public void onEquipped(ItemStack amulet, EntityLivingBase entityLivingBase) {
+  public void onEquipped(ItemStack amulet, EntityLivingBase entity) {
     // entityLivingBase.world.playSoundAtEntity(entityLivingBase, "thaumrev:compramos", 1, 1);
   }
 
   @Override
-  public void onUnequipped(ItemStack amulet, EntityLivingBase entityLivingBase) { }
+  public void onUnequipped(ItemStack amulet, EntityLivingBase entity) { }
 
   @Override
-  public void addInformation(ItemStack amulet, EntityPlayer player, List list, boolean b) {
+  public void addInformation(ItemStack amulet, EntityPlayer player, List list, boolean doit) {
     String chargeInformation;
 
     if (amulet.getMetadata() > 120) {
@@ -328,7 +326,7 @@ public class ItemWardenAmulet extends Item implements IBauble, IRunicArmor, IVis
     list.add(EnumChatFormatting.GOLD + StatCollector.translateToLocal("tooltip.wardenic.upgrade") +
       ": " + WardenicChargeHelper.getUpgrade(amulet).getQuote());
 
-    super.addInformation(amulet, player, list, b);
+    super.addInformation(amulet, player, list, doit);
   }
 
 
@@ -339,8 +337,8 @@ public class ItemWardenAmulet extends Item implements IBauble, IRunicArmor, IVis
   @Override
   public boolean canUnequip(ItemStack amulet, EntityLivingBase entityLivingBase) { return true; }
 
-  @Override
-  public boolean getShareTag() { return true; }
+  // @Override
+  // public boolean getShareTag() { return true; }
 
   /* Overrides - ItemStack */
   @Override
@@ -369,11 +367,10 @@ public class ItemWardenAmulet extends Item implements IBauble, IRunicArmor, IVis
 
 
   /* Overrides - MultiMap */
-  @Override
+  @Override   // FIXME: Attribute modifiers don't actually work with Baubles...
   public Multimap getAttributeModifiers(ItemStack amulet) {
     Multimap modifiers = super.getAttributeModifiers(amulet);
     String upgrade = WardenicChargeHelper.getUpgrade(amulet).getUpgradeAspect();
-    ItemArmor armor = (ItemArmor) amulet.getItem();
     AttributeModifier speedModifier;
     AttributeModifier knockbackModifier = null;
     float value = 0;
@@ -381,18 +378,18 @@ public class ItemWardenAmulet extends Item implements IBauble, IRunicArmor, IVis
     if (upgrade.equals(Aspect.AIR.getName())) {
       value = 0.01F;
     } else if (upgrade.equals(Aspect.EARTH.getName())) {
-      value = -0.01F;
+      value = -0.04F;
     } else {
       value = 0.0F;
     }
 
     speedModifier = new AttributeModifier(
-      ARMOR_SPEED_MODIFIERS[armor.armorType], "SPEED_MODIFIER", value, 0
+      SPEED_MODIFIER, "SPEED_MODIFIER", value, 0
     );
 
     if (upgrade.equals(Aspect.EARTH.getName())) {
       knockbackModifier = new AttributeModifier(
-        ARMOR_KNOCKBACK_MODIFIERS[armor.armorType], "KNOCKBACK_MODIFIER", 0.75F, 0
+        KNOCKBACK_MODIFIER, "KNOCKBACK_MODIFIER", 0.75F, 0
       );
     }
 
@@ -421,12 +418,18 @@ public class ItemWardenAmulet extends Item implements IBauble, IRunicArmor, IVis
 
   @Override
   public boolean showNodes(ItemStack amulet, EntityLivingBase entity) {
-    return entity instanceof EntityPlayer && ((EntityPlayer) entity).getCurrentArmor(0).getItem() instanceof ItemWardenArmor;
+    if (!(entity instanceof EntityPlayer)) return false;
+
+    short count = WardenicChargeHelper.getWardenicArmorCount((EntityPlayer) entity);
+    return count == 4;
   }
 
   @Override
   public boolean showIngamePopups(ItemStack amulet, EntityLivingBase entity) {
-    return entity instanceof EntityPlayer && ((EntityPlayer) entity).getCurrentArmor(0).getItem() instanceof ItemWardenArmor;
+    if (!(entity instanceof EntityPlayer)) return false;
+
+    short count = WardenicChargeHelper.getWardenicArmorCount((EntityPlayer) entity);
+    return count == 4;
   }
 
   @Override
