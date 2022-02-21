@@ -34,7 +34,6 @@
   as per circumvent bureaucratic bullshit (if you do not agree, you **really** should not contribute).
 
 ## 3. Distribution
-* Only _CurseForge_ and the _Team_ are permitted to publicly redistribute single binary files of the _Mod_.
 * _You_ are permitted to redistribute _Official Builds_ in _Public_ or _Private Modpacks_.
 * If _You_ redistribute the _Modpack_ outside the _CurseForge_, you must at least provide 
   a link to the _Mod's_ _CurseForge_ site in the description.
