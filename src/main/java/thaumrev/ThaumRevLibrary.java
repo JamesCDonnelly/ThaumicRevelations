@@ -19,9 +19,9 @@ import java.util.UUID;
 public class ThaumRevLibrary {
   public static final String MOD_ID = "thaumrev";
 
-  public static final UUID KNOCKBACK_MODIFIER = UUID.fromString("16fcf503-bb7d-493f-8af6-6fafae741110");
-  public static final UUID SPEED_MODIFIER = UUID.fromString("fcbfb696-b2a4-41e9-b9e9-ea874b85d5a4");
-  public static final UUID DAMAGE_MODIFIER = UUID.fromString("7ef33ceb-143f-434f-b7fd-eb07ca09f397");
+  public static final UUID AMULET_KNOCKBACK_MODIFIER = UUID.randomUUID();
+  public static final UUID AMULET_SPEED_MODIFIER = UUID.randomUUID();
+  public static final UUID DAMAGE_MODIFIER = UUID.randomUUID();
 
   public static CreativeTabs tabThaumRev;
 

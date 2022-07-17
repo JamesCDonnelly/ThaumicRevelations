@@ -11,7 +11,6 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import org.jetbrains.annotations.NotNull;
 import thaumcraft.api.aspects.Aspect;
-import thaumcraft.api.aspects.AspectList;
 import thaumrev.item.ItemWardenWeapon;
 import thaumrev.item.armor.ItemWardenArmor;
 import thaumrev.item.baubles.ItemWardenAmulet;
@@ -28,7 +27,7 @@ public class WardenicChargeEvents {
   }
 
   @SubscribeEvent
-  public void onPlayerTick(LivingUpdateEvent event) {
+  public void onPlayerTick(@NotNull LivingUpdateEvent event) {
     if (event.entity instanceof EntityPlayer) {
       EntityPlayer player = (EntityPlayer) event.entity;
       ItemStack amulet = ItemWardenAmulet.getAmulet(player);
@@ -56,7 +55,7 @@ public class WardenicChargeEvents {
       if (boots != null && boots.getItem() instanceof ItemWardenArmor &&
         (
           (upgrade.equals(Aspect.AIR.getName()) && !player.isInWater()) ||
-          (upgrade.equals(Aspect.WATER.getName()) && player.isInWater())
+            (upgrade.equals(Aspect.WATER.getName()) && player.isInWater())
         )
       ) {
         player.stepHeight = 1.0F;
@@ -67,7 +66,7 @@ public class WardenicChargeEvents {
   }
 
   @SubscribeEvent
-  public void onHurt(LivingHurtEvent event) {
+  public void onHurt(@NotNull LivingHurtEvent event) {
     if (event.entity instanceof EntityPlayer) {
       EntityPlayer player = (EntityPlayer) event.entity;
       ItemStack amulet = ItemWardenAmulet.getAmulet(player);

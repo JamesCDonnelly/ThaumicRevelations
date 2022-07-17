@@ -27,15 +27,11 @@ public class WardenicUpgrade {
 	public void onAttack(ItemStack weapon, EntityPlayer player, Entity entity) {
 		ItemStack amulet = ItemWardenAmulet.getAmulet(player);
 
-		if (amulet == null) {
-			return;
-		}
+		if (amulet == null) return;
 
 		boolean activate = ItemWardenAmulet.shouldActivate(amulet, 1000);
 
-		if (!activate) {
-			return;
-		}
+		if (!activate) return;
 	}
 
 	public void onIndirectAttack(LivingHurtEvent event) {
@@ -45,30 +41,22 @@ public class WardenicUpgrade {
 			EntityPlayer player = (EntityPlayer) entity;
 			ItemStack amulet = ItemWardenAmulet.getAmulet(player);
 
-			if (amulet == null) {
-				return;
-			}
+			if (amulet == null) return;
 
 			boolean activate = ItemWardenAmulet.shouldActivate(amulet, 1000);
-	
-			if (!activate) {
-				return;
-			}
+
+			if (!activate) return;
 		}
 	}
 
 	public void onWornTick(World world, EntityPlayer player, ItemStack stack) {
 		ItemStack amulet = ItemWardenAmulet.getAmulet(player);
 
-		if (amulet == null) {
-			return;
-		}
+		if (amulet == null) return;
 
-		boolean activate = ItemWardenAmulet.shouldActivate(amulet, 100);
+		boolean activate = ItemWardenAmulet.shouldActivate(amulet, 1000);
 
-		if (!activate) {
-			return;
-		}
+		if (!activate) return;
 	}
 
 	public void onHurt(LivingHurtEvent event) {
@@ -78,15 +66,11 @@ public class WardenicUpgrade {
 			EntityPlayer player = (EntityPlayer) entity;
 			ItemStack amulet = ItemWardenAmulet.getAmulet(player);
 
-			if (amulet == null) {
-				return;
-			}
+			if (amulet == null) return;
 
 			boolean activate = ItemWardenAmulet.shouldActivate(amulet, 1000);
-	
-			if (!activate) {
-				return;
-			}
+
+			if (!activate) return;
 		}
 	}
 

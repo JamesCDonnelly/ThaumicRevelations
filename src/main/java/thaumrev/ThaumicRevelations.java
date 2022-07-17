@@ -17,7 +17,7 @@ import thaumrev.util.MobDropsHandler;
 import thaumrev.util.TabThaumRev;
 import thaumrev.util.wardenic.WardenicChargeEvents;
 import thaumrev.util.wardenic.WardenicUpgrades;
-import thaumrev.world.WorldGenExcubitura;
+import thaumrev.world.ThaumRevWorldGenerator;
 
 import java.io.File;
 
@@ -68,7 +68,7 @@ public class ThaumicRevelations {
 
     // GameRegistry.addSubstitutionAlias();
 
-    GameRegistry.registerWorldGenerator(new WorldGenExcubitura(), 1);
+    GameRegistry.registerWorldGenerator(new ThaumRevWorldGenerator(), 1);
   }
 
   @EventHandler

@@ -4,6 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.*;
 import net.minecraft.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 import thaumcraft.api.aspects.IEssentiaContainerItem;
 import thaumrev.item.baubles.ItemWardenAmulet;
 import thaumrev.util.wardenic.WardenicChargeHelper;
@@ -13,7 +14,7 @@ public class ContainerHammer extends Container {
 	InventoryCrafting hammerInv;
 	IInventory resultInv;
 
-	public ContainerHammer(EntityPlayer player) {
+	public ContainerHammer(@NotNull EntityPlayer player) {
 		playerInv = player.inventory;
 		hammerInv = new InventoryCrafting(this, 2, 1);
 		resultInv = new InventoryCraftResult();
@@ -36,14 +37,17 @@ public class ContainerHammer extends Container {
 	}
 
 	@Override
-	public void onCraftMatrixChanged(IInventory craftingMatrix) {
+	public void onCraftMatrixChanged(@NotNull IInventory craftingMatrix) {
 		ItemStack essentia = craftingMatrix.getStackInSlot(0);
 		ItemStack item = craftingMatrix.getStackInSlot(1);
 
 		if (item != null) {
 			if (item.getItem() instanceof ItemWardenAmulet) {
 				if (essentia != null) {
-					String aspectKey = ((IEssentiaContainerItem) essentia.getItem()).getAspects(essentia).getAspects()[0].getName();
+					String aspectKey = ((IEssentiaContainerItem) essentia.getItem())
+						.getAspects(essentia)
+						.getAspects()[0]
+						.getName();
 					ItemStack infused = item.copy();
 
 					if (WardenicChargeHelper.upgrades.containsKey(aspectKey)) {

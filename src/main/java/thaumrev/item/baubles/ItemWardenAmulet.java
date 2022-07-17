@@ -17,11 +17,13 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import thaumcraft.api.IGoggles;
 import thaumcraft.api.IRunicArmor;
 import thaumcraft.api.IVisDiscountGear;
@@ -32,7 +34,6 @@ import thaumcraft.common.Thaumcraft;
 import thaumcraft.common.items.wands.ItemWandCasting;
 import thaumcraft.common.tiles.TileVisRelay;
 import thaumrev.ThaumRevLibrary;
-import thaumrev.util.DamageSourceWarden;
 import thaumrev.util.PurityHelper;
 import thaumrev.util.wardenic.VisHelper;
 import thaumrev.util.wardenic.WardenicChargeHelper;
@@ -41,13 +42,15 @@ import java.lang.ref.WeakReference;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import com.google.common.collect.Multimap;
 
-import static thaumrev.ThaumRevLibrary.KNOCKBACK_MODIFIER;
-import static thaumrev.ThaumRevLibrary.SPEED_MODIFIER;
+import static thaumrev.ThaumRevLibrary.AMULET_KNOCKBACK_MODIFIER;
+import static thaumrev.ThaumRevLibrary.AMULET_SPEED_MODIFIER;
 
 import static thaumrev.ThaumRevLibrary.EXCUBITOR;
+import static thaumrev.util.PurityHelper.summonParticles;
 
 public class ItemWardenAmulet extends Item implements IBauble, IRunicArmor, IVisDiscountGear, IGoggles, IRevealer {
   DecimalFormat formatter = new DecimalFormat("#######.##");
@@ -63,16 +66,15 @@ public class ItemWardenAmulet extends Item implements IBauble, IRunicArmor, IVis
     ItemStack amulet = getAmulet(player);
 
     if (amulet != null) {
-      List<Object> entities = getEntities(player);
+      List<Entity> entities = getEntities(player);
 
-      for (Object entity : entities) {
+      for (Entity entity : entities) {
         if (entity instanceof EntityLivingBase || entity instanceof INpc) {
-
           summonParticles(
             player.worldObj,
-            ((Entity) entity).posX,
-            ((Entity) entity).posY,
-            ((Entity) entity).posZ
+            entity.posX,
+            entity.posY,
+            entity.posZ
           );
         }
       }
@@ -80,127 +82,113 @@ public class ItemWardenAmulet extends Item implements IBauble, IRunicArmor, IVis
   }
 
   public static void amuletEffect(EntityPlayer player) {
+    short count = WardenicChargeHelper.getWardenicArmorCount(player);
     ItemStack amulet = getAmulet(player);
-    DamageSource damageSource = new DamageSourceWarden("warden", player);
 
     if (amulet == null) {
       return;
     }
 
-    List<Object> entities = getEntities(player);
+    List<Entity> entities = getEntities(player);
 
     amulet.setMetadata(120);
 
-    for (Object entity : entities) {
-      if (entity instanceof Entity &&
-        (PurityHelper.isEldritchOrTainted((Entity) entity) || entity instanceof EntityPlayer)) {
-        PurityHelper.purifyEntity((Entity) entity);
+    for (Entity e : entities) {
+      if (PurityHelper.isEldritchOrTainted(e)) {
+        EntityLivingBase entity = (EntityLivingBase) e;
 
-        if (PurityHelper.isEldritchOrTainted((Entity) entity)) {
-          ((Entity) entity).attackEntityFrom(damageSource, ((EntityLivingBase) entity).getMaxHealth() / 2);
-        }
+        PurityHelper.purifyEntity(entity);
+        PurityHelper.damageImpureEntity(entity, player, entity.getMaxHealth() / (10 - 2 * count));
       }
 
-      if (entity instanceof EntityPlayer) {
-        ItemStack am = getAmulet((EntityPlayer) entity);
+      if (e instanceof EntityPlayer) {
+        ItemStack am = getAmulet((EntityPlayer) e);
 
         if (am == null) {
           return;
         }
 
-        am.setMetadata(am.getMetadata() - 5);
-        amulet.setMetadata(amulet.getMetadata() + 5);
+        am.setMetadata(am.getMetadata() - (count + 1));
+        amulet.setMetadata(amulet.getMetadata() + (count + 1));
       }
     }
 
-    Thaumcraft.addWarpToPlayer(player, -10, true);
+    Thaumcraft.addWarpToPlayer(player, -2 * (count + 1), true);
   }
 
-  public static ItemStack getAmulet(EntityPlayer player) {
+  public static @Nullable ItemStack getAmulet(EntityPlayer player) {
     InventoryBaubles baubles = PlayerHandler.getPlayerBaubles(player);
 
-    for (int i = 0; i < baubles.getSizeInventory(); i++) {
-      if (baubles.getStackInSlot(i) != null &&
-        baubles.getStackInSlot(i).getItem() instanceof ItemWardenAmulet) {
-        return baubles.getStackInSlot(i);
-      }
+    if (baubles.getStackInSlot(0) != null &&
+      baubles.getStackInSlot(0).getItem() instanceof ItemWardenAmulet
+    ) {
+      return baubles.getStackInSlot(0);
     }
 
     return null;
   }
 
-	public static boolean shouldActivate(ItemStack amulet, int value) {
-		if (amulet != null) {
-			Aspect aspect = WardenicChargeHelper.getUpgrade(amulet).aspect;
+  public static boolean shouldActivate(ItemStack amulet, int value) {
+    if (amulet != null) {
+      Aspect aspect = WardenicChargeHelper.getUpgrade(amulet).aspect;
 
-			if (aspect.getName().equals(EXCUBITOR.getName())) {
-				AspectList aspectList = VisHelper.getAllVis(amulet);
-				Aspect[] aspects = aspectList.getAspects();
-				boolean doit = true;
+      if (aspect.getName().equals(EXCUBITOR.getName())) {
+        AspectList aspectList = VisHelper.getAllVis(amulet);
+        Aspect[] aspects = aspectList.getAspects();
+        boolean doit = true;
 
-				for (Aspect a : aspects) {
-					if (aspectList.getAmount(a) < value / 10) {
-						doit = false;
-						break;
-					}
-				}
+        for (Aspect a : aspects) {
+          if (aspectList.getAmount(a) < value / 10) {
+            doit = false;
+            break;
+          }
+        }
 
-				if (doit) {
-					for (Aspect a : aspects) {
-						VisHelper.addRealVis(amulet, a, -value / 10);
-					}
-				} else {
-					return false;
-				}
-			} else {
-				int vis = VisHelper.getVis(amulet, aspect);
+        if (doit) {
+          for (Aspect a : aspects) {
+            VisHelper.addRealVis(amulet, a, -value / 10);
+          }
+        } else {
+          return false;
+        }
+      } else {
+        int vis = VisHelper.getVis(amulet, aspect);
 
-				if (vis > value) {
-					VisHelper.addRealVis(amulet, aspect, -value);
-				} else {
-					return false;
-				}
-			}
+        if (vis > value) {
+          VisHelper.addRealVis(amulet, aspect, -value);
+        } else {
+          return false;
+        }
+      }
 
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-  private static List<Object> getEntities(EntityPlayer player) {
-    return new ArrayList<Object>(
-      player.worldObj.getEntitiesWithinAABBExcludingEntity(
-      player,
-      AxisAlignedBB.getBoundingBox(
-        player.posX - 8,
-        player.posY - 8,
-        player.posZ - 8,
-        player.posX + 8,
-        player.posY + 8,
-        player.posZ + 8)
-    ));
-  }
-
-  private static void summonParticles(World world, double x, double y, double z) {
-    for (int i = 0; i < 2; i++) {
-      float fx = (world.rand.nextFloat() - world.rand.nextFloat()) * 0.3F;
-      float fy = (world.rand.nextFloat() - world.rand.nextFloat()) * 0.3F;
-      float fz = (world.rand.nextFloat() - world.rand.nextFloat()) * 0.3F;
-      Thaumcraft.proxy.wispFX3(world,
-        x + fx, y + fy, z + fz,
-        x + fx * 8.0F, y + fy * 8.0F, z + fz * 8.0F,
-        0.3F, i % 2 == 0 ? 0 : 2, true, 0.02F);
+      return true;
+    } else {
+      return false;
     }
   }
 
-  private void chargeWands(ItemStack amulet, EntityLivingBase player) {
+  @Contract("_ -> new")
+  private static @NotNull List<Entity> getEntities(@NotNull EntityPlayer player) {
+    return new ArrayList<Entity>(
+      player.worldObj.getEntitiesWithinAABBExcludingEntity(
+        player,
+        AxisAlignedBB.getBoundingBox(
+          player.posX - 8,
+          player.posY - 8,
+          player.posZ - 8,
+          player.posX + 8,
+          player.posY + 8,
+          player.posZ + 8
+        )));
+  }
+
+
+  private void chargeWands(ItemStack amulet, @NotNull EntityLivingBase player) {
     ItemWandCasting wand = (ItemWandCasting) player.getHeldItem().getItem();
     AspectList al = wand.getAspectsWithRoom(player.getHeldItem());
     Aspect[] aspects = al.getAspects();
 
-    for (int j = 0; j < aspects.length; ++j) {
-      Aspect aspect = aspects[j];
+    for (Aspect aspect : aspects) {
       if (aspect != null && VisHelper.getVis(amulet, aspect) > 0) {
         int amt = Math.min(5, wand.getMaxVis(player.getHeldItem()) - wand.getVis(player.getHeldItem(), aspect));
         amt = Math.min(amt, VisHelper.getVis(amulet, aspect));
@@ -210,11 +198,11 @@ public class ItemWardenAmulet extends Item implements IBauble, IRunicArmor, IVis
     }
   }
 
-  private void chargeVis(ItemStack amulet, EntityLivingBase player) {
+  private void chargeVis(ItemStack amulet, @NotNull EntityLivingBase player) {
     if (
       ((WeakReference) TileVisRelay.nearbyPlayers.get(player.getEntityId())).get() != null &&
-        ((TileVisRelay) ((WeakReference) TileVisRelay.nearbyPlayers
-          .get(player.getEntityId())).get())
+        ((TileVisRelay) Objects.requireNonNull(((WeakReference) TileVisRelay.nearbyPlayers
+          .get(player.getEntityId())).get()))
           .getDistanceSq(player.posX, player.posY, player.posZ) < 26.0D
     ) {
       AspectList al = VisHelper.getAspectsWithRoom(amulet);
@@ -222,7 +210,10 @@ public class ItemWardenAmulet extends Item implements IBauble, IRunicArmor, IVis
 
       for (Aspect aspect : aspects) {
         if (aspect != null) {
-          int amt = ((TileVisRelay) ((WeakReference) TileVisRelay.nearbyPlayers.get(player.getEntityId())).get()).consumeVis(aspect, Math.min(5, VisHelper.getMaxVis(amulet) - VisHelper.getVis(amulet, aspect)));
+          int amt = (
+            (TileVisRelay) Objects
+              .requireNonNull(((WeakReference) TileVisRelay.nearbyPlayers.get(player.getEntityId())).get()))
+            .consumeVis(aspect, Math.min(5, VisHelper.getMaxVis(amulet) - VisHelper.getVis(amulet, aspect)));
           if (amt > 0) {
             VisHelper.addRealVis(amulet, aspect, amt);
             TileVisRelay tileVisRelay = (TileVisRelay) ((WeakReference) TileVisRelay.nearbyPlayers.get(player.getEntityId())).get();
@@ -242,7 +233,7 @@ public class ItemWardenAmulet extends Item implements IBauble, IRunicArmor, IVis
 
   /* Overrides - void */
   @Override
-  public void onWornTick(ItemStack amulet, EntityLivingBase player) {
+  public void onWornTick(ItemStack amulet, @NotNull EntityLivingBase player) {
     if (!player.worldObj.isRemote && player.ticksExisted % 5 == 0) {
       if (player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ItemWandCasting) {
         chargeWands(amulet, player);
@@ -265,7 +256,7 @@ public class ItemWardenAmulet extends Item implements IBauble, IRunicArmor, IVis
   public void onUnequipped(ItemStack amulet, EntityLivingBase entity) { }
 
   @Override
-  public void addInformation(ItemStack amulet, EntityPlayer player, List list, boolean doit) {
+  public void addInformation(@NotNull ItemStack amulet, EntityPlayer player, List list, boolean doit) {
     String chargeInformation;
 
     if (amulet.getMetadata() > 120) {
@@ -384,14 +375,19 @@ public class ItemWardenAmulet extends Item implements IBauble, IRunicArmor, IVis
     }
 
     speedModifier = new AttributeModifier(
-      SPEED_MODIFIER, "SPEED_MODIFIER", value, 0
+      AMULET_SPEED_MODIFIER, "AMULET_SPEED_MODIFIER", value, 0
     );
 
     if (upgrade.equals(Aspect.EARTH.getName())) {
       knockbackModifier = new AttributeModifier(
-        KNOCKBACK_MODIFIER, "KNOCKBACK_MODIFIER", 0.75F, 0
+        AMULET_KNOCKBACK_MODIFIER, "AMULET_KNOCKBACK_MODIFIER", 0.75F, 0
       );
     }
+
+    // modifiers.remove(
+    //   SharedMonsterAttributes.movementSpeed.getAttributeUnlocalizedName(),
+    //   speedModifier
+    // );
 
     modifiers.put(
       SharedMonsterAttributes.movementSpeed.getAttributeUnlocalizedName(),

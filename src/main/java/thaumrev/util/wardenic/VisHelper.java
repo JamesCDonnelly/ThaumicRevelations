@@ -2,6 +2,7 @@ package thaumrev.util.wardenic;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagInt;
 import org.jetbrains.annotations.NotNull;
 import thaumcraft.api.aspects.Aspect;

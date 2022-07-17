@@ -87,7 +87,8 @@ public class BlockWitor extends Block {
 				0.5F,
 				0,
 				true,
-				-0.025F);
+				-0.025F
+			);
 		}
 
 		if (rand.nextInt(15 - Thaumcraft.proxy.particleCount(4)) <= 8) {

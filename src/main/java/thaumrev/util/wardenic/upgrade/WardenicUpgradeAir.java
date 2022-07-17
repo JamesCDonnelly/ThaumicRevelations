@@ -72,7 +72,7 @@ public class WardenicUpgradeAir extends WardenicUpgrade {
   @Override
   public void onWornTick(World world, EntityPlayer player, ItemStack stack) {
     super.onWornTick(world, player, stack);
-    System.out.println(stack.getDisplayName()); // TODO: Debug
+    // DEBUG System.out.println(stack.getDisplayName());
 
     short count = WardenicChargeHelper.getWardenicArmorCount(player);
 

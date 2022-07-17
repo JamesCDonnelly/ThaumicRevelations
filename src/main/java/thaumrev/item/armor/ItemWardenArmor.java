@@ -89,7 +89,6 @@ public class ItemWardenArmor extends ItemArmor implements IRepairable, ISpecialA
   public void damageArmor(EntityLivingBase entity, ItemStack armor, DamageSource source, int damage, int slot) {
   }
 
-
   /* Overrides - boolean */
   // @Override
   // public boolean getShareTag() {
