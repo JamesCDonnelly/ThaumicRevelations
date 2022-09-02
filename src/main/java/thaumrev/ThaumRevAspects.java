@@ -120,7 +120,7 @@ public class ThaumRevAspects {
     );
 
     ThaumcraftApi.registerObjectTag(
-      ItemApi.getItem("itemChestplateCultistRobe", 0),
+      ItemApi.getItem("itemChestCultistRobe", 0),
       new AspectList()
         .add(CRIMSON, 1)
         .add(Aspect.METAL, 3)
@@ -128,14 +128,14 @@ public class ThaumRevAspects {
     );
 
     ThaumcraftApi.registerObjectTag(
-      ItemApi.getItem("itemChestplateCultistPlate", 0),
+      ItemApi.getItem("itemChestCultistPlate", 0),
       new AspectList()
         .add(CRIMSON, 1)
         .add(Aspect.METAL, 5)
     );
 
     ThaumcraftApi.registerObjectTag(
-      ItemApi.getItem("itemChestplateCultistLeaderPlate", 0),
+      ItemApi.getItem("itemChestCultistLeaderPlate", 0),
       new AspectList()
         .add(CRIMSON, 2)
         .add(Aspect.METAL, 5)
@@ -143,7 +143,7 @@ public class ThaumRevAspects {
 
 
     ThaumcraftApi.registerObjectTag(
-      ItemApi.getItem("itemLeggingsCultistRobe", 0),
+      ItemApi.getItem("itemLegsCultistRobe", 0),
       new AspectList()
         .add(CRIMSON, 1)
         .add(Aspect.METAL, 3)
@@ -151,14 +151,14 @@ public class ThaumRevAspects {
     );
 
     ThaumcraftApi.registerObjectTag(
-      ItemApi.getItem("itemLeggingsCultistPlate", 0),
+      ItemApi.getItem("itemLegsCultistPlate", 0),
       new AspectList()
         .add(CRIMSON, 1)
         .add(Aspect.METAL, 5)
     );
 
     ThaumcraftApi.registerObjectTag(
-      ItemApi.getItem("itemLeggingsCultistLeaderPlate", 0),
+      ItemApi.getItem("itemLegsCultistLeaderPlate", 0),
       new AspectList()
         .add(CRIMSON, 2)
         .add(Aspect.METAL, 5)

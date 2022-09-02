@@ -23,10 +23,10 @@ import thaumrev.world.ThaumRevWorldGenerator;
 
 import java.io.File;
 
-@Mod(modid="thaumrev", version="1.1.0", useMetadata=true)
+@Mod(modid="thaumrev", version="1.1.2", useMetadata=true)
 public class ThaumicRevelations {
   public File modDir;
-  public static final Logger log = LogManager.getLogger("thaumrev");
+  public static final Logger log = LogManager.getLogger("Thaumic Revelations");
 
   public static final String networkChannelName = "thaumrev";
   public final static int PACKET_TYPE_AMULET_USE = 1;
@@ -47,7 +47,7 @@ public class ThaumicRevelations {
     this.modDir = event.getModConfigurationDirectory();
 
     try {
-      ThaumRevConfig.initialize(event.getSuggestedConfigurationFile());
+      ThaumRevConfig.init(event.getSuggestedConfigurationFile());
     } catch (Exception var8) {
       log.error("Thaumic Revelations had a problem loading its configuration");
     } finally {
@@ -60,14 +60,7 @@ public class ThaumicRevelations {
 
     ThaumRevLibrary.tabThaumRev = new TabThaumRev(ThaumRevLibrary.MOD_ID);
 
-    if (Loader.isModLoaded("thaumicdyes")) {
-      System.out.println("Thaumic Revelations: Thaumic Dyes detected. Using Thaumic Dyes' dye system.");
-      ThaumRevConfig.isThaumicDyesLoaded = true;
-    } else {
-      System.out.println("Thaumic Revelations: Thaumic Dyes not detected. Using default dye system.");
-      ThaumRevConfig.isThaumicDyesLoaded = false;
-    }
-
+    ThaumRevIntegrations.init();
     MobDropsHandler.init();
     ThaumRevBlocks.init();
     ThaumRevItems.init();

@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 
+import org.jetbrains.annotations.NotNull;
 import org.lwjgl.opengl.GL11;
 
 import thaumrev.client.models.ModelKnowledgeReprocessor;
@@ -16,7 +17,7 @@ public class TileKnowledgeReprocessorRenderer extends TileEntitySpecialRenderer 
   private static final ResourceLocation rl = new ResourceLocation("thaumrev", "textures/models/reprocessor.png");
   public ModelKnowledgeReprocessor reprocessorModel = new ModelKnowledgeReprocessor();
 
-  public void renderTileEntityAt(TileKnowledgeReprocessor tile, double x, double y, double z, float arg4) {
+  public void renderTileEntityAt(@NotNull TileKnowledgeReprocessor tile, double x, double y, double z, float arg4) {
     int facing = 0;
     if (tile.hasWorldObj()) {
       facing = tile.getBlockMetadata();

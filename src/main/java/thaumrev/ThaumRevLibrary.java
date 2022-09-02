@@ -27,6 +27,7 @@ public class ThaumRevLibrary {
   public static ItemArmor.ArmorMaterial armorMaterialWarden;
   public static ItemArmor.ArmorMaterial armorMaterialWardencloth;
   public static ItemArmor.ArmorMaterial armorMaterialCrimsoncloth;
+  public static ItemArmor.ArmorMaterial armorMaterialFortressThauminite;
 
   public static ItemSword.ToolMaterial toolMaterialWarden;
 
@@ -60,6 +61,10 @@ public class ThaumRevLibrary {
   public static Item itemLoveRing;
   public static Item itemWaslieHammer;
   public static Item itemFocusIllumination;
+
+  public static Item itemThauminiteFortressHelm;
+  public static Item itemThauminiteFortressChest;
+  public static Item itemThauminiteFortressLegs;
 
   public static Block blockExcubitura;
   public static ItemSeeds itemExcubituraSeeds;

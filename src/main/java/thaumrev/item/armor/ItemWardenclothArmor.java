@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
+import org.jetbrains.annotations.NotNull;
 import thaumcraft.api.IRepairable;
 import thaumcraft.api.IRunicArmor;
 import thaumcraft.api.IVisDiscountGear;
@@ -20,20 +21,19 @@ import thaumrev.ThaumRevLibrary;
 import java.util.List;
 
 public class ItemWardenclothArmor extends ItemArmor implements IRepairable, IVisDiscountGear, IRunicArmor {
-  public IIcon[] iconWardenclothArmor = new IIcon[4];
+  public IIcon[] icons = new IIcon[4];
 
   public ItemWardenclothArmor(int type, String name) {
-      super(ThaumRevLibrary.armorMaterialWardencloth, 2, type);
-      setUnlocalizedName(name);
-      setCreativeTab(ThaumRevLibrary.tabThaumRev);
-      setMaxStackSize(1);
+    super(ThaumRevLibrary.armorMaterialWardencloth, 2, type);
+    setUnlocalizedName(name);
+    setCreativeTab(ThaumRevLibrary.tabThaumRev);
   }
 
   /** Overrides - void **/
   @Override
   public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
-      list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + ": "
-              + this.getVisDiscount(stack, player, (Aspect)null) + "%");
+    list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + ": "
+      + this.getVisDiscount(stack, player, (Aspect)null) + "%");
   }
 
 
@@ -66,17 +66,17 @@ public class ItemWardenclothArmor extends ItemArmor implements IRepairable, IVis
   /** Client-side **/
   @Override
   @SideOnly(Side.CLIENT)
-  public void registerIcons(IIconRegister register) {
-    this.iconWardenclothArmor[0] = register.registerIcon("thaumrev:armor/wardenclothhelm");
-    this.iconWardenclothArmor[1] = register.registerIcon("thaumrev:armor/wardenclothchest");
-    this.iconWardenclothArmor[2] = register.registerIcon("thaumrev:armor/wardenclothlegs");
-    this.iconWardenclothArmor[3] = register.registerIcon("thaumrev:armor/wardenclothboots");
+  public void registerIcons(@NotNull IIconRegister register) {
+    this.icons[0] = register.registerIcon("thaumrev:armor/wardenclothhelm");
+    this.icons[1] = register.registerIcon("thaumrev:armor/wardenclothchest");
+    this.icons[2] = register.registerIcon("thaumrev:armor/wardenclothlegs");
+    this.icons[3] = register.registerIcon("thaumrev:armor/wardenclothboots");
   }
 
   @Override
   @SideOnly(Side.CLIENT)
   public IIcon getIconFromDamage(int par1) {
-    return this.iconWardenclothArmor[this.armorType];
+    return this.icons[this.armorType];
   }
 
   @Override

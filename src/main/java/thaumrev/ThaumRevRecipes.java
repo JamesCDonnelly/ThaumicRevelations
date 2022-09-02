@@ -82,7 +82,7 @@ public class ThaumRevRecipes {
         .add(Aspect.CLOTH, 8)
     );
 
-    if (!ThaumRevConfig.isThaumicDyesLoaded) {
+    if (!ThaumRevIntegrations.isThaumicDyesLoaded) {
       recipeCrimsoncloth = ThaumcraftApi.addCrucibleRecipe(
         "CRIMSONCLOTH",
         new ItemStack(itemResource, 1, 4),
@@ -270,11 +270,11 @@ public class ThaumRevRecipes {
   }
 
   private static void loadCrimsonRecipes() {
-    ItemStack crimsonCloth = ThaumRevConfig.isThaumicDyesLoaded
+    ItemStack crimsonCloth = ThaumRevIntegrations.isThaumicDyesLoaded
       ? new ItemStack(GameRegistry.findItem("thaumicdyes", "ItemResourceFabric"), 1)
       : new ItemStack(itemResource, 1, 4);
 
-    if (!ThaumRevConfig.isThaumicDyesLoaded) {
+    if (!ThaumRevIntegrations.isThaumicDyesLoaded) {
       recipeHelmetCultistRobe = ThaumcraftApi.addArcaneCraftingRecipe(
         "CRIMSONCLOTH",
         ItemApi.getItem("itemHelmetCultistRobe", 0),

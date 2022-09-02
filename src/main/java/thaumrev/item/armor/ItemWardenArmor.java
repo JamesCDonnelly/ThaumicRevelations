@@ -13,18 +13,18 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ISpecialArmor;
+import org.jetbrains.annotations.NotNull;
 import thaumcraft.api.IRepairable;
 import thaumcraft.api.IRunicArmor;
 import thaumrev.ThaumRevLibrary;
 
 public class ItemWardenArmor extends ItemArmor implements IRepairable, ISpecialArmor, IRunicArmor {
-  public IIcon[] iconWardenArmor = new IIcon[4];
+  public IIcon[] icons = new IIcon[4];
 
   public ItemWardenArmor(int type, String name) {
     super(ThaumRevLibrary.armorMaterialWarden, 2, type);
     setUnlocalizedName(name);
     setCreativeTab(ThaumRevLibrary.tabThaumRev);
-    setMaxStackSize(1);
   }
 
   /* Overrides - void */
@@ -120,24 +120,43 @@ public class ItemWardenArmor extends ItemArmor implements IRepairable, ISpecialA
   /* Overrides - ArmorProperties */
   @Override
   public ArmorProperties getProperties(EntityLivingBase player, ItemStack armor, DamageSource source, double damage, int slot) {
-    return new ArmorProperties(0, getArmorMaterial().getDamageReductionAmount(slot) / 25D, 20);
+    int priority = 1;
+    double ratio = this.damageReduceAmount / 25.0D;
+
+    if (source.isMagicDamage()) {
+      ratio = this.damageReduceAmount / 20.0D;
+    }
+
+    if (player instanceof EntityPlayer) {
+      double set = 1.0D;
+
+      for (ItemStack piece : ((EntityPlayer) player).inventory.armorInventory) {
+        if (piece != null && piece.getItem() instanceof ItemWardenArmor) {
+          set += 0.25D;
+        }
+      }
+
+      ratio *= set;
+    }
+
+    return new ArmorProperties(priority, ratio, armor.getMaxDurability());
   }
 
 
   /* Client-side */
   @Override
   @SideOnly(Side.CLIENT)
-  public void registerIcons(IIconRegister register) {
-    this.iconWardenArmor[0] = register.registerIcon("thaumrev:armor/wardenhelm");
-    this.iconWardenArmor[1] = register.registerIcon("thaumrev:armor/wardenchest");
-    this.iconWardenArmor[2] = register.registerIcon("thaumrev:armor/wardenlegs");
-    this.iconWardenArmor[3] = register.registerIcon("thaumrev:armor/wardenboots");
+  public void registerIcons(@NotNull IIconRegister register) {
+    this.icons[0] = register.registerIcon("thaumrev:armor/wardenhelm");
+    this.icons[1] = register.registerIcon("thaumrev:armor/wardenchest");
+    this.icons[2] = register.registerIcon("thaumrev:armor/wardenlegs");
+    this.icons[3] = register.registerIcon("thaumrev:armor/wardenboots");
   }
 
   @Override
   @SideOnly(Side.CLIENT)
   public IIcon getIconFromDamage(int par1) {
-    return this.iconWardenArmor[this.armorType];
+    return this.icons[this.armorType];
   }
 
   @Override

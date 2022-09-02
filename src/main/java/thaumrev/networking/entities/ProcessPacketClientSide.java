@@ -8,6 +8,7 @@ import io.netty.buffer.ByteBufInputStream;
 import java.io.IOException;
 
 import static thaumrev.ThaumicRevelations.PACKET_TYPE_S2C_TEST;
+import static thaumrev.ThaumicRevelations.log;
 
 public class ProcessPacketClientSide {
   public ProcessPacketClientSide() {
@@ -23,7 +24,7 @@ public class ProcessPacketClientSide {
       switch (packetTypeID) {
         case PACKET_TYPE_S2C_TEST: {
           int testVal = bbis.readInt();
-          System.out.println(testVal);
+          log.debug(testVal);
           break;
         }
       }

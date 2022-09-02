@@ -40,6 +40,10 @@ item.itemWardenclothBoots.name=Wardencloth Boots
 
 item.itemCrimsonHat.name=Crimsoncloth Top Hat
 
+item.itemThauminiteFortressHelm.name=Thauminite Fortress Helmet
+item.itemThauminiteFortressChest.name=Thauminite Fortress Chestplate
+item.itemThauminiteFortressLegs.name=Thauminite Fortress Thigh Guards
+
 #Wand Cores
 item.itemWandCore.0.name=Wardencloth Rod
 item.itemWandCore.1.name=Voidwood Rod

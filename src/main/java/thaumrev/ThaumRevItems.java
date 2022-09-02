@@ -8,6 +8,7 @@ import thaumcraft.api.wands.StaffRod;
 import thaumcraft.api.wands.WandRod;
 import thaumrev.item.*;
 import thaumrev.item.armor.ItemCrimsonHat;
+import thaumrev.item.armor.ItemThauminiteFortressArmor;
 import thaumrev.item.armor.ItemWardenArmor;
 import thaumrev.item.armor.ItemWardenclothArmor;
 import thaumrev.item.baubles.ItemLoveRing;
@@ -17,13 +18,18 @@ import thaumrev.item.focus.ItemFocusPurity;
 import thaumrev.item.wands.ItemWandCore;
 
 import static thaumrev.ThaumRevLibrary.*;
-import static thaumrev.ThaumRevConfig.*;
 
-public class ThaumRevItems {
+public abstract class ThaumRevItems {
   public static void init() {
+    if (ThaumRevIntegrations.isThaumicBasesLoaded) {
+      initializeThaumicBasesIntegration();
+      registerThaumicBasesIntegration();
+    }
+
     initializeMaterials();
     initializeItems();
     initializeWandCores();
+
     registerItems();
   }
 
@@ -57,7 +63,7 @@ public class ThaumRevItems {
     armorMaterialWarden = EnumHelper.addArmorMaterial(
       "WARDEN",
       999,
-      new int[]{3, 7, 6, 3},
+      new int[]{3, 8, 6, 3},
       0
     );
     armorMaterialWardencloth = EnumHelper.addArmorMaterial(
@@ -186,5 +192,24 @@ public class ThaumRevItems {
     GameRegistry.registerItem(itemExcubituraSeeds, "itemExcubituraSeeds");
 
     GameRegistry.registerItem(itemWandCore, "itemWandCore");
+  }
+
+  private static void initializeThaumicBasesIntegration() {
+    armorMaterialFortressThauminite = EnumHelper.addArmorMaterial(
+      "FORTRESS_THAUMINITE",
+      43,
+      new int[]{4, 9, 7, 4},
+      17
+    );
+
+    itemThauminiteFortressHelm = new ItemThauminiteFortressArmor(0, "itemThauminiteFortressHelm");
+    itemThauminiteFortressChest = new ItemThauminiteFortressArmor(1, "itemThauminiteFortressChest");
+    itemThauminiteFortressLegs = new ItemThauminiteFortressArmor(2, "itemThauminiteFortressLegs");
+  }
+
+  private static void registerThaumicBasesIntegration() {
+    GameRegistry.registerItem(itemThauminiteFortressHelm, "itemThauminiteFortressHelm");
+    GameRegistry.registerItem(itemThauminiteFortressChest, "itemThauminiteFortressChest");
+    GameRegistry.registerItem(itemThauminiteFortressLegs, "itemThauminiteFortressLegs");
   }
 }

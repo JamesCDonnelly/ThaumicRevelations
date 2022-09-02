@@ -14,6 +14,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.ISpecialArmor;
+import org.jetbrains.annotations.NotNull;
 import thaumcraft.api.*;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.nodes.IRevealer;
@@ -30,24 +31,23 @@ public class ItemCrimsonHat extends ItemArmor implements ISpecialArmor, IRepaira
     super(ThaumRevLibrary.armorMaterialCrimsoncloth, 1, 0);
     setUnlocalizedName("itemCrimsonHat");
     setCreativeTab(ThaumRevLibrary.tabThaumRev);
-    setMaxStackSize(1);
   }
 
   /** Overrides - void **/
   @Override
-  public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
+  public void addInformation(ItemStack stack, EntityPlayer player, @NotNull List list, boolean par4) {
     list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + ": " +
       this.getVisDiscount(stack, player, null) + "%");
   }
 
   @Override
-    public void damageArmor(EntityLivingBase entityLivingBase, ItemStack itemStack, DamageSource damageSource, int i, int i1) {
+  public void damageArmor(EntityLivingBase entityLivingBase, ItemStack itemStack, DamageSource damageSource, int i, int i1) {
   }
 
 
   /** Overrides - boolean **/
   @Override
-  public boolean getIsRepairable(ItemStack stack, ItemStack material) {
+  public boolean getIsRepairable(ItemStack stack, @NotNull ItemStack material) {
     return material.isItemEqual(new ItemStack(ThaumRevLibrary.itemResource, 1, 4));
   }
 
@@ -73,7 +73,7 @@ public class ItemCrimsonHat extends ItemArmor implements ISpecialArmor, IRepaira
 
   @Override
   public int getArmorDisplay(EntityPlayer player, ItemStack armor, int slot) {
-      return getArmorMaterial().getDamageReductionAmount(slot);
+    return getArmorMaterial().getDamageReductionAmount(slot);
   }
 
 
@@ -92,10 +92,9 @@ public class ItemCrimsonHat extends ItemArmor implements ISpecialArmor, IRepaira
   /** Client-side **/
   @Override
   @SideOnly(Side.CLIENT)
-  public void registerIcons(IIconRegister register) {
+  public void registerIcons(@NotNull IIconRegister register) {
     itemIcon = register.registerIcon("thaumrev:armor/crimsonhat");
   }
-
 
   @Override
   @SideOnly(Side.CLIENT)
@@ -106,7 +105,6 @@ public class ItemCrimsonHat extends ItemArmor implements ISpecialArmor, IRepaira
 
     return this.model;
   }
-
 
   @Override
   @SideOnly(Side.CLIENT)

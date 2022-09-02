@@ -45,7 +45,7 @@ public class ThaumRevWorldGenerator implements IWorldGenerator {
       && ThaumRevLibrary.blockExcubitura.canBlockStay(world, x, y, z)
       && random.nextInt(10) == 0
     ) {
-      // DEBUG System.out.println(x + " " + y + " " + z);
+      // DEBUG log.debug(x + " " + y + " " + z);
       world.setBlock(x, y, z, ThaumRevLibrary.blockExcubitura, 0, 2);
       world.setBlockMetadataWithNotify(x, y, z, 15, 0);
     }

@@ -9,6 +9,8 @@ import thaumcraft.api.aspects.IEssentiaContainerItem;
 import thaumrev.item.baubles.ItemWardenAmulet;
 import thaumrev.util.wardenic.WardenicChargeHelper;
 
+import static thaumrev.ThaumicRevelations.log;
+
 public class ContainerHammer extends Container {
 	InventoryPlayer playerInv;
 	InventoryCrafting hammerInv;
@@ -88,7 +90,7 @@ public class ContainerHammer extends Container {
 
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int slot) {
-		System.out.println(slot);
+		log.debug(slot);
 		return null;
 	}
 

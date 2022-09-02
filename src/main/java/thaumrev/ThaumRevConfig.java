@@ -7,13 +7,18 @@ import java.io.File;
 
 public class ThaumRevConfig {
   public static Configuration config;
+
+  public static final String CATEGORY_INTEGRATIONS = "Category_Integrations";
+  public static boolean isThaumicDyesIntegrationEnabled = true;
+  public static boolean isThaumicBasesIntegrationEnabled = true;
+
   public static final String CATEGORY_VEGETATION = "Category_Vegetation";
-  public static final String CATEGORY_FOCI = "Category_Foci";
   public static int roseGrowthDivider = 1;
+
+  public static final String CATEGORY_FOCI = "Category_Foci";
   public static int basePurityCooldown = 500;
   public static int basePurityVisCost = 100;
 
-  public static boolean isThaumicDyesLoaded = false;
 
   public ThaumRevConfig() {}
 
@@ -21,12 +26,28 @@ public class ThaumRevConfig {
     config.save();
   }
 
-  public static void initialize(File file) {
+  public static void init(File file) {
     config = new Configuration(file);
     config.load();
 
+    initIntegrationCategory();
     initializeVegetationCategory();
     initializeFociCategory();
+  }
+
+  private static void initIntegrationCategory() {
+    config.addCustomCategoryComment(CATEGORY_FOCI, "Thaumic Revelations' integrations");
+
+    Property isThaumicDyesIntegrationEnabledProperty =
+      config.get(CATEGORY_INTEGRATIONS, "isThaumicDyesIntegrationEnabled", true);
+    Property isThaumicBasesIntegrationEnabledProperty =
+      config.get(CATEGORY_INTEGRATIONS, "isThaumicBasesIntegrationEnabled", true);
+
+    isThaumicDyesIntegrationEnabledProperty.comment = "Thaumic Dyes Integration";
+    isThaumicBasesIntegrationEnabledProperty.comment = "Thaumic Bases Integration";
+
+    isThaumicDyesIntegrationEnabled = isThaumicDyesIntegrationEnabledProperty.getBoolean();
+    isThaumicBasesIntegrationEnabled = isThaumicBasesIntegrationEnabledProperty.getBoolean();
   }
 
   private static void initializeVegetationCategory() {

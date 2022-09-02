@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
 import org.lwjgl.opengl.GL11;
 import thaumcraft.client.fx.ParticleEngine;
 import thaumcraft.client.lib.UtilsFX;
@@ -19,7 +20,7 @@ public class RenderPurity extends Render {
 		shadowSize = 0.1F;
 	}
 
-	public void renderEntityAt(Entity entity, double x, double y, double z, float fq, float pticks) {
+	public void renderEntityAt(@NotNull Entity entity, double x, double y, double z, float fq, float pticks) {
 		Tessellator tessellator = Tessellator.instance;
 		GL11.glPushMatrix();
 		RenderHelper.disableStandardItemLighting();

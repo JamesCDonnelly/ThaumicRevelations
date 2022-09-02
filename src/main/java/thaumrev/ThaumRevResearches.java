@@ -80,7 +80,7 @@ public class ThaumRevResearches {
       new ResearchPage(recipeWardenclothLegs),
       new ResearchPage(recipeWardenclothBoots));
 
-    if (!ThaumRevConfig.isThaumicDyesLoaded) {
+    if (!ThaumRevIntegrations.isThaumicDyesLoaded) {
       researchCrimsoncloth = new ThaumRevResearchItem(
         "CRIMSONCLOTH",
         "thaumrev",

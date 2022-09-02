@@ -3,6 +3,7 @@ package thaumrev.client.models;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import org.jetbrains.annotations.NotNull;
 
 public class ModelCrimsonHat extends ModelBiped {
   public ModelRenderer brim;
@@ -32,7 +33,7 @@ public class ModelCrimsonHat extends ModelBiped {
     this.bipedHead.render(f5);
   }
 
-  public void setRotation(ModelRenderer model, float x, float y, float z) {
+  public void setRotation(@NotNull ModelRenderer model, float x, float y, float z) {
     model.rotateAngleX = x;
     model.rotateAngleY = y;
     model.rotateAngleZ = z;
