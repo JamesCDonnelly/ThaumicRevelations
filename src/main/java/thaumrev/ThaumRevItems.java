@@ -17,6 +17,7 @@ import thaumrev.item.focus.ItemFocusPurity;
 import thaumrev.item.wands.ItemWandCore;
 
 import static thaumrev.ThaumRevLibrary.*;
+import static thaumrev.ThaumRevConfig.*;
 
 public class ThaumRevItems {
   public static void init() {
@@ -55,27 +56,32 @@ public class ThaumRevItems {
   private static void initializeMaterials() {
     armorMaterialWarden = EnumHelper.addArmorMaterial(
       "WARDEN",
-      50,
-      new int[]{3, 8, 6, 3},
-      0);
+      999,
+      new int[]{3, 7, 6, 3},
+      0
+    );
     armorMaterialWardencloth = EnumHelper.addArmorMaterial(
       "WARDENCLOTH",
       50,
-      new int[] {0, 2, 1, 0},
-      15);
+      new int[] {2, 4, 2, 1},
+      15
+    );
+
     armorMaterialCrimsoncloth = EnumHelper.addArmorMaterial(
       "CRIMSONCLOTH",
       50,
       new int[] {2, 3, 2, 1},
-      15);
+      15
+    );
 
     toolMaterialWarden = EnumHelper.addToolMaterial(
       "WARDEN",
       9,
-      50,
+      999,
+      6.0F,
       12.0F,
-      6,
-      0);
+      0
+    );
   }
 
   private static void initializeWandCores() {
@@ -88,7 +94,8 @@ public class ThaumRevItems {
       new ItemStack(
         itemWandCore,
         1,
-        0),
+        0
+      ),
       12,
       new ResourceLocation("thaumrev", "textures/models/rod_wardencloth.png"));
 
@@ -98,7 +105,8 @@ public class ThaumRevItems {
       new ItemStack(
         itemWandCore,
         1,
-        1),
+        1
+      ),
       12,
       new ResourceLocation("thaumrev", "textures/models/rod_voidwood.png"));
 
@@ -108,7 +116,8 @@ public class ThaumRevItems {
       new ItemStack(
         itemWandCore,
         1,
-        2),
+        2
+      ),
       12,
       new ResourceLocation("thaumrev", "textures/models/rod_crimsoncult.png"));
     WAND_ROD_CRIMSONCULT.setGlowing(true);
@@ -121,7 +130,8 @@ public class ThaumRevItems {
       new ItemStack(
         itemWandCore,
         1,
-        10),
+        10
+      ),
       32,
       new ResourceLocation("thaumrev", "textures/models/rod_wardencloth_staff.png"));
 
@@ -131,7 +141,8 @@ public class ThaumRevItems {
       new ItemStack(
         itemWandCore,
         1,
-        11),
+        11
+      ),
       32,
       new ResourceLocation("thaumrev", "textures/models/rod_voidwood_staff.png"));
     STAFF_ROD_VOIDWOOD.setRunes(true);
@@ -142,7 +153,8 @@ public class ThaumRevItems {
       new ItemStack(
         itemWandCore,
         1,
-        12),
+        12
+      ),
       32,
       new ResourceLocation("thaumrev", "textures/models/rod_crimsoncult_staff.png"));
     STAFF_ROD_CRIMSONCULT.setRunes(true);

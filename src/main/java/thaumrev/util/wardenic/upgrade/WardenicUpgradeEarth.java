@@ -1,7 +1,11 @@
 package thaumrev.util.wardenic.upgrade;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockDirt;
+import net.minecraft.block.BlockGrass;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.ItemStack;
@@ -11,10 +15,14 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import thaumcraft.api.aspects.Aspect;
+import thaumrev.util.AttributeHelper;
 import thaumrev.util.DamageSourceWarden;
 import thaumrev.util.wardenic.WardenicChargeHelper;
 
 import java.util.List;
+import java.util.UUID;
+
+import static thaumrev.ThaumRevLibrary.ATTRIBUTE_MODIFIER_UUID;
 
 public class WardenicUpgradeEarth extends WardenicUpgrade {
 
@@ -33,8 +41,8 @@ public class WardenicUpgradeEarth extends WardenicUpgrade {
     short count = WardenicChargeHelper.getWardenicArmorCount(player);
 
     if (entityArrow.getIsCritical()) {
-      entityLivingBase.addPotionEffect(new PotionEffect(Potion.moveSlowdown.getId(), 10 * (count + 1), 1));
-      entityLivingBase.addPotionEffect(new PotionEffect(Potion.digSlowdown.getId(), 10 * (count + 1), 1));
+      entityLivingBase.addPotionEffect(new PotionEffect(Potion.moveSlowdown.getId(), 20 * (count + 1), 1));
+      entityLivingBase.addPotionEffect(new PotionEffect(Potion.digSlowdown.getId(), 20 * (count + 1), 1));
     }
   }
 
@@ -44,11 +52,8 @@ public class WardenicUpgradeEarth extends WardenicUpgrade {
 
     EntityLivingBase entityLivingBase = (EntityLivingBase) entity;
 
-    short count = WardenicChargeHelper.getWardenicArmorCount(player);
-
-    entityLivingBase.addPotionEffect(new PotionEffect(Potion.moveSlowdown.getId(), 10 * (count + 1), 3));
-    entityLivingBase.addPotionEffect(new PotionEffect(Potion.digSlowdown.getId(), 10 * (count + 1), 3));
-    entityLivingBase.addPotionEffect(new PotionEffect(Potion.blindness.getId(), 10 * (count + 1), 0));
+    entityLivingBase.addPotionEffect(new PotionEffect(Potion.moveSlowdown.getId(), 20 * 2, 3));
+    entityLivingBase.addPotionEffect(new PotionEffect(Potion.digSlowdown.getId(), 20 * 2, 3));
   }
 
   @Override
@@ -57,6 +62,8 @@ public class WardenicUpgradeEarth extends WardenicUpgrade {
 
     if (event.entity instanceof EntityPlayer) {
       EntityPlayer player = (EntityPlayer) event.entity;
+
+      short count = WardenicChargeHelper.getWardenicArmorCount(player);
 
       if (event.source.damageType.equals("fall")) {
         DamageSource damageSource = new DamageSourceWarden("warden", player);
@@ -72,15 +79,47 @@ public class WardenicUpgradeEarth extends WardenicUpgrade {
             player.posZ + 6));
 
         for (Object entity : entities) {
-          if (entity instanceof Entity) {
-            ((Entity) entity).attackEntityFrom(damageSource, 4);
+          if (entity instanceof EntityLivingBase) {
+            ((EntityLivingBase) entity).attackEntityFrom(damageSource, count);
           }
         }
       }
 
-      short count = WardenicChargeHelper.getWardenicArmorCount(player);
-
-      event.ammount *= 1 - (0.10F * count);
+      Block block = event.entity.worldObj.getBlock((int) Math.round(player.posX), (int) Math.round(player.posY - 1), (int) Math.round(player.posZ));
+      
+      if (count == 4 && (block instanceof BlockDirt || block instanceof BlockGrass)) {
+        event.setCanceled(true);
+      }
     }
+  }
+
+  @Override
+  public void onEquipped(ItemStack stack, EntityLivingBase entityLivingBase) {
+    super.onEquipped(stack, entityLivingBase);
+    
+    if (entityLivingBase instanceof EntityPlayer) {
+      AttributeHelper.addAttributeModToLiving(
+        entityLivingBase,
+        SharedMonsterAttributes.knockbackResistance,
+        new UUID(ATTRIBUTE_MODIFIER_UUID, 3),
+        "TR_KNOCKBACK_RESISTANCE",
+        1.0F,
+        0
+      );
+    }
+  }
+
+  @Override
+  public void onUnequipped(ItemStack stack, EntityLivingBase entityLivingBase) {
+    super.onUnequipped(stack, entityLivingBase);
+
+    AttributeHelper.removeAttributeModFromLiving(
+      entityLivingBase,
+      SharedMonsterAttributes.knockbackResistance,
+      new UUID(ATTRIBUTE_MODIFIER_UUID, 3),
+      "TR_KNOCKBACK_RESISTANCE",
+      1.0F,
+      0
+    );
   }
 }

@@ -14,13 +14,11 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ISpecialArmor;
 import thaumcraft.api.IRepairable;
+import thaumcraft.api.IRunicArmor;
 import thaumrev.ThaumRevLibrary;
 
-public class ItemWardenArmor extends ItemArmor implements IRepairable, ISpecialArmor {
-  public IIcon iconHelm;
-  public IIcon iconChest;
-  public IIcon iconLegs;
-  public IIcon iconBoots;
+public class ItemWardenArmor extends ItemArmor implements IRepairable, ISpecialArmor, IRunicArmor {
+  public IIcon[] iconWardenArmor = new IIcon[4];
 
   public ItemWardenArmor(int type, String name) {
     super(ThaumRevLibrary.armorMaterialWarden, 2, type);
@@ -109,6 +107,11 @@ public class ItemWardenArmor extends ItemArmor implements IRepairable, ISpecialA
     return getArmorMaterial().getDamageReductionAmount(slot);
   }
 
+  @Override
+  public int getRunicCharge(ItemStack armor) {
+    return 2;
+  }
+
   /* Overrides - EnumRarity */
   @Override
   public EnumRarity getRarity(ItemStack stack) { return EnumRarity.epic; }
@@ -125,21 +128,21 @@ public class ItemWardenArmor extends ItemArmor implements IRepairable, ISpecialA
   @Override
   @SideOnly(Side.CLIENT)
   public void registerIcons(IIconRegister register) {
-    this.iconHelm = register.registerIcon("thaumrev:armor/wardenhelm");
-    this.iconChest = register.registerIcon("thaumrev:armor/wardenchest");
-    this.iconLegs = register.registerIcon("thaumrev:armor/wardenlegs");
-    this.iconBoots = register.registerIcon("thaumrev:armor/wardenboots");
+    this.iconWardenArmor[0] = register.registerIcon("thaumrev:armor/wardenhelm");
+    this.iconWardenArmor[1] = register.registerIcon("thaumrev:armor/wardenchest");
+    this.iconWardenArmor[2] = register.registerIcon("thaumrev:armor/wardenlegs");
+    this.iconWardenArmor[3] = register.registerIcon("thaumrev:armor/wardenboots");
   }
 
   @Override
   @SideOnly(Side.CLIENT)
   public IIcon getIconFromDamage(int par1) {
-    return this.armorType == 0 ? this.iconHelm : (this.armorType == 1 ? this.iconChest : (this.armorType == 2 ? this.iconLegs : this.iconBoots));
+    return this.iconWardenArmor[this.armorType];
   }
 
   @Override
   @SideOnly(Side.CLIENT)
-  public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
+  public String getArmorTexture(ItemStack armor, Entity entity, int slot, String type) {
     return "thaumrev:textures/models/warden_" + (this.armorType == 2 ? "2" : "1") + ".png";
   }
 }

@@ -1,5 +1,7 @@
 package thaumrev.item.baubles;
 
+import com.google.common.collect.Multimap;
+
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
 import baubles.common.container.InventoryBaubles;
@@ -9,12 +11,20 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 import thaumrev.ThaumRevLibrary;
+import thaumrev.util.AttributeHelper;
+
+import static thaumrev.ThaumRevLibrary.ATTRIBUTE_MODIFIER_UUID;
+
+import java.util.UUID;
 
 public class ItemLoveRing extends Item implements IBauble {
 
@@ -28,17 +38,37 @@ public class ItemLoveRing extends Item implements IBauble {
 
   /** Overrides - void **/
   @Override
-  public void onWornTick(ItemStack stack, EntityLivingBase entityLivingBase) {}
+  public void onWornTick(ItemStack stack, EntityLivingBase entityLivingBase) {
+    entityLivingBase.addPotionEffect(new PotionEffect(Potion.regeneration.getId(), 0, 0));
+  }
 
   @Override
   public void onEquipped(ItemStack stack, EntityLivingBase entityLivingBase) {
     entityLivingBase.worldObj.playSoundAtEntity(entityLivingBase, "thaumrev:abderp", 1, 1);
-    double maxHealth = entityLivingBase.getEntityAttribute(SharedMonsterAttributes.maxHealth).getAttributeValue();
-    entityLivingBase.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(maxHealth * 1.5D);
+
+    AttributeHelper.addAttributeModToLiving(
+      entityLivingBase,
+      SharedMonsterAttributes.maxHealth,
+      new UUID(ATTRIBUTE_MODIFIER_UUID, 1),
+      "TR_KNOCKBACK_RESISTANCE",
+      5F,
+      0
+    );
   }
 
   @Override
-  public void onUnequipped(ItemStack stack, EntityLivingBase entityLivingBase) {}
+  public void onUnequipped(ItemStack stack, EntityLivingBase entityLivingBase) {
+    entityLivingBase.worldObj.playSoundAtEntity(entityLivingBase, "thaumrev:abderp", 1, 1);
+    
+    AttributeHelper.removeAttributeModFromLiving(
+      entityLivingBase,
+      SharedMonsterAttributes.maxHealth,
+      new UUID(ATTRIBUTE_MODIFIER_UUID, 1),
+      "TR_KNOCKBACK_RESISTANCE",
+      5F,
+      0
+    );
+  }
 
 
   /** Overrides - boolean **/
@@ -81,7 +111,9 @@ public class ItemLoveRing extends Item implements IBauble {
 
   /** Overrides - EnumRarity **/
   @Override
-  public EnumRarity getRarity(ItemStack stack) { return EnumRarity.epic; }
+  public EnumRarity getRarity(ItemStack stack) {
+    return EnumRarity.epic;
+  }
 
 
   /** Client-side **/

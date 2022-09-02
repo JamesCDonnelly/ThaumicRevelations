@@ -14,14 +14,10 @@ import thaumcraft.api.research.ResearchItem;
 import thaumcraft.api.wands.StaffRod;
 import thaumcraft.api.wands.WandRod;
 
-import java.util.UUID;
-
 public class ThaumRevLibrary {
   public static final String MOD_ID = "thaumrev";
 
-  public static final UUID AMULET_KNOCKBACK_MODIFIER = UUID.randomUUID();
-  public static final UUID AMULET_SPEED_MODIFIER = UUID.randomUUID();
-  public static final UUID DAMAGE_MODIFIER = UUID.randomUUID();
+  public static final long ATTRIBUTE_MODIFIER_UUID = 213742069L;
 
   public static CreativeTabs tabThaumRev;
 
@@ -47,7 +43,7 @@ public class ThaumRevLibrary {
   public static Item itemResource;
   public static Item itemWardenWeapon;
   public static Item itemWardenBow;
-  public static Item itemFocusPurity; //TODO: make it working
+  public static Item itemFocusPurity;
 
   public static Item itemCrimsonHat;
 

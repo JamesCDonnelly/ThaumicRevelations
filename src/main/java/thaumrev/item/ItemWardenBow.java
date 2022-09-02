@@ -1,11 +1,8 @@
 package thaumrev.item;
 
-import com.google.common.collect.Multimap;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.EnumAction;
@@ -19,11 +16,8 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.event.entity.player.ArrowNockEvent;
 import org.jetbrains.annotations.NotNull;
-import thaumcraft.api.aspects.Aspect;
 import thaumrev.ThaumRevLibrary;
 import thaumrev.util.wardenic.WardenicChargeHelper;
-
-import static thaumrev.ThaumRevLibrary.DAMAGE_MODIFIER;
 
 public class ItemWardenBow extends ItemBow {
   public static final String[] wardenBowPullArray = new String[]{"pulling_0", "pulling_1", "pulling_2"};
@@ -40,17 +34,6 @@ public class ItemWardenBow extends ItemBow {
   /** Overrides - void **/
   @Override
   public void onPlayerStoppedUsing(ItemStack stack, World world, EntityPlayer player, int useTime) {
-    String upgrade = WardenicChargeHelper.getUpgrade(stack).getUpgradeAspect();
-    int air = upgrade.equals(Aspect.AIR.getName()) ? 1 : 0;
-
-    for (int i = 0; i < 4; i++) {
-      if ((player.getCurrentArmor(i) != null) &&
-        WardenicChargeHelper.getUpgrade(player.getCurrentArmor(i)).getUpgradeAspect()
-          .equals(Aspect.AIR.getName())) {
-        air++;
-      }
-    }
-
     int chargeTime = this.getMaxItemUseDuration(stack) - useTime;
 
     ArrowLooseEvent looseEvent = new ArrowLooseEvent(player, stack, chargeTime);
@@ -63,7 +46,7 @@ public class ItemWardenBow extends ItemBow {
     chargeTime = looseEvent.charge;
 
     float f = (float) chargeTime / 20.0F;
-    f = (f * f + f * 2.0F) / 3.0F;
+    f = f * (f + 2.0F) / 3.0F;
 
     if (f < 0.1F) {
       return;
@@ -86,20 +69,6 @@ public class ItemWardenBow extends ItemBow {
 
     NBTTagCompound tag = entityArrow.getEntityData();
     tag.setString("WardenArrow", WardenicChargeHelper.getUpgrade(player.getHeldItem()).getUpgradeAspect());
-
-    /*
-    try {
-      if (entityArrow.getIsCritical()) {
-        if (WardenicChargeHelper.getUpgrade(player.getHeldItem()).getUpgradeAspect()
-          .equals(Aspect.AIR.getName())) {
-          entityArrow.setDamage(3 * (air + 2));
-        } else if (WardenicChargeHelper.getUpgrade(player.getHeldItem()).getUpgradeAspect()
-          .equals(Aspect.ENTROPY.getName())) {
-          entityArrow.setDamage(0);
-        }
-      }
-    } catch (Exception ignored) {}
-     */
 
     if (!world.isRemote) {
       world.spawnEntityInWorld(entityArrow);
@@ -157,22 +126,6 @@ public class ItemWardenBow extends ItemBow {
   @Override
   public EnumAction getItemUseAction(ItemStack par1ItemStack) {
     return EnumAction.bow;
-  }
-
-
-  /** Overrides - MultiMap **/
-  @Override
-  public Multimap getAttributeModifiers(ItemStack stack) {
-    Multimap modifiers = super.getAttributeModifiers(stack);
-
-    // if (upgrade.equals(Aspect.AIR.getName())) {
-    //   modifiers.put(
-    //     SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(),
-    //     new AttributeModifier(DAMAGE_MODIFIER, "DAMAGE_MODIFIER", 4.0F, 0)
-    //   );
-    // }
-
-    return modifiers;
   }
 
 

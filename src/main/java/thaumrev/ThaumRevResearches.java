@@ -18,13 +18,15 @@ public class ThaumRevResearches {
     ResearchCategories.registerCategory(
       "thaumrev",
       new ResourceLocation("thaumrev", "textures/items/wardenamulet.png"),
-      new ResourceLocation("thaumrev", "textures/gui/gui_researchbackthaumrev.png"));
+      new ResourceLocation("thaumrev", "textures/gui/gui_researchbackthaumrev.png")
+    );
 
     loadResourceResearches();
     loadWardenResearches();
     loadWandCoresResearches();
     loadWandFociResearches();
     loadLoreResearches();
+    loadCrimsonResearches();
   }
 
   private static void loadResourceResearches() {
@@ -78,25 +80,27 @@ public class ThaumRevResearches {
       new ResearchPage(recipeWardenclothLegs),
       new ResearchPage(recipeWardenclothBoots));
 
-    researchCrimsoncloth = new ThaumRevResearchItem(
-      "CRIMSONCLOTH",
-      "thaumrev",
-      new AspectList()
-        .add(CRIMSON, 4)
-        .add(Aspect.MAGIC, 2)
-        .add(Aspect.CLOTH, 2),
-      0, -1, 0,
-      new ItemStack(itemResource, 0, 4))
-      .setParents("CRIMSONCULT")
-      .setParentsHidden("ENCHFABRIC")
-      .registerResearchItem();
-    researchCrimsoncloth.setPages(
-      new ResearchPage("0"),
-      new ResearchPage(recipeCrimsoncloth),
-      new ResearchPage(recipeHelmetCultistRobe),
-      new ResearchPage(recipeChestCultistRobe),
-      new ResearchPage(recipeLegsCultistRobe),
-      new ResearchPage(recipeBootsCultist));
+    if (!ThaumRevConfig.isThaumicDyesLoaded) {
+      researchCrimsoncloth = new ThaumRevResearchItem(
+        "CRIMSONCLOTH",
+        "thaumrev",
+        new AspectList()
+          .add(CRIMSON, 4)
+          .add(Aspect.MAGIC, 2)
+          .add(Aspect.CLOTH, 2),
+        0, -1, 0,
+        new ItemStack(itemResource, 0, 4))
+        .setParents("CRIMSONCULT")
+        .setParentsHidden("ENCHFABRIC")
+        .registerResearchItem();
+      researchCrimsoncloth.setPages(
+        new ResearchPage("0"),
+        new ResearchPage(recipeCrimsoncloth),
+        new ResearchPage(recipeHelmetCultistRobe),
+        new ResearchPage(recipeChestCultistRobe),
+        new ResearchPage(recipeLegsCultistRobe),
+        new ResearchPage(recipeBootsCultist));
+    }
 
     researchVoidcloth = new ThaumRevResearchItem(
       "VOIDCLOTH",
@@ -110,132 +114,6 @@ public class ThaumRevResearches {
     researchVoidcloth.setPages(
       new ResearchPage("0"),
       new ResearchPage(recipeVoidcloth));
-  }
-
-  private static void loadWardenResearches() {
-    researchExcubitura = new ThaumRevResearchItem(
-      "EXCUBITURA",
-      "thaumrev",
-      new AspectList()
-        .add(EXCUBITOR, 4)
-        .add(Aspect.PLANT, 4),
-      -6, 0, 0,
-      new ItemStack(itemResource, 0, 0))
-      .setConcealed()
-      .setItemTriggers(new ItemStack(itemResource, 0, 0))
-      .setParents("WARDENS")
-      .setRound()
-      .registerResearchItem();
-    researchExcubitura.setPages(
-      new ResearchPage("0"));
-
-    researchWardenArmor = new ThaumRevResearchItem(
-      "WARDENARMOR",
-      "thaumrev",
-      new AspectList()
-        .add(EXCUBITOR, 6)
-        .add(Aspect.ARMOR, 6)
-        .add(Aspect.AIR, 2)
-        .add(Aspect.EARTH, 2)
-        .add(Aspect.ENTROPY, 2)
-        .add(Aspect.FIRE, 2)
-        .add(Aspect.ORDER, 2)
-        .add(Aspect.WATER, 2),
-      -4, 1, 3,
-      new ItemStack(itemWardenChest))
-      .setConcealed()
-      .setParents("WASLIEHAMMER")
-      .setRound()
-      .setSpecial()
-      .registerResearchItem();
-    researchWardenArmor.setPages(
-      new ResearchPage("0"),
-      new ResearchPage(recipeWardenHelm),
-      new ResearchPage(recipeWardenChest),
-      new ResearchPage(recipeWardenLegs),
-      new ResearchPage(recipeWardenBoots));
-
-    researchWardenWeapon = new ThaumRevResearchItem(
-      "WARDENWEAPON",
-      "thaumrev",
-      new AspectList()
-        .add(EXCUBITOR, 6)
-        .add(Aspect.WEAPON, 6)
-        .add(Aspect.AIR, 2)
-        .add(Aspect.EARTH, 2)
-        .add(Aspect.ENTROPY, 2)
-        .add(Aspect.FIRE, 2)
-        .add(Aspect.ORDER, 2)
-        .add(Aspect.WATER, 2),
-      -4, 5, 3,
-      new ItemStack(itemWardenWeapon))
-      .setConcealed()
-      .setParents("WASLIEHAMMER")
-      .setRound()
-      .setSpecial()
-      .registerResearchItem();
-    researchWardenWeapon.setPages(
-      new ResearchPage("0"),
-      new ResearchPage(recipeWardenWeapon));
-
-    researchWardenBow = new ThaumRevResearchItem(
-      "WARDENBOW",
-      "thaumrev",
-      new AspectList()
-        .add(EXCUBITOR, 6)
-        .add(Aspect.WEAPON, 6)
-        .add(Aspect.AIR, 2)
-        .add(Aspect.EARTH, 2)
-        .add(Aspect.ENTROPY, 2)
-        .add(Aspect.FIRE, 2)
-        .add(Aspect.ORDER, 2)
-        .add(Aspect.WATER, 2),
-      -2, 3, 3,
-      new ItemStack(itemWardenBow))
-      .setConcealed()
-      .setParents("WASLIEHAMMER")
-      .setRound()
-      .setSpecial()
-      .registerResearchItem();
-    researchWardenBow.setPages(
-      new ResearchPage("0"),
-      new ResearchPage(recipeWardenBow));
-
-    researchWaslieHammer = new ThaumRevResearchItem(
-      "WASLIEHAMMER",
-      "thaumrev",
-      new AspectList()
-        .add(EXCUBITOR, 12)
-        .add(Aspect.TOOL, 6)
-        .add(Aspect.WEAPON, 3)
-        .add(Aspect.ARMOR, 3),
-      -4, 3, 3,
-      new ItemStack(itemWaslieHammer))
-      .setParents("CRYSTAL", "QUARTZ")
-      .setParentsHidden("ROD_wardencloth")
-      .setRound()
-      .setSpecial()
-      .registerResearchItem();
-    researchWaslieHammer.setPages(
-      new ResearchPage("0"),
-      new ResearchPage(recipeWaslieHammer));
-
-    researchWardenAmulet = new ThaumRevResearchItem(
-      "WARDENAMULET",
-      "thaumrev",
-      new AspectList()
-        .add(EXCUBITOR, 12)
-        .add(Aspect.ARMOR, 6)
-        .add(Aspect.MAGIC, 6),
-      -8, 7, 2,
-      new ItemStack(itemWardenAmulet))
-      .setParents("LORE4")
-      .setRound()
-      .setSpecial()
-      .registerResearchItem();
-    researchWardenAmulet.setPages(
-      new ResearchPage("0"),
-      new ResearchPage(recipeWardenAmulet));
   }
 
   private static void loadWandCoresResearches() {
@@ -369,9 +247,12 @@ public class ThaumRevResearches {
     researchLore1.setPages(
       new ResearchPage("0"),
       new ResearchPage("1"),
-      new ResearchPage("2"));
+      new ResearchPage("2")
+    );
 
-    researchLore2 = new ThaumRevResearchItem("LORE2", "thaumrev",
+    researchLore2 = new ThaumRevResearchItem(
+      "LORE2",
+      "thaumrev",
       new AspectList()
         .add(EXCUBITOR, 6)
         .add(Aspect.MIND, 6),
@@ -384,7 +265,8 @@ public class ThaumRevResearches {
       new ResearchPage("0"),
       new ResearchPage("1"),
       new ResearchPage("2"),
-      new ResearchPage("3"));
+      new ResearchPage("3")
+    );
 
     researchLore3 = new ThaumRevResearchItem(
       "LORE3",
@@ -403,7 +285,8 @@ public class ThaumRevResearches {
       new ResearchPage("2"),
       new ResearchPage("3"),
       new ResearchPage("4"),
-      new ResearchPage("5"));
+      new ResearchPage("5")
+    );
 
     researchLore4 = new ThaumRevResearchItem(
       "LORE4", "thaumrev",
@@ -419,7 +302,8 @@ public class ThaumRevResearches {
       new ResearchPage("0"),
       new ResearchPage("1"),
       new ResearchPage("2"),
-      new ResearchPage("3"));
+      new ResearchPage("3")
+    );
 
     researchCrimsonCult = new ThaumRevResearchItem(
       "CRIMSONCULT",
@@ -435,7 +319,8 @@ public class ThaumRevResearches {
       .setItemTriggers(ItemApi.getItem("itemEldritchObject", 1))
       .registerResearchItem();
     researchCrimsonCult.setPages(
-      new ResearchPage("0"));
+      new ResearchPage("0")
+    );
     addWarpToResearch("CRIMSONCULT", 4);
 
     researchEldritch = new ThaumRevResearchItem(
@@ -452,7 +337,158 @@ public class ThaumRevResearches {
       .setItemTriggers(ItemApi.getItem("itemEldritchObject", 0))
       .registerResearchItem();
     researchEldritch.setPages(
-      new ResearchPage("0"));
+      new ResearchPage("0")
+    );
     addWarpToResearch("ELDRITCH", 4);
+  }
+
+  private static void loadWardenResearches() {
+    researchExcubitura = new ThaumRevResearchItem(
+      "EXCUBITURA",
+      "thaumrev",
+      new AspectList()
+        .add(EXCUBITOR, 4)
+        .add(Aspect.PLANT, 4),
+      -6, 0, 0,
+      new ItemStack(itemResource, 0, 0))
+      .setConcealed()
+      .setItemTriggers(new ItemStack(itemResource, 0, 0))
+      .setParents("WARDENS")
+      .setRound()
+      .registerResearchItem();
+    researchExcubitura.setPages(
+      new ResearchPage("0")
+    );
+
+    researchWardenArmor = new ThaumRevResearchItem(
+      "WARDENARMOR",
+      "thaumrev",
+      new AspectList()
+        .add(EXCUBITOR, 6)
+        .add(Aspect.ARMOR, 6)
+        .add(Aspect.AIR, 2)
+        .add(Aspect.EARTH, 2)
+        .add(Aspect.ENTROPY, 2)
+        .add(Aspect.FIRE, 2)
+        .add(Aspect.ORDER, 2)
+        .add(Aspect.WATER, 2),
+      -4, 1, 3,
+      new ItemStack(itemWardenChest))
+      .setConcealed()
+      .setParents("WASLIEHAMMER")
+      .setRound()
+      .setSpecial()
+      .registerResearchItem();
+    researchWardenArmor.setPages(
+      new ResearchPage("0"),
+      new ResearchPage(recipeWardenHelm),
+      new ResearchPage(recipeWardenChest),
+      new ResearchPage(recipeWardenLegs),
+      new ResearchPage(recipeWardenBoots)
+    );
+
+    researchWardenWeapon = new ThaumRevResearchItem(
+      "WARDENWEAPON",
+      "thaumrev",
+      new AspectList()
+        .add(EXCUBITOR, 6)
+        .add(Aspect.WEAPON, 6)
+        .add(Aspect.AIR, 2)
+        .add(Aspect.EARTH, 2)
+        .add(Aspect.ENTROPY, 2)
+        .add(Aspect.FIRE, 2)
+        .add(Aspect.ORDER, 2)
+        .add(Aspect.WATER, 2),
+      -4, 5, 3,
+      new ItemStack(itemWardenWeapon))
+      .setConcealed()
+      .setParents("WASLIEHAMMER")
+      .setRound()
+      .setSpecial()
+      .registerResearchItem();
+    researchWardenWeapon.setPages(
+      new ResearchPage("0"),
+      new ResearchPage(recipeWardenWeapon));
+
+    researchWardenBow = new ThaumRevResearchItem(
+      "WARDENBOW",
+      "thaumrev",
+      new AspectList()
+        .add(EXCUBITOR, 6)
+        .add(Aspect.WEAPON, 6)
+        .add(Aspect.AIR, 2)
+        .add(Aspect.EARTH, 2)
+        .add(Aspect.ENTROPY, 2)
+        .add(Aspect.FIRE, 2)
+        .add(Aspect.ORDER, 2)
+        .add(Aspect.WATER, 2),
+      -2, 3, 3,
+      new ItemStack(itemWardenBow))
+      .setConcealed()
+      .setParents("WASLIEHAMMER")
+      .setRound()
+      .setSpecial()
+      .registerResearchItem();
+    researchWardenBow.setPages(
+      new ResearchPage("0"),
+      new ResearchPage(recipeWardenBow));
+
+    researchWaslieHammer = new ThaumRevResearchItem(
+      "WASLIEHAMMER",
+      "thaumrev",
+      new AspectList()
+        .add(EXCUBITOR, 12)
+        .add(Aspect.TOOL, 6)
+        .add(Aspect.WEAPON, 3)
+        .add(Aspect.ARMOR, 3),
+      -4, 3, 3,
+      new ItemStack(itemWaslieHammer))
+      .setParents("CRYSTAL", "QUARTZ")
+      .setParentsHidden("ROD_wardencloth")
+      .setRound()
+      .setSpecial()
+      .registerResearchItem();
+    researchWaslieHammer.setPages(
+      new ResearchPage("0"),
+      new ResearchPage(recipeWaslieHammer));
+
+    researchWardenAmulet = new ThaumRevResearchItem(
+      "WARDENAMULET",
+      "thaumrev",
+      new AspectList()
+        .add(EXCUBITOR, 12)
+        .add(Aspect.ARMOR, 6)
+        .add(Aspect.MAGIC, 6),
+      -8, 7, 2,
+      new ItemStack(itemWardenAmulet))
+      .setParents("LORE4")
+      .setRound()
+      .setSpecial()
+      .registerResearchItem();
+    researchWardenAmulet.setPages(
+      new ResearchPage("0"),
+      new ResearchPage(recipeWardenAmulet));
+  }
+
+  private static void loadCrimsonResearches() {
+    researchCrimsonHat = new ThaumRevResearchItem(
+      "CRIMSONHAT",
+      "thaumrev",
+      new AspectList()
+        .add(CRIMSON, 6)
+        .add(Aspect.ARMOR, 6)
+        .add(Aspect.MAGIC, 6),
+      2, -3, 3,
+      new ItemStack(itemCrimsonHat)
+    )
+      .setParents("CRIMSONCULT")
+      .setParentsHidden("TINYHAT")
+      .registerResearchItem();
+
+    researchCrimsonHat.setPages(
+      new ResearchPage("0"),
+      new ResearchPage(recipeCrimsonHat)
+    );
+    addWarpToResearch("CRIMSONCULT", 1);
   }
 }

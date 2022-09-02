@@ -43,17 +43,16 @@ public class WardenicUpgradeFire extends WardenicUpgrade {
   public void onHurt(LivingHurtEvent event) {
     super.onHurt(event);
 
-    EntityPlayer player = (EntityPlayer) event.entity;
-    short count = WardenicChargeHelper.getWardenicArmorCount(player);
+    Entity sourceEntity = event.source.getEntity();
 
-    if (event.source.getEntity() != null) {
-      event.source.getEntity().setFire(2);
+    if (sourceEntity != null) {
+      sourceEntity.setFire(2);
     }
 
     if (event.source.isFireDamage()) {
-      event.ammount *= 1 - (0.25F * count);
+      event.setCanceled(true);
     } else if (event.source.isExplosion()) {
-      event.ammount *= 1 - (0.15F * count);
+      event.ammount /= 3;
     }
   }
 
@@ -61,16 +60,7 @@ public class WardenicUpgradeFire extends WardenicUpgrade {
   public void onWornTick(World world, EntityPlayer player, ItemStack stack) {
     super.onWornTick(world, player, stack);
 
-    short count = WardenicChargeHelper.getWardenicArmorCount(player);
-
-    if (count == 4) {
-      if (player.isPotionActive(Config.potionSunScornedID)) {
-        player.removePotionEffect(Config.potionSunScornedID);
-      }
-
-      if (player.isBurning()) {
-        player.extinguish();
-      }
-    }
+    player.removePotionEffect(Config.potionSunScornedID);
+    player.extinguish();
   }
 }

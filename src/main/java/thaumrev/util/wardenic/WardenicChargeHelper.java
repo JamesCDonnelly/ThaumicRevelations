@@ -33,6 +33,10 @@ public abstract class WardenicChargeHelper {
 		return upgrades.get(stack.stackTagCompound.getString("upgrade"));
 	}
 
+	public static WardenicUpgrade getUpgrade(String upgrade) {
+		return upgrades.get(upgrade);
+	}
+
 	public static void setUpgradeOnStack(ItemStack stack, String key) {
 		if (stack.stackTagCompound == null) {
 			stack.setTagCompound(new NBTTagCompound());

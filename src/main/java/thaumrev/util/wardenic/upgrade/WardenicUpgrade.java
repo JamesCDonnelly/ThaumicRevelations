@@ -1,22 +1,21 @@
 package thaumrev.util.wardenic.upgrade;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import thaumcraft.api.aspects.Aspect;
-import thaumcraft.api.aspects.AspectList;
+import thaumrev.item.ItemWardenWeapon;
 import thaumrev.item.baubles.ItemWardenAmulet;
-import thaumrev.util.wardenic.VisHelper;
 import thaumrev.util.wardenic.WardenicChargeHelper;
 
 import java.util.Random;
 
-import static thaumrev.ThaumRevLibrary.EXCUBITOR;
-
 public class WardenicUpgrade {
+	
 	public Aspect aspect;
 	public Random random = new Random();
 
@@ -28,8 +27,9 @@ public class WardenicUpgrade {
 		ItemStack amulet = ItemWardenAmulet.getAmulet(player);
 
 		if (amulet == null) return;
+		if (!(weapon != null && weapon.getItem() instanceof ItemWardenWeapon)) return;
 
-		boolean activate = ItemWardenAmulet.shouldActivate(amulet, 1000);
+		boolean activate = ItemWardenAmulet.shouldActivate(amulet, 500);
 
 		if (!activate) return;
 	}
@@ -43,18 +43,22 @@ public class WardenicUpgrade {
 
 			if (amulet == null) return;
 
-			boolean activate = ItemWardenAmulet.shouldActivate(amulet, 1000);
+			boolean activate = ItemWardenAmulet.shouldActivate(amulet, 500);
 
 			if (!activate) return;
+		} else {
+			return;
 		}
 	}
 
 	public void onWornTick(World world, EntityPlayer player, ItemStack stack) {
 		ItemStack amulet = ItemWardenAmulet.getAmulet(player);
+		short count = WardenicChargeHelper.getWardenicArmorCount(player);
 
 		if (amulet == null) return;
+		if (count < 4) return;
 
-		boolean activate = ItemWardenAmulet.shouldActivate(amulet, 1000);
+		boolean activate = ItemWardenAmulet.shouldActivate(amulet, 100);
 
 		if (!activate) return;
 	}
@@ -65,12 +69,28 @@ public class WardenicUpgrade {
 		if (event.entity instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) entity;
 			ItemStack amulet = ItemWardenAmulet.getAmulet(player);
+			short count = WardenicChargeHelper.getWardenicArmorCount(player);
 
 			if (amulet == null) return;
+			if (count < 4) return;
 
 			boolean activate = ItemWardenAmulet.shouldActivate(amulet, 1000);
 
 			if (!activate) return;
+		} else {
+			return;
+		}
+	}
+
+	public void onEquipped(ItemStack stack, EntityLivingBase entityLivingBase) {
+		if (!(entityLivingBase instanceof EntityPlayer)) {
+			return;
+		}
+	}
+
+	public void onUnequipped(ItemStack stack, EntityLivingBase entityLivingBase) {
+		if (!(entityLivingBase instanceof EntityPlayer)) {
+			return;
 		}
 	}
 

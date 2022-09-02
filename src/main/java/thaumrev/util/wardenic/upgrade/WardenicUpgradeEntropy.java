@@ -11,8 +11,6 @@ import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.common.Thaumcraft;
-import thaumrev.util.DamageSourceWarden;
-import thaumrev.util.wardenic.WardenicChargeHelper;
 
 import java.util.Random;
 
@@ -29,49 +27,37 @@ public class WardenicUpgradeEntropy extends WardenicUpgrade {
     super.onIndirectAttack(event);
 
     EntityLivingBase entityLivingBase = (EntityLivingBase)event.entity;
-    EntityPlayer player = (EntityPlayer)event.source.getEntity();
     EntityArrow entityArrow = (EntityArrow)event.source.getSourceOfDamage();
 
-    DamageSource damageSource = new DamageSourceWarden("warden", player);
-    short count = WardenicChargeHelper.getWardenicArmorCount(player);
-    float damage = random.nextInt(20) <= (count + 1) ? entityLivingBase.getMaxHealth() : 0;
+    float damage = random.nextInt(20) == 0 ? entityLivingBase.getMaxHealth() / 2 : random.nextInt(4);
+    entityArrow.setDamage(0);
 
     if (entityArrow.getIsCritical()) {
-      entityArrow.setDamage(0);
-      entityLivingBase.attackEntityFrom(damageSource, damage);
+      event.entity.attackEntityFrom(DamageSource.outOfWorld, damage * 2);
+
+      if (event.entity instanceof EntityPlayer) Thaumcraft.addWarpToPlayer((EntityPlayer) event.entity, 1, true);
+    } else {
+      event.entity.attackEntityFrom(DamageSource.outOfWorld, damage * 2);
     }
   }
 
   @Override
   public void onAttack(ItemStack stack, EntityPlayer player, Entity entity) {
     super.onAttack(stack, player, entity);
+    EntityLivingBase entityLivingBase = (EntityLivingBase) entity;
 
-    short count = WardenicChargeHelper.getWardenicArmorCount(player);
-    EntityLivingBase entityLivingBase = (EntityLivingBase)entity;
-    DamageSource damageSource = new DamageSourceWarden("warden", player);
-
-    if (count < 4) {
-      if (random.nextInt(100) == 0) {
-        entity.attackEntityFrom(damageSource,
-          entityLivingBase.getMaxHealth());
-      } else {
-        entity.attackEntityFrom(damageSource,
-          (random.nextInt(4) + 1) * (count + 1));
-        entityLivingBase.addPotionEffect(new PotionEffect(Potion.wither.getId(), 20 * count, count));
-
-        if (entity instanceof EntityPlayer) Thaumcraft.addWarpToPlayer((EntityPlayer)entity, count, true);
-      }
+    if (random.nextInt(20) <= 4) {
+      entity.attackEntityFrom(
+        DamageSource.outOfWorld,
+        entityLivingBase.getMaxHealth() / 2
+      );
     } else {
-      if (random.nextInt(10) == 0) {
-        entity.attackEntityFrom(damageSource,
-          entityLivingBase.getMaxHealth());
-      } else {
-        entity.attackEntityFrom(damageSource,
-          (random.nextInt(4) + 1) * 5);
-        entityLivingBase.addPotionEffect(new PotionEffect(Potion.wither.getId(), 80, 4));
+      entity.attackEntityFrom(
+        DamageSource.outOfWorld,
+        (random.nextInt(4)) * 2);
+      entityLivingBase.addPotionEffect(new PotionEffect(Potion.wither.getId(), 20, 2));
 
-        if (entity instanceof EntityPlayer) Thaumcraft.addWarpToPlayer((EntityPlayer)entity, 4, false);
-      }
+      if (entity instanceof EntityPlayer) Thaumcraft.addWarpToPlayer((EntityPlayer) entity, 1, true);
     }
   }
 
@@ -81,21 +67,19 @@ public class WardenicUpgradeEntropy extends WardenicUpgrade {
 
     if (event.entity instanceof EntityPlayer) {
       EntityPlayer player = (EntityPlayer) event.entity;
-      short count = WardenicChargeHelper.getWardenicArmorCount(player);
 
-      if (random.nextInt(20) <= count) {
+      if (random.nextInt(20) <= 4) {
         Thaumcraft.addWarpToPlayer(player, 1, true);
       }
 
-      float damage = event.ammount * (random.nextInt((count + 1))) / 4;
+      player.addExhaustion(event.ammount / 10);
 
-      if (event.source.getSourceOfDamage() != null) {
+      if (event.source.getEntity() != null) {
         Entity sourceEntity = event.source.getEntity();
-        DamageSource damageSource = new DamageSourceWarden("warden", player);
-        sourceEntity.attackEntityFrom(damageSource, damage);
-      }
+        sourceEntity.attackEntityFrom(DamageSource.outOfWorld, random.nextInt(Math.round(event.ammount / 3)));
 
-      event.ammount = damage;
+        event.ammount = 2;
+      }
     }
   }
 }

@@ -12,6 +12,9 @@
 		"credits": "To Azanor - for creating Thaumcraft",
 		"parent": "",
 		"screenshots": [],
-		"dependencies": ["Thaumcraft"]
+		"dependencies": [
+			"required-after:Thaumcraft",
+			"after:thaumicdyes"
+		]
 	}
 ]

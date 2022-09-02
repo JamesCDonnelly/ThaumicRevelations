@@ -1,5 +1,6 @@
 package thaumrev;
 
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -9,6 +10,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.FMLEventChannel;
 import cpw.mods.fml.common.registry.GameRegistry;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import thaumrev.client.gui.GuiHandler;
@@ -21,7 +23,7 @@ import thaumrev.world.ThaumRevWorldGenerator;
 
 import java.io.File;
 
-@Mod(modid = "thaumrev", useMetadata = true)
+@Mod(modid="thaumrev", version="1.1.0", useMetadata=true)
 public class ThaumicRevelations {
   public File modDir;
   public static final Logger log = LogManager.getLogger("thaumrev");
@@ -47,7 +49,7 @@ public class ThaumicRevelations {
     try {
       ThaumRevConfig.initialize(event.getSuggestedConfigurationFile());
     } catch (Exception var8) {
-      log.error("Thaumic Revelations has a problem loading its configuration");
+      log.error("Thaumic Revelations had a problem loading its configuration");
     } finally {
       if (ThaumRevConfig.config != null) {
         ThaumRevConfig.save();
@@ -57,6 +59,14 @@ public class ThaumicRevelations {
     ThaumRevConfig.save();
 
     ThaumRevLibrary.tabThaumRev = new TabThaumRev(ThaumRevLibrary.MOD_ID);
+
+    if (Loader.isModLoaded("thaumicdyes")) {
+      System.out.println("Thaumic Revelations: Thaumic Dyes detected. Using Thaumic Dyes' dye system.");
+      ThaumRevConfig.isThaumicDyesLoaded = true;
+    } else {
+      System.out.println("Thaumic Revelations: Thaumic Dyes not detected. Using default dye system.");
+      ThaumRevConfig.isThaumicDyesLoaded = false;
+    }
 
     MobDropsHandler.init();
     ThaumRevBlocks.init();

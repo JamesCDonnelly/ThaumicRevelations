@@ -2,15 +2,15 @@ package thaumrev.util.wardenic;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagInt;
 import org.jetbrains.annotations.NotNull;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 
 public abstract class VisHelper {
-  public static int getMaxVis(@NotNull ItemStack stack) {
-    return 100000;
+
+  private static int getMaxVis(@NotNull ItemStack stack) {
+    return stack.stackTagCompound.getInteger("maxVis");
   }
 
   public static int getVis(@NotNull ItemStack stack, @NotNull Aspect aspect) {
@@ -25,6 +25,12 @@ public abstract class VisHelper {
 
   public static void storeVis(@NotNull ItemStack stack, @NotNull Aspect aspect, int amount) {
     stack.setTagInfo(aspect.getTag(), new NBTTagInt(amount));
+  }
+
+  public static void storeAllVis(@NotNull ItemStack stack, @NotNull AspectList aspects) {
+    for (Aspect aspect : aspects.getAspects()) {
+      storeVis(stack, aspect, aspects.getAmount(aspect));
+    }
   }
 
   public static AspectList getAspectsWithRoom(ItemStack wand) {

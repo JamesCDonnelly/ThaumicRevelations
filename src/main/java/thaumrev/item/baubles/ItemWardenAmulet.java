@@ -1,5 +1,17 @@
 package thaumrev.item.baubles;
 
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
+
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import com.google.common.collect.Multimap;
+
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
 import baubles.common.container.InventoryBaubles;
@@ -7,6 +19,7 @@ import baubles.common.lib.PlayerHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.INpc;
@@ -20,10 +33,6 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import thaumcraft.api.IGoggles;
 import thaumcraft.api.IRunicArmor;
 import thaumcraft.api.IVisDiscountGear;
@@ -34,21 +43,12 @@ import thaumcraft.common.Thaumcraft;
 import thaumcraft.common.items.wands.ItemWandCasting;
 import thaumcraft.common.tiles.TileVisRelay;
 import thaumrev.ThaumRevLibrary;
+import thaumrev.util.AttributeHelper;
 import thaumrev.util.PurityHelper;
 import thaumrev.util.wardenic.VisHelper;
 import thaumrev.util.wardenic.WardenicChargeHelper;
 
-import java.lang.ref.WeakReference;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-
-import com.google.common.collect.Multimap;
-
-import static thaumrev.ThaumRevLibrary.AMULET_KNOCKBACK_MODIFIER;
-import static thaumrev.ThaumRevLibrary.AMULET_SPEED_MODIFIER;
-
+import static thaumrev.ThaumRevLibrary.ATTRIBUTE_MODIFIER_UUID;
 import static thaumrev.ThaumRevLibrary.EXCUBITOR;
 import static thaumrev.util.PurityHelper.summonParticles;
 
@@ -58,8 +58,12 @@ public class ItemWardenAmulet extends Item implements IBauble, IRunicArmor, IVis
   public ItemWardenAmulet() {
     super();
     setUnlocalizedName("itemWardenAmulet");
-    setCreativeTab(ThaumRevLibrary.tabThaumRev);
     setMaxStackSize(1);
+    setCreativeTab(ThaumRevLibrary.tabThaumRev);
+  }
+
+  public static int getMaxVis() {
+    return 100000;
   }
 
   public static void amuletParticles(EntityPlayer player) {
@@ -182,7 +186,6 @@ public class ItemWardenAmulet extends Item implements IBauble, IRunicArmor, IVis
         )));
   }
 
-
   private void chargeWands(ItemStack amulet, @NotNull EntityLivingBase player) {
     ItemWandCasting wand = (ItemWandCasting) player.getHeldItem().getItem();
     AspectList al = wand.getAspectsWithRoom(player.getHeldItem());
@@ -200,8 +203,8 @@ public class ItemWardenAmulet extends Item implements IBauble, IRunicArmor, IVis
 
   private void chargeVis(ItemStack amulet, @NotNull EntityLivingBase player) {
     if (
-      ((WeakReference) TileVisRelay.nearbyPlayers.get(player.getEntityId())).get() != null &&
-        ((TileVisRelay) Objects.requireNonNull(((WeakReference) TileVisRelay.nearbyPlayers
+      (TileVisRelay.nearbyPlayers.get(player.getEntityId())).get() != null &&
+        ((TileVisRelay) Objects.requireNonNull((TileVisRelay.nearbyPlayers
           .get(player.getEntityId())).get()))
           .getDistanceSq(player.posX, player.posY, player.posZ) < 26.0D
     ) {
@@ -212,11 +215,11 @@ public class ItemWardenAmulet extends Item implements IBauble, IRunicArmor, IVis
         if (aspect != null) {
           int amt = (
             (TileVisRelay) Objects
-              .requireNonNull(((WeakReference) TileVisRelay.nearbyPlayers.get(player.getEntityId())).get()))
-            .consumeVis(aspect, Math.min(5, VisHelper.getMaxVis(amulet) - VisHelper.getVis(amulet, aspect)));
+              .requireNonNull((TileVisRelay.nearbyPlayers.get(player.getEntityId())).get()))
+            .consumeVis(aspect, Math.min(5, ItemWardenAmulet.getMaxVis() - VisHelper.getVis(amulet, aspect)));
           if (amt > 0) {
             VisHelper.addRealVis(amulet, aspect, amt);
-            TileVisRelay tileVisRelay = (TileVisRelay) ((WeakReference) TileVisRelay.nearbyPlayers.get(player.getEntityId())).get();
+            TileVisRelay tileVisRelay = (TileVisRelay) (TileVisRelay.nearbyPlayers.get(player.getEntityId())).get();
 
             if (tileVisRelay == null) {
               return;
@@ -249,15 +252,19 @@ public class ItemWardenAmulet extends Item implements IBauble, IRunicArmor, IVis
 
   @Override
   public void onEquipped(ItemStack amulet, EntityLivingBase entity) {
-    // entityLivingBase.world.playSoundAtEntity(entityLivingBase, "thaumrev:compramos", 1, 1);
+    WardenicChargeHelper.getUpgrade(amulet).onEquipped(amulet, entity);
   }
 
   @Override
-  public void onUnequipped(ItemStack amulet, EntityLivingBase entity) { }
+  public void onUnequipped(ItemStack amulet, EntityLivingBase entity) {
+    WardenicChargeHelper.getUpgrade(amulet).onUnequipped(amulet, entity);
+  }
 
   @Override
   public void addInformation(@NotNull ItemStack amulet, EntityPlayer player, List list, boolean doit) {
     String chargeInformation;
+
+    amulet.stackTagCompound.setInteger("maxVis", ItemWardenAmulet.getMaxVis());
 
     if (amulet.getMetadata() > 120) {
       amulet.setMetadata(120);
@@ -280,7 +287,7 @@ public class ItemWardenAmulet extends Item implements IBauble, IRunicArmor, IVis
     chargeInformation += (120 - amulet.getMetadata()) + "/120";
 
     list.add(chargeInformation);
-    list.add(EnumChatFormatting.GOLD + StatCollector.translateToLocal("item.capacity.text") + " " + VisHelper.getMaxVis(amulet) / 100);
+    list.add(EnumChatFormatting.GOLD + StatCollector.translateToLocal("item.capacity.text") + " " + ItemWardenAmulet.getMaxVis() / 100);
 
     if (this.getVisDiscount(amulet, player, Aspect.AIR) == 10) {
       list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") +
@@ -338,70 +345,29 @@ public class ItemWardenAmulet extends Item implements IBauble, IRunicArmor, IVis
     return super.onItemRightClick(amulet, world, player);
   }
 
-
   /* Overrides - int */
   @Override
-  public int getMaxDurability() { return 120; }
+  public int getMaxDurability() {
+    return 120;
+  }
 
   @Override
-  public int getRunicCharge(ItemStack itemStack) { return 0; }
+  public int getRunicCharge(ItemStack itemStack) {
+    return 2;
+  }
 
 
   /* Overrides - BaubleType */
   @Override
-  public BaubleType getBaubleType(ItemStack amulet) { return BaubleType.AMULET; }
+  public BaubleType getBaubleType(ItemStack amulet) {
+    return BaubleType.AMULET;
+  }
 
 
   /* Overrides - EnumRarity */
   @Override
-  public EnumRarity getRarity(ItemStack amulet) { return EnumRarity.rare; }
-
-
-  /* Overrides - MultiMap */
-  @Override   // FIXME: Attribute modifiers don't actually work with Baubles...
-  public Multimap getAttributeModifiers(ItemStack amulet) {
-    Multimap modifiers = super.getAttributeModifiers(amulet);
-    String upgrade = WardenicChargeHelper.getUpgrade(amulet).getUpgradeAspect();
-    AttributeModifier speedModifier;
-    AttributeModifier knockbackModifier = null;
-    float value = 0;
-
-    if (upgrade.equals(Aspect.AIR.getName())) {
-      value = 0.01F;
-    } else if (upgrade.equals(Aspect.EARTH.getName())) {
-      value = -0.04F;
-    } else {
-      value = 0.0F;
-    }
-
-    speedModifier = new AttributeModifier(
-      AMULET_SPEED_MODIFIER, "AMULET_SPEED_MODIFIER", value, 0
-    );
-
-    if (upgrade.equals(Aspect.EARTH.getName())) {
-      knockbackModifier = new AttributeModifier(
-        AMULET_KNOCKBACK_MODIFIER, "AMULET_KNOCKBACK_MODIFIER", 0.75F, 0
-      );
-    }
-
-    // modifiers.remove(
-    //   SharedMonsterAttributes.movementSpeed.getAttributeUnlocalizedName(),
-    //   speedModifier
-    // );
-
-    modifiers.put(
-      SharedMonsterAttributes.movementSpeed.getAttributeUnlocalizedName(),
-      speedModifier
-    );
-
-    if (knockbackModifier != null) {
-      modifiers.put(
-        SharedMonsterAttributes.knockbackResistance.getAttributeUnlocalizedName(),
-        knockbackModifier
-      );
-    }
-
-    return modifiers;
+  public EnumRarity getRarity(ItemStack amulet) {
+    return EnumRarity.epic;
   }
 
 
@@ -447,5 +413,21 @@ public class ItemWardenAmulet extends Item implements IBauble, IRunicArmor, IVis
     } else {
       return 5;
     }
+  }
+
+  @Override
+  @SideOnly(Side.CLIENT)
+  public void getSubItems(Item item, CreativeTabs tab, List list) {
+    ItemWardenAmulet amulet = (ItemWardenAmulet) item;
+    ItemStack stack = new ItemStack(amulet);
+    AspectList aspects = new AspectList();
+
+    for (Aspect aspect : Aspect.getPrimalAspects()) {
+      aspects.add(aspect, 100000);
+    }
+
+    VisHelper.storeAllVis(stack, aspects);
+
+    list.add(stack);
   }
 }

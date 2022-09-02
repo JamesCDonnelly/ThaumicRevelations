@@ -1,6 +1,7 @@
 package thaumrev.util.wardenic.upgrade;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.ItemStack;
@@ -10,9 +11,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.common.config.Config;
-import thaumrev.ThaumRevLibrary;
 import thaumrev.util.DamageSourceWarden;
-import thaumrev.util.wardenic.WardenicChargeHelper;
 
 import static thaumrev.util.PurityHelper.isEldritchOrTainted;
 
@@ -30,13 +29,13 @@ public class WardenicUpgradeWarden extends WardenicUpgrade {
     EntityPlayer player = (EntityPlayer)event.source.getEntity();
     EntityArrow entityArrow = (EntityArrow)event.source.getSourceOfDamage();
 
-    short count = WardenicChargeHelper.getWardenicArmorCount(player);
+    if (isEldritchOrTainted(entity)) {
+      DamageSource damageSource = new DamageSourceWarden("warden", player);
 
-    if (entityArrow.getIsCritical()) {
-      if (isEldritchOrTainted(entity)) {
-        DamageSource damageSource = new DamageSourceWarden("warden", player);
-
-        entity.attackEntityFrom(damageSource, 8 * (count + 1));
+      if (entityArrow.getIsCritical()) {
+        entity.attackEntityFrom(damageSource, 4.0F);
+      } else {
+        entity.attackEntityFrom(damageSource, 2.0F);
       }
     }
   }
@@ -45,12 +44,10 @@ public class WardenicUpgradeWarden extends WardenicUpgrade {
   public void onAttack(ItemStack stack, EntityPlayer player, Entity entity) {
     super.onAttack(stack, player, entity);
 
-    short count = WardenicChargeHelper.getWardenicArmorCount(player);
-
     if (isEldritchOrTainted(entity)) {
       DamageSource damageSource = new DamageSourceWarden("warden", player);
 
-      entity.attackEntityFrom(damageSource, 8 * (count + 1));
+      entity.attackEntityFrom(damageSource, 4.0F);
     }
   }
 
@@ -60,20 +57,13 @@ public class WardenicUpgradeWarden extends WardenicUpgrade {
 
     if (event.entity instanceof EntityPlayer) {
       EntityPlayer player = (EntityPlayer) event.entity;
-      short count = WardenicChargeHelper.getWardenicArmorCount(player);
-
-      if (count == 4) {
-        if (isEldritchOrTainted(event.source.getEntity())) {
-          event.setCanceled(true);
-        }
-      }
-
       Entity sourceEntity = event.source.getEntity();
-
       DamageSource damageSource = new DamageSourceWarden("warden", player);
 
+      event.ammount /= 2;
+
       if (isEldritchOrTainted(sourceEntity)) {
-        sourceEntity.attackEntityFrom(damageSource, (event.ammount * count));
+        sourceEntity.attackEntityFrom(damageSource, event.ammount);
       }
     }
   }
@@ -82,24 +72,17 @@ public class WardenicUpgradeWarden extends WardenicUpgrade {
   public void onWornTick(World world, EntityPlayer player, ItemStack stack) {
     super.onWornTick(world, player, stack);
 
-    short count = WardenicChargeHelper.getWardenicArmorCount(player);
+    player.removePotionEffect(Config.potionVisExhaustID);
+    player.removePotionEffect(Config.potionInfVisExhaustID);
+    player.removePotionEffect(Config.potionDeathGazeID);
+    player.removePotionEffect(Config.potionTaintPoisonID);
+    player.removePotionEffect(Potion.wither.getId());
+  }
 
-    if (count == 4) {
-      if (player.isPotionActive(Config.potionVisExhaustID)) {
-        player.removePotionEffect(Config.potionVisExhaustID);
-      }
-      if (player.isPotionActive(Config.potionInfVisExhaustID)) {
-        player.removePotionEffect(Config.potionInfVisExhaustID);
-      }
-      if (player.isPotionActive(Config.potionDeathGazeID)) {
-        player.removePotionEffect(Config.potionDeathGazeID);
-      }
-      if (player.isPotionActive(Config.potionTaintPoisonID)) {
-        player.removePotionEffect(Config.potionTaintPoisonID);
-      }
-      if (player.isPotionActive(Potion.wither.getId())) {
-        player.removePotionEffect(Potion.wither.getId());
-      }
-    }
+  @Override
+  public void onEquipped(ItemStack stack, EntityLivingBase entityLivingBase) {
+    super.onEquipped(stack, entityLivingBase);
+
+    entityLivingBase.worldObj.playSoundAtEntity(entityLivingBase, "thaumrev:compramos", 1.0F, 1.0F);
   }
 }

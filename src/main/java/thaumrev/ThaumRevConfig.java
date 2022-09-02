@@ -13,6 +13,8 @@ public class ThaumRevConfig {
   public static int basePurityCooldown = 500;
   public static int basePurityVisCost = 100;
 
+  public static boolean isThaumicDyesLoaded = false;
+
   public ThaumRevConfig() {}
 
   public static void save() {
