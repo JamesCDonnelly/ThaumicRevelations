@@ -6,16 +6,14 @@ import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.RecipesArmorDyes;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import thaumrev.item.armor.ItemWardenclothRobes;
 
 import java.util.ArrayList;
 
-import static thaumrev.ThaumicRevelations.log;
-
-public class RecipesThaumRevArmorDyes extends RecipesArmorDyes {
+public class RecipesThaumRevArmorDyes implements IRecipe {
 
   @Override
   public boolean matches(@NotNull InventoryCrafting inventory, World world) {
@@ -132,5 +130,15 @@ public class RecipesThaumRevArmorDyes extends RecipesArmorDyes {
     armor.func_82813_b(result, finalColor);
 
     return result;
+  }
+
+  @Override
+  public int getRecipeSize() {
+    return 10;
+  }
+
+  @Override
+  public ItemStack getRecipeOutput() {
+    return null;
   }
 }

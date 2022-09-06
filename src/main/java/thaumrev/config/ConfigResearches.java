@@ -17,7 +17,7 @@ public final class ConfigResearches {
   public static void registerResearches() {
     ResearchCategories.registerCategory(
       "thaumrev",
-      new ResourceLocation("thaumrev", "textures/items/wardenamulet.png"),
+      new ResourceLocation("thaumrev", "textures/items/baubles/wardenamulet-warden.png"),
       new ResourceLocation("thaumrev", "textures/gui/gui_researchbackthaumrev.png")
     );
 

@@ -4,9 +4,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import thaumcraft.api.ItemApi;
 import thaumcraft.api.ThaumcraftApi;
+import thaumcraft.api.ThaumcraftApiHelper;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 
+import java.util.Enumeration;
+
+import static thaumrev.ThaumicRevelations.log;
 import static thaumrev.config.ConfigLibrary.*;
 
 public final class ConfigAspects {
@@ -39,6 +43,8 @@ public final class ConfigAspects {
   }
 
   public static void registerItemAspects() {
+    AspectList tcAspectList;
+
     ThaumcraftApi.registerObjectTag(
       new ItemStack(itemResource, 0, 0),
       new AspectList().add(EXCUBITOR, 4)
@@ -101,79 +107,118 @@ public final class ConfigAspects {
         .add(EXCUBITOR, 20)
     );
 
+
+    tcAspectList = ThaumcraftApiHelper.getObjectAspects(
+      ItemApi.getItem("itemHelmetCultistRobe", 0)
+    );
+
     ThaumcraftApi.registerObjectTag(
       ItemApi.getItem("itemHelmetCultistRobe", 0),
-      new AspectList()
-        .add(CRIMSON, 1)
-        .add(Aspect.METAL, 3)
-        .add(Aspect.CLOTH, 2)
+      tcAspectList
+        .add(CRIMSON, tcAspectList.getAmount(Aspect.ELDRITCH))
+        .remove(Aspect.ELDRITCH)
+    );
+
+    tcAspectList = ThaumcraftApiHelper.getObjectAspects(
+      ItemApi.getItem("itemHelmetCultistPlate", 0)
     );
 
     ThaumcraftApi.registerObjectTag(
       ItemApi.getItem("itemHelmetCultistPlate", 0),
-      new AspectList()
-        .add(CRIMSON, 1)
-        .add(Aspect.METAL, 5)
+      tcAspectList
+        .add(CRIMSON, tcAspectList.getAmount(Aspect.ELDRITCH))
+        .remove(Aspect.ELDRITCH)
+    );
+
+    tcAspectList = ThaumcraftApiHelper.getObjectAspects(
+      ItemApi.getItem("itemHelmetCultistLeaderPlate", 0)
     );
 
     ThaumcraftApi.registerObjectTag(
       ItemApi.getItem("itemHelmetCultistLeaderPlate", 0),
-      new AspectList()
-        .add(CRIMSON, 2)
-        .add(Aspect.METAL, 5)
+      tcAspectList
+        .add(CRIMSON, tcAspectList.getAmount(Aspect.ELDRITCH))
+        .remove(Aspect.ELDRITCH)
+    );
+
+
+    tcAspectList = ThaumcraftApiHelper.getObjectAspects(
+      ItemApi.getItem("itemChestCultistRobe", 0)
     );
 
     ThaumcraftApi.registerObjectTag(
       ItemApi.getItem("itemChestCultistRobe", 0),
-      new AspectList()
-        .add(CRIMSON, 1)
-        .add(Aspect.METAL, 3)
-        .add(Aspect.CLOTH, 2)
+      tcAspectList
+        .add(CRIMSON, tcAspectList.getAmount(Aspect.ELDRITCH))
+        .remove(Aspect.ELDRITCH)
+    );
+
+    tcAspectList = ThaumcraftApiHelper.getObjectAspects(
+      ItemApi.getItem("itemChestCultistPlate", 0)
     );
 
     ThaumcraftApi.registerObjectTag(
       ItemApi.getItem("itemChestCultistPlate", 0),
-      new AspectList()
-        .add(CRIMSON, 1)
-        .add(Aspect.METAL, 5)
+      tcAspectList
+        .add(CRIMSON, tcAspectList.getAmount(Aspect.ELDRITCH))
+        .remove(Aspect.ELDRITCH)
+    );
+
+    tcAspectList = ThaumcraftApiHelper.getObjectAspects(
+      ItemApi.getItem("itemChestCultistLeaderPlate", 0)
     );
 
     ThaumcraftApi.registerObjectTag(
       ItemApi.getItem("itemChestCultistLeaderPlate", 0),
-      new AspectList()
-        .add(CRIMSON, 2)
-        .add(Aspect.METAL, 5)
+      tcAspectList
+        .add(CRIMSON, tcAspectList.getAmount(Aspect.ELDRITCH))
+        .remove(Aspect.ELDRITCH)
     );
 
 
+    tcAspectList = ThaumcraftApiHelper.getObjectAspects(
+      ItemApi.getItem("itemLegsCultistRobe", 0)
+    );
+
     ThaumcraftApi.registerObjectTag(
       ItemApi.getItem("itemLegsCultistRobe", 0),
-      new AspectList()
-        .add(CRIMSON, 1)
-        .add(Aspect.METAL, 3)
-        .add(Aspect.CLOTH, 2)
+      tcAspectList
+        .add(CRIMSON, tcAspectList.getAmount(Aspect.ELDRITCH))
+        .remove(Aspect.ELDRITCH)
+    );
+
+    tcAspectList = ThaumcraftApiHelper.getObjectAspects(
+      ItemApi.getItem("itemLegsCultistPlate", 0)
     );
 
     ThaumcraftApi.registerObjectTag(
       ItemApi.getItem("itemLegsCultistPlate", 0),
-      new AspectList()
-        .add(CRIMSON, 1)
-        .add(Aspect.METAL, 5)
+      tcAspectList
+        .add(CRIMSON, tcAspectList.getAmount(Aspect.ELDRITCH))
+        .remove(Aspect.ELDRITCH)
+    );
+
+    tcAspectList = ThaumcraftApiHelper.getObjectAspects(
+      ItemApi.getItem("itemLegsCultistLeaderPlate", 0)
     );
 
     ThaumcraftApi.registerObjectTag(
       ItemApi.getItem("itemLegsCultistLeaderPlate", 0),
-      new AspectList()
-        .add(CRIMSON, 2)
-        .add(Aspect.METAL, 5)
+      tcAspectList
+        .add(CRIMSON, tcAspectList.getAmount(Aspect.ELDRITCH))
+        .remove(Aspect.ELDRITCH)
     );
 
 
+    tcAspectList = ThaumcraftApiHelper.getObjectAspects(
+      ItemApi.getItem("itemBootsCultist", 0)
+    );
+
     ThaumcraftApi.registerObjectTag(
       ItemApi.getItem("itemBootsCultist", 0),
-      new AspectList()
-        .add(CRIMSON, 1)
-        .add(Aspect.METAL, 5)
+      tcAspectList
+        .add(CRIMSON, tcAspectList.getAmount(Aspect.ELDRITCH))
+        .remove(Aspect.ELDRITCH)
     );
   }
 }

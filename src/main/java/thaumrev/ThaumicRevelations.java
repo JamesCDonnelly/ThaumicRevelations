@@ -19,7 +19,7 @@ import thaumrev.client.gui.GuiHandler;
 import thaumrev.common.CommonProxy;
 import thaumrev.config.*;
 import thaumrev.lib.utils.MobDropsHandler;
-import thaumrev.lib.CreativeTabRev;
+import thaumrev.lib.CreativeTabThaumRev;
 import thaumrev.api.wardenic.WardenicChargeEvents;
 import thaumrev.api.wardenic.WardenicUpgrades;
 import thaumrev.lib.world.ThaumRevWorldGenerator;
@@ -44,6 +44,7 @@ public final class ThaumicRevelations {
     serverSide = "thaumrev.common.CommonProxy",
     clientSide = "thaumrev.client.ClientProxy"
   )
+
   public static CommonProxy proxy;
 
   @EventHandler
@@ -62,14 +63,13 @@ public final class ThaumicRevelations {
 
     Config.save();
 
-    ConfigLibrary.tabThaumRev = new CreativeTabRev(ConfigLibrary.MOD_ID);
+    ConfigLibrary.tabThaumRev = new CreativeTabThaumRev(ConfigLibrary.MOD_ID);
 
     ConfigIntegrations.init();
     MobDropsHandler.init();
     ConfigBlocks.init();
     ConfigItems.init();
     ConfigAspects.registerAspects();
-    ConfigAspects.registerItemAspects();
     WardenicChargeEvents.init();
     WardenicUpgrades.init();
 
@@ -90,6 +90,7 @@ public final class ThaumicRevelations {
   @EventHandler
   public void postInit(@NotNull FMLPostInitializationEvent event) {
     ConfigRecipes.registerRecipes();
+    ConfigAspects.registerItemAspects();
     ConfigResearches.registerResearches();
   }
 

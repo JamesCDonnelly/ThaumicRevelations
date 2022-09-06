@@ -8,10 +8,10 @@ import thaumrev.lib.utils.ItemSorter;
 import java.util.Collections;
 import java.util.List;
 
-public final class CreativeTabRev extends CreativeTabs {
+public final class CreativeTabThaumRev extends CreativeTabs {
 	private final ItemSorter itemSorter = new ItemSorter();
 
-	public CreativeTabRev(String label) {
+	public CreativeTabThaumRev(String label) {
 		super(label);
 	}
 
