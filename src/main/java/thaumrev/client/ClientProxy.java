@@ -5,13 +5,13 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
 
-import thaumrev.entity.EntityPurity;
+import thaumrev.entities.EntityPurity;
 import thaumrev.tiles.TileKnowledgeReprocessor;
 import thaumrev.client.renderers.TileKnowledgeReprocessorRenderer;
 import thaumrev.client.renderers.RenderPurity;
 import thaumrev.common.CommonProxy;
-import thaumrev.networking.ClientPacketHandler;
-import thaumrev.util.KeyHandler;
+import thaumrev.lib.network.ClientPacketHandler;
+import thaumrev.lib.utils.KeyHandler;
 
 import static thaumrev.ThaumicRevelations.channel;
 import static thaumrev.ThaumicRevelations.networkChannelName;

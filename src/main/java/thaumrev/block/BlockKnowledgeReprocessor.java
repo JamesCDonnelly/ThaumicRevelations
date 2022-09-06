@@ -14,7 +14,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-import thaumrev.ThaumRevLibrary;
+import thaumrev.config.ConfigLibrary;
 import thaumrev.tiles.TileKnowledgeReprocessor;
 
 public class BlockKnowledgeReprocessor extends BlockContainer {
@@ -22,7 +22,7 @@ public class BlockKnowledgeReprocessor extends BlockContainer {
 
   public BlockKnowledgeReprocessor() {
     super(Material.rock);
-    setCreativeTab(ThaumRevLibrary.tabThaumRev);
+    setCreativeTab(ConfigLibrary.tabThaumRev);
     setUnlocalizedName("blockKnowledgeReprocessor");
 
     this.setHardness(4.0F);

@@ -8,7 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import org.jetbrains.annotations.NotNull;
-import thaumrev.ThaumRevLibrary;
+import thaumrev.config.ConfigLibrary;
 
 import java.util.List;
 
@@ -28,7 +28,7 @@ public class ItemResource extends Item {
 	public ItemResource() {
 		super();
 		setUnlocalizedName("itemResource");
-		setCreativeTab(ThaumRevLibrary.tabThaumRev);
+		setCreativeTab(ConfigLibrary.tabThaumRev);
 		setHasSubtypes(true);
 
 		icons = new IIcon["itemResource".length()];
@@ -38,7 +38,7 @@ public class ItemResource extends Item {
 	/** Overrides - void **/
 	@Override
 	public void getSubItems(Item item, CreativeTabs tab, List list) {
-		for (int i = 0; i < RESOURCE_ICON.length; i++) {
+		for (int i = 0; i < RESOURCE_ICON.length; ++i) {
 			list.add(new ItemStack(item, 1, i));
 		}
 	}
@@ -57,14 +57,14 @@ public class ItemResource extends Item {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister register) {
-		for (int i = 0; i < RESOURCE_ICON.length; i++) {
+		for (int i = 0; i < RESOURCE_ICON.length; ++i) {
 			icons[i] = register.registerIcon("thaumrev:resources/" + RESOURCE_ICON[i]);
 		}
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public IIcon getIconFromDamage(int meta) {
-		return icons[meta];
+	public IIcon getIconFromDamage(int damage) {
+		return icons[damage];
 	}
 }

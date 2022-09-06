@@ -9,7 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
-import thaumrev.ThaumRevLibrary;
+import thaumrev.config.ConfigLibrary;
 import thaumrev.ThaumicRevelations;
 
 public class ItemWaslieHammer extends Item {
@@ -17,7 +17,7 @@ public class ItemWaslieHammer extends Item {
 	public ItemWaslieHammer() {
 		super();
 		setUnlocalizedName("itemWaslieHammer");
-		setCreativeTab(ThaumRevLibrary.tabThaumRev);
+		setCreativeTab(ConfigLibrary.tabThaumRev);
 		setMaxStackSize(1);
 		canRepair = false;
 	}

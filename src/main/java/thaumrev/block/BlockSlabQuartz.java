@@ -9,7 +9,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
-import thaumrev.ThaumRevLibrary;
+import thaumrev.config.ConfigLibrary;
 
 
 public class BlockSlabQuartz extends BlockSlab {
@@ -19,7 +19,7 @@ public class BlockSlabQuartz extends BlockSlab {
 		super(isDouble, Material.rock);
 		setUnlocalizedName("blockSlab");
 		if (!isDouble) {
-			setCreativeTab(ThaumRevLibrary.tabThaumRev);
+			setCreativeTab(ConfigLibrary.tabThaumRev);
 		}
 		setStepSound(Block.soundTypeStone);
 		setHardness(0.8F);
@@ -29,7 +29,7 @@ public class BlockSlabQuartz extends BlockSlab {
 	/* Overrides - Item */
 	@Override
 	public Item getItemDropped(int par1, Random par2, int par3) {
-		return Item.getItemFromBlock(ThaumRevLibrary.blockSlabInfusedQuartz);
+		return Item.getItemFromBlock(ConfigLibrary.blockSlabInfusedQuartz);
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public class BlockSlabQuartz extends BlockSlab {
 	@Override
 	public ItemStack createStackedBlock(int stacked) {
 		return new ItemStack(
-			Item.getItemFromBlock(ThaumRevLibrary.blockSlabInfusedQuartz), 2, stacked & 7
+			Item.getItemFromBlock(ConfigLibrary.blockSlabInfusedQuartz), 2, stacked & 7
 		);
 	}
 
@@ -54,6 +54,6 @@ public class BlockSlabQuartz extends BlockSlab {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int par2) {
-		return ThaumRevLibrary.blockInfusedQuartzNormal.getBlockTextureFromSide(side);
+		return ConfigLibrary.blockInfusedQuartzNormal.getBlockTextureFromSide(side);
 	}
 }

@@ -1,7 +1,5 @@
 package thaumrev.item.baubles;
 
-import com.google.common.collect.Multimap;
-
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
 import baubles.common.container.InventoryBaubles;
@@ -11,7 +9,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
@@ -19,10 +16,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
-import thaumrev.ThaumRevLibrary;
-import thaumrev.util.AttributeHelper;
+import org.jetbrains.annotations.NotNull;
+import thaumrev.config.ConfigLibrary;
+import thaumrev.lib.utils.AttributeHelper;
 
-import static thaumrev.ThaumRevLibrary.ATTRIBUTE_MODIFIER_UUID;
+import static thaumrev.config.ConfigLibrary.ATTRIBUTE_MODIFIER_UUID;
 
 import java.util.UUID;
 
@@ -31,19 +29,19 @@ public class ItemLoveRing extends Item implements IBauble {
   public ItemLoveRing() {
     super();
     setUnlocalizedName("itemLoveRing");
-    setCreativeTab(ThaumRevLibrary.tabThaumRev);
+    setCreativeTab(ConfigLibrary.tabThaumRev);
     setMaxStackSize(1);
   }
 
 
   /** Overrides - void **/
   @Override
-  public void onWornTick(ItemStack stack, EntityLivingBase entityLivingBase) {
+  public void onWornTick(ItemStack stack, @NotNull EntityLivingBase entityLivingBase) {
     entityLivingBase.addPotionEffect(new PotionEffect(Potion.regeneration.getId(), 0, 0));
   }
 
   @Override
-  public void onEquipped(ItemStack stack, EntityLivingBase entityLivingBase) {
+  public void onEquipped(ItemStack stack, @NotNull EntityLivingBase entityLivingBase) {
     entityLivingBase.worldObj.playSoundAtEntity(entityLivingBase, "thaumrev:abderp", 1, 1);
 
     AttributeHelper.addAttributeModToLiving(
@@ -57,7 +55,7 @@ public class ItemLoveRing extends Item implements IBauble {
   }
 
   @Override
-  public void onUnequipped(ItemStack stack, EntityLivingBase entityLivingBase) {
+  public void onUnequipped(ItemStack stack, @NotNull EntityLivingBase entityLivingBase) {
     entityLivingBase.worldObj.playSoundAtEntity(entityLivingBase, "thaumrev:abderp", 1, 1);
     
     AttributeHelper.removeAttributeModFromLiving(
@@ -76,7 +74,7 @@ public class ItemLoveRing extends Item implements IBauble {
   public boolean canEquip(ItemStack stack, EntityLivingBase entityLivingBase) {
     InventoryBaubles baubles = PlayerHandler.getPlayerBaubles((EntityPlayer) entityLivingBase);
 
-    for (int i = 0; i < baubles.getSizeInventory(); i++) {
+    for (int i = 0; i < baubles.getSizeInventory(); ++i) {
       if (baubles.getStackInSlot(i) != null &&
         baubles.getStackInSlot(i).getItem() instanceof ItemLoveRing) {
         return false;
@@ -120,6 +118,6 @@ public class ItemLoveRing extends Item implements IBauble {
   @Override
   @SideOnly(Side.CLIENT)
   public void registerIcons(IIconRegister register) {
-    itemIcon = register.registerIcon("thaumrev:lovering");
+    itemIcon = register.registerIcon("thaumrev:baubles/lovering");
   }
 }

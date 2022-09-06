@@ -13,13 +13,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.util.ForgeDirection;
 import org.jetbrains.annotations.NotNull;
-import thaumrev.ThaumRevLibrary;
+import thaumrev.config.ConfigLibrary;
 
 public class ItemExcubituraSeeds extends ItemSeeds {
   public ItemExcubituraSeeds() {
-      super(ThaumRevLibrary.blockExcubitura, Blocks.farmland);
+      super(ConfigLibrary.blockExcubitura, Blocks.farmland);
       setUnlocalizedName("itemExcubituraSeeds");
-      setCreativeTab(ThaumRevLibrary.tabThaumRev);
+      setCreativeTab(ConfigLibrary.tabThaumRev);
   }
 
 
@@ -37,7 +37,7 @@ public class ItemExcubituraSeeds extends ItemSeeds {
       if (world.getBlock(x, y, z).canSustainPlant(world,
           x, y, z, ForgeDirection.UP, this) && world
             .isAirBlock(x, y + 1, z)) {
-          world.setBlock(x, y + 1, z, ThaumRevLibrary.blockExcubitura);
+          world.setBlock(x, y + 1, z, ConfigLibrary.blockExcubitura);
           --stack.stackSize;
           return true;
         }
@@ -58,7 +58,7 @@ public class ItemExcubituraSeeds extends ItemSeeds {
   /* Overrides - Block */
   @Override
   public Block getPlant(IBlockAccess world, int x, int y, int z) {
-    return ThaumRevLibrary.blockExcubitura;
+    return ConfigLibrary.blockExcubitura;
   }
 
 

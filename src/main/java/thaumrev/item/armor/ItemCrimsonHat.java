@@ -10,45 +10,40 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
-import net.minecraftforge.common.ISpecialArmor;
 import org.jetbrains.annotations.NotNull;
 import thaumcraft.api.*;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.nodes.IRevealer;
-import thaumrev.ThaumRevLibrary;
+import thaumrev.config.ConfigLibrary;
 import thaumrev.client.models.ModelCrimsonHat;
 
 import java.util.List;
 
-public class ItemCrimsonHat extends ItemArmor implements ISpecialArmor, IRepairable, IRevealer, IGoggles, IRunicArmor, IVisDiscountGear, IWarpingGear {
+public class ItemCrimsonHat extends ItemArmor implements IRepairable, IRevealer, IGoggles, IRunicArmor, IVisDiscountGear, IWarpingGear {
 
   ModelBiped model = null;
 
   public ItemCrimsonHat() {
-    super(ThaumRevLibrary.armorMaterialCrimsoncloth, 1, 0);
+    super(ConfigLibrary.armorMaterialCrimsoncloth, 1, 0);
     setUnlocalizedName("itemCrimsonHat");
-    setCreativeTab(ThaumRevLibrary.tabThaumRev);
+    setCreativeTab(ConfigLibrary.tabThaumRev);
   }
 
   /** Overrides - void **/
   @Override
-  public void addInformation(ItemStack stack, EntityPlayer player, @NotNull List list, boolean par4) {
+  public void addInformation(ItemStack stack, EntityPlayer player, @NotNull List list, boolean doit) {
     list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + ": " +
       this.getVisDiscount(stack, player, null) + "%");
-  }
 
-  @Override
-  public void damageArmor(EntityLivingBase entityLivingBase, ItemStack itemStack, DamageSource damageSource, int i, int i1) {
+    super.addInformation(stack, player, list, doit);
   }
-
 
   /** Overrides - boolean **/
   @Override
   public boolean getIsRepairable(ItemStack stack, @NotNull ItemStack material) {
-    return material.isItemEqual(new ItemStack(ThaumRevLibrary.itemResource, 1, 4));
+    return material.isItemEqual(new ItemStack(ConfigLibrary.itemResource, 1, 4));
   }
 
   @Override
@@ -71,23 +66,9 @@ public class ItemCrimsonHat extends ItemArmor implements ISpecialArmor, IRepaira
   @Override
   public int getWarp(ItemStack itemStack, EntityPlayer entityPlayer) { return 4; }
 
-  @Override
-  public int getArmorDisplay(EntityPlayer player, ItemStack armor, int slot) {
-    return getArmorMaterial().getDamageReductionAmount(slot);
-  }
-
-
   /** Overrides - EnumRarity **/
   @Override
   public EnumRarity getRarity(ItemStack itemstack) { return EnumRarity.rare; }
-
-
-  /** Overrides - ArmorProperties **/
-  @Override
-  public ArmorProperties getProperties(EntityLivingBase player, ItemStack armor, DamageSource source, double damage, int slot) {
-    return new ArmorProperties(0, getArmorMaterial().getDamageReductionAmount(slot) / 25D, 20);
-  }
-
 
   /** Client-side **/
   @Override

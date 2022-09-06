@@ -19,6 +19,8 @@ item.itemResource.5.name=Voidcloth
 item.itemWardenAmulet.name=Warden's Amulet
 item.itemLoveRing.name=Ring of Love
 
+item.thaumrevcharge.text=Charge
+
 #Foci
 item.itemFocusIllumination.name=Wand Focus: Illumination
 item.itemFocusPurity.name=Wand Focus: Purity

@@ -14,7 +14,7 @@ import thaumcraft.api.wands.WandRod;
 import thaumcraft.common.config.ConfigItems;
 import thaumcraft.common.items.wands.ItemWandCasting;
 import thaumcraft.common.items.wands.ItemWandRod;
-import thaumrev.ThaumRevLibrary;
+import thaumrev.config.ConfigLibrary;
 
 import java.util.List;
 
@@ -27,7 +27,7 @@ public class ItemWandCore extends ItemWandRod {
 		setUnlocalizedName("itemWandCore");
 		setMaxStackSize(64);
 		setHasSubtypes(true);
-		setCreativeTab(ThaumRevLibrary.tabThaumRev);
+		setCreativeTab(ConfigLibrary.tabThaumRev);
 	}
 
 
@@ -52,7 +52,7 @@ public class ItemWandCore extends ItemWandRod {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item item, CreativeTabs tab, List list) {
-		for (int i = 0; i < 6; i++) {
+		for (int i = 0; i < 6; ++i) {
 			list.add(new ItemStack(this, 1, (i < 3 ? i : i + 7)));
 		}
 
@@ -66,13 +66,13 @@ public class ItemWandCore extends ItemWandRod {
 		wandCasting.setCap(wand, WandCap.caps.get("thaumium"));
 		wandCasting.setRod(wand, WandRod.rods.get("wardencloth"));
 		wandCasting.storeAllVis(
-      wand, new AspectList()
-        .add(Aspect.FIRE, 15000)
-        .add(Aspect.WATER, 15000)
-        .add(Aspect.EARTH, 15000)
-        .add(Aspect.AIR, 15000)
-        .add(Aspect.ORDER, 15000)
-        .add(Aspect.ENTROPY, 15000));
+			wand, new AspectList()
+				.add(Aspect.FIRE, 15000)
+				.add(Aspect.WATER, 15000)
+				.add(Aspect.EARTH, 15000)
+				.add(Aspect.AIR, 15000)
+				.add(Aspect.ORDER, 15000)
+				.add(Aspect.ENTROPY, 15000));
 		list.add(wand);
 
 		wand = new ItemStack(ConfigItems.itemWandCasting, 1, 401);

@@ -5,7 +5,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import thaumrev.ThaumicRevelations;
-import thaumrev.inventory.ContainerHammer;
+import thaumrev.container.ContainerHammer;
 
 public class GuiHandler implements IGuiHandler {
 

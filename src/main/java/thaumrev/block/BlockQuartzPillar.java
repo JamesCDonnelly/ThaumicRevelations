@@ -7,7 +7,7 @@ import net.minecraft.block.BlockRotatedPillar;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
-import thaumrev.ThaumRevLibrary;
+import thaumrev.config.ConfigLibrary;
 
 public class BlockQuartzPillar extends BlockRotatedPillar {
 
@@ -17,7 +17,7 @@ public class BlockQuartzPillar extends BlockRotatedPillar {
 	public BlockQuartzPillar() {
 		super(Material.rock);
 		setUnlocalizedName("blockInfusedQuartzPillar");
-		setCreativeTab(ThaumRevLibrary.tabThaumRev);
+		setCreativeTab(ConfigLibrary.tabThaumRev);
 		setStepSound(Block.soundTypeStone);
 		setHardness(0.8F);
 	}

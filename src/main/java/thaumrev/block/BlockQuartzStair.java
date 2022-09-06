@@ -1,14 +1,14 @@
 package thaumrev.block;
 
 import net.minecraft.block.BlockStairs;
-import thaumrev.ThaumRevLibrary;
+import thaumrev.config.ConfigLibrary;
 
 public class BlockQuartzStair extends BlockStairs {
 
 	public BlockQuartzStair() {
-        super(ThaumRevLibrary.blockInfusedQuartzNormal, 0);
+        super(ConfigLibrary.blockInfusedQuartzNormal, 0);
         setUnlocalizedName("blockInfusedQuartzStair");
-        setCreativeTab(ThaumRevLibrary.tabThaumRev);
+        setCreativeTab(ConfigLibrary.tabThaumRev);
         setLightOpacity(0);
     }
 }

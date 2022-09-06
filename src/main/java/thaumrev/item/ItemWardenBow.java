@@ -16,8 +16,8 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.event.entity.player.ArrowNockEvent;
 import org.jetbrains.annotations.NotNull;
-import thaumrev.ThaumRevLibrary;
-import thaumrev.util.wardenic.WardenicChargeHelper;
+import thaumrev.config.ConfigLibrary;
+import thaumrev.api.wardenic.WardenicChargeHelper;
 
 public class ItemWardenBow extends ItemBow {
   public static final String[] wardenBowPullArray = new String[]{"pulling_0", "pulling_1", "pulling_2"};
@@ -25,7 +25,7 @@ public class ItemWardenBow extends ItemBow {
   public ItemWardenBow() {
     super();
     setUnlocalizedName("itemWardenBow");
-    setCreativeTab(ThaumRevLibrary.tabThaumRev);
+    setCreativeTab(ConfigLibrary.tabThaumRev);
     setMaxStackSize(1);
     setFull3D();
   }
@@ -157,7 +157,7 @@ public class ItemWardenBow extends ItemBow {
 
     iconArray = new IIcon[wardenBowPullArray.length];
 
-    for (int i = 0; i < iconArray.length; i++) {
+    for (int i = 0; i < iconArray.length; ++i) {
       iconArray[i] = register.registerIcon("thaumrev:bow/wardenbow" + "_" + wardenBowPullArray[i]);
     }
   }

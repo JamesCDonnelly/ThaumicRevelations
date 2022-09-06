@@ -24,13 +24,13 @@ import thaumcraft.api.IRunicArmor;
 import thaumcraft.api.IVisDiscountGear;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.nodes.IRevealer;
-import thaumrev.ThaumRevLibrary;
+import thaumrev.config.ConfigLibrary;
 import thaumrev.client.models.ModelThauminiteFortressArmor;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static thaumrev.ThaumRevLibrary.armorMaterialFortressThauminite;
+import static thaumrev.config.ConfigLibrary.armorMaterialFortressThauminite;
 
 public class ItemThauminiteFortressArmor extends ItemArmor implements IRepairable, IRunicArmor, ISpecialArmor, IGoggles, IRevealer, IVisDiscountGear {
 
@@ -40,11 +40,11 @@ public class ItemThauminiteFortressArmor extends ItemArmor implements IRepairabl
   public ItemThauminiteFortressArmor(int type, String name) {
     super(armorMaterialFortressThauminite, 4, type);
     setUnlocalizedName(name);
-    setCreativeTab(ThaumRevLibrary.tabThaumRev);
+    setCreativeTab(ConfigLibrary.tabThaumRev);
   }
 
   @Override
-  public int getVisDiscount(ItemStack itemStack, EntityPlayer entityPlayer, Aspect aspect) {
+  public int getVisDiscount(ItemStack armor, EntityPlayer entityPlayer, Aspect aspect) {
     return 4;
   }
 
@@ -82,21 +82,27 @@ public class ItemThauminiteFortressArmor extends ItemArmor implements IRepairabl
   }
 
   @Override
-  public EnumRarity getRarity(ItemStack itemstack) {
+  public EnumRarity getRarity(ItemStack armor) {
     return EnumRarity.rare;
   }
 
   @Override
-  public void addInformation(@NotNull ItemStack stack, EntityPlayer player, List list, boolean par4) {
-    if (stack.hasTagCompound() && stack.stackTagCompound.hasKey("goggles")) {
+  public void addInformation(@NotNull ItemStack armor, EntityPlayer player, List list, boolean par4) {
+    if (armor.hasTagCompound() && armor.stackTagCompound.hasKey("goggles")) {
       list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("item.ItemGoggles.name"));
     }
 
-    if (stack.hasTagCompound() && stack.stackTagCompound.hasKey("mask")) {
-      list.add(EnumChatFormatting.GOLD + StatCollector.translateToLocal("item.HelmetFortress.mask." + stack.stackTagCompound.getInteger("mask")));
+    if (armor.hasTagCompound() && armor.stackTagCompound.hasKey("mask")) {
+      list.add(EnumChatFormatting.GOLD + StatCollector.translateToLocal("item.HelmetFortress.mask." + armor.stackTagCompound.getInteger("mask")));
     }
 
-    super.addInformation(stack, player, list, par4);
+    list.add("");
+
+
+    list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + ": "
+      + this.getVisDiscount(armor, player, null) + "%");
+
+    super.addInformation(armor, player, list, par4);
   }
 
   @Override
@@ -126,7 +132,7 @@ public class ItemThauminiteFortressArmor extends ItemArmor implements IRepairabl
   }
 
   @Override
-  public int getRunicCharge(ItemStack itemStack) {
+  public int getRunicCharge(ItemStack armor) {
     return 0;
   }
 
@@ -156,8 +162,8 @@ public class ItemThauminiteFortressArmor extends ItemArmor implements IRepairabl
 
   @Override
   @SideOnly(Side.CLIENT)
-  public ModelBiped getArmorModel(EntityLivingBase entityLiving, @NotNull ItemStack itemStack, int armorSlot) {
-    int type = ((ItemArmor)itemStack.getItem()).armorType;
+  public ModelBiped getArmorModel(EntityLivingBase entity, @NotNull ItemStack armor, int armorSlot) {
+    int type = ((ItemArmor) armor.getItem()).armorType;
     if (this.models[1] == null) {
       this.models[1] = new ModelThauminiteFortressArmor(1.0F);
     }
@@ -180,13 +186,13 @@ public class ItemThauminiteFortressArmor extends ItemArmor implements IRepairabl
       this.models[0].bipedLeftArm.showModel = armorSlot == 1;
       this.models[0].bipedRightLeg.showModel = armorSlot == 2;
       this.models[0].bipedLeftLeg.showModel = armorSlot == 2;
-      this.models[0].isSneak = entityLiving.isSneaking();
-      this.models[0].isRiding = entityLiving.isRiding();
-      this.models[0].isChild = entityLiving.isChild();
+      this.models[0].isSneak = entity.isSneaking();
+      this.models[0].isRiding = entity.isRiding();
+      this.models[0].isChild = entity.isChild();
       this.models[0].aimedBow = false;
-      this.models[0].heldItemRight = entityLiving.getHeldItem() != null ? 1 : 0;
-      if (entityLiving instanceof EntityPlayer && ((EntityPlayer)entityLiving).getItemInUseDuration() > 0) {
-        EnumAction enumaction = ((EntityPlayer)entityLiving).getItemInUse().getItemUseAction();
+      this.models[0].heldItemRight = entity.getHeldItem() != null ? 1 : 0;
+      if (entity instanceof EntityPlayer && ((EntityPlayer)entity).getItemInUseDuration() > 0) {
+        EnumAction enumaction = ((EntityPlayer)entity).getItemInUse().getItemUseAction();
         if (enumaction == EnumAction.block) {
           this.models[0].heldItemRight = 3;
         } else if (enumaction == EnumAction.bow) {
@@ -200,7 +206,7 @@ public class ItemThauminiteFortressArmor extends ItemArmor implements IRepairabl
 
   @Override
   @SideOnly(Side.CLIENT)
-  public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
+  public String getArmorTexture(ItemStack armor, Entity entity, int slot, String type) {
     return "thaumrev:textures/models/thauminite_fortress_armor.png";
   }
 

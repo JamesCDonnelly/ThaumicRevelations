@@ -12,11 +12,11 @@ import net.minecraft.item.Item;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import thaumrev.ThaumRevLibrary;
+import thaumrev.config.ConfigLibrary;
 
 import java.util.Random;
 
-import static thaumrev.ThaumRevConfig.roseGrowthDivider;
+import static thaumrev.config.Config.roseGrowthDivider;
 
 public class BlockExcubitura extends BlockBush implements IGrowable {
 
@@ -107,7 +107,7 @@ public class BlockExcubitura extends BlockBush implements IGrowable {
 	/** Overrides - Item **/
 	@Override
 	public Item getItemDropped(int metadata, Random random, int fortune) {
-		return random.nextInt(4) < 2 ? ThaumRevLibrary.itemExcubituraSeeds : ThaumRevLibrary.itemResource;
+		return random.nextInt(4) < 2 ? ConfigLibrary.itemExcubituraSeeds : ConfigLibrary.itemResource;
 	}
 
 

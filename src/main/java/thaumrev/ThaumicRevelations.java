@@ -1,6 +1,6 @@
 package thaumrev;
 
-import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -8,23 +8,27 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.network.FMLEventChannel;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 import thaumrev.client.gui.GuiHandler;
 import thaumrev.common.CommonProxy;
-import thaumrev.util.MobDropsHandler;
-import thaumrev.util.TabThaumRev;
-import thaumrev.util.wardenic.WardenicChargeEvents;
-import thaumrev.util.wardenic.WardenicUpgrades;
-import thaumrev.world.ThaumRevWorldGenerator;
+import thaumrev.config.*;
+import thaumrev.lib.utils.MobDropsHandler;
+import thaumrev.lib.CreativeTabRev;
+import thaumrev.api.wardenic.WardenicChargeEvents;
+import thaumrev.api.wardenic.WardenicUpgrades;
+import thaumrev.lib.world.ThaumRevWorldGenerator;
 
 import java.io.File;
 
-@Mod(modid="thaumrev", version="1.1.2", useMetadata=true)
-public class ThaumicRevelations {
+
+@Mod(modid=ConfigLibrary.MOD_ID, version=ConfigLibrary.VERSION, useMetadata=true)
+public final class ThaumicRevelations {
   public File modDir;
   public static final Logger log = LogManager.getLogger("Thaumic Revelations");
 
@@ -33,7 +37,7 @@ public class ThaumicRevelations {
   public final static int PACKET_TYPE_S2C_TEST = 1;
   public static FMLEventChannel channel;
 
-  @Instance(ThaumRevLibrary.MOD_ID)
+  @Instance(ConfigLibrary.MOD_ID)
   public static ThaumicRevelations instance;
 
   @SidedProxy(
@@ -43,29 +47,29 @@ public class ThaumicRevelations {
   public static CommonProxy proxy;
 
   @EventHandler
-  public void preInit(FMLPreInitializationEvent event) {
+  public void preInit(@NotNull FMLPreInitializationEvent event) {
     this.modDir = event.getModConfigurationDirectory();
 
     try {
-      ThaumRevConfig.init(event.getSuggestedConfigurationFile());
+      Config.init(event.getSuggestedConfigurationFile());
     } catch (Exception var8) {
       log.error("Thaumic Revelations had a problem loading its configuration");
     } finally {
-      if (ThaumRevConfig.config != null) {
-        ThaumRevConfig.save();
+      if (Config.config != null) {
+        Config.save();
       }
     }
 
-    ThaumRevConfig.save();
+    Config.save();
 
-    ThaumRevLibrary.tabThaumRev = new TabThaumRev(ThaumRevLibrary.MOD_ID);
+    ConfigLibrary.tabThaumRev = new CreativeTabRev(ConfigLibrary.MOD_ID);
 
-    ThaumRevIntegrations.init();
+    ConfigIntegrations.init();
     MobDropsHandler.init();
-    ThaumRevBlocks.init();
-    ThaumRevItems.init();
-    ThaumRevAspects.registerAspects();
-    ThaumRevAspects.registerItemAspects();
+    ConfigBlocks.init();
+    ConfigItems.init();
+    ConfigAspects.registerAspects();
+    ConfigAspects.registerItemAspects();
     WardenicChargeEvents.init();
     WardenicUpgrades.init();
 
@@ -75,7 +79,7 @@ public class ThaumicRevelations {
   }
 
   @EventHandler
-  public void init(FMLInitializationEvent event) {
+  public void init(@NotNull FMLInitializationEvent event) {
     GuiHandler.init();
 
     proxy.initRenderers();
@@ -84,8 +88,20 @@ public class ThaumicRevelations {
   }
 
   @EventHandler
-  public void postInit(FMLPostInitializationEvent event) {
-    ThaumRevRecipes.registerRecipes();
-    ThaumRevResearches.registerResearches();
+  public void postInit(@NotNull FMLPostInitializationEvent event) {
+    ConfigRecipes.registerRecipes();
+    ConfigResearches.registerResearches();
+  }
+
+  @SubscribeEvent
+  public void onConfigChanged(ConfigChangedEvent.@NotNull OnConfigChangedEvent event) {
+    if (event.modID.equals("thaumrev")) {
+      Config.sync();
+
+      if (Config.config != null && Config.config.hasChanged()) {
+        Config.save();
+      }
+    }
   }
 }
+

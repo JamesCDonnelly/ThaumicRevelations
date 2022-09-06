@@ -4,14 +4,14 @@ package thaumrev.block;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.item.ItemSlab;
-import thaumrev.ThaumRevLibrary;
+import thaumrev.config.ConfigLibrary;
 
 public class BlockCosmeticSlabQuartzItem extends ItemSlab {
   public BlockCosmeticSlabQuartzItem(Block block) {
     super(
       block,
-      (BlockSlab)ThaumRevLibrary.blockSlabInfusedQuartz,
-      (BlockSlab)ThaumRevLibrary.blockSlabDoubleInfusedQuartz,
+      (BlockSlab) ConfigLibrary.blockSlabInfusedQuartz,
+      (BlockSlab) ConfigLibrary.blockSlabDoubleInfusedQuartz,
       false
     );
 

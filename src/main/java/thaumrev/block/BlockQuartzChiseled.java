@@ -6,7 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
-import thaumrev.ThaumRevLibrary;
+import thaumrev.config.ConfigLibrary;
 
 public class BlockQuartzChiseled extends Block {
 
@@ -17,7 +17,7 @@ public class BlockQuartzChiseled extends Block {
 	public BlockQuartzChiseled() {
         super(Material.rock);
         setUnlocalizedName("blockInfusedQuartzChiseled");
-        setCreativeTab(ThaumRevLibrary.tabThaumRev);
+        setCreativeTab(ConfigLibrary.tabThaumRev);
         setStepSound(Block.soundTypeStone);
         setHardness(0.8F);
     }

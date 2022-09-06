@@ -1,7 +1,7 @@
 package thaumrev.common;
 
 import cpw.mods.fml.common.network.NetworkRegistry;
-import thaumrev.networking.ServerPacketHandler;
+import thaumrev.lib.network.ServerPacketHandler;
 
 import static thaumrev.ThaumicRevelations.channel;
 import static thaumrev.ThaumicRevelations.networkChannelName;

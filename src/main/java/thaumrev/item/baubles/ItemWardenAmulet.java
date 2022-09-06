@@ -4,13 +4,11 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
 
+import net.minecraft.util.IIcon;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import com.google.common.collect.Multimap;
 
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
@@ -23,8 +21,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.INpc;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
@@ -42,24 +38,23 @@ import thaumcraft.api.nodes.IRevealer;
 import thaumcraft.common.Thaumcraft;
 import thaumcraft.common.items.wands.ItemWandCasting;
 import thaumcraft.common.tiles.TileVisRelay;
-import thaumrev.ThaumRevLibrary;
-import thaumrev.util.AttributeHelper;
-import thaumrev.util.PurityHelper;
-import thaumrev.util.wardenic.VisHelper;
-import thaumrev.util.wardenic.WardenicChargeHelper;
+import thaumrev.config.ConfigLibrary;
+import thaumrev.lib.utils.PurityHelper;
+import thaumrev.api.wardenic.VisHelper;
+import thaumrev.api.wardenic.WardenicChargeHelper;
 
-import static thaumrev.ThaumRevLibrary.ATTRIBUTE_MODIFIER_UUID;
-import static thaumrev.ThaumRevLibrary.EXCUBITOR;
-import static thaumrev.util.PurityHelper.summonParticles;
+import static thaumrev.config.ConfigLibrary.EXCUBITOR;
+import static thaumrev.lib.utils.PurityHelper.summonParticles;
 
 public class ItemWardenAmulet extends Item implements IBauble, IRunicArmor, IVisDiscountGear, IGoggles, IRevealer {
   DecimalFormat formatter = new DecimalFormat("#######.##");
+  IIcon[] icons = new IIcon[7];
 
   public ItemWardenAmulet() {
     super();
     setUnlocalizedName("itemWardenAmulet");
     setMaxStackSize(1);
-    setCreativeTab(ThaumRevLibrary.tabThaumRev);
+    setCreativeTab(ConfigLibrary.tabThaumRev);
   }
 
   public static int getMaxVis() {
@@ -204,7 +199,7 @@ public class ItemWardenAmulet extends Item implements IBauble, IRunicArmor, IVis
   private void chargeVis(ItemStack amulet, @NotNull EntityLivingBase player) {
     if (
       (TileVisRelay.nearbyPlayers.get(player.getEntityId())).get() != null &&
-        ((TileVisRelay) Objects.requireNonNull((TileVisRelay.nearbyPlayers
+        (Objects.requireNonNull((TileVisRelay.nearbyPlayers
           .get(player.getEntityId())).get()))
           .getDistanceSq(player.posX, player.posY, player.posZ) < 26.0D
     ) {
@@ -214,12 +209,12 @@ public class ItemWardenAmulet extends Item implements IBauble, IRunicArmor, IVis
       for (Aspect aspect : aspects) {
         if (aspect != null) {
           int amt = (
-            (TileVisRelay) Objects
+            Objects
               .requireNonNull((TileVisRelay.nearbyPlayers.get(player.getEntityId())).get()))
             .consumeVis(aspect, Math.min(5, ItemWardenAmulet.getMaxVis() - VisHelper.getVis(amulet, aspect)));
           if (amt > 0) {
             VisHelper.addRealVis(amulet, aspect, amt);
-            TileVisRelay tileVisRelay = (TileVisRelay) (TileVisRelay.nearbyPlayers.get(player.getEntityId())).get();
+            TileVisRelay tileVisRelay = TileVisRelay.nearbyPlayers.get(player.getEntityId()).get();
 
             if (tileVisRelay == null) {
               return;
@@ -247,7 +242,7 @@ public class ItemWardenAmulet extends Item implements IBauble, IRunicArmor, IVis
       }
     }
 
-    // String upgrade = WardenicChargeHelper.getUpgrade(amulet).getUpgradeAspect();
+    WardenicChargeHelper.getUpgrade(amulet).onWornTick(amulet, player);
   }
 
   @Override
@@ -264,69 +259,77 @@ public class ItemWardenAmulet extends Item implements IBauble, IRunicArmor, IVis
   public void addInformation(@NotNull ItemStack amulet, EntityPlayer player, List list, boolean doit) {
     String chargeInformation;
 
-    amulet.stackTagCompound.setInteger("maxVis", ItemWardenAmulet.getMaxVis());
-
-    if (amulet.getMetadata() > 120) {
-      amulet.setMetadata(120);
-    } else if (amulet.getMetadata() < 0) amulet.setMetadata(0);
-
-    if (amulet.getMetadata() > 101) {
-      chargeInformation = EnumChatFormatting.DARK_RED.toString();
-    } else if (amulet.getMetadata() > 81) {
-      chargeInformation = EnumChatFormatting.RED.toString();
-    } else if (amulet.getMetadata() > 61) {
-      chargeInformation = EnumChatFormatting.GOLD.toString();
-    } else if (amulet.getMetadata() > 41) {
-      chargeInformation = EnumChatFormatting.YELLOW.toString();
-    } else if (amulet.getMetadata() > 21) {
-      chargeInformation = EnumChatFormatting.GREEN.toString();
-    } else {
-      chargeInformation = EnumChatFormatting.DARK_GREEN.toString();
-    }
-
-    chargeInformation += (120 - amulet.getMetadata()) + "/120";
-
-    list.add(chargeInformation);
-    list.add(EnumChatFormatting.GOLD + StatCollector.translateToLocal("item.capacity.text") + " " + ItemWardenAmulet.getMaxVis() / 100);
-
-    if (this.getVisDiscount(amulet, player, Aspect.AIR) == 10) {
-      list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") +
-        " (Aer): " + this.getVisDiscount(amulet, player, Aspect.AIR) + "%");
-    } else if (this.getVisDiscount(amulet, player, Aspect.WATER) == 10) {
-      list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") +
-        " (Aqua): " + this.getVisDiscount(amulet, player, Aspect.WATER) + "%");
-    } else if (this.getVisDiscount(amulet, player, Aspect.FIRE) == 10) {
-      list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") +
-        " (Ignis): " + this.getVisDiscount(amulet, player, Aspect.FIRE) + "%");
-    } else if (this.getVisDiscount(amulet, player, Aspect.ORDER) == 10) {
-      list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") +
-        " (Ordo): " + this.getVisDiscount(amulet, player, Aspect.ORDER) + "%");
-    } else if (this.getVisDiscount(amulet, player, Aspect.ENTROPY) == 10) {
-      list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") +
-        " (Perditio): " + this.getVisDiscount(amulet, player, Aspect.ENTROPY) + "%");
-    } else if (this.getVisDiscount(amulet, player, Aspect.EARTH) == 10) {
-      list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") +
-        " (Terra): " + this.getVisDiscount(amulet, player, Aspect.EARTH) + "%");
-    } else {
-      list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") +
-        ": " + this.getVisDiscount(amulet, player, null) + "%");
-    }
-
     if (amulet.hasTagCompound()) {
+      amulet.stackTagCompound.setInteger("max_vis", ItemWardenAmulet.getMaxVis());
+
+      int charge = amulet.stackTagCompound.getInteger("current_charge");
+
+      if (charge > 120) {
+        amulet.stackTagCompound.setInteger("current_charge", 120);
+      } else if (charge < 0) {
+        amulet.stackTagCompound.setInteger("current_charge", 0);
+      }
+
+      if (charge > 101) {
+        chargeInformation = EnumChatFormatting.DARK_GREEN.toString();
+      } else if (charge > 81) {
+        chargeInformation = EnumChatFormatting.GREEN.toString();
+      } else if (charge > 61) {
+        chargeInformation = EnumChatFormatting.YELLOW.toString();
+      } else if (charge > 41) {
+        chargeInformation = EnumChatFormatting.GOLD.toString();
+      } else if (charge > 21) {
+        chargeInformation = EnumChatFormatting.RED.toString();
+      } else {
+        chargeInformation = EnumChatFormatting.DARK_RED.toString();
+      }
+
+      list.add(EnumChatFormatting.GRAY + StatCollector.translateToLocal("tooltip.wardenic.upgrade") +
+        ": " + WardenicChargeHelper.getUpgrade(amulet).getQuote());
+
+      chargeInformation += StatCollector.translateToLocal("item.thaumrevcharge.text") + " " + charge + "/120";
+
+      list.add(chargeInformation);
+
+      list.add("");
+
+      list.add(EnumChatFormatting.GOLD + StatCollector.translateToLocal("item.capacity.text") + " " + ItemWardenAmulet.getMaxVis() / 100);
+
       for (Aspect aspect : Aspect.getPrimalAspects()) {
         if (amulet.stackTagCompound.hasKey(aspect.getTag())) {
           String amount = this.formatter.format(((float) amulet.stackTagCompound.getInteger(aspect.getTag()) / 100.0F));
           list.add(" §" + aspect.getChatcolor() + aspect.getName() + "§r x " + amount);
         }
       }
-    }
 
-    list.add(EnumChatFormatting.GOLD + StatCollector.translateToLocal("tooltip.wardenic.upgrade") +
-      ": " + WardenicChargeHelper.getUpgrade(amulet).getQuote());
+      list.add("");
+
+      if (this.getVisDiscount(amulet, player, Aspect.AIR) == 10) {
+        list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") +
+          " (Aer): " + this.getVisDiscount(amulet, player, Aspect.AIR) + "%");
+      } else if (this.getVisDiscount(amulet, player, Aspect.WATER) == 10) {
+        list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") +
+          " (Aqua): " + this.getVisDiscount(amulet, player, Aspect.WATER) + "%");
+      } else if (this.getVisDiscount(amulet, player, Aspect.FIRE) == 10) {
+        list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") +
+          " (Ignis): " + this.getVisDiscount(amulet, player, Aspect.FIRE) + "%");
+      } else if (this.getVisDiscount(amulet, player, Aspect.ORDER) == 10) {
+        list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") +
+          " (Ordo): " + this.getVisDiscount(amulet, player, Aspect.ORDER) + "%");
+      } else if (this.getVisDiscount(amulet, player, Aspect.ENTROPY) == 10) {
+        list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") +
+          " (Perditio): " + this.getVisDiscount(amulet, player, Aspect.ENTROPY) + "%");
+      } else if (this.getVisDiscount(amulet, player, Aspect.EARTH) == 10) {
+        list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") +
+          " (Terra): " + this.getVisDiscount(amulet, player, Aspect.EARTH) + "%");
+      } else {
+        list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") +
+          ": " + this.getVisDiscount(amulet, player, null) + "%");
+      }
+    }
 
     super.addInformation(amulet, player, list, doit);
   }
-
 
   /* Overrides - boolean */
   @Override
@@ -335,24 +338,14 @@ public class ItemWardenAmulet extends Item implements IBauble, IRunicArmor, IVis
   @Override
   public boolean canUnequip(ItemStack amulet, EntityLivingBase entityLivingBase) { return true; }
 
-  // @Override
-  // public boolean getShareTag() { return true; }
-
   /* Overrides - ItemStack */
   @Override
   public ItemStack onItemRightClick(ItemStack amulet, World world, EntityPlayer player) {
-    // world.playSoundAtEntity(player, "thaumrev:compramos", 1, 1);
     return super.onItemRightClick(amulet, world, player);
   }
 
-  /* Overrides - int */
   @Override
-  public int getMaxDurability() {
-    return 120;
-  }
-
-  @Override
-  public int getRunicCharge(ItemStack itemStack) {
+  public int getRunicCharge(ItemStack amulet) {
     return 2;
   }
 
@@ -368,30 +361,6 @@ public class ItemWardenAmulet extends Item implements IBauble, IRunicArmor, IVis
   @Override
   public EnumRarity getRarity(ItemStack amulet) {
     return EnumRarity.epic;
-  }
-
-
-  /* Client-side */
-  @Override
-  @SideOnly(Side.CLIENT)
-  public void registerIcons(IIconRegister register) {
-    itemIcon = register.registerIcon("thaumrev:wardenamulet");
-  }
-
-  @Override
-  public boolean showNodes(ItemStack amulet, EntityLivingBase entity) {
-    if (!(entity instanceof EntityPlayer)) return false;
-
-    short count = WardenicChargeHelper.getWardenicArmorCount((EntityPlayer) entity);
-    return count == 4;
-  }
-
-  @Override
-  public boolean showIngamePopups(ItemStack amulet, EntityLivingBase entity) {
-    if (!(entity instanceof EntityPlayer)) return false;
-
-    short count = WardenicChargeHelper.getWardenicArmorCount((EntityPlayer) entity);
-    return count == 4;
   }
 
   @Override
@@ -416,7 +385,6 @@ public class ItemWardenAmulet extends Item implements IBauble, IRunicArmor, IVis
   }
 
   @Override
-  @SideOnly(Side.CLIENT)
   public void getSubItems(Item item, CreativeTabs tab, List list) {
     ItemWardenAmulet amulet = (ItemWardenAmulet) item;
     ItemStack stack = new ItemStack(amulet);
@@ -429,5 +397,42 @@ public class ItemWardenAmulet extends Item implements IBauble, IRunicArmor, IVis
     VisHelper.storeAllVis(stack, aspects);
 
     list.add(stack);
+  }
+
+  /* Client-side */
+  @Override
+  @SideOnly(Side.CLIENT)
+  public void registerIcons(@NotNull IIconRegister register) {
+    this.icons[0] = register.registerIcon("thaumrev:baubles/wardenamulet-warden");
+    this.icons[1] = register.registerIcon("thaumrev:baubles/wardenamulet-air");
+    this.icons[2] = register.registerIcon("thaumrev:baubles/wardenamulet-water");
+    this.icons[3] = register.registerIcon("thaumrev:baubles/wardenamulet-fire");
+    this.icons[4] = register.registerIcon("thaumrev:baubles/wardenamulet-order");
+    this.icons[5] = register.registerIcon("thaumrev:baubles/wardenamulet-entropy");
+    this.icons[6] = register.registerIcon("thaumrev:baubles/wardenamulet-earth");
+  }
+
+  @Override
+  @SideOnly(Side.CLIENT)
+  public IIcon getIconFromDamage(int damage) {
+    return this.icons[damage];
+  }
+
+  @Override
+  @SideOnly(Side.CLIENT)
+  public boolean showNodes(ItemStack amulet, EntityLivingBase entity) {
+    if (!(entity instanceof EntityPlayer)) return false;
+
+    short count = WardenicChargeHelper.getWardenicArmorCount((EntityPlayer) entity);
+    return count == 4;
+  }
+
+  @Override
+  @SideOnly(Side.CLIENT)
+  public boolean showIngamePopups(ItemStack amulet, EntityLivingBase entity) {
+    if (!(entity instanceof EntityPlayer)) return false;
+
+    short count = WardenicChargeHelper.getWardenicArmorCount((EntityPlayer) entity);
+    return count == 4;
   }
 }

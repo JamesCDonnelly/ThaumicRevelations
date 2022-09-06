@@ -13,15 +13,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-import thaumrev.ThaumRevLibrary;
-import thaumrev.util.DamageSourceWarden;
-import thaumrev.util.wardenic.WardenicChargeHelper;
+import thaumrev.config.ConfigLibrary;
+import thaumrev.api.damagesource.DamageSourceWarden;
+import thaumrev.api.wardenic.WardenicChargeHelper;
 
 public class ItemWardenWeapon extends ItemSword {
 	public ItemWardenWeapon() {
-		super(ThaumRevLibrary.toolMaterialWarden);
+		super(ConfigLibrary.toolMaterialWarden);
 		setUnlocalizedName("itemWardenWeapon");
-		setCreativeTab(ThaumRevLibrary.tabThaumRev);
+		setCreativeTab(ConfigLibrary.tabThaumRev);
 		setMaxStackSize(1);
 		setFull3D();
 	}
