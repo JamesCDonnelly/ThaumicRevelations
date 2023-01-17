@@ -12,7 +12,6 @@ import thaumrev.item.armor.ItemThauminiteFortressArmor;
 import java.util.HashMap;
 
 public class ModelThauminiteFortressArmor extends ModelBiped {
-
   ModelRenderer OrnamentL;
   ModelRenderer OrnamentL2;
   ModelRenderer OrnamentR;

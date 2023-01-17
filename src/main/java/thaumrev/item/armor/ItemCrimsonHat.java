@@ -22,7 +22,7 @@ import thaumrev.client.models.ModelCrimsonHat;
 import java.util.List;
 
 public class ItemCrimsonHat extends ItemArmor implements IRepairable, IRevealer, IGoggles, IRunicArmor, IVisDiscountGear, IWarpingGear {
-
+  @SideOnly(Side.CLIENT)
   ModelBiped model = null;
 
   public ItemCrimsonHat() {
