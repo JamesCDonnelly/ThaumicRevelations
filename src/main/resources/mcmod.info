@@ -13,9 +13,12 @@
     "parent": "",
     "screenshots": [],
     "requiredMods": [
+      "Forge",
       "Thaumcraft"
     ],
     "dependencies": [
+      "required-after:Forge",
+      "required-after:Thaumcraft",
       "after:thaumicdyes",
       "after:thaumicbases"
     ]
