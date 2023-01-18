@@ -1,5 +1,7 @@
 # Thaumic Revelations
 
+[![Java CI with Gradle](https://github.com/iwo-strzebonski/ThaumicRevelations/actions/workflows/gradle.yml/badge.svg?branch=Legacy)](https://github.com/iwo-strzebonski/ThaumicRevelations/actions/workflows/gradle.yml)
+
 ## Planned features
 
   Look in the [Wardenic Upgrades](Wardenic_Upgrades.md) file
