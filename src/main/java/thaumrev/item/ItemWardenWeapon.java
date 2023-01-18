@@ -18,6 +18,7 @@ import thaumrev.api.damagesource.DamageSourceWarden;
 import thaumrev.api.wardenic.WardenicChargeHelper;
 
 public class ItemWardenWeapon extends ItemSword {
+
 	public ItemWardenWeapon() {
 		super(ConfigLibrary.toolMaterialWarden);
 		setUnlocalizedName("itemWardenWeapon");

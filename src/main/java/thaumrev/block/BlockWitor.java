@@ -15,6 +15,7 @@ import thaumcraft.common.config.Config;
 import java.util.Random;
 
 public class BlockWitor extends Block {
+
 	public BlockWitor() {
 		super(Config.airyMaterial);
 		setUnlocalizedName("blockWitor");

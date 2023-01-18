@@ -25,6 +25,7 @@ import thaumrev.config.ConfigLibrary;
 import java.util.List;
 
 public class ItemWardenclothRobes extends ItemArmor implements IRepairable, IVisDiscountGear, IRunicArmor {
+
   public IIcon[] icons = new IIcon[4];
   public IIcon[] overlays = new IIcon[4];
 

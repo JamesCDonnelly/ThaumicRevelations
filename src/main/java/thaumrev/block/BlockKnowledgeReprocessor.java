@@ -18,7 +18,8 @@ import thaumrev.config.ConfigLibrary;
 import thaumrev.tiles.TileKnowledgeReprocessor;
 
 public class BlockKnowledgeReprocessor extends BlockContainer {
-  public IIcon[] icons = new IIcon[3];
+
+  protected IIcon[] icons = new IIcon[3];
 
   public BlockKnowledgeReprocessor() {
     super(Material.rock);

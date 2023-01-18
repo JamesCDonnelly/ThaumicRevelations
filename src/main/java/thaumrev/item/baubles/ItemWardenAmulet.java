@@ -47,6 +47,7 @@ import static thaumrev.config.ConfigLibrary.EXCUBITOR;
 import static thaumrev.lib.utils.PurityHelper.summonParticles;
 
 public class ItemWardenAmulet extends Item implements IBauble, IRunicArmor, IVisDiscountGear, IGoggles, IRevealer {
+
   DecimalFormat formatter = new DecimalFormat("#######.##");
   IIcon[] icons = new IIcon[7];
 

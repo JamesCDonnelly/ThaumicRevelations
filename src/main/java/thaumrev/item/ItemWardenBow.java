@@ -20,6 +20,7 @@ import thaumrev.config.ConfigLibrary;
 import thaumrev.api.wardenic.WardenicChargeHelper;
 
 public class ItemWardenBow extends ItemBow {
+
   public static final String[] wardenBowPullArray = new String[]{"pulling_0", "pulling_1", "pulling_2"};
 
   public ItemWardenBow() {

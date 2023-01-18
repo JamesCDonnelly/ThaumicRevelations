@@ -16,6 +16,7 @@ import org.jetbrains.annotations.NotNull;
 import thaumrev.config.ConfigLibrary;
 
 public class ItemExcubituraSeeds extends ItemSeeds {
+
   public ItemExcubituraSeeds() {
       super(ConfigLibrary.blockExcubitura, Blocks.farmland);
       setUnlocalizedName("itemExcubituraSeeds");

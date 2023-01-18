@@ -33,7 +33,7 @@ import java.util.List;
 import static thaumrev.config.ConfigLibrary.armorMaterialFortressThauminite;
 
 public class ItemThauminiteFortressArmor extends ItemArmor implements IRepairable, IRunicArmor, ISpecialArmor, IGoggles, IRevealer, IVisDiscountGear {
-  @SideOnly(Side.CLIENT)
+
   public IIcon[] icons = new IIcon[3];
 
   @SideOnly(Side.CLIENT)

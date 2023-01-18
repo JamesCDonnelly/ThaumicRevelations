@@ -13,6 +13,7 @@ import thaumrev.config.ConfigLibrary;
 
 
 public class BlockSlabQuartz extends BlockSlab {
+
 	public static final String[] types = { "InfusedQuartz" };
 
 	public BlockSlabQuartz(boolean isDouble) {

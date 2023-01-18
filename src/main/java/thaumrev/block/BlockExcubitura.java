@@ -110,9 +110,6 @@ public class BlockExcubitura extends BlockBush implements IGrowable {
 		return random.nextInt(4) < 2 ? ConfigLibrary.itemExcubituraSeeds : ConfigLibrary.itemResource;
 	}
 
-
-	/** Client-side **/
-	@SideOnly(Side.CLIENT)
 	protected IIcon[] iIcon;
 
 	@Override

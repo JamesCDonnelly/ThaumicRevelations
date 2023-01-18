@@ -19,6 +19,7 @@ import thaumcraft.api.IRunicArmor;
 import thaumrev.config.ConfigLibrary;
 
 public class ItemWardenArmor extends ItemArmor implements IRepairable, ISpecialArmor, IRunicArmor {
+
   public IIcon[] icons = new IIcon[4];
 
   public ItemWardenArmor(int type, String name) {
