@@ -34,10 +34,9 @@ import static thaumrev.config.ConfigLibrary.armorMaterialFortressThauminite;
 
 public class ItemThauminiteFortressArmor extends ItemArmor implements IRepairable, IRunicArmor, ISpecialArmor, IGoggles, IRevealer, IVisDiscountGear {
 
-  public IIcon[] icons = new IIcon[3];
-
   @SideOnly(Side.CLIENT)
-  ModelBiped[] models = new ModelBiped[3];
+  public IIcon[] icons;
+  ModelBiped[] models;
 
   public ItemThauminiteFortressArmor(int type, String name) {
     super(armorMaterialFortressThauminite, 4, type);
@@ -150,7 +149,9 @@ public class ItemThauminiteFortressArmor extends ItemArmor implements IRepairabl
 
   @Override
   @SideOnly(Side.CLIENT)
+
   public void registerIcons(@NotNull IIconRegister register) {
+	icons = new IIcon[3];
     icons[0] = register.registerIcon("thaumrev:armor/thauminitefortresshelm");
     icons[1] = register.registerIcon("thaumrev:armor/thauminitefortresschest");
     icons[2] = register.registerIcon("thaumrev:armor/thauminitefortresslegs");
@@ -166,6 +167,7 @@ public class ItemThauminiteFortressArmor extends ItemArmor implements IRepairabl
   @SideOnly(Side.CLIENT)
   public ModelBiped getArmorModel(EntityLivingBase entity, @NotNull ItemStack armor, int armorSlot) {
     int type = ((ItemArmor) armor.getItem()).armorType;
+    models = new ModelBiped[3];
     if (this.models[1] == null) {
       this.models[1] = new ModelThauminiteFortressArmor(1.0F);
     }

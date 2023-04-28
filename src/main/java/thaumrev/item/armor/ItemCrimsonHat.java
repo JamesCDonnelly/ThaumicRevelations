@@ -24,7 +24,7 @@ import java.util.List;
 public class ItemCrimsonHat extends ItemArmor implements IRepairable, IRevealer, IGoggles, IRunicArmor, IVisDiscountGear, IWarpingGear {
 
   @SideOnly(Side.CLIENT)
-  ModelBiped model = null;
+  ModelBiped model;
 
   public ItemCrimsonHat() {
     super(ConfigLibrary.armorMaterialCrimsoncloth, 1, 0);
@@ -81,6 +81,7 @@ public class ItemCrimsonHat extends ItemArmor implements IRepairable, IRevealer,
   @Override
   @SideOnly(Side.CLIENT)
   public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemstack, int armorSlot) {
+	  model = null;
     if(this.model == null) {
       this.model = new ModelCrimsonHat();
     }
